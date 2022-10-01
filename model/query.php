@@ -13,7 +13,7 @@
 		if ($result) {
 			return $result;
 		} else {
-			echo "Error en la creación del usuario.";
+			echo "Error when creating an user.";
 		} 
 		mysqli_close($DB);
 	}

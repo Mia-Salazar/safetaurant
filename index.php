@@ -10,26 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="icon" href="./img/favicon.ico" />
-    <link rel="apple-touch-icon" href="./img/logo.png" />
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
+    <link rel="icon" href="./assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="./assets/img/logo.png" />
     <title>SafeTaurant, restaurantes sin alergias</title>
   </head>
   <body>
-    <header class="header">
-      <div class="title-container">
-        <h1 class="title">Safe<span>Taurant</span></h1>
-        <figure class="shield-container">
-          <img class="shield" src="./img/shield.png" alt="" />
-        </figure>
-      </div>
-      <nav></nav>
-    </header>
+    <?php
+      include "../view/header.php";
+    ?>
     <main class="main">
     </main>
-    <footer class="footer">
-      <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
-    </footer>
+    <?php
+      include "../view/footer.php";
+    ?>
   </body>
 </html>
