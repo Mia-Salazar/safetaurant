@@ -11,13 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="index.css">
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="icon" href="./img/favicon.ico" />
+    <link rel="apple-touch-icon" href="./img/logo.png" />
     <title>SafeTaurant, restaurantes sin alergias</title>
   </head>
   <body>
     <header class="header">
-      <h1 class="title">Safe<span>Taurant</span></h1>
+      <div class="title-container">
+        <h1 class="title">Safe<span>Taurant</span></h1>
+        <figure class="shield-container">
+          <img class="shield" src="./img/shield.png" alt="" />
+        </figure>
+      </div>
+      
       <nav></nav>
     </header>
     <main>
