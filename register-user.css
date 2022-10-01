@@ -1,0 +1,56 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border: 1px solid #8f949a;
+    border-radius: 5px;
+}
+
+.register-form h2 {
+	margin: 0 auto;
+}
+
+.register-form p, .register-form h2 {
+	text-align: center;
+}
+
+.input-group {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.input-label {
+	margin-bottom: 5px;
+}
+
+.input {
+	padding: 5px 0;
+	border: none;
+    border-bottom: 1px solid #8f949a;
+}
+
+.link-login {
+	display: block;
+	margin-top: 15px;
+	color: #8f949a;
+}
+
+.primary-button {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.checkbox-group {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+@media (min-width:  768px) {
+	.register-form {
+		max-width: 400px;
+		margin: 20px auto 0 auto;
+	}
+}
