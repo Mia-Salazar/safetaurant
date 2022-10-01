@@ -1,0 +1,22 @@
+/*General styles*/
+body {
+	margin: 0;
+}
+.header {
+	display:  flex;
+	justify-content: space-between;
+	align-content: center;
+	padding:  15px;
+	background-color: #319DA0;
+	font-family: 'Teko', sans-serif;
+}
+
+.header .title {
+	margin: 0;
+	color:  white;
+	font-weight: 500;
+}
+
+.header .title span {
+	font-weight: 400;
+}
