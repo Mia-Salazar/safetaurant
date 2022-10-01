@@ -23,11 +23,9 @@
           <img class="shield" src="./img/shield.png" alt="" />
         </figure>
       </div>
-      
       <nav></nav>
     </header>
-    <main>
-      
+    <main class="main">
     </main>
     <footer></footer>
   </body>
