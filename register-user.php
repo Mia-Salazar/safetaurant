@@ -66,6 +66,9 @@
         <a class="link-login" href="login.php">Inicia sesión si ya tienes cuenta</a>
       </form>
     </main>
-    <footer></footer>
+    <footer class="footer">
+      <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
+      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+    </footer>
   </body>
 </html>

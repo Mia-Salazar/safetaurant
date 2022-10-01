@@ -33,7 +33,7 @@ body {
 	display:  flex;
 	justify-content: space-between;
 	align-content: center;
-	padding:  15px;
+	padding: 15px;
 	background-color: #319DA0;
 	font-family: 'Teko', sans-serif;
 }
@@ -61,4 +61,14 @@ body {
 .shield-container {
 	width: 20px;
 	margin: 0 0 0 5px;
+}
+
+/*Footer*/
+.footer {
+	padding: 15px;
+	background-color: #781C68;
+}
+
+.footer a, .footer {
+	color:  white;
 }
