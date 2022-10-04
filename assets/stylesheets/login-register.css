@@ -1,5 +1,5 @@
 .main.form {
-    min-height: calc(100vh - 76px - 125px - 60px);
+	min-height: calc(100vh - 56px - 125px - 60px);
     display: flex;
     align-items: center;
 }
@@ -30,9 +30,13 @@
 	margin-top: 10px;
 }
 
-@media (min-width:  768px) {
+@media (min-width: 768px) {
 	.register-form, .login-form {
 		max-width: 400px;
 		margin: 20px auto 0 auto;
+	}
+
+	.main.form {
+		min-height: calc(100vh - 71px - 125px - 60px);
 	}
 }
