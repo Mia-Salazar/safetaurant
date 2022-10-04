@@ -8,6 +8,7 @@
     <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
     <link rel="icon" href="./assets/img/favicon.ico" />
@@ -19,6 +20,7 @@
       include "../view/header.php";
     ?>
     <main class="main">
+      LOGIN
     </main>
     <?php
       include "../view/footer.php";
