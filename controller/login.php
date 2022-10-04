@@ -5,7 +5,7 @@
   if(isset($formInfo['Email'])){
     $userID = login($formInfo['Email'], $formInfo['Password']);
     if ($userID) {
-      setcookie("UserID", $userID, time() + 7200);
+      setcookie("UserID", $userID, time() + 7200, "/");
       echo "OK";
     } else {
       echo "El email o la contraseña son incorrectos";
