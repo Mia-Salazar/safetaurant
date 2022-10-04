@@ -29,4 +29,18 @@
 		closeConnection($DB);
 	}
 
+	function login($Email, $Password) {
+		$DDBB = createConnection();
+		$sql = "SELECT UserID FROM user WHERE Email ='" . $Email . "' AND Password = '" . $Password. "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$user = mysqli_fetch_assoc($result);
+			return $user["UserID"];
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
 ?>

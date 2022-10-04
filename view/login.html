@@ -48,47 +48,32 @@
   <script>
     document.getElementById("register").addEventListener("submit", login, false);
 
-
     function login(event){
       event.preventDefault();
-      // const birthDate = document.getElementById("BirthDate");
-      // const password = document.getElementById("Password");
-      // const buttonSubmit = document.getElementById("buttonSubmit");
-      // const error = document.getElementById("error");
-      // buttonSubmit.innerHTML = "Cargando...";
-      // error.innerHTML = "";
-      // if(isMinor(birthDate.value)) {
-      //   alert("No puedes registrarte si eres menor de edad");
-      //   return;
-      // }
-      // if(!hasCorrectPassword(password.value)) {
-      //   alert("La contraseña debe tener 8 caracteres que sean números o letras");
-      //   return;
-      // }
-      // const data = {
-      //   Name: document.getElementById("Name").value,
-      //   Email: document.getElementById("Email").value,
-      //   BirthDate:document.getElementById("BirthDate").value,
-      //   Password: document.getElementById("Password").value,
-      //   Surname: document.getElementById("Surname").value,
-      //   LactoseIntolerance: document.getElementById("LactoseIntolerance").checked ? 1 : 0,
-      //   CeliacDisease: document.getElementById("CeliacDisease").checked ? 1 : 0,
-      //   Allergies: document.getElementById("Allergies").value
-      // };
-      // var xmlhttp = new XMLHttpRequest();
-      // xmlhttp.open("POST", "http://localhost/TFG/controller/register-user.php", true);
-      // xmlhttp.setRequestHeader("Content-Type", "application/json");
-      // xmlhttp.onreadystatechange = function() {
-      //   if (this.readyState == 4 && this.status == 200) {
-      //     if (this.responseText === "OK") {
-      //       window.location.href = "http://localhost/TFG/view/login.html";
-      //     } else {
-      //       buttonSubmit.innerHTML = "Registrar";
-      //       error.innerHTML = this.responseText;
-      //     }
-      //   }   
-      // };
-      // xmlhttp.send(JSON.stringify(data));
+      const email = document.getElementById("Email");
+      const password = document.getElementById("Password");
+      const buttonSubmit = document.getElementById("buttonSubmit");
+      const error = document.getElementById("error");
+      buttonSubmit.innerHTML = "Cargando...";
+      error.innerHTML = "";
+      const data = {
+        Email: document.getElementById("Email").value,
+        Password: document.getElementById("Password").value,
+      };
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/login.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText === "OK") {
+            window.location.href = "http://localhost/TFG/view/index.html";
+          } else {
+            buttonSubmit.innerHTML = "Iniciar sesión";
+            error.innerHTML = this.responseText;
+          }
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
     }
   </script>
 </html>
