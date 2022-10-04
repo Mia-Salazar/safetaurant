@@ -11,11 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/login-register.css">
-    <link rel="icon" href="./assets/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="./assets/img/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
+    <link rel="icon" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/img/logo.png" />
     <title>SafeTaurant, restaurantes sin alergias</title>
   </head>
-<header class="header">
+  <header class="header">
     <div class="title-container">
       <h1 class="title">Safe<span>Taurant</span></h1>
       <figure class="shield-container">
@@ -42,28 +43,102 @@
 
     </nav>
   </header>
-    <main class="main form">
+    <main class="main profile">
+      <h2>Perfil</h2>
+      <p id="subtitle">En esta pagina podrás ver los datos de tu perfil y podrás editarlos.</p>
+      <div class="profile-wrapper">
+        <form class="profile-form" id="profile">
+          <div class="input-group">
+            <label class="input-label" for="Name">Nombre: </label>
+            <input disabled class="input" id="Name" name="Name" type="text" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Surname">Apellido: </label>
+            <input disabled class="input" id="Surname" name="Surname" type="text" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="BirthDate">Fecha de nacimiento: </label>
+            <input disabled class="input" id="BirthDate" name="BirthDate" type="date" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Email">Correo electrónico: </label>
+            <input disabled class="input" id="Email" name="Email" type="email" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Password">Contraseña: </label>
+            <input disabled class="input" id="Password" name="Password" type="password" required />
+            <small>La contraseña debe tener al menos 8 caracteres y deben ser letras o números</small>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Allergies">Alergias: </label>
+            <textarea disabled id="Allergies" name="Allergies" rows="4" cols="50"></textarea>
+          </div>
+          <div class="checkbox-group">
+            <label class="input-label" for="CeliacDisease">¿Celíaquía?</label>
+            <input disabled class="input" id="CeliacDisease" name="CeliacDisease" type="checkbox" />
+          </div>
+          <div class="checkbox-group">
+            <label class="input-label" for="LactoseIntolerance">¿Intolerancia a la lactosa?</label>
+            <input disabled class="input" id="LactoseIntolerance" name="LactoseIntolerance" type="checkbox" />
+          </div>
+          <small id="error" class="error"></small>
+        </form>
+        <div class="decoration-wrapper">
+          <figure class="img-container">
+            <img class="img" alt="" src="../assets/img/shield-3.png" />
+          </figure>
+        </div>
+      </div>
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
       <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
     </footer>
   </body>
+  <script type="text/javascript" src="./menu.js"></script>
   <script>
-    document.getElementById("toggle").addEventListener("click", toggleMenu, false);
-    const menu = document.getElementById("nav");
-    const toggle = document.getElementById("toggle");
-    let menuToggle = false;
+    const subtitle = document.getElementById("subtitle");
+    const password = document.getElementById("Password");
+    const name = document.getElementById("Name")
+    const email = document.getElementById("Email")
+    const birthDate =document.getElementById("BirthDate")
+    const surname = document.getElementById("Surname")
+    const lactoseIntolerance = document.getElementById("LactoseIntolerance");
+    const celiacDisease = document.getElementById("CeliacDisease");
+    const allergies = document.getElementById("Allergies")
+    password.value = "********";
+    let user;
 
-    function toggleMenu() {
-      if(!menuToggle) {
-        menu.classList.add("open");
-        toggle.classList.add("open");
-      } else {
-        menu.classList.remove("open");
-        toggle.classList.remove("open");
-      }
-      menuToggle = !menuToggle;
+    function getProfile() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/profile.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText === "Error") {
+            subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+          } else {
+            console.log(this.responseText, 'wiiiii')
+            user = JSON.parse(this.responseText);
+            putData();
+          }
+        } else if (this.status == 401) {
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }  
+      };
+      xmlhttp.send();
+    };
+
+    function putData() {
+      name.value = user.Name;
+      email.value = user.Email;
+      birthDate.value = user.BirthDate;
+      surname.value = user.Surname;
+      allergies.value = user.Allergies;
+      user.LactoseIntolerance === "1" ? lactoseIntolerance.checked = true : lactoseIntolerance.checked = false;
+      user.CeliacDisease === "1" ? celiacDisease.checked = true : celiacDisease.checked = false;
     }
+
+    getProfile();
   </script>
 </html>
