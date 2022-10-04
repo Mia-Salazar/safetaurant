@@ -72,3 +72,37 @@ body {
 .footer a, .footer {
 	color:  white;
 }
+
+/*Form*/
+.input-group {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.input-label {
+	margin-bottom: 5px;
+}
+
+.input {
+	padding: 5px 0;
+	border: none;
+    border-bottom: 1px solid #8f949a;
+}
+
+.link {
+	display: block;
+	margin-top: 15px;
+	color: #8f949a;
+}
+
+.primary-button {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.checkbox-group {
+	display: flex;
+	flex-direction: row-reverse;
+}

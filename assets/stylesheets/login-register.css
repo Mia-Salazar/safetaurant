@@ -1,0 +1,38 @@
+.main.form {
+    min-height: calc(100vh - 76px - 125px - 60px);
+    display: flex;
+    align-items: center;
+}
+
+.register-form, .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border: 1px solid #8f949a;
+    border-radius: 5px;
+}
+
+.register-form h2 {
+	margin: 0 auto;
+}
+
+.login-form h2 {
+	margin: 0 auto 20px auto;
+}
+
+.register-form p, .register-form h2, .login-form p, .login-form h2 {
+	text-align: center;
+}
+
+.error {
+	color: #781C68;
+	margin-top: 10px;
+}
+
+@media (min-width:  768px) {
+	.register-form, .login-form {
+		max-width: 400px;
+		margin: 20px auto 0 auto;
+	}
+}
