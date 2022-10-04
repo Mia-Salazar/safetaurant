@@ -43,4 +43,18 @@
 		closeConnection($DB);
 	}
 
+	function getUser($UserID) {
+		$DDBB = createConnection();
+		$sql = "SELECT BirthDate, CeliacDisease, Email, LactoseIntolerance, Name, Surname, Allergies FROM user WHERE UserID ='" . $UserID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$user = mysqli_fetch_assoc($result);
+			return $user;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
 ?>
