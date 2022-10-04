@@ -9,20 +9,86 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/login-register.css">
     <link rel="icon" href="./assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="./assets/img/logo.png" />
     <title>SafeTaurant, restaurantes sin alergias</title>
   </head>
-  <body>
-    <?php
-      include "../view/header.php";
-    ?>
-    <main class="main">
-      Holi
+<header class="header">
+    <div class="title-container">
+      <h1 class="title">Safe<span>Taurant</span></h1>
+      <figure class="shield-container">
+        <img class="shield" src="../assets/img/shield.png" alt="" />
+      </figure>
+    </div>
+    <nav></nav>
+  </header>
+    <main class="main form">
+      <form class="login-form" id="register">
+        <h2>¡Te damos la bienvenida de nuevo!</h2>
+        <div class="input-group">
+          <label class="input-label" for="Email">Correo electrónico*: </label>
+          <input class="input" id="Email" placeholder="Escribe tu email" name="Email" type="email" required />
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="Password">Contraseña*: </label>
+          <input class="input" id="Password" placeholder="Escribe tu contraseña" name="Password" type="password" required />
+        </div>
+        <small id="error" class="error"></small>
+        <button type="submit" class="primary-button" id="buttonSubmit">Iniciar sesión</button>
+        <a class="link" href="http://localhost/TFG/view/register-user.html">Regístrate</a>
+      </form>
     </main>
-    <?php
-      include "../view/footer.php";
-    ?>
+    <footer class="footer">
+      <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
+      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+    </footer>
   </body>
+  <script>
+    document.getElementById("register").addEventListener("submit", login, false);
+
+
+    function login(event){
+      event.preventDefault();
+      // const birthDate = document.getElementById("BirthDate");
+      // const password = document.getElementById("Password");
+      // const buttonSubmit = document.getElementById("buttonSubmit");
+      // const error = document.getElementById("error");
+      // buttonSubmit.innerHTML = "Cargando...";
+      // error.innerHTML = "";
+      // if(isMinor(birthDate.value)) {
+      //   alert("No puedes registrarte si eres menor de edad");
+      //   return;
+      // }
+      // if(!hasCorrectPassword(password.value)) {
+      //   alert("La contraseña debe tener 8 caracteres que sean números o letras");
+      //   return;
+      // }
+      // const data = {
+      //   Name: document.getElementById("Name").value,
+      //   Email: document.getElementById("Email").value,
+      //   BirthDate:document.getElementById("BirthDate").value,
+      //   Password: document.getElementById("Password").value,
+      //   Surname: document.getElementById("Surname").value,
+      //   LactoseIntolerance: document.getElementById("LactoseIntolerance").checked ? 1 : 0,
+      //   CeliacDisease: document.getElementById("CeliacDisease").checked ? 1 : 0,
+      //   Allergies: document.getElementById("Allergies").value
+      // };
+      // var xmlhttp = new XMLHttpRequest();
+      // xmlhttp.open("POST", "http://localhost/TFG/controller/register-user.php", true);
+      // xmlhttp.setRequestHeader("Content-Type", "application/json");
+      // xmlhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //     if (this.responseText === "OK") {
+      //       window.location.href = "http://localhost/TFG/view/login.html";
+      //     } else {
+      //       buttonSubmit.innerHTML = "Registrar";
+      //       error.innerHTML = this.responseText;
+      //     }
+      //   }   
+      // };
+      // xmlhttp.send(JSON.stringify(data));
+    }
+  </script>
 </html>
