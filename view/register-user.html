@@ -72,6 +72,7 @@
       <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
     </footer>
   </body>
+  <script type="text/javascript" src="./shared.js"></script>
   <script>
     document.getElementById("register").addEventListener("submit", registerUser, false);
 
@@ -85,14 +86,6 @@
         return true;
       }
       return false;
-    }
-
-    const hasCorrectPassword = (value) => {
-      const regex = /[A-Za-z\d]{8,}/g;
-      if(!value.match(regex)) {
-        return false;
-      }
-      return true;
     }
 
     function registerUser(event){
