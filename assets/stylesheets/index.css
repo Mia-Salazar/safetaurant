@@ -15,7 +15,7 @@ body {
 	padding: 30px 15px;
 }
 
-.primary-button {
+.primary-button, .secondary-button {
 	padding: 10px 20px;
 	background-color: #781C68;
 	border-radius: 5px;
@@ -24,7 +24,13 @@ body {
 	font-weight: 700;
 }
 
-.primary-button:hover {
+.secondary-button {
+	color:  #781C68;
+	border:  1px solid #781C68;
+	background-color: transparent;
+}
+
+.primary-button:hover, .secondary-button:hover {
 	opacity: 0.8;
 }
 
@@ -184,7 +190,7 @@ body {
 	color: #8f949a;
 }
 
-.primary-button {
+.primary-button, .secondary-button {
 	width: 100%;
 	margin-top: 10px;
 }
@@ -192,4 +198,15 @@ body {
 .checkbox-group {
 	display: flex;
 	flex-direction: row-reverse;
+}
+
+/*Feedback*/
+.error {
+	color: #781C68;
+	margin-top: 10px;
+}
+
+.success {
+	color:  #319DA0;
+	margin-top: 10px;
 }

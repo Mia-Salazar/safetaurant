@@ -66,7 +66,7 @@
           </div>
           <div class="input-group">
             <label class="input-label" for="Password">Contraseña: </label>
-            <input disabled class="input" id="Password" name="Password" type="password" required />
+            <input disabled class="input" id="Password" name="Password" placeholder="********" type="password" required />
             <small>La contraseña debe tener al menos 8 caracteres y deben ser letras o números</small>
           </div>
           <div class="input-group">
@@ -81,7 +81,11 @@
             <label class="input-label" for="LactoseIntolerance">¿Intolerancia a la lactosa?</label>
             <input disabled class="input" id="LactoseIntolerance" name="LactoseIntolerance" type="checkbox" />
           </div>
-          <small id="error" class="error"></small>
+          <small id="feedback" class=""></small>
+          <div class="button-container">
+            <button type="button" class="secondary-button" id="toggleEdit">Editar perfil</button>
+            <button type="submit" class="primary-button hidden" id="edit">Editar perfil</button>
+          </div>
         </form>
         <div class="decoration-wrapper">
           <figure class="img-container">
@@ -95,8 +99,10 @@
       <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
     </footer>
   </body>
-  <script type="text/javascript" src="./menu.js"></script>
+  <script type="text/javascript" src="./shared.js"></script>
   <script>
+    const toggleEditButton = document.getElementById("toggleEdit");
+    const editButton = document.getElementById("edit");
     const subtitle = document.getElementById("subtitle");
     const password = document.getElementById("Password");
     const name = document.getElementById("Name")
@@ -105,9 +111,73 @@
     const surname = document.getElementById("Surname")
     const lactoseIntolerance = document.getElementById("LactoseIntolerance");
     const celiacDisease = document.getElementById("CeliacDisease");
-    const allergies = document.getElementById("Allergies")
-    password.value = "********";
+    const allergies = document.getElementById("Allergies");
+    const feedback = document.getElementById("feedback");
+    const submit = document.getElementById("profile");
+
     let user;
+    let toggleEdit = false;
+
+    toggleEditButton.addEventListener("click", toggleEditFunction, false);
+    profile.addEventListener("submit", editFunction, false);
+
+    function editFunction(event){
+      event.preventDefault();
+      if(!hasCorrectPassword(password.value)) {
+        alert("La contraseña debe tener 8 caracteres que sean números o letras");
+        return;
+      }
+      editButton.innerHTML = "Cargando...";
+      const data = {
+        Name: name.value,
+        Password: password.value,
+        Surname: surname.value,
+        LactoseIntolerance: lactoseIntolerance.checked ? 1 : 0,
+        CeliacDisease: celiacDisease.checked ? 1 : 0,
+        Allergies: allergies.value
+      };
+      console.log(data)
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/profile-edit.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText === "OK") {
+            feedback.innerHTML = "Actualizado correctamente";
+            feedback.classList.add("success");
+            feedback.classList.remove("error");
+            toggleEditFunction();
+          } else {
+            feedback.innerHTML = this.responseText;
+            feedback.classList.add("error");
+            feedback.classList.remove("success");
+          }
+        } else if (this.status == 401) {
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }
+        editButton.innerHTML = "Editar perfil";
+      };
+      xmlhttp.send(JSON.stringify(data));
+    };
+
+    function toggleDisable(value) {
+      const elements = ["Password", "Name","Surname", "LactoseIntolerance", "CeliacDisease", "Allergies"];
+      elements.forEach(element => {
+        document.getElementById(element).disabled = value;
+      });
+    }
+
+    function toggleEditFunction() {
+      if(!toggleEdit) {
+        toggleEditButton.innerHTML = "Dejar de editar";
+        editButton.classList.remove("hidden");
+      } else {
+        toggleEditButton.innerHTML = "Editar perfil";
+        editButton.classList.add("hidden");
+      }
+      toggleDisable(toggleEdit);
+      toggleEdit = !toggleEdit;
+    }
 
     function getProfile() {
       var xmlhttp = new XMLHttpRequest();
@@ -118,7 +188,6 @@
           if (this.responseText === "Error") {
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
           } else {
-            console.log(this.responseText, 'wiiiii')
             user = JSON.parse(this.responseText);
             putData();
           }

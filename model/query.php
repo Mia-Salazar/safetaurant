@@ -57,4 +57,23 @@
 		closeConnection($DB);
 	}
 
+	function editUser($UserID, $Name, $Surname, $Password, $LactoseIntolerance, $CeliacDisease, $Allergies) {
+		$DDBB = createConnection();
+		$sql = "UPDATE user SET Name = '" . $Name . "'" .
+				", Surname = '" . $Surname . "'" .
+				", Password = '" . $Password . "'" .
+				", CeliacDisease = '" . $CeliacDisease . "'" . 
+				", Allergies = '" . $Allergies . "'" . 
+				", LactoseIntolerance =" . $LactoseIntolerance . 
+				" WHERE UserID =" . $UserID;
+		$result = mysqli_query($DDBB, $sql);
+
+		if ($result) {
+			return $result;
+		} else {
+			echo "Error, no se pudo editar el usuario";
+		}
+		closeConnection($DB);
+	}
+
 ?>
