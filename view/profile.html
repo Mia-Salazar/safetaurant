@@ -36,7 +36,7 @@
           <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
         </li>
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/restaurants.html">Perfil</a>
+          <a class="nav-link" href="http://localhost/TFG/view/index.html">Perfil</a>
         </li>
       </ul>
 
@@ -135,7 +135,6 @@
         CeliacDisease: celiacDisease.checked ? 1 : 0,
         Allergies: allergies.value
       };
-      console.log(data)
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/profile-edit.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");

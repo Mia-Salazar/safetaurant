@@ -37,7 +37,7 @@
           <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
         </li>
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/restaurants.html">Perfil</a>
+          <a class="nav-link" href="http://localhost/TFG/view/index.html">Perfil</a>
         </li>
       </ul>
 
@@ -151,7 +151,6 @@
         FoodType: document.getElementById("FoodType").value,
         CCAA: document.getElementById("CCAA").value
       };
-      console.log(data)
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/add-restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -174,7 +173,20 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
-    addCities();
+    function checkIsLoggedIn() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          addCities();
+        } else if (this.status == 401) {
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }  
+      };
+      xmlhttp.send();
+    }
+    checkIsLoggedIn();
 
   </script>
 </html>
