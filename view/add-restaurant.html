@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
+    <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <link rel="icon" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/img/logo.png" />
+    <title>SafeTaurant, restaurantes sin alergias</title>
+  </head>
+  <header class="header">
+    <div class="title-container">
+      <h1 class="title">Safe<span>Taurant</span></h1>
+      <figure class="shield-container">
+        <img class="shield" src="../assets/img/shield.png" alt="" />
+      </figure>
+    </div>
+    <nav class="nav">
+      <button id="toggle" class="toggle" aria-label="Abrir menú">
+        <i class="toggle-item" aria-hidden="true"></i>
+        <i class="toggle-item" aria-hidden="true"></i>
+        <i class="toggle-item" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-list" id="nav">
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/profile.html">Buscar</a>
+        </li>
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+        </li>
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/restaurants.html">Perfil</a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+    <main class="main add-restaurant">
+      <h2>Añadir restaurante</h2>
+      <p id="subtitle">Registra un restaurante para poder puntuarlo en <span class="logo-text">SafeTaurant</span>. Los campos con un asterisco (*) son obligatorios.</p>
+      <div class="add-restaurant-wrapper">
+        <form class="add-restaurant-form" id="profile">
+          <div class="input-group">
+            <label class="input-label" for="Name">Nombre del restaurante*: </label>
+            <input class="input" id="Name" name="Name" type="text" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="CCAA">Comunidad Autónoma*: </label>
+            <select name="CCAA" id="CCAA" class="select" required>
+              <option selected disabled value="">Escoje CCAA</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Province">Provincia*: </label>
+            <select name="Province" id="Province" class="select" required>
+              <option selected disabled value="">Escoje Provincia</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Address">Dirección*: </label>
+            <input class="input" id="Address" name="Address" type="text" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="ZIP">Código Postal*: </label>
+            <input class="input" id="ZIP" name="ZIP" type="number" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Phone">Teléfono: </label>
+            <input class="input" id="Phone" name="Phone" type="number" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="FoodType">Tipo de comida: </label>
+            <select name="FoodType" id="FoodType" class="select">
+              <option selected disabled value="">Escoje el tipo</option>
+            </select>
+          </div>
+          <small id="feedback" class=""></small>
+          <button type="submit" class="primary-button" id="buttonSubmit">Crear restaurante</button>
+        </form>
+        <div class="decoration-wrapper">
+          <figure class="img-container">
+            <img class="img" alt="" src="../assets/img/food.jpg" />
+          </figure>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
+      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./shared.js"></script>
+  <script>
+    const provinces = ["Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres",
+            "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
+            "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
+            "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
+            "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
+    const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
+    const foodType = ["Italiana", "Fast Food", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
+    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Alta cocina", "Fusión", "Catering", "Otro"];
+
+    const provinceSelect = document.getElementById("Province");
+    const communitySelect = document.getElementById("CCAA");
+    const foodSelect = document.getElementById("FoodType");
+
+    function addCities() {
+      provinces.forEach((province) => {
+        let option = document.createElement("option");
+        option.value = province;
+        option.innerHTML = province;
+        provinceSelect.appendChild(option);
+      });
+      CCAA.forEach((community) => {
+        let option = document.createElement("option");
+        option.value = community;
+        option.innerHTML = community;
+        communitySelect.appendChild(option);
+      });
+      const foodTypeOrderes = foodType.sort();
+      foodTypeOrderes.forEach((food) => {
+        let option = document.createElement("option");
+        option.value = food;
+        option.innerHTML = food;
+        foodSelect.appendChild(option);
+      });
+    }
+
+    addCities();
+
+  </script>
+</html>

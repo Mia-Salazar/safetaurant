@@ -178,7 +178,7 @@ body {
 	margin-bottom: 5px;
 }
 
-.input {
+.input, .select {
 	padding: 5px 0;
 	border: none;
     border-bottom: 1px solid #8f949a;
