@@ -76,4 +76,18 @@
 		closeConnection($DB);
 	}
 
+	function registerRestaurant($Name, $Province, $Address, $ZIP, $Phone, $FoodType, $CCAA, $UserID) {
+		$DDBB = createConnection();
+		$sql = "INSERT INTO restaurant (Name, Province, Address, ZIP, Phone, FoodType, CCAA, UserID) 
+				VALUES ('" . $Name . "', '" . $Province . "', '" . $Address . "', '" . $ZIP . "', '" . $Phone . "', '" . $FoodType . "', '" . $CCAA . "', '"  . $UserID . "')";
+		$result = mysqli_query($DDBB, $sql);
+
+		if ($result) {
+			return $result;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
 ?>

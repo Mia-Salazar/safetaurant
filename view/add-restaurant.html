@@ -47,7 +47,7 @@
       <h2>Añadir restaurante</h2>
       <p id="subtitle">Registra un restaurante para poder puntuarlo en <span class="logo-text">SafeTaurant</span>. Los campos con un asterisco (*) son obligatorios.</p>
       <div class="add-restaurant-wrapper">
-        <form class="add-restaurant-form" id="profile">
+        <form class="add-restaurant-form" id="add">
           <div class="input-group">
             <label class="input-label" for="Name">Nombre del restaurante*: </label>
             <input class="input" id="Name" name="Name" type="text" required />
@@ -111,6 +111,8 @@
     const provinceSelect = document.getElementById("Province");
     const communitySelect = document.getElementById("CCAA");
     const foodSelect = document.getElementById("FoodType");
+    const feedback = document.getElementById("feedback");
+    document.getElementById("add").addEventListener("submit", registerRestaurant, false);
 
     function addCities() {
       provinces.forEach((province) => {
@@ -132,6 +134,44 @@
         option.innerHTML = food;
         foodSelect.appendChild(option);
       });
+    }
+
+    function registerRestaurant(event){
+      event.preventDefault();
+      const buttonSubmit = document.getElementById("buttonSubmit");
+      const error = document.getElementById("error");
+      buttonSubmit.innerHTML = "Cargando...";
+      feedback.innerHTML = "";
+      const data = {
+        Name: document.getElementById("Name").value,
+        Province: document.getElementById("Province").value,
+        Address: document.getElementById("Address").value,
+        ZIP: Number(document.getElementById("ZIP").value),
+        Phone: Number(document.getElementById("Phone").value),
+        FoodType: document.getElementById("FoodType").value,
+        CCAA: document.getElementById("CCAA").value
+      };
+      console.log(data)
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/add-restaurant.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText === "OK") {
+            feedback.innerHTML = "Creado correctamente";
+            feedback.classList.add("success");
+            feedback.classList.remove("error");
+          } else {
+            feedback.innerHTML = this.responseText;
+            feedback.classList.add("error");
+            feedback.classList.remove("success");
+          }
+        }  else if (this.status == 401) {
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }
+        buttonSubmit.innerHTML = "Crear restaurante";
+      };
+      xmlhttp.send(JSON.stringify(data));
     }
 
     addCities();
