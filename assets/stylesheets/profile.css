@@ -4,10 +4,6 @@
     align-items: flex-start;
 }
 
-.hidden {
-	display:  none;
-}
-
 .img {
 	max-width: 100%;
 	max-height: 100%;

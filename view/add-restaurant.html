@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#319DA0" />
     <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
     <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,13 +31,13 @@
       </button>
       <ul class="nav-list" id="nav">
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/profile.html">Buscar</a>
+          <a class="nav-link" href="http://localhost/TFG/view/index.html">Buscar</a>
         </li>
         <li>
           <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
         </li>
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/index.html">Perfil</a>
+          <a class="nav-link" href="http://localhost/TFG/view/profile.html">Perfil</a>
         </li>
       </ul>
 
@@ -107,14 +107,13 @@
     const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
     const foodType = ["Italiana", "Fast Food", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
     "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Alta cocina", "Fusión", "Catering", "Otro"];
-
     const provinceSelect = document.getElementById("Province");
     const communitySelect = document.getElementById("CCAA");
     const foodSelect = document.getElementById("FoodType");
     const feedback = document.getElementById("feedback");
     document.getElementById("add").addEventListener("submit", registerRestaurant, false);
 
-    function addCities() {
+    function fillSelects() {
       provinces.forEach((province) => {
         let option = document.createElement("option");
         option.value = province;
@@ -179,7 +178,7 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          addCities();
+          fillSelects();
         } else if (this.status == 401) {
           window.location.href = "http://localhost/TFG/view/login.html";
         }  

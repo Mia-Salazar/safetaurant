@@ -8,7 +8,10 @@ body {
 	font-family: 'Teko', sans-serif;
 	font-size:  20px;
 	font-weight: 500;
+}
 
+.hidden {
+	display:  none;
 }
 
 .main {
@@ -32,6 +35,11 @@ body {
 
 .primary-button:hover, .secondary-button:hover {
 	opacity: 0.8;
+}
+
+.img {
+	max-width: 100%;
+	max-height: 100%;
 }
 
 /*Header*/
