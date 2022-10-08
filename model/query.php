@@ -90,4 +90,28 @@
 		closeConnection($DB);
 	}
 
+	function getRestaurants($Name, $Province, $FoodType) {
+		$DDBB = createConnection();
+		if ($Province == "" && $FoodType == "") {
+			$sql = "SELECT * FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name ='" . $Name . "'";
+		} else if ($Province == "" && $FoodType != "") {
+
+		} else if ($Province != "" && $FoodType == "") {
+
+		} else {
+			// $query = "SELECT setup.SuperAdmin FROM user INNER JOIN setup ON user.UserID = setup.SuperAdmin ;
+			// $sql = "SELECT * FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name ='" . $Name . "' AND Province = '" . $Province . "' AND FoodType = '" . $FoodType . "'";
+		}
+
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$restaurants = mysqli_fetch_assoc($result);
+			return $restaurants;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
 ?>
