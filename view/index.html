@@ -105,7 +105,6 @@
             "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
             "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
             "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
-    const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
     const foodType = ["Italiana", "Fast Food", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
     "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Alta cocina", "Fusión", "Catering", "Otro"];
 
@@ -133,8 +132,12 @@
       });
     }
 
-    function search() {
-
+    function search(event) {
+      event.preventDefault();
+      const name = document.getElementById("Name").value;
+      const province = document.getElementById("Province").value;
+      const foodType = document.getElementById("FoodType").value;
+      window.location.href = `http://localhost/TFG/view/login.html?Name=${name}&Province=${province}&FoodType=${foodType}`;
     }
 
     function checkIsLoggedIn() {
