@@ -43,11 +43,8 @@
     </nav>
   </header>
     <main class="home">
-      <figure class="img-container">
-        <img class="img" alt="" src="../assets/img/happy.jpg" />
-      </figure>
       <section class="search-container">
-        <h2>Disfruta la comida con total seguridad</h2>
+        <h2>Resultados de la búsqueda</h2>
         <form id="search">
           <div class="input-group">
             <label class="input-label" for="Name">Busca un restaurante</label>
@@ -68,30 +65,9 @@
             </div>
             <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
           </div>
-          
         </form>
       </section>
-      <section class="instructions">
-        <div class="instructions-wrapper">
-          <ol class="instructions-list">
-            <li>Busca el restaurante en <span class="logo-text">SafeTaurant</span></li>
-            <li>Consulta las opiniones de otros <i>foodies</i></li>
-            <li>Ve al restaurante y disfruta la comida</li>
-            <li>Puntúa la experiencia y ayuda a otros</li>
-          </ol>
-        </div>
-      </section>
-      <section class="register">
-        <div class="register-container">
-          <h3 class="register-text" id="register">¡Regístrate! <br /> Y empieza a utilizar todas las funcionalidades de <span class="logo-text">SafeTaurant</span></h3>
-          <a href="http://localhost/TFG/view/register-user.html" class="primary-button" id="link">Registrar</a>
-        </div>
-          
-          <figure class="img-container">
-            <img class="img" alt="" src="../assets/img/food.jpg" />
-          </figure>
-        
-      </section>
+      <h3 id="found"></h3>
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
@@ -105,16 +81,32 @@
             "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
             "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
             "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
-    const foodType = ["Italiana", "Fast Food", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
-    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Alta cocina", "Fusión", "Catering", "Otro"];
+    const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
+    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
 
     const nav = document.getElementById("nav");
+    const found = document.getElementById("found");
     const toggleButton = document.getElementById("toggle");
     const register = document.getElementById("register");
-    const link = document.getElementById("link");
+    const name = document.getElementById("Name");
     const provinceSelect = document.getElementById("Province");
     const foodSelect = document.getElementById("FoodType");
     document.getElementById("search").addEventListener("submit", search, false);
+
+    let restaurants;
+
+    function checkIsLoggedIn() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          nav.classList.remove("hidden");
+          toggleButton.classList.remove("hidden");
+        }  
+      };
+      xmlhttp.send();
+    }
 
     function fillSelects() {
       provinces.forEach((province) => {
@@ -132,30 +124,42 @@
       });
     }
 
+    function getRestaurants() {
+      if(name && name != "") {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?Name=${name.value}&Province=${provinceSelect.value || ""}&FoodType=${foodSelect.value || ""}`, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            restaurants = JSON.parse(this.responseText);
+            console.log(restaurants)
+          } else if (this.status === 404 || this.status === 204) {
+            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+          }
+        };
+        xmlhttp.send();
+      } else {
+        found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+      }
+    }
+
+    function getInitialValues() {
+      name.value = new URL(document.URL).searchParams.get('Name');
+      provinceSelect.value = new URL(document.URL).searchParams.get('Province');
+      foodSelect.value =  new URL(document.URL).searchParams.get('FoodType');
+      getRestaurants();
+    }
+
     function search(event) {
       event.preventDefault();
       const name = document.getElementById("Name").value;
-      const province = provinceSelect.value;
-      const foodType = foodSelect.value;
+      const province = document.getElementById("Province").value;
+      const foodType = document.getElementById("FoodType").value;
       window.location.href = `http://localhost/TFG/view/restaurants.html?Name=${name}&Province=${province}&FoodType=${foodType}`;
     }
 
-    function checkIsLoggedIn() {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          nav.classList.remove("hidden");
-          toggleButton.classList.remove("hidden");
-          register.innerHTML = "¡Aprovecha las funcionalidades! <br />Empieza a crear restaurantes y a puntuarlos";
-          link.href="http://localhost/TFG/view/add-restaurant.html";
-          link.innerHTML = "¡Llévame!"
-        }  
-      };
-      xmlhttp.send();
-    }
-    fillSelects()
+    fillSelects();
+    getInitialValues();
     checkIsLoggedIn();
   </script>
 </html>
