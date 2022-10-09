@@ -1,12 +1,11 @@
 <?php 
   include "../model/query.php";
 
-  $formInfo = json_decode(file_get_contents("php://input"), true);
-  if(isset($formInfo['Name'])){
-    $restaurants = checkUniqueEmail($formInfo['Email']);
+  if(isset($_GET['Name'])){
+    $restaurants = getRestaurants($_GET['Name'], $_GET['Province'], $_GET['FoodType']);
     if($restaurants) {
       echo json_encode($restaurants);
-    }else {
+    } else {
       http_response_code(204);
       exit;
     }

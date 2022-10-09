@@ -93,14 +93,13 @@
 	function getRestaurants($Name, $Province, $FoodType) {
 		$DDBB = createConnection();
 		if ($Province == "" && $FoodType == "") {
-			$sql = "SELECT * FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name ='" . $Name . "'";
-		} else if ($Province == "" && $FoodType != "") {
-
+			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%'";
 		} else if ($Province != "" && $FoodType == "") {
-
+			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND Province = '" . $Province. "'";
+		} else if ($Province == "" && $FoodType != "") {
+			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "'";
 		} else {
-			// $query = "SELECT setup.SuperAdmin FROM user INNER JOIN setup ON user.UserID = setup.SuperAdmin ;
-			// $sql = "SELECT * FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name ='" . $Name . "' AND Province = '" . $Province . "' AND FoodType = '" . $FoodType . "'";
+			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "' AND Province = '" . $Province. "'";
 		}
 
 		$result = mysqli_query($DDBB, $sql);
