@@ -65,13 +65,11 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText === "OK") {
-            window.location.href = "http://localhost/TFG/view/index.html";
-          } else {
-            buttonSubmit.innerHTML = "Iniciar sesión";
-            error.innerHTML = this.responseText;
-          }
-        }   
+          window.location.href = "http://localhost/TFG/view/index.html";
+        } else if (this.status == 401) {
+          buttonSubmit.innerHTML = "Iniciar sesión";
+          error.innerHTML = "El email o la contraseña son incorrectos";
+        } 
       };
       xmlhttp.send(JSON.stringify(data));
     }

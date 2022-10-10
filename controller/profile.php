@@ -6,7 +6,8 @@
     if($user) {
       echo json_encode($user);
     } else {
-      echo "Error";
+      http_response_code(400);
+      exit;
     }
   } else {
     http_response_code(401);

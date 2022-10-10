@@ -119,13 +119,14 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText === "OK") {
-            window.location.href = "http://localhost/TFG/view/login.html";
-          } else {
-            buttonSubmit.innerHTML = "Registrar";
-            error.innerHTML = this.responseText;
-          }
-        }   
+          window.location.href = "http://localhost/TFG/view/login.html";
+        } else if (this.status == 400) {
+          buttonSubmit.innerHTML = "Registrar";
+          error.innerHTML = "Hubo un error al crear el usuario";
+        } else if (this.status == 401) {
+          buttonSubmit.innerHTML = "Registrar";
+          error.innerHTML = "Este usuario ya está registrado";
+        }
       };
       xmlhttp.send(JSON.stringify(data));
     }
