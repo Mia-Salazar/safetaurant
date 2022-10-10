@@ -42,8 +42,13 @@
 
     </nav>
   </header>
-    <main class="main profile">
-      <h2>Perfil</h2>
+    <main class="main profile container">
+      <div class="profile-controls">
+        <h2>Perfil</h2>
+        <button class="primary-button" type="button" id="logout">Salir</button>
+        
+      </div>
+      
       <p id="subtitle">En esta pagina podrás ver los datos de tu perfil y podrás editarlos.</p>
       <div class="profile-wrapper">
         <form class="profile-form" id="profile">
@@ -113,12 +118,14 @@
     const allergies = document.getElementById("Allergies");
     const feedback = document.getElementById("feedback");
     const submit = document.getElementById("profile");
+    const logout = document.getElementById("logout");
 
     let user;
     let toggleEdit = false;
 
     toggleEditButton.addEventListener("click", toggleEditFunction, false);
     profile.addEventListener("submit", editFunction, false);
+    logout.addEventListener("click", logoutFunction, false);
 
     function editFunction(event){
       event.preventDefault();
@@ -157,6 +164,19 @@
       };
       xmlhttp.send(JSON.stringify(data));
     };
+
+    function logoutFunction() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/logout.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 401) {
+          console.log('holi')
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }
+      };
+      xmlhttp.send();
+    }
 
     function toggleDisable(value) {
       const elements = ["Password", "Name","Surname", "LactoseIntolerance", "CeliacDisease", "Allergies"];
@@ -206,6 +226,20 @@
       user.CeliacDisease === "1" ? celiacDisease.checked = true : celiacDisease.checked = false;
     }
 
-    getProfile();
+    function checkIsLoggedIn() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          getProfile();
+        } else if (this.status == 401) {
+          window.location.href = "http://localhost/TFG/view/login.html";
+        }  
+      };
+      xmlhttp.send();
+    }
+
+    checkIsLoggedIn();
   </script>
 </html>
