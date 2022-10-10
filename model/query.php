@@ -93,18 +93,23 @@
 	function getRestaurants($Name, $Province, $FoodType) {
 		$DDBB = createConnection();
 		if ($Province == "" && $FoodType == "") {
-			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%'";
+			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%'";
 		} else if ($Province != "" && $FoodType == "") {
-			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND Province = '" . $Province. "'";
+			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND Province = '" . $Province. "'";
 		} else if ($Province == "" && $FoodType != "") {
-			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "'";
+			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "'";
 		} else {
-			$sql = "SELECT restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE Name LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "' AND Province = '" . $Province. "'";
+			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "' AND Province = '" . $Province. "'";
 		}
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
-			$restaurants = mysqli_fetch_assoc($result);
+			$restaurants = array();
+		    while ($resultsrows = mysqli_fetch_assoc($result)) {
+		      $restaurants[] = $resultsrows;
+		      //var_dump($resultsrows);
+		    }
+			//$restaurants = mysqli_fetch_assoc($result);
 			return $restaurants;
 		} else {
 			return false;

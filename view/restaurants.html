@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/home.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/restaurants.css">
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
     <title>SafeTaurant, restaurantes sin alergias</title>
@@ -67,7 +68,12 @@
           </div>
         </form>
       </section>
-      <h3 id="found"></h3>
+      <section class="list-search-container">
+        <h3 id="found"></h3>
+        <ul class="list-search" id="list">
+          
+        </ul>
+      </section>
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
@@ -91,6 +97,7 @@
     const name = document.getElementById("Name");
     const provinceSelect = document.getElementById("Province");
     const foodSelect = document.getElementById("FoodType");
+    const list = document.getElementById("list");
     document.getElementById("search").addEventListener("submit", search, false);
 
     let restaurants;
@@ -124,7 +131,36 @@
       });
     }
 
+    function viewList() {
+      restaurants.forEach((restaurant) => {
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+        let title = document.createElement("h4");
+        let address = document.createElement("p");
+        let province = document.createElement("p");
+        let score = document.createElement("p");
+
+        link.innerHTML = "Ver detalle";
+        link.href = `http://localhost/TFG/controller/restaurant.html?ID=${restaurant.RestaurantID}`
+        title.innerHTML = restaurant.Name;
+        address.innerHTML = restaurant.Address;
+        province.innerHTML = restaurant.Province;
+        score.innerHTML = `${restaurant.GeneralScore}<span>/10</span>`;
+        score.classList.add("list-score");
+        link.classList.add("primary-button");
+
+        li.appendChild(title);
+        li.appendChild(address);
+        li.appendChild(province);
+        li.appendChild(score);
+        li.appendChild(link);
+
+        list.appendChild(li);
+      });
+    }
+
     function getRestaurants() {
+      found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?Name=${name.value}&Province=${provinceSelect.value || ""}&FoodType=${foodSelect.value || ""}`, true);
@@ -132,7 +168,8 @@
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             restaurants = JSON.parse(this.responseText);
-            console.log(restaurants)
+            viewList();
+            found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
           } else if (this.status === 404 || this.status === 204) {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
           }
@@ -144,6 +181,7 @@
     }
 
     function getInitialValues() {
+      list.innerHTML = "";
       name.value = new URL(document.URL).searchParams.get('Name');
       provinceSelect.value = new URL(document.URL).searchParams.get('Province');
       foodSelect.value =  new URL(document.URL).searchParams.get('FoodType');
