@@ -9,7 +9,8 @@
       setcookie("UserName", $user['Name'], time() + 7200, "/");
       echo "OK";
     } else {
-      echo "El email o la contraseña son incorrectos";
+      http_response_code(401);
+      exit;
     }
   }
 ?>

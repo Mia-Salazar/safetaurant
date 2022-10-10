@@ -7,7 +7,8 @@
     if($data) {
       echo "OK";
     } else {
-      echo "Hubo un error al crear el usuario";
+      http_response_code(400);
+      exit;
     };
   } else {
     http_response_code(401);

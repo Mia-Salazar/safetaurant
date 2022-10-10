@@ -147,18 +147,16 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText === "OK") {
-            feedback.innerHTML = "Actualizado correctamente";
-            feedback.classList.add("success");
-            feedback.classList.remove("error");
-            toggleEditFunction();
-          } else {
-            feedback.innerHTML = this.responseText;
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
-          }
+          feedback.innerHTML = "Actualizado correctamente";
+          feedback.classList.add("success");
+          feedback.classList.remove("error");
+          toggleEditFunction();
         } else if (this.status == 401) {
           window.location.href = "http://localhost/TFG/view/login.html";
+        } else if (this.status == 400) {
+          feedback.innerHTML = "Hubo un error al crear el usuario";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
         }
         editButton.innerHTML = "Editar perfil";
       };
@@ -171,7 +169,6 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
-          console.log('holi')
           window.location.href = "http://localhost/TFG/view/login.html";
         }
       };
@@ -203,14 +200,12 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText === "Error") {
-            subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
-          } else {
-            user = JSON.parse(this.responseText);
-            putData();
-          }
+          user = JSON.parse(this.responseText);
+          putData();
         } else if (this.status == 401) {
           window.location.href = "http://localhost/TFG/view/login.html";
+        } else if (this.status == 400) {
+          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
         }  
       };
       xmlhttp.send();
