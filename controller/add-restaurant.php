@@ -7,7 +7,7 @@
     if($data) {
      createScore($data, $formInfo);
     } else {
-      http_response_code(418);
+      http_response_code(424);
       exit;
     }
   } else {
@@ -20,7 +20,7 @@
     if($score) {
       createAverage($data, $formInfo);
     } else {
-      http_response_code(418);
+      http_response_code(424);
       exit;
     }
   }
@@ -30,7 +30,7 @@
     if($average) {
       echo "OK";
     } else {
-      http_response_code(418);
+      http_response_code(424);
       exit;
     }
   }
