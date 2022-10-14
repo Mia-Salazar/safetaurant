@@ -102,7 +102,7 @@
 
     let restaurants;
 
-    function checkIsLoggedIn() {
+    const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -115,7 +115,7 @@
       xmlhttp.send();
     }
 
-    function fillSelects() {
+    const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
         option.value = province;
@@ -131,7 +131,7 @@
       });
     }
 
-    function viewList() {
+    const viewList = () => {
       restaurants.forEach((restaurant) => {
         let li = document.createElement("li");
         let link = document.createElement("a");
@@ -159,7 +159,7 @@
       });
     }
 
-    function getRestaurants() {
+    const getRestaurants = () => {
       found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
@@ -180,7 +180,7 @@
       }
     }
 
-    function getInitialValues() {
+    const getInitialValues = () => {
       list.innerHTML = "";
       name.value = new URL(document.URL).searchParams.get('Name');
       provinceSelect.value = new URL(document.URL).searchParams.get('Province');
