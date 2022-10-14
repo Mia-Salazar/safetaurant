@@ -116,7 +116,7 @@
     const foodSelect = document.getElementById("FoodType");
     document.getElementById("search").addEventListener("submit", search, false);
 
-    function fillSelects() {
+    const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
         option.value = province;
@@ -140,7 +140,7 @@
       window.location.href = `http://localhost/TFG/view/restaurants.html?Name=${name}&Province=${province}&FoodType=${foodType}`;
     }
 
-    function checkIsLoggedIn() {
+    const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");

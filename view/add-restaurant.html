@@ -148,7 +148,7 @@
     document.getElementById("add").addEventListener("submit", registerRestaurant, false);
     document.getElementById("AllergenChart").addEventListener("change", allergenToggle, false);
 
-    function fillSelects() {
+    const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
         option.value = province;
@@ -220,7 +220,7 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
-    function checkIsLoggedIn() {
+    const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
