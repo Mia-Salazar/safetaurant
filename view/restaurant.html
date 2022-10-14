@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#319DA0" />
+    <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
+    <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/restaurant.css">
+    <link rel="icon" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/img/logo.png" />
+    <title>SafeTaurant, restaurantes sin alergias</title>
+  </head>
+  <header class="header">
+    <div class="title-container">
+      <h1 class="title">Safe<span>Taurant</span></h1>
+      <figure class="shield-container">
+        <img class="shield" src="../assets/img/shield.png" alt="" />
+      </figure>
+    </div>
+    <nav class="nav">
+      <button id="toggle" class="toggle hidden" aria-label="Abrir menú">
+        <i class="toggle-item" aria-hidden="true"></i>
+        <i class="toggle-item" aria-hidden="true"></i>
+        <i class="toggle-item" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-list hidden" id="nav">
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/index.html">Buscar</a>
+        </li>
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+        </li>
+        <li>
+          <a class="nav-link" href="http://localhost/TFG/view/profile.html">Perfil</a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+    <main class="main add-restaurant container">
+      <h2 id="name">Restaurante</h2>
+      <div class="data-container">
+        <div>
+          <p class="data-text">Dirección: <span class="data-info" id="address">-</span></p>
+          <p class="data-text">Comunidad Autónoma: <span class="data-info" id="ccaa">-</span></p>
+          <p class="data-text">Provincia: <span class="data-info" id="province">-</span></p>
+          <p class="data-text">Código Postal: <span class="data-info" id="zip">-</span></p>
+        </div>
+        <div class="extra-info">
+          <p class="data-text">Teléfono: <span class="data-info" id="phone">-</span></p>
+          <p class="data-text">Tipo de comida: <span class="data-info" id="foodType">-</span></p>
+        </div>
+      </div>
+      <div class="averages-container">
+        <h3 id="averages">Puntuaciones medias</h3>
+        <div class="input-group">
+          <label class="input-label" for="GeneralScore">Puntuación general</label>
+          <div class="range-input-container">
+            <input class="range-input" id="GeneralScore" name="GeneralScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
+            <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="GeneralScore.value=value">
+          </div>
+        </div>
+        <div class="checkbox-group">
+          <label class="input-label" for="AllergenChart" disabled>Carta de alérgenos</label>
+          <input class="input" id="AllergenChart" name="AllergenChart" type="checkbox" />
+        </div>
+        <div class="input-group hidden" id="FidelityScoreContainer">
+          <label class="input-label" for="FidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+          <div class="range-input-container">
+            <input class="range-input" id="FidelityScore" name="FidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
+            <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="FidelityScore.value=value">
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="AttentionScore">Atención recibida por el personal*: </label>
+          <div class="range-input-container">
+            <input class="range-input" id="AttentionScore" name="AttentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
+            <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="AttentionScore.value=value">
+          </div>
+        </div>
+      </div>
+      <div class="scores-container">
+        <h3 id="scores">Comentarios y puntuaciones</h3>
+        <ul id="scoresList" class="scores-list">
+          
+        </ul>
+      </div>
+
+      <div class="add-restaurant-wrapper">
+        <form class="add-restaurant-form" id="add">
+          <h3>Añade los primeros datos y puntuaciones sobre alérgenos</h3>
+<!--           <div class="input-group">
+            <label class="input-label" for="GeneralScore">Puntuación general*: </label>
+            <div class="range-input-container">
+              <input class="range-input" id="GeneralScore" name="GeneralScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
+              <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="GeneralScore.value=value">
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <label class="input-label" for="AllergenChart">¿Carta de alérgenos?</label>
+            <input class="input" id="AllergenChart" name="AllergenChart" type="checkbox" />
+          </div>
+          <div class="input-group hidden" id="FidelityScoreContainer">
+            <label class="input-label" for="FidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+            <div class="range-input-container">
+              <input class="range-input" id="FidelityScore" name="FidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
+              <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="FidelityScore.value=value">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="AttentionScore">Atención recibida por el personal*: </label>
+            <div class="range-input-container">
+              <input class="range-input" id="AttentionScore" name="AttentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
+              <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="AttentionScore.value=value">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="Comment">Comentario: </label>
+            <textarea id="Comment" name="Comment" rows="4" cols="50"></textarea>
+          </div> -->
+          <small id="feedback" class=""></small>
+          <button type="submit" class="primary-button" id="buttonSubmit">Añadir nueva puntuación</button>
+        </form>
+      </div>
+    </main>
+    <footer class="footer">
+      <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
+      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./shared.js"></script>
+  <script>
+    const provinces = ["Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres",
+            "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
+            "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
+            "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
+            "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
+    const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
+    const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
+    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
+    const feedback = document.getElementById("feedback");
+    const nav = document.getElementById("nav");
+    const toggleButton = document.getElementById("toggle");
+    const restaurantID = new URL(document.URL).searchParams.get('ID');
+    const add = document.getElementById("add");
+    const data = {ID: restaurantID};
+
+    let restaurant;
+    let scores;
+    let average;
+
+    let allergenChartToggle = false;
+
+    // document.getElementById("add").addEventListener("submit", registerRestaurant, false);
+    // document.getElementById("AllergenChart").addEventListener("change", allergenToggle, false);
+
+    //TODO: En php comprobar que no puede añdir puntuación
+
+    function putData() {
+        document.getElementById("name").innerHTML = restaurant.Name;
+        document.getElementById("address").innerHTML = restaurant.Address;
+        document.getElementById("ccaa").innerHTML = restaurant.CCAA;
+        document.getElementById("province").innerHTML = restaurant.Province;
+        document.getElementById("zip").innerHTML = restaurant.ZIP;
+        if (restaurant.Phone && restaurant.Phone !== "0") {
+          document.getElementById("phone").innerHTML = restaurant.Phone;
+        }
+        if (restaurant.FoodType && restaurant.FoodType !== "") {
+          document.getElementById("foodType").innerHTML = restaurant.FoodType;
+        }
+    }
+
+    function putScores() {
+      const scoresList = document.getElementById("scoresList");
+      scores.forEach((score) => {
+        let li = document.createElement("li");
+        let date = document.createElement("small");
+        let userName = document.createElement("h4");
+        let allergenChart = document.createElement("p");
+        let comment = document.createElement("p");
+        let fidelityScore = document.createElement("p");
+        let generalScore = document.createElement("p");
+        let attentionScore = document.createElement("p");
+
+        date.innerHTML = score.Created;
+        userName.innerHTML = score.UserName;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.AllergenChart === "0" ? "Sí" : "No"}`;
+        comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.Comment || "-"}`;
+        fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.FidelityScore}`;
+        generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.GeneralScore}`;
+        attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.AttentionScore}`;
+        //score.classList.add("list-score");
+        //link.classList.add("primary-button");
+
+        li.appendChild(userName);
+        li.appendChild(date);
+        li.appendChild(generalScore);
+        li.appendChild(allergenChart);
+        li.appendChild(fidelityScore);
+        li.appendChild(attentionScore);
+        li.appendChild(comment);
+
+        scoresList.appendChild(li);
+
+      })
+    }
+
+    function putAverage() {
+      document.getElementById("GeneralScore").value = average.GeneralScore;
+      document.getElementById("numberGeneral").value = average.GeneralScore;
+      document.getElementById("AllergenChart").checked = average.AllergenChart === "0" ? false : true;
+      document.getElementById("FidelityScore").value = average.FidelityScore;
+      document.getElementById("numberFidelity").value = average.FidelityScore;
+      document.getElementById("AttentionScore").value = average.AttentionScore;
+      document.getElementById("numberAttention").value = average.AttentionScore;
+    }
+
+    function getRestaurant() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/restaurant.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          restaurant = JSON.parse(this.responseText);
+          putData();
+          getScores();
+        } else if (this.status == 400) {
+          document.getElementById("subtitle").innerHTML = "No hay un restaurante con este ID";
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    function getAverage() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/average.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          average = JSON.parse(this.responseText);
+          putAverage();
+        } else if (this.status == 400) {
+          document.getElementById("averages").innerHTML = "No hay puntuaciones medias para este restaurante";
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    function getScores() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/TFG/controller/scores.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          scores = JSON.parse(this.responseText);
+          console.log(scores)
+          getAverage();
+          putScores();
+        } else if (this.status == 400) {
+          document.getElementById("scores").innerHTML = "No hay comentarios para este restaurante";
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    function checkIsLoggedIn() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          nav.classList.remove("hidden");
+          toggleButton.classList.remove("hidden");
+        } else if (this.status == 401) {
+          add.classList.add("hidden");
+        } 
+      };
+      xmlhttp.send();
+    }
+
+    getRestaurant();
+    checkIsLoggedIn();
+  </script>
+</html>
