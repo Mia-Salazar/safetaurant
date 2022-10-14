@@ -107,9 +107,7 @@
 			$restaurants = array();
 		    while ($resultsrows = mysqli_fetch_assoc($result)) {
 		      $restaurants[] = $resultsrows;
-		      //var_dump($resultsrows);
 		    }
-			//$restaurants = mysqli_fetch_assoc($result);
 			return $restaurants;
 		} else {
 			return false;
@@ -140,6 +138,51 @@
 
 		if ($result) {
 			return $result;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
+	function getRestaurant($RestaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT * FROM restaurant WHERE RestaurantID ='" . $RestaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$restaurant = mysqli_fetch_assoc($result);
+			return $restaurant;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
+	function getAverage($RestaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT * FROM averages WHERE RestaurantID ='" . $RestaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$scores = mysqli_fetch_assoc($result);
+			return $scores;
+		} else {
+			return false;
+		} 
+		closeConnection($DB);
+	}
+
+	function getScores($RestaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT * FROM scores WHERE RestaurantID ='" . $RestaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$scores = array();
+		    while ($resultsrows = mysqli_fetch_assoc($result)) {
+		      $scores[] = $resultsrows;
+		    }
+			return $scores;
 		} else {
 			return false;
 		} 
