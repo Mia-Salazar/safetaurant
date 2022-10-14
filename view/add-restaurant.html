@@ -49,8 +49,8 @@
       <div class="add-restaurant-wrapper">
         <form class="add-restaurant-form" id="add">
           <div class="input-group">
-            <label class="input-label" for="Name">Nombre del restaurante*: </label>
-            <input class="input" id="Name" name="Name" type="text" required />
+            <label class="input-label" for="name">Nombre del restaurante*: </label>
+            <input class="input" id="name" name="name" type="text" required />
           </div>
           <div class="input-group">
             <label class="input-label" for="CCAA">Comunidad Autónoma*: </label>
@@ -59,58 +59,58 @@
             </select>
           </div>
           <div class="input-group">
-            <label class="input-label" for="Province">Provincia*: </label>
-            <select name="Province" id="Province" class="select" required>
+            <label class="input-label" for="province">Provincia*: </label>
+            <select name="province" id="province" class="select" required>
               <option selected disabled value="">Escoge Provincia</option>
             </select>
           </div>
           <div class="input-group">
-            <label class="input-label" for="Address">Dirección*: </label>
-            <input class="input" id="Address" name="Address" type="text" required />
+            <label class="input-label" for="address">Dirección*: </label>
+            <input class="input" id="address" name="address" type="text" required />
           </div>
           <div class="input-group">
             <label class="input-label" for="ZIP">Código Postal*: </label>
             <input class="input" id="ZIP" name="ZIP" type="number" required />
           </div>
           <div class="input-group">
-            <label class="input-label" for="Phone">Teléfono: </label>
-            <input class="input" id="Phone" name="Phone" type="number" />
+            <label class="input-label" for="phone">Teléfono: </label>
+            <input class="input" id="phone" name="phone" type="number" />
           </div>
           <div class="input-group">
-            <label class="input-label" for="FoodType">Tipo de comida: </label>
-            <select name="FoodType" id="FoodType" class="select">
+            <label class="input-label" for="foodType">Tipo de comida: </label>
+            <select name="foodType" id="foodType" class="select">
               <option selected disabled value="">Escoge el tipo</option>
             </select>
           </div>
           <h3>Añade los primeros datos y puntuaciones sobre alérgenos</h3>
           <div class="input-group">
-            <label class="input-label" for="GeneralScore">Puntuación general*: </label>
+            <label class="input-label" for="generalScore">Puntuación general*: </label>
             <div class="range-input-container">
-              <input class="range-input" id="GeneralScore" name="GeneralScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="GeneralScore.value=value">
+              <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
+              <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="generalScore.value=value">
             </div>
           </div>
           <div class="checkbox-group">
-            <label class="input-label" for="AllergenChart">¿Carta de alérgenos?</label>
-            <input class="input" id="AllergenChart" name="AllergenChart" type="checkbox" />
+            <label class="input-label" for="allergenChart">¿Carta de alérgenos?</label>
+            <input class="input" id="allergenChart" name="allergenChart" type="checkbox" />
           </div>
-          <div class="input-group hidden" id="FidelityScoreContainer">
-            <label class="input-label" for="FidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+          <div class="input-group hidden" id="fidelityScoreContainer">
+            <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
             <div class="range-input-container">
-              <input class="range-input" id="FidelityScore" name="FidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="FidelityScore.value=value">
+              <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
+              <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="fidelityScore.value=value">
             </div>
           </div>
           <div class="input-group">
-            <label class="input-label" for="AttentionScore">Atención recibida por el personal*: </label>
+            <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
             <div class="range-input-container">
-              <input class="range-input" id="AttentionScore" name="AttentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="AttentionScore.value=value">
+              <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
+              <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="attentionScore.value=value">
             </div>
           </div>
           <div class="input-group">
-            <label class="input-label" for="Comment">Comentario: </label>
-            <textarea id="Comment" name="Comment" rows="4" cols="50"></textarea>
+            <label class="input-label" for="comment">Comentario: </label>
+            <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
           </div>
           <small id="feedback" class=""></small>
           <button type="submit" class="primary-button" id="buttonSubmit">Crear restaurante</button>
@@ -137,16 +137,16 @@
     const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
     const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
     "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
-    const provinceSelect = document.getElementById("Province");
+    const provinceSelect = document.getElementById("province");
     const communitySelect = document.getElementById("CCAA");
-    const foodSelect = document.getElementById("FoodType");
+    const foodSelect = document.getElementById("foodType");
     const feedback = document.getElementById("feedback");
-    const fidelity = document.getElementById("FidelityScoreContainer");
+    const fidelity = document.getElementById("fidelityScoreContainer");
 
     let allergenChartToggle = false;
 
     document.getElementById("add").addEventListener("submit", registerRestaurant, false);
-    document.getElementById("AllergenChart").addEventListener("change", allergenToggle, false);
+    document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 
     const fillSelects = () => {
       provinces.forEach((province) => {
@@ -186,19 +186,19 @@
       buttonSubmit.innerHTML = "Cargando...";
       feedback.innerHTML = "";
       const data = {
-        Name: document.getElementById("Name").value,
-        Province: document.getElementById("Province").value,
-        Address: document.getElementById("Address").value,
+        name: document.getElementById("name").value,
+        province: document.getElementById("province").value,
+        address: document.getElementById("address").value,
         ZIP: Number(document.getElementById("ZIP").value),
-        Phone: Number(document.getElementById("Phone").value),
-        FoodType: document.getElementById("FoodType").value,
+        phone: Number(document.getElementById("phone").value),
+        foodType: document.getElementById("foodType").value,
         CCAA: document.getElementById("CCAA").value,
-        Created: new Date(),
-        Comment: document.getElementById("Comment").value,
-        GeneralScore: document.getElementById("GeneralScore").value,
-        AllergenChart: document.getElementById("AllergenChart").checked ? 1 : 0,
-        FidelityScore: document.getElementById("AllergenChart").checked ? document.getElementById("FidelityScore").value : 0,
-        AttentionScore: document.getElementById("AttentionScore").value
+        created: new Date(),
+        comment: document.getElementById("comment").value,
+        generalScore: document.getElementById("generalScore").value,
+        allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
+        fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
+        attentionScore: document.getElementById("attentionScore").value
       };
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/add-restaurant.php", true);

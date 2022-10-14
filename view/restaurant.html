@@ -59,35 +59,34 @@
       <div class="averages-container">
         <h3 id="averages">Puntuaciones medias</h3>
         <div class="input-group">
-          <label class="input-label" for="GeneralScore">Puntuación general</label>
+          <label class="input-label" for="generalScore">Puntuación general</label>
           <div class="range-input-container">
-            <input class="range-input" id="GeneralScore" name="GeneralScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
-            <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="GeneralScore.value=value">
+            <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
+            <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="generalScore.value=value">
           </div>
         </div>
         <div class="checkbox-group">
-          <label class="input-label" for="AllergenChart" disabled>Carta de alérgenos</label>
-          <input class="input" id="AllergenChart" name="AllergenChart" type="checkbox" />
+          <label class="input-label" for="allergenChart" disabled>Carta de alérgenos</label>
+          <input class="input" id="allergenChart" name="allergenChart" type="checkbox" />
         </div>
-        <div class="input-group hidden" id="FidelityScoreContainer">
-          <label class="input-label" for="FidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+        <div class="input-group hidden">
+          <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
           <div class="range-input-container">
-            <input class="range-input" id="FidelityScore" name="FidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
-            <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="FidelityScore.value=value">
+            <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
+            <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="fidelityScore.value=value">
           </div>
         </div>
         <div class="input-group">
-          <label class="input-label" for="AttentionScore">Atención recibida por el personal*: </label>
+          <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
           <div class="range-input-container">
-            <input class="range-input" id="AttentionScore" name="AttentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
-            <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="AttentionScore.value=value">
+            <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
+            <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="attentionScore.value=value">
           </div>
         </div>
       </div>
       <div class="scores-container">
         <h3 id="scores">Comentarios y puntuaciones</h3>
         <ul id="scoresList" class="scores-list">
-          
         </ul>
       </div>
 
@@ -162,16 +161,16 @@
     //TODO: En php comprobar que no puede añdir puntuación
 
     const putData = () => {
-        document.getElementById("name").innerHTML = restaurant.Name;
-        document.getElementById("address").innerHTML = restaurant.Address;
+        document.getElementById("name").innerHTML = restaurant.name;
+        document.getElementById("address").innerHTML = restaurant.address;
         document.getElementById("ccaa").innerHTML = restaurant.CCAA;
-        document.getElementById("province").innerHTML = restaurant.Province;
+        document.getElementById("province").innerHTML = restaurant.province;
         document.getElementById("zip").innerHTML = restaurant.ZIP;
-        if (restaurant.Phone && restaurant.Phone !== "0") {
-          document.getElementById("phone").innerHTML = restaurant.Phone;
+        if (restaurant.phone && restaurant.phone !== "0") {
+          document.getElementById("phone").innerHTML = restaurant.phone;
         }
-        if (restaurant.FoodType && restaurant.FoodType !== "") {
-          document.getElementById("foodType").innerHTML = restaurant.FoodType;
+        if (restaurant.foodType && restaurant.foodType !== "") {
+          document.getElementById("foodType").innerHTML = restaurant.foodType;
         }
     }
 
@@ -187,13 +186,13 @@
         let generalScore = document.createElement("p");
         let attentionScore = document.createElement("p");
 
-        date.innerHTML = score.Created;
-        userName.innerHTML = score.UserName;
-        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.AllergenChart === "0" ? "Sí" : "No"}`;
-        comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.Comment || "-"}`;
-        fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.FidelityScore}`;
-        generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.GeneralScore}`;
-        attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.AttentionScore}`;
+        date.innerHTML = score.created;
+        userName.innerHTML = score.userName;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "0" ? "Sí" : "No"}`;
+        comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
+        fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
+        generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
+        attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
 
         li.appendChild(userName);
         li.appendChild(date);
@@ -209,13 +208,13 @@
     }
 
     const putAverage = () => {
-      document.getElementById("GeneralScore").value = average.GeneralScore;
-      document.getElementById("numberGeneral").value = average.GeneralScore;
-      document.getElementById("AllergenChart").checked = average.AllergenChart === "0" ? false : true;
-      document.getElementById("FidelityScore").value = average.FidelityScore;
-      document.getElementById("numberFidelity").value = average.FidelityScore;
-      document.getElementById("AttentionScore").value = average.AttentionScore;
-      document.getElementById("numberAttention").value = average.AttentionScore;
+      document.getElementById("generalScore").value = average.generalScore;
+      document.getElementById("numberGeneral").value = average.generalScore;
+      document.getElementById("allergenChart").checked = average.allergenChart === "0" ? false : true;
+      document.getElementById("fidelityScore").value = average.fidelityScore;
+      document.getElementById("numberFidelity").value = average.fidelityScore;
+      document.getElementById("attentionScore").value = average.attentionScore;
+      document.getElementById("numberAttention").value = average.attentionScore;
     }
 
     const getRestaurant = () => {
@@ -256,7 +255,6 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           scores = JSON.parse(this.responseText);
-          console.log(scores)
           getAverage();
           putScores();
         } else if (this.status == 400) {

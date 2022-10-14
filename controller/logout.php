@@ -1,9 +1,9 @@
 <?php 
-  unset($_COOKIE['UserID']);
-  unset($_COOKIE['UserName']);
-  setcookie('UserID', false, -1, "/");
-  setcookie('UserName', false, -1, "/");
-  echo $_COOKIE['UserID'];
+  unset($_COOKIE['userID']);
+  unset($_COOKIE['userName']);
+  setcookie('userID', false, -1, "/");
+  setcookie('userName', false, -1, "/");
+  echo $_COOKIE['userID'];
   http_response_code(401);
   exit;
 ?>

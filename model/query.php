@@ -2,10 +2,10 @@
 
 	include "connection.php";
 
-	function registerUser($Name, $Email, $BirthDate, $Password, $Surname, $LactoseIntolerance, $CeliacDisease, $Allergies) {
+	function registerUser($name, $email, $birthDate, $password, $surname, $lactoseIntolerance, $celiacDisease, $allergies) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO user (Name, Email, BirthDate, Password, Surname, LactoseIntolerance, CeliacDisease, Allergies) 
-				VALUES ('" . $Name . "', '" . $Email . "', '" . $BirthDate . "', '" . $Password . "', '" . $Surname . "', '" . $LactoseIntolerance . "', '" . $CeliacDisease . "', '"  . $Allergies . "')";
+		$sql = "INSERT INTO user (name, email, birthDate, password, surname, lactoseIntolerance, celiacDisease, allergies) 
+				VALUES ('" . $name . "', '" . $email . "', '" . $birthDate . "', '" . $password . "', '" . $surname . "', '" . $lactoseIntolerance . "', '" . $celiacDisease . "', '"  . $allergies . "')";
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -13,12 +13,12 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function checkUniqueEmail($Email) {
+	function checkUniqueEmail($email) {
 		$DDBB = createConnection();
-		$sql = "SELECT UserID FROM user WHERE Email = '" . $Email . "'";
+		$sql = "SELECT userID FROM user WHERE email = '" . $email . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -26,12 +26,12 @@
 		} else {
 			return true;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function login($Email, $Password) {
+	function login($email, $password) {
 		$DDBB = createConnection();
-		$sql = "SELECT UserID, Name FROM user WHERE Email ='" . $Email . "' AND Password = '" . $Password. "'";
+		$sql = "SELECT userID, name FROM user WHERE email ='" . $email . "' AND password = '" . $password. "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -40,12 +40,12 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function getUser($UserID) {
+	function getUser($userID) {
 		$DDBB = createConnection();
-		$sql = "SELECT BirthDate, CeliacDisease, Email, LactoseIntolerance, Name, Surname, Allergies FROM user WHERE UserID ='" . $UserID . "'";
+		$sql = "SELECT birthDate, celiacDisease, email, lactoseIntolerance, name, surname, allergies FROM user WHERE userID ='" . $userID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -54,18 +54,18 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function editUser($UserID, $Name, $Surname, $Password, $LactoseIntolerance, $CeliacDisease, $Allergies) {
+	function editUser($userID, $name, $surname, $password, $lactoseIntolerance, $celiacDisease, $allergies) {
 		$DDBB = createConnection();
-		$sql = "UPDATE user SET Name = '" . $Name . "'" .
-				", Surname = '" . $Surname . "'" .
-				", Password = '" . $Password . "'" .
-				", CeliacDisease = '" . $CeliacDisease . "'" . 
-				", Allergies = '" . $Allergies . "'" . 
-				", LactoseIntolerance =" . $LactoseIntolerance . 
-				" WHERE UserID =" . $UserID;
+		$sql = "UPDATE user SET name = '" . $name . "'" .
+				", surname = '" . $surname . "'" .
+				", password = '" . $password . "'" .
+				", celiacDisease = '" . $celiacDisease . "'" . 
+				", allergies = '" . $allergies . "'" . 
+				", lactoseIntolerance =" . $lactoseIntolerance . 
+				" WHERE userID =" . $userID;
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -73,13 +73,13 @@
 		} else {
 			echo "Error, no se pudo editar el usuario";
 		}
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function registerRestaurant($Name, $Province, $Address, $ZIP, $Phone, $FoodType, $CCAA, $UserID) {
+	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $CCAA, $userID) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO restaurant (Name, Province, Address, ZIP, Phone, FoodType, CCAA, UserID) 
-				VALUES ('" . $Name . "', '" . $Province . "', '" . $Address . "', '" . $ZIP . "', '" . $Phone . "', '" . $FoodType . "', '" . $CCAA . "', '"  . $UserID . "')";
+		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, CCAA, userID) 
+				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '" . $CCAA . "', '"  . $userID . "')";
 		$result = mysqli_query($DDBB, $sql);
 		$lastID = mysqli_insert_id($DDBB);
 		if ($result) {
@@ -87,19 +87,19 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function getRestaurants($Name, $Province, $FoodType) {
+	function getRestaurants($name, $province, $foodType) {
 		$DDBB = createConnection();
-		if ($Province == "" && $FoodType == "") {
-			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%'";
-		} else if ($Province != "" && $FoodType == "") {
-			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND Province = '" . $Province. "'";
-		} else if ($Province == "" && $FoodType != "") {
-			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "'";
+		if ($province == "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, averages.generalScore FROM restaurant INNER JOIN averages ON restaurant.restaurantID = averages.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%'";
+		} else if ($province != "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, averages.generalScore FROM restaurant INNER JOIN averages ON restaurant.restaurantID = averages.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND province = '" . $province. "'";
+		} else if ($province == "" && $foodType != "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, averages.generalScore FROM restaurant INNER JOIN averages ON restaurant.restaurantID = averages.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "'";
 		} else {
-			$sql = "SELECT restaurant.RestaurantID, restaurant.Name, restaurant.Address, restaurant.Province, averages.GeneralScore FROM restaurant INNER JOIN averages ON restaurant.RestaurantID = averages.RestaurantID WHERE LOWER(Name) LIKE '%" . $Name . "%' AND FoodType = '" . $FoodType. "' AND Province = '" . $Province. "'";
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, averages.generalScore FROM restaurant INNER JOIN averages ON restaurant.restaurantID = averages.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "' AND province = '" . $province. "'";
 		}
 		$result = mysqli_query($DDBB, $sql);
 
@@ -112,13 +112,13 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function addScore($Comment, $GeneralScore, $AllergenChart, $FidelityScore, $AttentionScore, $UserName, $UserID, $RestaurantID, $today) {
+	function addScore($comment, $generalScore, $allergenChart, $fidelityScore, $attentionScore, $userName, $userID, $restaurantID, $today) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO scores (Comment, Created, GeneralScore, AllergenChart, FidelityScore, AttentionScore, UserName, UserID, RestaurantID) 
-				VALUES ('" . $Comment . "', '" . $today . "', '" . $GeneralScore . "', '" . $AllergenChart . "', '" . $FidelityScore . "', '" . $AttentionScore . "', '" . $UserName . "', '"  . $UserID . "', '"  . $RestaurantID . "')";
+		$sql = "INSERT INTO scores (comment, created, generalScore, allergenChart, fidelityScore, attentionScore, userName, userID, restaurantID) 
+				VALUES ('" . $comment . "', '" . $today . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $FfdelityScore . "', '" . $attentionScore . "', '" . $userName . "', '"  . $userID . "', '"  . $restaurantID . "')";
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -126,14 +126,14 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function addAverage($RestaurantID, $GeneralScore, $AllergenChart, $FidelityScore, $AttentionScore) {
+	function addAverage($restaurantID, $generalScore, $allergenChart, $fidelityScore, $attentionScore) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO averages (RestaurantID, GeneralScore, AllergenChart, FidelityScore, AttentionScore) 
-				VALUES ('" .  $RestaurantID . "', '" . $GeneralScore . "', '" . $AllergenChart . "', '" . $FidelityScore . "', '" . 
-					$AttentionScore . "')";
+		$sql = "INSERT INTO averages (restaurantID, generalScore, allergenChart, fidelityScore, attentionScore) 
+				VALUES ('" .  $restaurantID . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $fidelityScore . "', '" . 
+					$attentionScore . "')";
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -141,12 +141,12 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function getRestaurant($RestaurantID) {
+	function getRestaurant($restaurantID) {
 		$DDBB = createConnection();
-		$sql = "SELECT * FROM restaurant WHERE RestaurantID ='" . $RestaurantID . "'";
+		$sql = "SELECT * FROM restaurant WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -155,12 +155,12 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function getAverage($RestaurantID) {
+	function getAverage($restaurantID) {
 		$DDBB = createConnection();
-		$sql = "SELECT * FROM averages WHERE RestaurantID ='" . $RestaurantID . "'";
+		$sql = "SELECT * FROM averages WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -169,12 +169,12 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
-	function getScores($RestaurantID) {
+	function getScores($restaurantID) {
 		$DDBB = createConnection();
-		$sql = "SELECT * FROM scores WHERE RestaurantID ='" . $RestaurantID . "'";
+		$sql = "SELECT * FROM scores WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -186,7 +186,7 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DB);
+		closeConnection($DDBB);
 	}
 
 ?>

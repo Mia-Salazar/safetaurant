@@ -2,8 +2,8 @@
   include "../model/query.php";
 
   $formInfo = json_decode(file_get_contents("php://input"), true);
-  if(isset($_COOKIE['UserID'])) {
-    $data = editUser($_COOKIE['UserID'], $formInfo['Name'], $formInfo['Surname'], $formInfo['Password'],  $formInfo['LactoseIntolerance'], $formInfo['CeliacDisease'], $formInfo['Allergies']);
+  if(isset($_COOKIE['userID'])) {
+    $data = editUser($_COOKIE['userID'], $formInfo['name'], $formInfo['surname'], $formInfo['password'],  $formInfo['lactoseIntolerance'], $formInfo['celiacDisease'], $formInfo['allergies']);
     if($data) {
       echo "OK";
     } else {
