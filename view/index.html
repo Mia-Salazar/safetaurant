@@ -50,19 +50,19 @@
         <h2>Disfruta la comida con total seguridad</h2>
         <form id="search">
           <div class="input-group">
-            <label class="input-label" for="Name">Busca un restaurante</label>
-            <input class="input" id="Name" placeholder="Nombre restaurante" name="Name" type="text" required />
+            <label class="input-label" for="name">Busca un restaurante</label>
+            <input class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" required />
           </div>
           <div class="form-selects">
             <div class="input-group">
-              <label class="input-label" for="Province">Provincia: </label>
-              <select name="Province" id="Province" class="select">
+              <label class="input-label" for="province">Provincia: </label>
+              <select name="province" id="province" class="select">
                 <option selected disabled value="">Escoge Provincia</option>
               </select>
             </div>
             <div class="input-group">
-              <label class="input-label" for="FoodType">Tipo de comida: </label>
-              <select name="FoodType" id="FoodType" class="select">
+              <label class="input-label" for="foodType">Tipo de comida: </label>
+              <select name="foodType" id="foodType" class="select">
                 <option selected disabled value="">Escoge el tipo</option>
               </select>
             </div>
@@ -112,8 +112,8 @@
     const toggleButton = document.getElementById("toggle");
     const register = document.getElementById("register");
     const link = document.getElementById("link");
-    const provinceSelect = document.getElementById("Province");
-    const foodSelect = document.getElementById("FoodType");
+    const provinceSelect = document.getElementById("province");
+    const foodSelect = document.getElementById("foodType");
     document.getElementById("search").addEventListener("submit", search, false);
 
     const fillSelects = () => {
@@ -134,10 +134,10 @@
 
     function search(event) {
       event.preventDefault();
-      const name = document.getElementById("Name").value;
+      const name = document.getElementById("name").value;
       const province = provinceSelect.value;
       const foodType = foodSelect.value;
-      window.location.href = `http://localhost/TFG/view/restaurants.html?Name=${name}&Province=${province}&FoodType=${foodType}`;
+      window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
     }
 
     const checkIsLoggedIn = () => {

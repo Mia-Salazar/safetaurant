@@ -48,19 +48,19 @@
         <h2>Resultados de la búsqueda</h2>
         <form id="search">
           <div class="input-group">
-            <label class="input-label" for="Name">Busca un restaurante</label>
-            <input class="input" id="Name" placeholder="Nombre restaurante" name="Name" type="text" required />
+            <label class="input-label" for="name">Busca un restaurante</label>
+            <input class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" required />
           </div>
           <div class="form-selects">
             <div class="input-group">
-              <label class="input-label" for="Province">Provincia: </label>
-              <select name="Province" id="Province" class="select">
+              <label class="input-label" for="province">Provincia: </label>
+              <select name="province" id="province" class="select">
                 <option selected disabled value="">Escoge Provincia</option>
               </select>
             </div>
             <div class="input-group">
-              <label class="input-label" for="FoodType">Tipo de comida: </label>
-              <select name="FoodType" id="FoodType" class="select">
+              <label class="input-label" for="foodType">Tipo de comida: </label>
+              <select name="foodType" id="foodType" class="select">
                 <option selected disabled value="">Escoge el tipo</option>
               </select>
             </div>
@@ -94,9 +94,9 @@
     const found = document.getElementById("found");
     const toggleButton = document.getElementById("toggle");
     const register = document.getElementById("register");
-    const name = document.getElementById("Name");
-    const provinceSelect = document.getElementById("Province");
-    const foodSelect = document.getElementById("FoodType");
+    const name = document.getElementById("name");
+    const provinceSelect = document.getElementById("province");
+    const foodSelect = document.getElementById("foodType");
     const list = document.getElementById("list");
     document.getElementById("search").addEventListener("submit", search, false);
 
@@ -141,11 +141,11 @@
         let score = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `http://localhost/TFG/view/restaurant.html?ID=${restaurant.RestaurantID}`
-        title.innerHTML = restaurant.Name;
-        address.innerHTML = restaurant.Address;
-        province.innerHTML = restaurant.Province;
-        score.innerHTML = `${restaurant.GeneralScore}<span>/10</span>`;
+        link.href = `http://localhost/TFG/view/restaurant.html?ID=${restaurant.restaurantID}`
+        title.innerHTML = restaurant.name;
+        address.innerHTML = restaurant.address;
+        province.innerHTML = restaurant.province;
+        score.innerHTML = `${restaurant.generalScore}<span>/10</span>`;
         score.classList.add("list-score");
         link.classList.add("primary-button");
 
@@ -163,7 +163,7 @@
       found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?Name=${name.value}&Province=${provinceSelect.value || ""}&FoodType=${foodSelect.value || ""}`, true);
+        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -182,18 +182,18 @@
 
     const getInitialValues = () => {
       list.innerHTML = "";
-      name.value = new URL(document.URL).searchParams.get('Name');
-      provinceSelect.value = new URL(document.URL).searchParams.get('Province');
-      foodSelect.value =  new URL(document.URL).searchParams.get('FoodType');
+      name.value = new URL(document.URL).searchParams.get('name');
+      provinceSelect.value = new URL(document.URL).searchParams.get('province');
+      foodSelect.value =  new URL(document.URL).searchParams.get('foodType');
       getRestaurants();
     }
 
     function search(event) {
       event.preventDefault();
-      const name = document.getElementById("Name").value;
-      const province = document.getElementById("Province").value;
-      const foodType = document.getElementById("FoodType").value;
-      window.location.href = `http://localhost/TFG/view/restaurants.html?Name=${name}&Province=${province}&FoodType=${foodType}`;
+      const name = document.getElementById("name").value;
+      const province = document.getElementById("province").value;
+      const foodType = document.getElementById("foodType").value;
+      window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
     }
 
     fillSelects();

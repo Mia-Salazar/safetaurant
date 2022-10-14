@@ -2,8 +2,8 @@
   include "../model/query.php";
 
   $formInfo = json_decode(file_get_contents("php://input"), true);
-  if(isset($_COOKIE['UserID'])) {
-    $data = registerRestaurant($formInfo['Name'], $formInfo['Province'], $formInfo['Address'],  $formInfo['ZIP'], $formInfo['Phone'], $formInfo['FoodType'], $formInfo['CCAA'], $_COOKIE['UserID']);
+  if(isset($_COOKIE['userID'])) {
+    $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $formInfo['CCAA'], $_COOKIE['userID']);
     if($data) {
      createScore($data, $formInfo);
     } else {
@@ -16,7 +16,7 @@
   }
 
   function createScore($data, $formInfo) {
-    $score = addScore($formInfo['Comment'], $formInfo['GeneralScore'], $formInfo['AllergenChart'],  $formInfo['FidelityScore'], $formInfo['AttentionScore'], $_COOKIE['UserName'], $_COOKIE['UserID'], $data, $formInfo['Created']);
+    $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_COOKIE['userID'], $data, $formInfo['created']);
     if($score) {
       createAverage($data, $formInfo);
     } else {
@@ -26,7 +26,7 @@
   }
 
   function createAverage($data, $formInfo) {
-    $average = addAverage($data, $formInfo['GeneralScore'], $formInfo['AllergenChart'],  $formInfo['FidelityScore'], $formInfo['AttentionScore']);
+    $average = addAverage($data, $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore']);
     if($average) {
       echo "OK";
     } else {

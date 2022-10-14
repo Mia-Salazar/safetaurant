@@ -2,10 +2,10 @@
   include "../model/query.php";
 
   $formInfo = json_decode(file_get_contents("php://input"), true);
-  if(isset($formInfo['Email'])){
-    $isUnique = checkUniqueEmail($formInfo['Email']);
+  if(isset($formInfo['email'])){
+    $isUnique = checkUniqueEmail($formInfo['email']);
     if ($isUnique) {
-      $data = registerUser($formInfo['Name'], $formInfo['Email'], $formInfo['BirthDate'], $formInfo['Password'], $formInfo['Surname'], $formInfo['LactoseIntolerance'], $formInfo['CeliacDisease'], $formInfo['Allergies']);
+      $data = registerUser($formInfo['name'], $formInfo['email'], $formInfo['birthDate'], $formInfo['password'], $formInfo['surname'], $formInfo['lactoseIntolerance'], $formInfo['celiacDisease'], $formInfo['allergies']);
       if($data) {
         echo "OK";
       } else {

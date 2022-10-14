@@ -1,8 +1,8 @@
 <?php 
   include "../model/query.php";
 
-  if(isset($_GET['Name'])){
-    $restaurants = getRestaurants($_GET['Name'], $_GET['Province'], $_GET['FoodType']);
+  if(isset($_GET['name'])){
+    $restaurants = getRestaurants($_GET['name'], $_GET['province'], $_GET['foodType']);
     if($restaurants) {
       echo json_encode($restaurants);
     } else {
