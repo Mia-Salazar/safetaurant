@@ -89,43 +89,7 @@
         <ul id="scoresList" class="scores-list">
         </ul>
       </div>
-
-      <div class="add-restaurant-wrapper">
-        <form class="add-restaurant-form" id="add">
-          <h3>Añade los primeros datos y puntuaciones sobre alérgenos</h3>
-<!--           <div class="input-group">
-            <label class="input-label" for="GeneralScore">Puntuación general*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="GeneralScore" name="GeneralScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="GeneralScore.value=value">
-            </div>
-          </div>
-          <div class="checkbox-group">
-            <label class="input-label" for="AllergenChart">¿Carta de alérgenos?</label>
-            <input class="input" id="AllergenChart" name="AllergenChart" type="checkbox" />
-          </div>
-          <div class="input-group hidden" id="FidelityScoreContainer">
-            <label class="input-label" for="FidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="FidelityScore" name="FidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="FidelityScore.value=value">
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="AttentionScore">Atención recibida por el personal*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="AttentionScore" name="AttentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="AttentionScore.value=value">
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="Comment">Comentario: </label>
-            <textarea id="Comment" name="Comment" rows="4" cols="50"></textarea>
-          </div> -->
-          <small id="feedback" class=""></small>
-          <button type="submit" class="primary-button" id="buttonSubmit">Añadir nueva puntuación</button>
-        </form>
-      </div>
+      <a href="" class="primary-button" id="addScore">Añadir nueva puntuación</a>
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
@@ -147,6 +111,7 @@
     const toggleButton = document.getElementById("toggle");
     const restaurantID = new URL(document.URL).searchParams.get('ID');
     const add = document.getElementById("add");
+    const addScore = document.getElementById("addScore");
     const data = {ID: restaurantID};
 
     let restaurant;
@@ -154,11 +119,6 @@
     let average;
 
     let allergenChartToggle = false;
-
-    // document.getElementById("add").addEventListener("submit", registerRestaurant, false);
-    // document.getElementById("AllergenChart").addEventListener("change", allergenToggle, false);
-
-    //TODO: En php comprobar que no puede añdir puntuación
 
     const putData = () => {
         document.getElementById("name").innerHTML = restaurant.name;
@@ -208,13 +168,13 @@
     }
 
     const putAverage = () => {
-      document.getElementById("generalScore").value = average.generalScore;
-      document.getElementById("numberGeneral").value = average.generalScore;
-      document.getElementById("allergenChart").checked = average.allergenChart === "0" ? false : true;
-      document.getElementById("fidelityScore").value = average.fidelityScore;
-      document.getElementById("numberFidelity").value = average.fidelityScore;
-      document.getElementById("attentionScore").value = average.attentionScore;
-      document.getElementById("numberAttention").value = average.attentionScore;
+      document.getElementById("generalScore").value = Math.floor(average.generalScore);
+      document.getElementById("numberGeneral").value = Math.floor(average.generalScore);
+      document.getElementById("allergenChart").checked = Math.floor(average.allergenChart) === "0" ? false : true;
+      document.getElementById("fidelityScore").value = Math.floor(average.fidelityScore);
+      document.getElementById("numberFidelity").value = Math.floor(average.fidelityScore);
+      document.getElementById("attentionScore").value = Math.floor(average.attentionScore);
+      document.getElementById("numberAttention").value = Math.floor(average.attentionScore);
     }
 
     const getRestaurant = () => {
@@ -272,8 +232,9 @@
         if (this.readyState == 4 && this.status == 200) {
           nav.classList.remove("hidden");
           toggleButton.classList.remove("hidden");
+          addScore.href = `http://localhost/TFG/view/add-score.html?ID=${restaurantID}`;
         } else if (this.status == 401) {
-          add.classList.add("hidden");
+          addScore.classList.add("hidden");
         } 
       };
       xmlhttp.send();
