@@ -47,7 +47,6 @@
       <div class="data-container">
         <div>
           <p class="data-text">Dirección: <span class="data-info" id="address">-</span></p>
-          <p class="data-text">Comunidad Autónoma: <span class="data-info" id="ccaa">-</span></p>
           <p class="data-text">Provincia: <span class="data-info" id="province">-</span></p>
           <p class="data-text">Código Postal: <span class="data-info" id="zip">-</span></p>
         </div>
@@ -66,8 +65,8 @@
           </div>
         </div>
         <div class="checkbox-group">
-          <label class="input-label" for="allergenChart" disabled>Carta de alérgenos</label>
-          <input class="input" id="allergenChart" name="allergenChart" type="checkbox" />
+          <label class="input-label" for="allergenChart" >Carta de alérgenos</label>
+          <input class="input" id="allergenChart" name="allergenChart" type="checkbox" disabled />
         </div>
         <div class="input-group hidden">
           <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
@@ -93,19 +92,11 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
   <script>
-    const provinces = ["Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres",
-            "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
-            "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
-            "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
-            "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
-    const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
-    const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
-    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
     const feedback = document.getElementById("feedback");
     const nav = document.getElementById("nav");
     const toggleButton = document.getElementById("toggle");
@@ -123,7 +114,6 @@
     const putData = () => {
         document.getElementById("name").innerHTML = restaurant.name;
         document.getElementById("address").innerHTML = restaurant.address;
-        document.getElementById("ccaa").innerHTML = restaurant.CCAA;
         document.getElementById("province").innerHTML = restaurant.province;
         document.getElementById("zip").innerHTML = restaurant.ZIP;
         if (restaurant.phone && restaurant.phone !== "0") {

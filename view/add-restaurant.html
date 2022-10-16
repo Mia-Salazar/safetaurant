@@ -53,12 +53,6 @@
             <input class="input" id="name" name="name" type="text" required />
           </div>
           <div class="input-group">
-            <label class="input-label" for="CCAA">Comunidad Autónoma*: </label>
-            <select name="CCAA" id="CCAA" class="select" required>
-              <option selected disabled value="">Escoge CCAA</option>
-            </select>
-          </div>
-          <div class="input-group">
             <label class="input-label" for="province">Provincia*: </label>
             <select name="province" id="province" class="select" required>
               <option selected disabled value="">Escoge Provincia</option>
@@ -70,7 +64,7 @@
           </div>
           <div class="input-group">
             <label class="input-label" for="ZIP">Código Postal*: </label>
-            <input class="input" id="ZIP" name="ZIP" type="number" required />
+            <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
           </div>
           <div class="input-group">
             <label class="input-label" for="phone">Teléfono: </label>
@@ -124,7 +118,7 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
@@ -134,11 +128,9 @@
             "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
             "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
             "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
-    const CCAA = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
     const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
     "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
     const provinceSelect = document.getElementById("province");
-    const communitySelect = document.getElementById("CCAA");
     const foodSelect = document.getElementById("foodType");
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
@@ -154,12 +146,6 @@
         option.value = province;
         option.innerHTML = province;
         provinceSelect.appendChild(option);
-      });
-      CCAA.forEach((community) => {
-        let option = document.createElement("option");
-        option.value = community;
-        option.innerHTML = community;
-        communitySelect.appendChild(option);
       });
       const foodTypeOrderes = foodType.sort();
       foodTypeOrderes.forEach((food) => {
@@ -192,7 +178,6 @@
         ZIP: Number(document.getElementById("ZIP").value),
         phone: Number(document.getElementById("phone").value),
         foodType: document.getElementById("foodType").value,
-        CCAA: document.getElementById("CCAA").value,
         created: new Date(),
         comment: document.getElementById("comment").value,
         generalScore: document.getElementById("generalScore").value,
@@ -208,6 +193,7 @@
             feedback.innerHTML = "Creado correctamente";
             feedback.classList.add("success");
             feedback.classList.remove("error");
+            window.location.href = "http://localhost/TFG/view/index.html";
         } else if (this.status == 424) {
             feedback.innerHTML = "Hubo un error en la creación del restaurante";
             feedback.classList.add("error");

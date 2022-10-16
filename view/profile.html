@@ -45,7 +45,7 @@
     <main class="main profile container">
       <div class="profile-controls">
         <h2>Perfil</h2>
-        <button class="primary-button" type="button" id="logout">Salir</button>
+        <button class="primary-button logout" type="button" id="logout">Salir</button>
         
       </div>
       
@@ -88,7 +88,7 @@
           <small id="feedback" class=""></small>
           <div class="button-container">
             <button type="button" class="secondary-button" id="toggleEdit">Editar perfil</button>
-            <button type="submit" class="primary-button hidden" id="edit">Editar perfil</button>
+            <button type="submit" class="primary-button hidden" id="edit">Aceptar</button>
           </div>
         </form>
         <div class="decoration-wrapper">
@@ -100,7 +100,7 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
@@ -184,7 +184,7 @@
 
     function toggleEditFunction() {
       if(!toggleEdit) {
-        toggleEditButton.innerHTML = "Dejar de editar";
+        toggleEditButton.innerHTML = "Rechazar";
         editButton.classList.remove("hidden");
       } else {
         toggleEditButton.innerHTML = "Editar perfil";
