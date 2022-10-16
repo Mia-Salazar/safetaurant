@@ -145,7 +145,7 @@
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
-        score.innerHTML = `${restaurant.generalScore}<span>/10</span>`;
+        score.innerHTML = `${Math.floor(restaurant.generalScore)}<span>/10</span>`;
         score.classList.add("list-score");
         link.classList.add("primary-button");
 
