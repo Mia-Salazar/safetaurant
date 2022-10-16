@@ -89,13 +89,14 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
   <script>
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
+    const ID = new URL(document.URL).searchParams.get('ID');
 
     let allergenChartToggle = false;
 
@@ -124,7 +125,7 @@
         allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
         fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
         attentionScore: document.getElementById("attentionScore").value,
-        restaurantID: new URL(document.URL).searchParams.get('ID')
+        restaurantID: ID
       };
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/add-score.php", true);
@@ -134,6 +135,7 @@
             feedback.innerHTML = "Creado correctamente";
             feedback.classList.add("success");
             feedback.classList.remove("error");
+            link.href = `http://localhost/TFG/view/restaurant.html?ID=${ID}`
         } else if (this.status == 424) {
             feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
             feedback.classList.add("error");

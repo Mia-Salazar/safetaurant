@@ -55,13 +55,13 @@
             <div class="input-group">
               <label class="input-label" for="province">Provincia: </label>
               <select name="province" id="province" class="select">
-                <option selected disabled value="">Escoge Provincia</option>
+                <option selected value="">Escoge Provincia</option>
               </select>
             </div>
             <div class="input-group">
               <label class="input-label" for="foodType">Tipo de comida: </label>
               <select name="foodType" id="foodType" class="select">
-                <option selected disabled value="">Escoge el tipo</option>
+                <option selected value="">Escoge el tipo</option>
               </select>
             </div>
             <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
@@ -77,7 +77,7 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
@@ -141,7 +141,7 @@
         let score = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `http://localhost/TFG/view/restaurant.html?ID=${restaurant.restaurantID}`
+        link.href = `http://localhost/TFG/view/restaurant.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
@@ -168,8 +168,13 @@
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             restaurants = JSON.parse(this.responseText);
-            viewList();
-            found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
+            if (restaurants[0].restaurantID !== null) {
+              viewList();
+              found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
+            } else {
+              found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            }
+
           } else if (this.status === 404 || this.status === 204) {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
           }
@@ -190,10 +195,15 @@
 
     function search(event) {
       event.preventDefault();
-      const name = document.getElementById("name").value;
-      const province = document.getElementById("province").value;
-      const foodType = document.getElementById("foodType").value;
-      window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
+      if(name.value && trim(name.value) != "") {
+        const name = document.getElementById("name").value;
+        const province = document.getElementById("province").value;
+        const foodType = document.getElementById("foodType").value;
+        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
+      } else {
+        alert("Debes introducir un valor en la búsqueda");
+        return;
+      }
     }
 
     fillSelects();

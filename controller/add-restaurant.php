@@ -3,7 +3,7 @@
 
   $formInfo = json_decode(file_get_contents("php://input"), true);
   if(isset($_COOKIE['userID'])) {
-    $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $formInfo['CCAA'], $_COOKIE['userID']);
+    $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $_COOKIE['userID']);
     if($data) {
      createScore($data, $formInfo);
     } else {

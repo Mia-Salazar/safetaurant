@@ -69,11 +69,19 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script>
     document.getElementById("register").addEventListener("submit", registerUser, false);
+
+    const hasCorrectPassword = (value) => {
+      const regex = /[A-Za-z\d]{8,}/g;
+      if(!value.match(regex)) {
+        return false;
+      }
+      return true;
+    }
 
     const isMinor = (value) => {
       const today = new Date();
@@ -96,10 +104,12 @@
       buttonSubmit.innerHTML = "Cargando...";
       error.innerHTML = "";
       if(isMinor(birthDate.value)) {
+        buttonSubmit.innerHTML = "Registrar";
         alert("No puedes registrarte si eres menor de edad");
         return;
       }
       if(!hasCorrectPassword(password.value)) {
+        buttonSubmit.innerHTML = "Registrar";
         alert("La contraseña debe tener 8 caracteres que sean números o letras");
         return;
       }

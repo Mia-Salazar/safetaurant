@@ -57,13 +57,13 @@
             <div class="input-group">
               <label class="input-label" for="province">Provincia: </label>
               <select name="province" id="province" class="select">
-                <option selected disabled value="">Escoge Provincia</option>
+                <option selected value="">Escoge Provincia</option>
               </select>
             </div>
             <div class="input-group">
               <label class="input-label" for="foodType">Tipo de comida: </label>
               <select name="foodType" id="foodType" class="select">
-                <option selected disabled value="">Escoge el tipo</option>
+                <option selected value="">Escoge el tipo</option>
               </select>
             </div>
             <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
@@ -95,7 +95,7 @@
     </main>
     <footer class="footer">
       <p><span class="logo-text">SafeTaurant</span>, restaurantes sin alergias</p>
-      <p>Proyecto realizado por <a href="miasalazar.com" target="_blank">María Salazar</a></p>
+      <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
@@ -134,10 +134,16 @@
 
     function search(event) {
       event.preventDefault();
-      const name = document.getElementById("name").value;
-      const province = provinceSelect.value;
-      const foodType = foodSelect.value;
-      window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
+      if(name.value && trim(name.value) != "") {
+        const name = document.getElementById("name").value;
+        const province = provinceSelect.value;
+        const foodType = foodSelect.value;
+        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
+      } else {
+        alert("Debes introducir un valor en la búsqueda");
+        return;
+      }
+
     }
 
     const checkIsLoggedIn = () => {

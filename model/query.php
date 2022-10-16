@@ -76,10 +76,10 @@
 		closeConnection($DDBB);
 	}
 
-	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $CCAA, $userID) {
+	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, CCAA, userID) 
-				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '" . $CCAA . "', '"  . $userID . "')";
+		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID) 
+				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '"  . $userID . "')";
 		$result = mysqli_query($DDBB, $sql);
 		$lastID = mysqli_insert_id($DDBB);
 		if ($result) {
