@@ -18,16 +18,6 @@
   function createScore($data, $formInfo) {
     $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_COOKIE['userID'], $data, $formInfo['created']);
     if($score) {
-      createAverage($data, $formInfo);
-    } else {
-      http_response_code(424);
-      exit;
-    }
-  }
-
-  function createAverage($data, $formInfo) {
-    $average = addAverage($data, $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore']);
-    if($average) {
       echo "OK";
     } else {
       http_response_code(424);

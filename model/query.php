@@ -129,21 +129,6 @@
 		closeConnection($DDBB);
 	}
 
-	function addAverage($restaurantID, $generalScore, $allergenChart, $fidelityScore, $attentionScore) {
-		$DDBB = createConnection();
-		$sql = "INSERT INTO averages (restaurantID, generalScore, allergenChart, fidelityScore, attentionScore) 
-				VALUES ('" .  $restaurantID . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $fidelityScore . "', '" . 
-					$attentionScore . "')";
-		$result = mysqli_query($DDBB, $sql);
-
-		if ($result) {
-			return $result;
-		} else {
-			return false;
-		} 
-		closeConnection($DDBB);
-	}
-
 	function getRestaurant($restaurantID) {
 		$DDBB = createConnection();
 		$sql = "SELECT * FROM restaurant WHERE restaurantID ='" . $restaurantID . "'";
@@ -160,7 +145,7 @@
 
 	function getAverage($restaurantID) {
 		$DDBB = createConnection();
-		$sql = "SELECT * FROM averages WHERE restaurantID ='" . $restaurantID . "'";
+		$sql = "SELECT AVG(generalScore) as generalScore, AVG(allergenChart) as allergenChart, AVG(fidelityScore) as fidelityScore, AVG(attentionScore) as attentionScore FROM scores WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -172,17 +157,21 @@
 		closeConnection($DDBB);
 	}
 
-	function getScores($restaurantID) {
+	function getScores($restaurantID, $returnsArray = true) {
 		$DDBB = createConnection();
 		$sql = "SELECT * FROM scores WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
-			$scores = array();
-		    while ($resultsrows = mysqli_fetch_assoc($result)) {
-		      $scores[] = $resultsrows;
-		    }
-			return $scores;
+			if ($returnsArray) {
+				$scores = array();
+			    while ($resultsrows = mysqli_fetch_assoc($result)) {
+			      $scores[] = $resultsrows;
+			    }
+				return $scores;
+			} else {
+				return mysqli_num_rows($result);
+			}
 		} else {
 			return false;
 		} 
