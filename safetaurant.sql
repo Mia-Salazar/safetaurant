@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2022 a las 20:56:43
+-- Tiempo de generación: 17-10-2022 a las 18:26:59
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -35,8 +35,7 @@ CREATE TABLE `restaurant` (
   `ZIP` int(6) NOT NULL,
   `phone` int(12) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
-  `userID` int(10) NOT NULL,
-  `CCAA` varchar(100) NOT NULL
+  `userID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
