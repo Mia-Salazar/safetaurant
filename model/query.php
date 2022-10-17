@@ -59,13 +59,23 @@
 
 	function editUser($userID, $name, $surname, $password, $lactoseIntolerance, $celiacDisease, $allergies) {
 		$DDBB = createConnection();
-		$sql = "UPDATE user SET name = '" . $name . "'" .
+		if($password === "") {
+			$sql = "UPDATE user SET name = '" . $name . "'" .
 				", surname = '" . $surname . "'" .
-				", password = '" . $password . "'" .
 				", celiacDisease = '" . $celiacDisease . "'" . 
 				", allergies = '" . $allergies . "'" . 
 				", lactoseIntolerance =" . $lactoseIntolerance . 
 				" WHERE userID =" . $userID;
+		} else {
+			$sql = "UPDATE user SET name = '" . $name . "'" .
+			", surname = '" . $surname . "'" .
+			", password = '" . $password . "'" .
+			", celiacDisease = '" . $celiacDisease . "'" . 
+			", allergies = '" . $allergies . "'" . 
+			", lactoseIntolerance =" . $lactoseIntolerance . 
+			" WHERE userID =" . $userID;	
+		}
+
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
