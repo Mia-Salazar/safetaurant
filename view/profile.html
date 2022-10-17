@@ -70,7 +70,7 @@
           </div>
           <div class="input-group">
             <label class="input-label" for="password">Contraseña: </label>
-            <input disabled class="input" id="password" name="password" placeholder="********" type="password" required />
+            <input disabled class="input" id="password" name="password" placeholder="********" type="password" />
             <small>La contraseña debe tener al menos 8 caracteres y deben ser letras o números</small>
           </div>
           <div class="input-group">
@@ -108,7 +108,7 @@
     const toggleEditButton = document.getElementById("toggleEdit");
     const editButton = document.getElementById("edit");
     const subtitle = document.getElementById("subtitle");
-    const password = document.getElementById("Password");
+    const password = document.getElementById("password");
     const name = document.getElementById("name")
     const email = document.getElementById("email")
     const birthDate =document.getElementById("birthDate")
@@ -129,7 +129,7 @@
 
     function editFunction(event){
       event.preventDefault();
-      if(!hasCorrectPassword(password.value)) {
+      if(password.value && !hasCorrectPassword(password.value)) {
         alert("La contraseña debe tener 8 caracteres que sean números o letras");
         return;
       }

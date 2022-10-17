@@ -72,16 +72,9 @@
       <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
+  <script type="text/javascript" src="./shared.js"></script>
   <script>
     document.getElementById("register").addEventListener("submit", registerUser, false);
-
-    const hasCorrectPassword = (value) => {
-      const regex = /[A-Za-z\d]{8,}/g;
-      if(!value.match(regex)) {
-        return false;
-      }
-      return true;
-    }
 
     const isMinor = (value) => {
       const today = new Date();

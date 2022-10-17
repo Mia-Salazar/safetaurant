@@ -13,3 +13,11 @@ function toggleMenu() {
   }
   menuToggle = !menuToggle;
 }
+
+function hasCorrectPassword(value){
+  const regex = /[A-Za-z\d]{8,}/g;
+  if(!value.match(regex)) {
+    return false;
+  }
+  return true;
+}
