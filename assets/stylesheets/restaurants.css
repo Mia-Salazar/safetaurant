@@ -15,6 +15,18 @@
 	margin-top: 0;
 }
 
+.order-container {
+	display: flex;
+	align-items: center;
+}
+
+.order-label {
+	margin-bottom: 0;
+	margin-right: 5px;
+	color: #781C68;
+    font-weight: 700;
+}
+
 .list-search li {
 
 	position: relative;

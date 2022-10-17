@@ -2,7 +2,7 @@
   include "../model/query.php";
 
   if(isset($_GET['name'])){
-    $restaurants = getRestaurants($_GET['name'], $_GET['province'], $_GET['foodType']);
+    $restaurants = getRestaurants($_GET['name'], $_GET['province'], $_GET['foodType'], $_GET['order']);
     if($restaurants) {
       echo json_encode($restaurants);
     } else {
