@@ -195,11 +195,10 @@
 
     function search(event) {
       event.preventDefault();
-      if(name.value && trim(name.value) != "") {
-        const name = document.getElementById("name").value;
+      if(name.value && name.value.trim() != "") {
         const province = document.getElementById("province").value;
         const foodType = document.getElementById("foodType").value;
-        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name}&province=${province}&foodType=${foodType}`;
+        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}`;
       } else {
         alert("Debes introducir un valor en la búsqueda");
         return;
