@@ -138,7 +138,7 @@
       if(name.value && name.value.trim() != "") {
         const province = provinceSelect.value;
         const foodType = foodSelect.value;
-        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}`;
+        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
       } else {
         alert("Debes introducir un valor en la búsqueda");
         return;

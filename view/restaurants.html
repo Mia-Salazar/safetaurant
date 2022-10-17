@@ -69,9 +69,15 @@
         </form>
       </section>
       <section class="list-search-container">
+        <div class="order-container" id="orderContainer">
+          <label class="input-label order-label" for="order">Ordernar de forma: </label>
+          <select name="order" id="order" class="select">
+            <option value="asc">Ascendente</option>
+            <option selected value="desc">Descendente</option>
+          </select>
+        </div>
         <h3 id="found"></h3>
         <ul class="list-search" id="list">
-          
         </ul>
       </section>
     </main>
@@ -97,8 +103,11 @@
     const name = document.getElementById("name");
     const provinceSelect = document.getElementById("province");
     const foodSelect = document.getElementById("foodType");
+    const orderContainer = document.getElementById("orderContainer");
     const list = document.getElementById("list");
+    const order = document.getElementById("order");
     document.getElementById("search").addEventListener("submit", search, false);
+    document.getElementById("order").addEventListener("change", search, false);
 
     let restaurants;
 
@@ -163,7 +172,7 @@
       found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
+        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -177,6 +186,7 @@
 
           } else if (this.status === 404 || this.status === 204) {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            orderContainer.add.classList("hidden");
           }
         };
         xmlhttp.send();
@@ -190,15 +200,14 @@
       name.value = new URL(document.URL).searchParams.get('name');
       provinceSelect.value = new URL(document.URL).searchParams.get('province');
       foodSelect.value =  new URL(document.URL).searchParams.get('foodType');
+      order.value = new URL(document.URL).searchParams.get('order');
       getRestaurants();
     }
 
     function search(event) {
       event.preventDefault();
       if(name.value && name.value.trim() != "") {
-        const province = document.getElementById("province").value;
-        const foodType = document.getElementById("foodType").value;
-        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}`;
+        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
       } else {
         alert("Debes introducir un valor en la búsqueda");
         return;
