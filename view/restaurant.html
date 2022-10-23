@@ -23,23 +23,28 @@
       </figure>
     </div>
     <nav class="nav">
-      <button id="toggle" class="toggle hidden" aria-label="Abrir menú">
+      <button id="toggle" class="toggle" aria-label="Abrir menú">
         <i class="toggle-item" aria-hidden="true"></i>
         <i class="toggle-item" aria-hidden="true"></i>
         <i class="toggle-item" aria-hidden="true"></i>
       </button>
-      <ul class="nav-list hidden" id="nav">
+      <ul class="nav-list" id="nav">
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/index.html">Buscar</a>
+          <a class="nav-link registered" href="http://localhost/TFG/view/index.html">Buscar</a>
         </li>
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+          <a class="nav-link registered" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
         </li>
         <li>
-          <a class="nav-link" href="http://localhost/TFG/view/profile.html">Perfil</a>
+          <a class="nav-link registered" href="http://localhost/TFG/view/profile.html">Perfil</a>
+        </li>
+        <li>
+          <a class="nav-link no-registered hidden" href="http://localhost/TFG/view/login.html">Iniciar sesión</a>
+        </li>
+        <li>
+          <a class="nav-link no-registered hidden" href="http://localhost/TFG/view/register-user.html">Registrarse</a>
         </li>
       </ul>
-
     </nav>
   </header>
     <main class="main add-restaurant container">
@@ -220,11 +225,16 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          nav.classList.remove("hidden");
-          toggleButton.classList.remove("hidden");
           addScore.href = `http://localhost/TFG/view/add-score.html?ID=${restaurantID}`;
         } else if (this.status == 401) {
-          addScore.classList.add("hidden");
+          const list = document.querySelectorAll(".nav-link");
+          list.forEach((li)=> {
+            if (li.classList.contains("no-registered")) {
+              li.classList.remove("hidden");
+            } else {
+              li.classList.add("hidden");
+            }
+          });
         } 
       };
       xmlhttp.send();
