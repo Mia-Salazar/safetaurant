@@ -227,6 +227,7 @@
         if (this.readyState == 4 && this.status == 200) {
           addScore.href = `http://localhost/TFG/view/add-score.html?ID=${restaurantID}`;
         } else if (this.status == 401) {
+          addScore.classList.add("hidden");
           const list = document.querySelectorAll(".nav-link");
           list.forEach((li)=> {
             if (li.classList.contains("no-registered")) {
