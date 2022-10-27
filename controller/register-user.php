@@ -2,7 +2,7 @@
   //Esta funcionalidad forma parte de la página de crear usuario
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
   //Comprobamos si hemos recibido el email, si no lo hemos recibido no podremos crear el usuario
   if(isset($formInfo['email'])){

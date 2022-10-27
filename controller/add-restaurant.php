@@ -2,7 +2,7 @@
   //Funcionalidades para la página de añadir restaurante
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
 
   //Comprobamos si el usuario está autentificado mirando las cookies
@@ -27,7 +27,7 @@
     //Añadimos la nueva calificación
     $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_COOKIE['userID'], $data, $formInfo['created']);
     if($score) {
-      //Si tenemos éxito devolvemos un mensaje de que todo ha ido bien
+      //Si tenemos éxito devolvemos un mensaje que indica que todo ha ido bien
       echo "OK";
     } else {
       //Si sucede algún error durante la creación devolvemos ún código 424

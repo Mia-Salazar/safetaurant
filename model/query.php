@@ -46,7 +46,8 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para obtener un usuario por ID. Devolvemos el usuario o false
+	//Funcionalidad para obtener un usuario por ID
+	//Devolvemos el usuario o false
 	function getUser($userID) {
 		$DDBB = createConnection();
 		$sql = "SELECT birthDate, celiacDisease, email, lactoseIntolerance, name, surname, allergies FROM user WHERE userID ='" . $userID . "'";
@@ -61,7 +62,7 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para editar un usuario. O devolvemos el resultado o un mensaje de error.
+	//Funcionalidad para editar un usuario. O devolvemos el resultado o un mensaje de error
 	function editUser($userID, $name, $surname, $password, $lactoseIntolerance, $celiacDisease, $allergies) {
 		$DDBB = createConnection();
 		//Si se ha escrito una contraseña, la modificaremos y sino no
@@ -92,8 +93,8 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para crear un restaurante.
-	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false.
+	//Funcionalidad para crear un restaurante
+	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false
 	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID) {
 		$DDBB = createConnection();
 		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID) 
@@ -108,8 +109,9 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para obtener restaurantes. En función de los filtros que se hayan usado, haremos una petición u otra.
-	//Obtenemos ciertos datos de los restaurantes y luego su media de puntuación general.
+	//Funcionalidad para obtener restaurantes
+	//En función de los filtros que se hayan usado, haremos una petición u otra
+	//Obtenemos ciertos datos de los restaurantes y luego su media de puntuación general
 	//Buscamos por el término que hayan metido sin importar si estaba en mayúscula o minúscula
 	function getRestaurants($name, $province, $foodType, $order) {
 		$DDBB = createConnection();
@@ -138,7 +140,8 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para añadir una nueva puntuación. O devolvemos el resultado o false.
+	//Funcionalidad para añadir una nueva puntuación
+	//O devolvemos el resultado o false
 	function addScore($comment, $generalScore, $allergenChart, $fidelityScore, $attentionScore, $userName, $userID, $restaurantID, $today) {
 		$DDBB = createConnection();
 		$sql = "INSERT INTO scores (comment, created, generalScore, allergenChart, fidelityScore, attentionScore, userName, userID, restaurantID) 
@@ -153,7 +156,7 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para obtener la información de un restaurante por su ID.
+	//Funcionalidad para obtener la información de un restaurante por su ID
 	function getRestaurant($restaurantID) {
 		$DDBB = createConnection();
 		$sql = "SELECT * FROM restaurant WHERE restaurantID ='" . $restaurantID . "'";

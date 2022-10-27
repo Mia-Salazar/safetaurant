@@ -2,7 +2,7 @@
   //Esta funcionalidad se utiliza en el detalle de restaurante para obtener las puntuaciones medias
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
 
   //Comprobamos si hemos recibido un ID de restaurante
@@ -13,12 +13,12 @@
       //Devolvemos los datos
       echo json_encode($restaurant);
     } else {
-      //Si no hemos encontrado un ID que corresponda a ninguno que tenemos en la BBDD, respondemos con un 400, "no encontrado"
+      //Si no hemos encontrado un ID que corresponda a ninguno que tenemos en la BBDD, respondemos con un 400
       http_response_code(400);
       exit;
     }
   } else {
-    //Si no hemos recibido un ID respondemos con un 400, "no encontrado"
+    //Si no hemos recibido un ID respondemos con un 400
     http_response_code(400);
     exit;
   }

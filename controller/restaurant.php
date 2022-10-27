@@ -2,7 +2,7 @@
   //Funcionalidad de la página de detalle de restaurnate
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
   //Comprobamos si hemos recibido el ID del restaurante
   if(isset($formInfo['ID'])) {

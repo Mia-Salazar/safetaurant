@@ -2,7 +2,7 @@
   //Esta funcionalidad pertnece a la página de perfil, y consiste en poder editarlo
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
   //Comprobamos si el usuario está autentificado mirando las cookies
   if(isset($_COOKIE['userID'])) {

@@ -76,7 +76,8 @@
   <script>
     document.getElementById("register").addEventListener("submit", registerUser, false);
 
-    //Comprobamos si la persona que está registrándose es un menor. Si lo es retornamos true, sino false
+    //Comprobamos si la persona que está registrándose es un menor
+    //Si lo es retornamos true, sino false
     const isMinor = (value) => {
       const today = new Date();
       const birthDate = new Date(value);

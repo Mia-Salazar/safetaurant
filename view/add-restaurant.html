@@ -135,7 +135,8 @@
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
 
-    //Variable para comprobar si hay carta de alérgenos. Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
+    //Variable para comprobar si hay carta de alérgenos
+    //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
     let allergenChartToggle = false;
 
     document.getElementById("add").addEventListener("submit", registerRestaurant, false);
@@ -217,7 +218,8 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
-    //Comprobamos si el usuario ha iniciado sesión. Si la respuesta es afirmativa, continuamos con la carga de la página.
+    //Comprobamos si el usuario ha iniciado sesión
+    //Si la respuesta es afirmativa, continuamos con la carga de la página
     //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();

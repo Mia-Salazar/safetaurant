@@ -1,8 +1,9 @@
 <?php 
-  //Esta funcionalidad pertenece a la página de detalle de restaurante. Obtenemos todas las puntuaciones de un restaurante
+  //Esta funcionalidad pertenece a la página de detalle de restaurante
+  //Obtenemos todas las puntuaciones de un restaurante
   include "../model/query.php";
 
-  //Obtenemos los datos que han sido enviamos
+  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
   //Comprobamos si hemos recibido un ID
   if(isset($formInfo['ID'])) {
