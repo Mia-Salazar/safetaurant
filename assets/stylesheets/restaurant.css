@@ -1,3 +1,5 @@
+/*Estilos de la página de detalle de restaurante*/
+
 .toggle.hidden, .nav-list.hidden {
 	display:  none;
 }
@@ -59,12 +61,15 @@ h3 {
 	font-weight: 700;
 }
 
+
+/*Adaptando el diseño a pantallas mayores*/
 @media (min-width: 768px) {
     .scores-list {
     	grid-template-columns: 1fr 1fr;
     }
 }
 
+/*Adaptando el diseño a pantallas grandes*/
 @media (min-width: 992px) {
 	.data-container {
 		display: grid;

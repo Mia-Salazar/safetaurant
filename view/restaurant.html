@@ -110,25 +110,31 @@
     const addScore = document.getElementById("addScore");
     const data = {ID: restaurantID};
 
+    //Creamos las variables necesarias que usaremos para guardar los datos
     let restaurant;
     let scores;
     let average;
 
+    //Variable para comprobar si hay carta de alérgenos. Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
     let allergenChartToggle = false;
 
+    //Mostramos los datos del restaurante en los inputs
     const putData = () => {
-        document.getElementById("name").innerHTML = restaurant.name;
-        document.getElementById("address").innerHTML = restaurant.address;
-        document.getElementById("province").innerHTML = restaurant.province;
-        document.getElementById("zip").innerHTML = restaurant.ZIP;
-        if (restaurant.phone && restaurant.phone !== "0") {
-          document.getElementById("phone").innerHTML = restaurant.phone;
-        }
-        if (restaurant.foodType && restaurant.foodType !== "") {
-          document.getElementById("foodType").innerHTML = restaurant.foodType;
-        }
+      document.getElementById("name").innerHTML = restaurant.name;
+      document.getElementById("address").innerHTML = restaurant.address;
+      document.getElementById("province").innerHTML = restaurant.province;
+      document.getElementById("zip").innerHTML = restaurant.ZIP;
+      //Si se ha guardado el teléfono, lo mostramos
+      if (restaurant.phone && restaurant.phone !== "0") {
+        document.getElementById("phone").innerHTML = restaurant.phone;
+      }
+      //Si se ha guardado el tipo de comida, lo mostramos
+      if (restaurant.foodType && restaurant.foodType !== "") {
+        document.getElementById("foodType").innerHTML = restaurant.foodType;
+      }
     }
 
+    //Para cada puntuación creamos un <li> con los datos y lo introducimos en la <ul>
     const putScores = () => {
       const scoresList = document.getElementById("scoresList");
       scores.forEach((score) => {
@@ -158,10 +164,10 @@
         li.appendChild(comment);
 
         scoresList.appendChild(li);
-
       })
     }
 
+    //Mostramos la puntuación media del restaurante en los inputs
     const putAverage = () => {
       document.getElementById("generalScore").value = Math.floor(average.generalScore);
       document.getElementById("numberGeneral").value = Math.floor(average.generalScore);
@@ -172,63 +178,80 @@
       document.getElementById("numberAttention").value = Math.floor(average.attentionScore);
     }
 
+    //Obtenemos los datos del restaurante
     const getRestaurant = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si se ha encontrado el restaurante, llamamos a las funciones que ponen la información y buscan las calificaciones
+          //Se guarda la información del restaurante
           restaurant = JSON.parse(this.responseText);
           putData();
           getScores();
-        } else if (this.status == 400) {
+        } else if (this.status == 404) {
+          //Si no se encuentra el ID del restaurante, le dejamos este mensaje
           document.getElementById("subtitle").innerHTML = "No hay un restaurante con este ID";
         }   
       };
       xmlhttp.send(JSON.stringify(data));
     }
 
+    //Obtenemos la información de media de puntuación
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/average.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Guardamos los datos en una variable
+          //Colocamos los datos de las calificaciones
           average = JSON.parse(this.responseText);
           putAverage();
-        } else if (this.status == 400) {
+        } else if (this.status == 404) {
+          //Si no se encuentra el ID del restaurante, le dejamos este mensaje
           document.getElementById("averages").innerHTML = "No hay puntuaciones medias para este restaurante";
         }   
       };
       xmlhttp.send(JSON.stringify(data));
     }
 
+    //Obtenemos las puntuaciones
     const getScores = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/scores.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Se guardan las calificaciones en una variable
           scores = JSON.parse(this.responseText);
+          //Llamamos a la función que obtiene las medias
           getAverage();
+          //Llamamos a la función que añade en la página todas las puntuaciones
           putScores();
         } else if (this.status == 400) {
+          //Si no encontramos las puntuaciones, mostramos un mensaje
           document.getElementById("scores").innerHTML = "No hay comentarios para este restaurante";
         }   
       };
       xmlhttp.send(JSON.stringify(data));
     }
 
+    //Comprobamos si se ha iniciado sesión
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
           addScore.href = `http://localhost/TFG/view/add-score.html?ID=${restaurantID}`;
         } else if (this.status == 401) {
+          //Si el usuario no está activo, ocultamos el link de añadir puntuación
           addScore.classList.add("hidden");
           const list = document.querySelectorAll(".nav-link");
+          //Ocultamos los links a los que no puede acceder
           list.forEach((li)=> {
             if (li.classList.contains("no-registered")) {
               li.classList.remove("hidden");

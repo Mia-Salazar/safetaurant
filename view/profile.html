@@ -39,16 +39,13 @@
           <a class="nav-link" href="http://localhost/TFG/view/profile.html">Perfil</a>
         </li>
       </ul>
-
     </nav>
   </header>
     <main class="main profile container">
       <div class="profile-controls">
         <h2>Perfil</h2>
         <button class="primary-button logout" type="button" id="logout">Salir</button>
-        
       </div>
-      
       <p id="subtitle">En esta pagina podrás ver los datos de tu perfil y podrás editarlos.</p>
       <div class="profile-wrapper">
         <form class="profile-form" id="profile">
@@ -120,6 +117,7 @@
     const submit = document.getElementById("profile");
     const logout = document.getElementById("logout");
 
+    //Variables que necesitamos de forma global
     let user;
     let toggleEdit = false;
 
@@ -127,13 +125,20 @@
     profile.addEventListener("submit", editFunction, false);
     logout.addEventListener("click", logoutFunction, false);
 
+    //Función para editar el perfil
     function editFunction(event){
       event.preventDefault();
+      //Comprobamos si la contraseña es correcta, si no lo es, se lanza una alerta.
+      //En caso contrario se sigue ejecutando
       if(password.value && !hasCorrectPassword(password.value)) {
         alert("La contraseña debe tener 8 caracteres que sean números o letras");
         return;
       }
+      //Mostramos al usuario que la aplicación está en proceso
       editButton.innerHTML = "Cargando...";
+      //Deshabilitamos los inputs para que no se puedan editar durante la carga
+      toggleEditFunction();
+      //Creamos un objeto con los datos a editar
       const data = {
         name: name.value,
         password: password.value,
@@ -147,34 +152,40 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+           //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
           feedback.innerHTML = "Actualizado correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
-          toggleEditFunction();
         } else if (this.status == 401) {
+          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
           window.location.href = "http://localhost/TFG/view/login.html";
         } else if (this.status == 400) {
+          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
           feedback.innerHTML = "Hubo un error al crear el usuario";
           feedback.classList.add("error");
           feedback.classList.remove("success");
         }
+        //Mostramos al usuario que ya no está cargando
         editButton.innerHTML = "Editar perfil";
       };
       xmlhttp.send(JSON.stringify(data));
     };
 
+    //Función para salir
     function logoutFunction() {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/logout.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
+          //Si tiene éxito y nos devuelve un 401, se ha salido y le expulsamos al login
           window.location.href = "http://localhost/TFG/view/login.html";
         }
       };
       xmlhttp.send();
     }
 
+    //Cada uno de los inputs del array es habilitado o deshabilitado
     const toggleDisable = (value) => {
       const elements = ["password", "name","surname", "lactoseIntolerance", "celiacDisease", "allergies"];
       elements.forEach(element => {
@@ -182,6 +193,7 @@
       });
     }
 
+    //Habilitamos y deshabilitamos los inputs en función de la necesidad
     function toggleEditFunction() {
       if(!toggleEdit) {
         toggleEditButton.innerHTML = "Rechazar";
@@ -194,41 +206,51 @@
       toggleEdit = !toggleEdit;
     }
 
+    //Obtenemos los datos del usuario
     const getProfile = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/profile.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si ha habido éxito, guardamos los datos del usuario en la variable user
           user = JSON.parse(this.responseText);
+          //Llamamos a la función que mete en los inputs los valores que se han obtenido
           putData();
         } else if (this.status == 401) {
+          //Si la persona no está autorizada, la expulsamos
           window.location.href = "http://localhost/TFG/view/login.html";
         } else if (this.status == 400) {
+          //Si hay un error, devolvemos un error
           subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
         }  
       };
       xmlhttp.send();
     };
 
+    //Cambiamos los valores de los inputs
     const putData = () => {
       name.value = user.name;
       email.value = user.email;
       birthDate.value = user.birthDate;
       surname.value = user.surname;
       allergies.value = user.allergies;
+      //Si tenemos 1, el checkbox estará en true, y si es 0, estará en false
       user.lactoseIntolerance === "1" ? lactoseIntolerance.checked = true : lactoseIntolerance.checked = false;
       user.celiacDisease === "1" ? celiacDisease.checked = true : celiacDisease.checked = false;
     }
 
+    //Comprobamos si el usuario está activo
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si el usuario ha iniciado sesión, llamamos a la función que añade los datos a los inputs
           getProfile();
         } else if (this.status == 401) {
+          //Si no ha iniciado sesión, le expulsamos al login
           window.location.href = "http://localhost/TFG/view/login.html";
         }  
       };

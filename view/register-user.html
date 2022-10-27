@@ -76,6 +76,7 @@
   <script>
     document.getElementById("register").addEventListener("submit", registerUser, false);
 
+    //Comprobamos si la persona que está registrándose es un menor. Si lo es retornamos true, sino false
     const isMinor = (value) => {
       const today = new Date();
       const birthDate = new Date(value);
@@ -88,24 +89,29 @@
       return false;
     }
 
+    //Creamos un usuario
     function registerUser(event){
       event.preventDefault();
       const birthDate = document.getElementById("birthDate");
       const password = document.getElementById("password");
       const buttonSubmit = document.getElementById("buttonSubmit");
       const error = document.getElementById("error");
+      //Mostramos al usuario que la aplicación está en proceso
       buttonSubmit.innerHTML = "Cargando...";
       error.innerHTML = "";
+      //Comprobamos si es menor, si lo es se lanzará una alerta
       if(isMinor(birthDate.value)) {
         buttonSubmit.innerHTML = "Registrar";
         alert("No puedes registrarte si eres menor de edad");
         return;
       }
+      //Comprobamos si la contraseña es correcta, sino se lanzará un alert
       if(!hasCorrectPassword(password.value)) {
         buttonSubmit.innerHTML = "Registrar";
         alert("La contraseña debe tener 8 caracteres que sean números o letras");
         return;
       }
+      //Creamos un objeto con los datos para crear un usuario
       const data = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
@@ -121,11 +127,14 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si el usuario es creado correctamente, le enviamos a la página de inicio de sesión
           window.location.href = "http://localhost/TFG/view/login.html";
         } else if (this.status == 400) {
+          //Si ocurre algún error le devolvemos este mensaje de error
           buttonSubmit.innerHTML = "Registrar";
           error.innerHTML = "Hubo un error al crear el usuario";
         } else if (this.status == 401) {
+          //Si el email ya existe, le devolvemos este error
           buttonSubmit.innerHTML = "Registrar";
           error.innerHTML = "Este usuario ya está registrado";
         }

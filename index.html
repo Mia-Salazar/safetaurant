@@ -73,7 +73,6 @@
             </div>
             <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
           </div>
-          
         </form>
       </section>
       <section class="instructions">
@@ -91,11 +90,9 @@
           <h3 class="register-text" id="register">¡Regístrate! <br /> Y empieza a utilizar todas las funcionalidades de <span class="logo-text">SafeTaurant</span></h3>
           <a href="http://localhost/TFG/view/register-user.html" class="primary-button" id="link">Registrar</a>
         </div>
-          
-          <figure class="img-container">
-            <img class="img" alt="" src="./assets/img/food.jpg" />
-          </figure>
-        
+        <figure class="img-container">
+          <img class="img" alt="" src="./assets/img/food.jpg" />
+        </figure>
       </section>
     </main>
     <footer class="footer">
@@ -122,6 +119,7 @@
     const name = document.getElementById("name");
     document.getElementById("search").addEventListener("submit", search, false);
 
+    //Rellenamos los select con los array que encontramos arriba
     const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
@@ -138,6 +136,7 @@
       });
     }
 
+    //Con esta función redirigimos al usuario a otra ruta con todos los valores de la búsqueda. Si se ha pulsado el botón de búsqueda sin  introducir ningún valor en el campo de nombre, lanzamos una alerta
     function search(event) {
       event.preventDefault();
       if(name.value && name.value.trim() != "") {
@@ -148,7 +147,6 @@
         alert("Debes introducir un valor en la búsqueda");
         return;
       }
-
     }
 
     const checkIsLoggedIn = () => {

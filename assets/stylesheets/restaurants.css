@@ -1,3 +1,4 @@
+/*Estilos de la página de resultados de restaurantes*/
 .home {
 	min-height: calc(100vh - 56px - 125px);
 }
@@ -28,7 +29,6 @@
 }
 
 .list-search li {
-
 	position: relative;
 	margin-bottom: 20px;
 	padding: 15px;
