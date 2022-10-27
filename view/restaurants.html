@@ -193,8 +193,8 @@
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            //Si se encuentran restaurantes que coincidan con lso filtros de búsqueda, llamamos la función para pintar todos los restaurantes y mostramos un mensaje
-            //Si no hya ninguno, mostramos un mensaje indicando lo contrario
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurants = JSON.parse(this.responseText);
             if (restaurants[0].restaurantID !== null) {
               viewList();
@@ -225,7 +225,7 @@
     }
 
     //Con esta función redirigimos al usuario a otra ruta con todos los valores de la búsqueda
-    //Si se ha pulsado el botón de búsqueda sin  introducir ningún valor en el campo de nombre, lanzamos una alerta
+    //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
     function search(event) {
       event.preventDefault();
       if(name.value && name.value.trim() != "") {

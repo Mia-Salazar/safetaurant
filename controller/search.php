@@ -10,12 +10,12 @@
       //Enviamos los resultados
       echo json_encode($restaurants);
     } else {
-      //Si no se ha encontrado ningún restaurante que coincida con los criterios, devolvemos un 204, "sin contenido"
+      //Si no se ha encontrado ningún restaurante que coincida con los criterios, devolvemos un 204, ya que no hay contenido
       http_response_code(204);
       exit;
     }
   } else {
-    //Si no hemos recibido para buscar por nombre, devolvemos un 404
+    //Si no hemos recibido ningún dato para que podamos buscar por nombre, devolvemos un 404
     http_response_code(404);
     exit;
   }

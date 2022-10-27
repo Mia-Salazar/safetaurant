@@ -31,7 +31,8 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para iniciar sesión. Devolvemos el usuario si hemos tenido éxito y sino false
+	//Funcionalidad para iniciar sesión
+	//Devolvemos el usuario si hemos tenido éxito y sino false
 	function login($email, $password) {
 		$DDBB = createConnection();
 		$sql = "SELECT userID, name FROM user WHERE email ='" . $email . "' AND password = '" . $password. "'";
@@ -62,7 +63,8 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para editar un usuario. O devolvemos el resultado o un mensaje de error
+	//Funcionalidad para editar un usuario
+	//O devolvemos el resultado o un mensaje de error
 	function editUser($userID, $name, $surname, $password, $lactoseIntolerance, $celiacDisease, $allergies) {
 		$DDBB = createConnection();
 		//Si se ha escrito una contraseña, la modificaremos y sino no
@@ -111,7 +113,7 @@
 
 	//Funcionalidad para obtener restaurantes
 	//En función de los filtros que se hayan usado, haremos una petición u otra
-	//Obtenemos ciertos datos de los restaurantes y luego su media de puntuación general
+	//Seleccionamos ciertos datos de los restaurantes y luego su media de puntuación general
 	//Buscamos por el término que hayan metido sin importar si estaba en mayúscula o minúscula
 	function getRestaurants($name, $province, $foodType, $order) {
 		$DDBB = createConnection();

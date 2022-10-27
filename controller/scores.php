@@ -13,7 +13,7 @@
       //Devolvemos las calificaciones
       echo json_encode($restaurant);
     } else {
-      //Si no hay evaluaciones, devolvemos un 404, not found
+      //Si no hay evaluaciones, devolvemos un 404 ya que no lo hemos encontrado
       http_response_code(404);
       exit;
     }

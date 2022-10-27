@@ -186,7 +186,7 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          //Si se ha encontrado el restaurante, llamamos a las funciones que ponen la información y buscan las calificaciones
+          //Si se ha encontrado el restaurante, llamamos a las funciones que muestran la información en la página y a la que  busca las calificaciones
           //Se guarda la información del restaurante
           restaurant = JSON.parse(this.responseText);
           putData();
@@ -199,7 +199,7 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
-    //Obtenemos la información de media de puntuación
+    //Obtenemos la información de todas las puntuaciones medias
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/average.php", true);
@@ -207,7 +207,7 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Guardamos los datos en una variable
-          //Colocamos los datos de las calificaciones
+          //Colocamos los datos de las calificaciones medias en la página
           average = JSON.parse(this.responseText);
           putAverage();
         } else if (this.status == 404) {

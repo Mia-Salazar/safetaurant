@@ -178,7 +178,7 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
-          //Si tiene éxito y nos devuelve un 401, se ha salido y le expulsamos al login
+          //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
           window.location.href = "http://localhost/TFG/view/login.html";
         }
       };

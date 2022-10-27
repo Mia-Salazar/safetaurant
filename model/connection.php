@@ -5,13 +5,13 @@
 		$user = "root";
 		$pass = "";
 		$DDBB = "safetaurant";
-		//Nos conectamos a la BBDD con los datos indicamos
+		//Nos conectamos a la BBDD con los datos indicados
 		$connection = mysqli_connect($host, $user, $pass, $DDBB);
 		//Si falla la conexión, devolvemos un error
 		if (!$connection) {
 			die("<p>Error al conectarnos con la BBDD: " . mysqli_connect_error() . "</p>");
 		}
-		//Devolvemos la coenxión
+		//Devolvemos la conexión
 		return $connection;
 	}
 
