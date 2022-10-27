@@ -142,7 +142,7 @@
           feedback.innerHTML = "Creado correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
-          link.href = `http://localhost/TFG/view/restaurant.html?ID=${ID}`
+          window.location.href = "http://localhost/TFG/index.html";
         } else if (this.status == 424) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
           feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";

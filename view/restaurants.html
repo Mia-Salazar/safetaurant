@@ -31,19 +31,19 @@
       </button>
       <ul class="nav-list" id="nav">
         <li>
-          <a class="nav-link registered" href="http://localhost/TFG/index.html">Buscar</a>
+          <a class="nav-link" href="http://localhost/TFG/index.html">Buscar</a>
         </li>
         <li>
-          <a class="nav-link registered" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+          <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
         </li>
         <li>
-          <a class="nav-link registered" href="http://localhost/TFG/view/profile.html">Perfil</a>
+          <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/profile.html">Perfil</a>
         </li>
         <li>
-          <a class="nav-link no-registered hidden" href="http://localhost/TFG/view/login.html">Iniciar sesión</a>
+          <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/login.html">Iniciar sesión</a>
         </li>
         <li>
-          <a class="nav-link no-registered hidden" href="http://localhost/TFG/view/register-user.html">Registrarse</a>
+          <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/register-user.html">Registrarse</a>
         </li>
       </ul>
     </nav>
@@ -124,16 +124,10 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
-          //Ocultamos los links a los que no puede acceder
-          const list = document.querySelectorAll(".nav-link");
-          list.forEach((li)=> {
-            if (li.classList.contains("no-registered")) {
-              li.classList.remove("hidden");
-            } else {
-              li.classList.add("hidden");
-            }
-          });
-        }  
+          changeMenu("no-registered");
+        } else {
+          changeMenu("registered");
+        } 
       };
       xmlhttp.send();
     }
@@ -205,7 +199,7 @@
           } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-            orderContainer.add.classList("hidden");
+            orderContainer.classList.add("hidden");
           }
         };
         xmlhttp.send();
