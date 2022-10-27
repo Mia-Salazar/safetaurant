@@ -3,6 +3,7 @@ const menu = document.getElementById("nav");
 const toggle = document.getElementById("toggle");
 let menuToggle = false;
 
+//Funcionalidad para abrir y cerrar el hamburguer menú
 function toggleMenu() {
   if(!menuToggle) {
     menu.classList.add("open");
@@ -14,6 +15,7 @@ function toggleMenu() {
   menuToggle = !menuToggle;
 }
 
+//Funcionalidad para comprobar si la contraseña es correcta
 function hasCorrectPassword(value){
   const regex = /[A-Za-z\d]{8,}/g;
   if(!value.match(regex)) {

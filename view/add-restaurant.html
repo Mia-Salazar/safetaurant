@@ -135,11 +135,14 @@
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
 
+    //Variable para comprobar si hay carta de alérgenos
+    //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
     let allergenChartToggle = false;
 
     document.getElementById("add").addEventListener("submit", registerRestaurant, false);
     document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 
+    //Rellenamos los select con los array que encontramos arriba
     const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
@@ -156,6 +159,7 @@
       });
     }
 
+    //Mostramos u ocultamos el range input de la puntuación de fidelidad
     function allergenToggle() {
       if(!allergenChartToggle) {
         fidelity.classList.remove("hidden");
@@ -165,12 +169,15 @@
       allergenChartToggle = !allergenChartToggle;
     }
 
+
     function registerRestaurant(event){
       event.preventDefault();
       const buttonSubmit = document.getElementById("buttonSubmit");
       const error = document.getElementById("error");
+      //Mostramos al usuario que la aplicación está en proceso
       buttonSubmit.innerHTML = "Cargando...";
       feedback.innerHTML = "";
+      //Creamos el objeto con todos los datos del nuevo restaurante
       const data = {
         name: document.getElementById("name").value,
         province: document.getElementById("province").value,
@@ -185,27 +192,35 @@
         fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
         attentionScore: document.getElementById("attentionScore").value
       };
+      //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/add-restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            feedback.innerHTML = "Creado correctamente";
-            feedback.classList.add("success");
-            feedback.classList.remove("error");
-            window.location.href = "http://localhost/TFG/index.html";
+          //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+          feedback.innerHTML = "Creado correctamente";
+          feedback.classList.add("success");
+          feedback.classList.remove("error");
+          window.location.href = "http://localhost/TFG/index.html";
         } else if (this.status == 424) {
-            feedback.innerHTML = "Hubo un error en la creación del restaurante";
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
+          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+          feedback.innerHTML = "Hubo un error en la creación del restaurante";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
         } else if (this.status == 401) {
+          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
           window.location.href = "http://localhost/TFG/view/login.html";
         }
+        //Mostramos al usuario que ya no está cargando
         buttonSubmit.innerHTML = "Crear restaurante";
       };
       xmlhttp.send(JSON.stringify(data));
     }
 
+    //Comprobamos si el usuario ha iniciado sesión
+    //Si la respuesta es afirmativa, continuamos con la carga de la página
+    //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);

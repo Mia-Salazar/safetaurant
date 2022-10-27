@@ -1,3 +1,4 @@
+/*Estilos para las páginas de iniciar sesión y registrar*/
 .main.form {
 	min-height: calc(100vh - 56px - 125px - 60px);
     display: flex;
@@ -26,6 +27,7 @@
 	text-align: center;
 }
 
+/*Adaptando estilos a dispositivos grandes*/
 @media (min-width: 768px) {
 	.register-form, .login-form {
 		max-width: 400px;

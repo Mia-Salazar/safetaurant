@@ -1,7 +1,7 @@
+/*Estilos de la página principal*/
 .img {
 	width: 100%;
     object-fit: cover;
-    /* filter: brightness(40%);*/
 }
 
 .img-container {
@@ -35,10 +35,6 @@
 	padding: 20px 20px 40px 20px;
 }
 
-.register-text {
-
-}
-
 .register .img-container {
 	height: 400px;
 }
@@ -56,6 +52,7 @@
 	max-width: 300px;
 }
 
+/*Adaptando a pantallas mayores*/
 @media (min-width: 768px) {
 	.register {
 		display: grid;
@@ -74,6 +71,7 @@
 	}
 }
 
+/*Para que en responsive se vea bien, eliminamos esta imagen ya que no aporta nada*/
 @media (max-width: 767px) {
 	.img-container {
 		display:  none;

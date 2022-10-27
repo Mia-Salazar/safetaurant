@@ -114,14 +114,17 @@
     document.getElementById("search").addEventListener("submit", search, false);
     document.getElementById("order").addEventListener("change", search, false);
 
+    //Creamos una variable para guardar el resultado de la búsqueda
     let restaurants;
 
+    //Comprobamos si el usuario ha iniciado sesión
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
+          //Ocultamos los links a los que no puede acceder
           const list = document.querySelectorAll(".nav-link");
           list.forEach((li)=> {
             if (li.classList.contains("no-registered")) {
@@ -135,6 +138,7 @@
       xmlhttp.send();
     }
 
+    //Rellenamos los select con los array que encontramos arriba
     const fillSelects = () => {
       provinces.forEach((province) => {
         let option = document.createElement("option");
@@ -151,6 +155,7 @@
       });
     }
 
+    //Para cada restaurante encontrado, creamos un <li> con todos los datos
     const viewList = () => {
       restaurants.forEach((restaurant) => {
         let li = document.createElement("li");
@@ -179,6 +184,7 @@
       });
     }
 
+    //Función para buscar restaurantes con los datos recabados en el buscador
     const getRestaurants = () => {
       found.innerHTML = "Cargando...";
       if(name && name != "") {
@@ -187,6 +193,8 @@
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurants = JSON.parse(this.responseText);
             if (restaurants[0].restaurantID !== null) {
               viewList();
@@ -194,8 +202,8 @@
             } else {
               found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             }
-
           } else if (this.status === 404 || this.status === 204) {
+            //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             orderContainer.add.classList("hidden");
           }
@@ -206,6 +214,7 @@
       }
     }
 
+    //Obtenemos los valores iniciales de la ruta y llamamos a la función de obtener resultados para la búsqueda
     const getInitialValues = () => {
       list.innerHTML = "";
       name.value = new URL(document.URL).searchParams.get('name');
@@ -215,6 +224,8 @@
       getRestaurants();
     }
 
+    //Con esta función redirigimos al usuario a otra ruta con todos los valores de la búsqueda
+    //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
     function search(event) {
       event.preventDefault();
       if(name.value && name.value.trim() != "") {

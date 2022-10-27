@@ -54,19 +54,24 @@
       const password = document.getElementById("password");
       const buttonSubmit = document.getElementById("buttonSubmit");
       const error = document.getElementById("error");
+      //Mostramos al usuario que la aplicación está en proceso
       buttonSubmit.innerHTML = "Cargando...";
       error.innerHTML = "";
+      //Creamos un objeto con los datos para iniciar sesión
       const data = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
       };
+      //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "http://localhost/TFG/controller/login.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          //Si el inicio de sesión es correcto, le enviamos a la página principal
           window.location.href = "http://localhost/TFG/index.html";
         } else if (this.status == 401) {
+          //Si el inicio de sesión no es correcto, le mostramos que la carga ha terminado y un mensaje de error
           buttonSubmit.innerHTML = "Iniciar sesión";
           error.innerHTML = "El email o la contraseña son incorrectos";
         } 
