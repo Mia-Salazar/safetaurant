@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2022 a las 18:26:59
+-- Tiempo de generación: 27-10-2022 a las 19:58:48
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -84,15 +84,15 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `restaurant`
   ADD PRIMARY KEY (`restaurantID`),
-  ADD KEY `UserID` (`userID`);
+  ADD KEY `userID` (`userID`);
 
 --
 -- Indices de la tabla `scores`
 --
 ALTER TABLE `scores`
   ADD PRIMARY KEY (`scoreID`),
-  ADD KEY `UserID` (`userID`),
-  ADD KEY `RestaurantID` (`restaurantID`);
+  ADD KEY `scores_ibfk_2` (`restaurantID`),
+  ADD KEY `userID` (`userID`);
 
 --
 -- Indices de la tabla `user`
@@ -120,7 +120,7 @@ ALTER TABLE `scores`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `userID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas
@@ -130,14 +130,14 @@ ALTER TABLE `user`
 -- Filtros para la tabla `restaurant`
 --
 ALTER TABLE `restaurant`
-  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
 
 --
 -- Filtros para la tabla `scores`
 --
 ALTER TABLE `scores`
-  ADD CONSTRAINT `scores_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`RestaurantID`) REFERENCES `restaurant` (`RestaurantID`);
+  ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`),
+  ADD CONSTRAINT `scores_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
