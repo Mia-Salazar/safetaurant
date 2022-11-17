@@ -31,19 +31,19 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/TFG/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link nav-link-optional registered" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/profile.html">Perfil</a>
+            <a class="nav-link nav-link-optional registered" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/login.html">Iniciar sesión</a>
+            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/register-user.html">Registrarse</a>
+            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/SafeTaurant/view/register-user.html">Registrarse</a>
           </li>
         </ul>
       </nav>
@@ -183,7 +183,7 @@
     //Obtenemos los datos del restaurante
     const getRestaurant = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/restaurant.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -203,7 +203,7 @@
     //Obtenemos la información de todas las puntuaciones medias
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/average.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/average.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -222,7 +222,7 @@
     //Obtenemos las puntuaciones
     const getScores = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/scores.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/scores.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -243,12 +243,12 @@
     //Comprobamos si se ha iniciado sesión
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
-          addScore.href = `http://localhost/TFG/view/add-score.html?ID=${restaurantID}`;
+          addScore.href = `http://localhost/SafeTaurant/view/add-score.html?ID=${restaurantID}`;
           changeMenu("registered");
         } else if (this.status == 401) {
           addScore.classList.add("hidden");
