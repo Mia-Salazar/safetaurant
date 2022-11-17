@@ -63,7 +63,7 @@
         </div>
         <small id="error" class="error"></small>
         <button type="submit" class="primary-button" id="buttonSubmit">Registrar</button>
-        <a class="link" href="http://localhost/TFG/view/login.html">Inicia sesión si ya tienes cuenta</a>
+        <a class="link" href="http://localhost/SafeTaurant/view/login.html">Inicia sesión si ya tienes cuenta</a>
       </form>
     </main>
     <footer class="footer">
@@ -116,19 +116,19 @@
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
         birthDate:document.getElementById("birthDate").value,
-        password: document.getElementById("password").value,
+        password: password.value,
         surname: document.getElementById("surname").value,
         lactoseIntolerance: document.getElementById("lactoseIntolerance").checked ? 1 : 0,
         celiacDisease: document.getElementById("celiacDisease").checked ? 1 : 0,
         allergies: document.getElementById("allergies").value
       };
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/register-user.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/register-user.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si el usuario es creado correctamente, le enviamos a la página de inicio de sesión
-          window.location.href = "http://localhost/TFG/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         } else if (this.status == 400) {
           //Si ocurre algún error le devolvemos este mensaje de error
           buttonSubmit.innerHTML = "Registrar";

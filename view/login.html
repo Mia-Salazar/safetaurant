@@ -37,7 +37,7 @@
         </div>
         <small id="error" class="error"></small>
         <button type="submit" class="primary-button" id="buttonSubmit">Iniciar sesión</button>
-        <a class="link" href="http://localhost/TFG/view/register-user.html">Regístrate</a>
+        <a class="link" href="http://localhost/SafeTaurant/view/register-user.html">Regístrate</a>
       </form>
     </main>
     <footer class="footer">
@@ -45,6 +45,7 @@
       <p>Proyecto realizado por <a href="https://miasalazar.netlify.app/" target="_blank">María Salazar</a></p>
     </footer>
   </body>
+  <script type="text/javascript" src="./shared.js"></script>
   <script>
     document.getElementById("register").addEventListener("submit", login, false);
 
@@ -59,17 +60,23 @@
       error.innerHTML = "";
       //Creamos un objeto con los datos para iniciar sesión
       const data = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
+        email: email.value,
+        password: password.value,
       };
+      //Comprobamos si la contraseña es correcta, sino se lanzará una alerta
+      if(!hasCorrectPassword(password.value)) {
+        buttonSubmit.innerHTML = "Registrar";
+        alert("La contraseña debe tener 8 caracteres que sean números o letras");
+        return;
+      }
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/login.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/login.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si el inicio de sesión es correcto, le enviamos a la página principal
-          window.location.href = "http://localhost/TFG/index.html";
+          window.location.href = "http://localhost/SafeTaurant/index.html";
         } else if (this.status == 401) {
           //Si el inicio de sesión no es correcto, le mostramos que la carga ha terminado y un mensaje de error
           buttonSubmit.innerHTML = "Iniciar sesión";

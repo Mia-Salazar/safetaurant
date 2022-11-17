@@ -32,19 +32,19 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/TFG/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link nav-link-optional registered" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional registered" href="http://localhost/TFG/view/profile.html">Perfil</a>
+            <a class="nav-link nav-link-optional registered" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/login.html">Iniciar sesión</a>
+            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
           </li>
           <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/TFG/view/register-user.html">Registrarse</a>
+            <a class="nav-link nav-link-optional no-registered hidden" href="http://localhost/SafeTaurant/view/register-user.html">Registrarse</a>
           </li>
         </ul>
       </nav>
@@ -121,7 +121,7 @@
     //Comprobamos si el usuario ha iniciado sesión
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
@@ -161,7 +161,7 @@
         let score = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `http://localhost/TFG/view/restaurant.html?ID=${restaurant.restaurantID}`;
+        link.href = `http://localhost/SafeTaurant/view/restaurant.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
@@ -184,7 +184,7 @@
       found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", `http://localhost/TFG/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
+        xmlhttp.open("GET", `http://localhost/SafeTaurant/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -224,7 +224,7 @@
     function search(event) {
       event.preventDefault();
       if(name.value && name.value.trim() != "") {
-        window.location.href = `http://localhost/TFG/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+        window.location.href = `http://localhost/SafeTaurant/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
       } else {
         alert("Debes introducir un valor en la búsqueda");
         return;

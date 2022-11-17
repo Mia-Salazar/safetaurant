@@ -32,13 +32,13 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/TFG/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/TFG/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/TFG/view/profile.html">Perfil</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
           </li>
         </ul>
 
@@ -135,7 +135,7 @@
       };
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/TFG/controller/add-score.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/add-score.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -143,7 +143,7 @@
           feedback.innerHTML = "Creado correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
-          window.location.href = "http://localhost/TFG/index.html";
+          window.location.href = "http://localhost/SafeTaurant/index.html";
         } else if (this.status == 424) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
           feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
@@ -151,7 +151,7 @@
           feedback.classList.remove("success");
         } else if (this.status == 401) {
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-          window.location.href = "http://localhost/TFG/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         }
         //Mostramos al usuario que ya no está cargando
         buttonSubmit.innerHTML = "Añadir puntuación";
@@ -164,11 +164,11 @@
     //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/TFG/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 &&  this.status == 401) {
-          window.location.href = "http://localhost/TFG/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         }  
       };
       xmlhttp.send();
