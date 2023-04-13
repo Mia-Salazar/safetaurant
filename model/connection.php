@@ -1,15 +1,17 @@
 <?php 
 	//Creamos una conexión con la BBDD
 	function createConnection() {
-		$host = "localhost";
-		$user = "root";
-		$pass = "";
-		$DDBB = "safetaurant";
-		//Nos conectamos a la BBDD con los datos indicados
-		$connection = mysqli_connect($host, $user, $pass, $DDBB);
-		//Si falla la conexión, devolvemos un error
-		if (!$connection) {
-			die("<p>Error al conectarnos con la BBDD: " . mysqli_connect_error() . "</p>");
+		$host_name = 'db5012427505.hosting-data.io';
+		$database = 'dbs10448932';
+		$user_name = 'dbu631847';
+		$password = '*jHJ$6nA60hU';
+	  
+		$connection = new mysqli($host_name, $user_name, $password, $database);
+	  
+		if ($connection->connect_error) {
+		  die('<p>Error al conectar con servidor MySQL: '. $connection->connect_error .'</p>');
+		} else {
+		  echo '<p>Se ha establecido la conexión al servidor MySQL con éxito.</p>';
 		}
 		//Devolvemos la conexión
 		return $connection;
