@@ -12,9 +12,10 @@
     if ($user) {
       //Creamos las cookies de usuario y el nombre del usuario y devolvemos un mensaje de éxito
       //Guardamos el nombre de usuario para que cuando quiera añadir una puntuación no tengamos que pedir a la BBDD ese dato
-      setcookie("userID", $user['userID'], time() + 7200, "/");
-      setcookie("userName", $user['name'], time() + 7200, "/");
+      setcookie("userID", $user['userID'], time() + 7200, "/", NULL);
+      setcookie("userName", $user['name'], time() + 7200, "/", NULL);
       echo "OK";
+
     } else {
       //Devolvemos un 401 si no hemos recibido un email
       http_response_code(401);
