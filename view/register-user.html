@@ -33,11 +33,11 @@
         <p>Regístrate para poder acceder a todas las funcionalidades de <span class="logo-text">Foodiesaurus</span>. Los campos con un asterisco (*) son obligatorios.</p>
         <div class="input-group">
           <label class="input-label" for="name">Nombre*: </label>
-          <input class="input" id="name" placeholder="Escribe tu nombre" name="name" type="text" required />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Escribe tu nombre" name="name" type="text" required />
         </div>
         <div class="input-group">
           <label class="input-label" for="surname">Apellido: </label>
-          <input class="input" id="surname" placeholder="Escribe tu apellido" name="surname" type="text" />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="surname" placeholder="Escribe tu apellido" name="surname" type="text" />
         </div>
         <div class="input-group">
           <label class="input-label" for="birthDate">Fecha de nacimiento*: </label>
@@ -45,11 +45,11 @@
         </div>
         <div class="input-group">
           <label class="input-label" for="email">Correo electrónico*: </label>
-          <input class="input" id="email" placeholder="Escribe tu email" name="email" type="email" required />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="email" placeholder="Escribe tu email" name="email" type="email" required />
         </div>
         <div class="input-group">
           <label class="input-label" for="password">Contraseña*: </label>
-          <input class="input" id="password" placeholder="Escribe tu contraseña" name="password" type="password" required />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="password" placeholder="Escribe tu contraseña" name="password" type="password" required />
           <small>La contraseña debe tener al menos 8 caracteres y deben ser letras o números</small>
         </div>
         <div class="input-group">
@@ -58,11 +58,11 @@
         </div>
         <div class="checkbox-group">
           <label class="input-label" for="celiacDisease">¿Celíaquía?</label>
-          <input class="input" id="celiacDisease" name="celiacDisease" type="checkbox" />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="celiacDisease" name="celiacDisease" type="checkbox" />
         </div>
         <div class="checkbox-group">
           <label class="input-label" for="lactoseIntolerance">¿Intolerancia a la lactosa?</label>
-          <input class="input" id="lactoseIntolerance" name="lactoseIntolerance" type="checkbox" />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="lactoseIntolerance" name="lactoseIntolerance" type="checkbox" />
         </div>
         <small id="error" class="error"></small>
         <button type="submit" class="primary-button" id="buttonSubmit">Registrar</button>
