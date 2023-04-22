@@ -10,7 +10,7 @@
     $isUnique = checkUniqueEmail($formInfo['email']);
     if ($isUnique) {
       //Si el email es único, enviamos los datos para crear el usuario
-      $data = registerUser($formInfo['name'], $formInfo['email'], $formInfo['birthDate'], $formInfo['password'], $formInfo['surname'], $formInfo['lactoseIntolerance'], $formInfo['celiacDisease'], $formInfo['allergies']);
+      $data = registerUser($formInfo['name'], $formInfo['email'], $formInfo['birthDate'], $formInfo['password'], $formInfo['surname']);
       if($data) {
         //Si ha sido creado correctamente, devolvemos un mensaje de éxito
         echo "OK";

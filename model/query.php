@@ -3,10 +3,10 @@
 	include "connection.php";
 
 	//Funcionalidad para crear usuario
-	function registerUser($name, $email, $birthDate, $password, $surname, $lactoseIntolerance, $celiacDisease, $allergies) {
+	function registerUser($name, $email, $birthDate, $password, $surname) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO user (name, email, birthDate, password, surname, lactoseIntolerance, celiacDisease, allergies) 
-				VALUES ('" . $name . "', '" . $email . "', '" . $birthDate . "', '" . $password . "', '" . $surname . "', '" . $lactoseIntolerance . "', '" . $celiacDisease . "', '"  . $allergies . "')";
+		$sql = "INSERT INTO user (name, email, birthDate, password, surname) 
+				VALUES ('" . $name . "', '" . $email . "', '" . $birthDate . "', '" . $password . "', '" . $surname . "')";
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -51,7 +51,7 @@
 	//Devolvemos el usuario o false
 	function getUser($userID) {
 		$DDBB = createConnection();
-		$sql = "SELECT birthDate, celiacDisease, email, lactoseIntolerance, name, surname, allergies FROM user WHERE userID ='" . $userID . "'";
+		$sql = "SELECT birthDate, email, name, surname FROM user WHERE userID ='" . $userID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -65,23 +65,17 @@
 
 	//Funcionalidad para editar un usuario
 	//O devolvemos el resultado o un mensaje de error
-	function editUser($userID, $name, $surname, $password, $lactoseIntolerance, $celiacDisease, $allergies) {
+	function editUser($userID, $name, $surname, $password) {
 		$DDBB = createConnection();
 		//Si se ha escrito una contraseña, la modificaremos y sino no
 		if($password === "") {
 			$sql = "UPDATE user SET name = '" . $name . "'" .
 				", surname = '" . $surname . "'" .
-				", celiacDisease = '" . $celiacDisease . "'" . 
-				", allergies = '" . $allergies . "'" . 
-				", lactoseIntolerance =" . $lactoseIntolerance . 
 				" WHERE userID =" . $userID;
 		} else {
 			$sql = "UPDATE user SET name = '" . $name . "'" .
 			", surname = '" . $surname . "'" .
 			", password = '" . $password . "'" .
-			", celiacDisease = '" . $celiacDisease . "'" . 
-			", allergies = '" . $allergies . "'" . 
-			", lactoseIntolerance =" . $lactoseIntolerance . 
 			" WHERE userID =" . $userID;	
 		}
 
