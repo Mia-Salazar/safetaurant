@@ -7,7 +7,7 @@
   //Comprobamos si el usuario está autentificado mirando las cookies
   if(isset($_COOKIE['userID'])) {
     //Enviamos los datos que vamos a modificar
-    $data = editUser($_COOKIE['userID'], $formInfo['name'], $formInfo['surname'], $formInfo['password'],  $formInfo['lactoseIntolerance'], $formInfo['celiacDisease'], $formInfo['allergies']);
+    $data = editUser($_COOKIE['userID'], $formInfo['name'], $formInfo['surname'], $formInfo['password']);
     if($data) {
       //Si la edición ha sido correcta, devolvemos un mensaje de éxito
       echo "OK";

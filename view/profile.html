@@ -74,18 +74,6 @@
             <input pattern="^(?!.*<[^>]+>).*"  disabled class="input" id="password" name="password" placeholder="********" type="password" />
             <small>La contraseña debe tener al menos 8 caracteres y deben ser letras o números</small>
           </div>
-          <div class="input-group">
-            <label class="input-label" for="allergies">Alergias: </label>
-            <textarea disabled id="allergies" name="allergies" rows="4" cols="50"></textarea>
-          </div>
-          <div class="checkbox-group">
-            <label class="input-label" for="celiacDisease">¿Celíaquía?</label>
-            <input pattern="^(?!.*<[^>]+>).*"  disabled class="input" id="celiacDisease" name="celiacDisease" type="checkbox" />
-          </div>
-          <div class="checkbox-group">
-            <label class="input-label" for="lactoseIntolerance">¿Intolerancia a la lactosa?</label>
-            <input pattern="^(?!.*<[^>]+>).*"  disabled class="input" id="lactoseIntolerance" name="lactoseIntolerance" type="checkbox" />
-          </div>
           <small id="feedback" class=""></small>
           <div class="button-container">
             <button type="button" class="secondary-button" id="toggleEdit">Editar perfil</button>
@@ -114,9 +102,6 @@
     const email = document.getElementById("email")
     const birthDate =document.getElementById("birthDate")
     const surname = document.getElementById("surname")
-    const lactoseIntolerance = document.getElementById("lactoseIntolerance");
-    const celiacDisease = document.getElementById("celiacDisease");
-    const allergies = document.getElementById("allergies");
     const feedback = document.getElementById("feedback");
     const submit = document.getElementById("profile");
     const logout = document.getElementById("logout");
@@ -147,9 +132,6 @@
         name: name.value,
         password: password.value,
         surname: surname.value,
-        lactoseIntolerance: lactoseIntolerance.checked ? 1 : 0,
-        celiacDisease: celiacDisease.checked ? 1 : 0,
-        allergies: allergies.value
       };
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/profile-edit.php", true);
@@ -191,7 +173,7 @@
 
     //Cada uno de los inputs del array es habilitado o deshabilitado
     const toggleDisable = (value) => {
-      const elements = ["password", "name","surname", "lactoseIntolerance", "celiacDisease", "allergies"];
+      const elements = ["password", "name","surname"];
       elements.forEach(element => {
         document.getElementById(element).disabled = value;
       });
@@ -238,10 +220,6 @@
       email.value = user.email;
       birthDate.value = user.birthDate;
       surname.value = user.surname;
-      allergies.value = user.allergies;
-      //Si tenemos 1, el checkbox estará en true, y si es 0, estará en false
-      user.lactoseIntolerance === "1" ? lactoseIntolerance.checked = true : lactoseIntolerance.checked = false;
-      user.celiacDisease === "1" ? celiacDisease.checked = true : celiacDisease.checked = false;
     }
 
     //Comprobamos si el usuario está activo
