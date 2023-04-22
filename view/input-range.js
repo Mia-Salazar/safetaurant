@@ -1,18 +1,25 @@
 const rangeInputs = document.querySelectorAll('.range-input')
 const numberInput = document.querySelector('.range-number')
 
+const changeInputRangeBackground = (input, value) => {
+  const min = input.min;
+  const max = input.max;
+  input.style.backgroundSize = calculateInputRange(value, min, max);
+}
+
+const calculateInputRange = (val, min, max) => {
+  const result = (val - min) * 100 / (max - min);
+  const hasPositiveValue = result > 0 ? result : 0;
+  return hasPositiveValue + '% 100%';
+}
+
 function handleInputChange(e) {
-  let target = e.target
-  if (e.target.type !== 'range') {
-    target = document.getElementById('range')
-  } 
+  let target = e.target 
   const min = target.min
   const max = target.max
   const val = target.value
-
-  console.log(val, 'aa')
   
-  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+  target.style.backgroundSize = calculateInputRange(val, min, max);
 }
 
 rangeInputs.forEach(input => {
