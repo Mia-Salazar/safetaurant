@@ -1,12 +1,7 @@
-@font-face {
-	font-family: "african";
-    src: url('../african.ttf') format('truetype');
-	}
-
 /*Estilos generales*/
 body {
 	margin: 0;
-	font-family: "african" !important;
+	font-family: sans-serif;
 }
 
 .logo-text {
