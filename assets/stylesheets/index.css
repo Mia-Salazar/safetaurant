@@ -1,7 +1,12 @@
+@font-face {
+	font-family: "african";
+    src: url('../african.ttf') format('truetype');
+	}
+
 /*Estilos generales*/
 body {
 	margin: 0;
-	font-family: sans-serif;
+	font-family: "african" !important;
 }
 
 .logo-text {
@@ -67,6 +72,12 @@ body {
 	font-family: 'Teko', sans-serif;
 }
 
+.title {
+	display: flex;
+	align-items: center;
+	font-weight: 400;
+}
+
 .header .title {
 	margin: 0;
 	color:  white;
@@ -78,18 +89,19 @@ body {
 	align-items: center;
 }
 
-.header .title span {
-	font-weight: 400;
+.title span {
+	margin-top: 5px;
 }
 
-.shield {
+.logo {
 	max-width: 100%;
 	max-height: 100%;
 }
 
-.shield-container {
-	width: 20px;
-	margin: 0 0 0 5px;
+.logo-container {
+	display: flex;
+	width: 42px;
+	margin: 0 2px 0 2px;
 }
 
 /*Nav*/
