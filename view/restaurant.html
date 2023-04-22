@@ -176,13 +176,28 @@
 
     //Mostramos la puntuación media del restaurante en los inputs
     const putAverage = () => {
-      document.getElementById("generalScore").value = Math.floor(average.generalScore);
-      document.getElementById("numberGeneral").value = Math.floor(average.generalScore);
+      const averageGeneral = Math.floor(average.generalScore);
+      const averageFidelity = Math.floor(average.fidelityScore);
+      const averageAttention = Math.floor(average.attentionScore);
+      const averageGeneralId = document.getElementById("generalScore");
+      const averageFidelityId = document.getElementById("fidelityScore");
+      const averageAttentionId = document.getElementById("attentionScore");
+
+      //General
+      changeInputRangeBackground(averageGeneralId, averageGeneral);
+      averageGeneralId.value = averageGeneral;
+      document.getElementById("numberGeneral").value = averageGeneral;
+      //Fidelity
+      changeInputRangeBackground(averageFidelityId, averageFidelity);
+      averageFidelityId.value = averageFidelity;
+      document.getElementById("numberFidelity").value = averageFidelity;
+      
+      //Attention
+      changeInputRangeBackground(averageAttentionId, averageAttention);
+      document.getElementById("numberAttention").value = averageAttention;
+      averageAttentionId.value = averageAttention;
+
       document.getElementById("allergenChart").checked = Math.floor(average.allergenChart) === "0" ? false : true;
-      document.getElementById("fidelityScore").value = Math.floor(average.fidelityScore);
-      document.getElementById("numberFidelity").value = Math.floor(average.fidelityScore);
-      document.getElementById("attentionScore").value = Math.floor(average.attentionScore);
-      document.getElementById("numberAttention").value = Math.floor(average.attentionScore);
     }
 
     //Obtenemos los datos del restaurante
