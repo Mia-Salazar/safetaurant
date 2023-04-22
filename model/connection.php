@@ -10,8 +10,6 @@
 	  
 		if ($connection->connect_error) {
 		  die('<p>Error al conectar con servidor MySQL: '. $connection->connect_error .'</p>');
-		} else {
-		  echo '<p>Se ha establecido la conexión al servidor MySQL con éxito.</p>';
 		}
 		//Devolvemos la conexión
 		return $connection;
