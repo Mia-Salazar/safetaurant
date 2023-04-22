@@ -231,19 +231,6 @@ body {
 	flex-direction: row-reverse;
 }
 
-.range-input-container {
-	display: grid;
-    grid-template-columns: 1fr 40px;
-}
-
-.range-number {
-	border: none;
-    background: transparent;
-    text-align: center;
-    font-weight: 500;
-    padding: 5px;
-}
-
 /*Feedback*/
 .error {
 	color: #781C68;
