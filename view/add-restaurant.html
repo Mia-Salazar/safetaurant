@@ -54,7 +54,7 @@
         <form class="add-restaurant-form" id="add">
           <div class="input-group">
             <label class="input-label" for="name">Nombre del restaurante*: </label>
-            <input class="input" id="name" name="name" type="text" required />
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
           </div>
           <div class="input-group">
             <label class="input-label" for="province">Provincia*: </label>
@@ -64,7 +64,7 @@
           </div>
           <div class="input-group">
             <label class="input-label" for="address">Dirección*: </label>
-            <input class="input" id="address" name="address" type="text" required />
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
           </div>
           <div class="input-group">
             <label class="input-label" for="ZIP">Código Postal*: </label>

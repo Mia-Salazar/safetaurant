@@ -32,11 +32,11 @@
         <h2>¡Te damos la bienvenida de nuevo!</h2>
         <div class="input-group">
           <label class="input-label" for="email">Correo electrónico*: </label>
-          <input class="input" id="email" placeholder="Escribe tu email" name="email" type="email" required />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="email" placeholder="Escribe tu email" name="email" type="email" required />
         </div>
         <div class="input-group">
           <label class="input-label" for="password">Contraseña*: </label>
-          <input class="input" id="password" placeholder="Escribe tu contraseña" name="password" type="password" required />
+          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="password" placeholder="Escribe tu contraseña" name="password" type="password" required />
         </div>
         <small id="error" class="error"></small>
         <button type="submit" class="primary-button" id="buttonSubmit">Iniciar sesión</button>

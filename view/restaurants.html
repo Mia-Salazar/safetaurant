@@ -58,7 +58,7 @@
         <form id="search">
           <div class="input-group">
             <label class="input-label" for="name">Busca un restaurante</label>
-            <input class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" required />
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" required />
           </div>
           <div class="form-selects">
             <div class="input-group">
