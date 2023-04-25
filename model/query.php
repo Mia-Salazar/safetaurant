@@ -91,10 +91,10 @@
 
 	//Funcionalidad para crear un restaurante
 	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false
-	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID) {
+	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID, $url) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID) 
-				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '"  . $userID . "')";
+		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID, url) 
+				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '"  . $userID . "', '"  . $url . "')";
 		$result = mysqli_query($DDBB, $sql);
 		$lastID = mysqli_insert_id($DDBB);
 		if ($result) {
