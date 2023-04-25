@@ -1,6 +1,6 @@
 <?php 
   //Funcionalidad de la página de inicio de sesión
-  include "../model/query.php";
+  include "../model/queryPerson.php";
 
  //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
