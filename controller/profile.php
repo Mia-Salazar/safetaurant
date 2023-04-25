@@ -1,6 +1,6 @@
 <?php 
   //Esta funcionalidad la usamos en la página de perfil para obtene run usuario
-  include "../model/query.php";
+  include "../model/queryPerson.php";
 
   //Comprobamos si el usuario está activo
   if(isset($_COOKIE['userID'])) {

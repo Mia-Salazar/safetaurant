@@ -1,6 +1,6 @@
 <?php 
   //Esta funcionalidad pertnece a la página de perfil, y consiste en poder editarlo
-  include "../model/query.php";
+  include "../model/queryPerson.php";
 
   //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);

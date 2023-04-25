@@ -1,6 +1,6 @@
 <?php 
   //Esta funcionalidad forma parte de la página de crear usuario
-  include "../model/query.php";
+  include "../model/queryPerson.php";
 
   //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
