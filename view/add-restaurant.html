@@ -76,6 +76,10 @@
             <input class="input" id="phone" name="phone" type="number" />
           </div>
           <div class="input-group">
+            <label class="input-label" for="url">Sitio web: </label>
+            <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
+          </div>
+          <div class="input-group">
             <label class="input-label" for="foodType">Tipo de comida: </label>
             <select name="foodType" id="foodType" class="select">
               <option selected disabled value="">Escoge el tipo</option>
@@ -190,6 +194,7 @@
         address: document.getElementById("address").value,
         ZIP: Number(document.getElementById("ZIP").value),
         phone: Number(document.getElementById("phone").value),
+        url: document.getElementById("url").value,
         foodType: document.getElementById("foodType").value,
         created: new Date(),
         comment: document.getElementById("comment").value,
