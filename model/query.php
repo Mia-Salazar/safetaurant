@@ -111,14 +111,10 @@
 	//Buscamos por el término que hayan metido sin importar si estaba en mayúscula o minúscula
 	function getRestaurants($name, $province, $foodType, $order) {
 		$DDBB = createConnection();
-		if ($province == "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
-		} else if ($province != "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
-		} else if ($province == "" && $foodType != "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		if ($name == "") {
+			$sql = getRestaurantWithoutName($province, $foodType, $order);
 		} else {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "' AND province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+			$sql = getRestaurantWithName($name, $province, $foodType, $order);
 		}
 		$result = mysqli_query($DDBB, $sql);
 
@@ -134,6 +130,32 @@
 			return false;
 		} 
 		closeConnection($DDBB);
+	}
+
+	function getRestaurantWithName($name, $province, $foodType, $order) {
+		if ($province == "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else if ($province != "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else if ($province == "" && $foodType != "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE LOWER(name) LIKE '%" . $name . "%' AND foodType = '" . $foodType. "' AND province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		}
+		return $sql;
+	}
+
+	function getRestaurantWithoutName($province, $foodType, $order) {
+		if ($province == "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else if ($province != "" && $foodType == "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else if ($province == "" && $foodType != "") {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = '" . $foodType. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		} else {
+			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = '" . $foodType. "' AND province = '" . $province. "' GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order . "";
+		}
+		return $sql;
 	}
 
 	//Funcionalidad para añadir una nueva puntuación
