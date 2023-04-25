@@ -58,7 +58,7 @@
         <form id="search">
           <div class="input-group">
             <label class="input-label" for="name">Busca un restaurante</label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" required />
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
           </div>
           <div class="form-selects">
             <div class="input-group">
@@ -226,12 +226,7 @@
     //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
     function search(event) {
       event.preventDefault();
-      if(name.value && name.value.trim() != "") {
-        window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
-      } else {
-        alert("Debes introducir un valor en la búsqueda");
-        return;
-      }
+      window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
     }
 
     fillSelects();
