@@ -88,4 +88,23 @@
 		}
 		closeConnection($DDBB);
 	}
+
+	function getPersonRestaurants($userID) {
+		$DDBB = createConnection();
+		$sql = "SELECT restaurantID, name FROM restaurant WHERE userID ='" . $userID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			//Creamos un array con los resultados y lo devolvemos
+			$restaurants = array();
+		    while ($resultsrows = mysqli_fetch_assoc($result)) {
+		      $restaurants[] = $resultsrows;
+		    }
+			return $restaurants;
+		} else {
+			//Si ha habido algún error devolvemos false
+			return false;
+		} 
+		closeConnection($DDBB);
+	}
 ?>
