@@ -1,6 +1,6 @@
 <?php 
   //Esta funcionalidad la usamos para comprobar si un usuario ha iniciado sesión
-  include "../model/query.php";
+  include "../model/queryRestaurant.php";
 
   //Comprobamos si hay una cookie con el ID del usuario
   if(!isset($_COOKIE['userID'])) {
