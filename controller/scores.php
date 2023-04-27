@@ -1,7 +1,7 @@
 <?php 
   //Esta funcionalidad pertenece a la página de detalle de restaurante
   //Obtenemos todas las puntuaciones de un restaurante
-  include "../model/query.php";
+  include "../model/queryRestaurant.php";
 
   //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);

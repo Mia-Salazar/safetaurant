@@ -1,6 +1,6 @@
 <?php
   //Esta funcionalidad pertenece a la página de buscar restaurantes 
-  include "../model/query.php";
+  include "../model/queryRestaurant.php";
 
   //Comprobamos si hemos recibido un nombre de restaurante
   if(isset($_GET['name'])){
