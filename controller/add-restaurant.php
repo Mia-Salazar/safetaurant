@@ -1,6 +1,7 @@
 <?php
   //Funcionalidades para la página de añadir restaurante
   include "../model/queryRestaurant.php";
+  include "../model/queryScoret.php";
 
   //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
