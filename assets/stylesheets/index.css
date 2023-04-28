@@ -25,7 +25,6 @@ body {
 }
 
 /*Botones*/
-
 .primary-button, .secondary-button {
 	padding: 10px 20px;
 	background-color: #781C68;
@@ -45,16 +44,6 @@ body {
 
 .primary-button:hover, .secondary-button:hover {
 	opacity: 0.8;
-}
-
-/*Estilo al contenedor de las páginas para que no cojan el 100% del ancho*/
-
-@media (min-width: 1100px) {
-	.container {
-		max-width: 900px;
-		margin-right: auto;
-		margin-left: auto;
-	}
 }
 
 /*Header*/
@@ -99,6 +88,34 @@ body {
 	margin: 0 2px 0 2px;
 }
 
+/*Mi cuenta dropdown*/
+.dropdown {
+	padding: 0;
+	display: none;
+	flex-direction: column;
+	list-style-type: none;
+}
+
+.account-dropdown-button {
+	border: none;
+	background: transparent;
+	font-family: 'Teko', sans-serif;
+}
+
+.dropdown a {
+	font-size: 14px;
+}
+
+.arrow {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+	transform: rotate(45deg);
+	margin-left: 5px;
+	margin-bottom: 4px;
+}
+
 /*Nav*/
 .nav-list {
 	display: none;
@@ -131,60 +148,7 @@ body {
 	color: white;
 	font-size: 18px;
 	text-decoration: none;
-}
-
-/*Hamburguer menu*/
-@media (max-width:  767px) {
-	.toggle {
-		width: 36px;
-		height: 32px;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		padding: 0;
-		appearance: none;
-		background-color: transparent;
-		border: none;
-	}
-
-	.toggle.open .toggle-item {
-		margin-left: 4px;
-	}
-
-	.toggle.open .toggle-item:first-of-type {
-		transform: rotate(46deg);
-	}
-	.toggle.open .toggle-item:last-of-type {
-		transform: rotate(-46deg);
-		transform-origin: bottom left;
-	}
-	.toggle.open .toggle-item:nth-of-type(2) {
-		display:  none;
-	}
-
-	.nav-list.open {
-		position: absolute;
-	    width: 100%;
-	    left: 0;
-	    bottom: 0;
-	    background: #319DA0;
-	    height: calc(100vh - 55px);
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: center;
-	    align-items: center;
-	    margin: 0;
-	}
-}
-
-@media (min-width: 768px) {
-	.nav-list {
-		display: flex;
-	}
-	.nav-list a {
-		font-size: 20px;
-	}
+	text-align: center;
 }
 
 /*Footer*/
@@ -240,4 +204,85 @@ body {
 .success {
 	color:  #319DA0;
 	margin-top: 10px;
+}
+
+/*Medias queries*/
+
+@media (min-width: 768px) {
+	.nav-list {
+		display: flex;
+	}
+	.nav-list a {
+		font-size: 20px;
+	}
+
+	.dropdown {
+		position: absolute;
+		right: 0;
+    	bottom: -118px;
+    	background: #319DA0;
+	}
+
+	.account-dropdown-button {
+		font-size: 20px;
+	}
+
+	.dropdown li {
+		padding: 5px 0;
+	}
+}
+
+/*Estilo al contenedor de las páginas para que no cojan el 100% del ancho*/
+
+@media (min-width: 1100px) {
+	.container {
+		max-width: 900px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+/*Hamburguer menu*/
+@media (max-width: 767px) {
+	.toggle {
+		width: 36px;
+		height: 32px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 0;
+		appearance: none;
+		background-color: transparent;
+		border: none;
+	}
+
+	.toggle.open .toggle-item {
+		margin-left: 4px;
+	}
+
+	.toggle.open .toggle-item:first-of-type {
+		transform: rotate(46deg);
+	}
+	.toggle.open .toggle-item:last-of-type {
+		transform: rotate(-46deg);
+		transform-origin: bottom left;
+	}
+	.toggle.open .toggle-item:nth-of-type(2) {
+		display:  none;
+	}
+
+	.nav-list.open {
+		position: absolute;
+	    width: 100%;
+	    left: 0;
+	    bottom: 0;
+	    background: #319DA0;
+	    height: calc(100vh - 55px);
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	    margin: 0;
+	}
 }
