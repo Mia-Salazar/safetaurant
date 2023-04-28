@@ -5,7 +5,7 @@
 	height: 7px;
 	background: lightgray;
 	border-radius: 5px;
-	background-image: linear-gradient(#319DA0, #319DA0);
+	background-image: linear-gradient(var(--primaryColor), var(--primaryColor));
 	background-size: 45% 100%;
 	background-repeat: no-repeat;
   }
@@ -16,9 +16,9 @@
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
-	background: #319DA0;
+	background: var(--primaryColor);
 	cursor: ew-resize;
-	box-shadow: 0 0 2px 0 #555;
+	box-shadow: 0 0 2px 0 var(--grayDark);
 	transition: background .3s ease-in-out;
   }
   
@@ -27,9 +27,9 @@
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
-	background: #319DA0;
+	background: var(--primaryColor);
 	cursor: ew-resize;
-	box-shadow: 0 0 2px 0 #555;
+	box-shadow: 0 0 2px 0 var(--grayDark);
 	transition: background .3s ease-in-out;
   }
   
@@ -38,22 +38,22 @@
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
-	background: #319DA0;
+	background: var(--primaryColor);
 	cursor: ew-resize;
-	box-shadow: 0 0 2px 0 #555;
+	box-shadow: 0 0 2px 0 var(--grayDark);
 	transition: background .3s ease-in-out;
   }
   
   .range-input::-webkit-slider-thumb:hover {
-	background: #177b7e;
+	background: var(--primaryColorDark);
   }
   
   .range-input::-moz-range-thumb:hover {
-	background: #177b7e;
+	background: var(--primaryColorDark);
   }
   
   .range-input::-ms-thumb:hover {
-	background: #177b7e;
+	background: var(--primaryColorDark);
   }
 
   input[type=range]::-webkit-slider-runnable-track  {
@@ -91,5 +91,5 @@
 	font-size: 20px;
     padding: 5px;
 	margin-left: 5px;
-	color: #319DA0
+	color: var(--primaryColor)
 }
