@@ -19,7 +19,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -37,19 +37,31 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional registered" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+          <li class="registered hidden">
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional registered" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+          <li class="no-registered">
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
+          <li class="no-registered">
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/register-user.html">Registrarse</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="https://foodiesaurus.miasalazar.com/view/register-user.html">Registrarse</a>
+          <li class="nav-link registered hidden">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis puntuaciones</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -126,14 +138,15 @@
     //Comprobamos si el usuario ha iniciado sesión
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 401) {
-          changeMenu("no-registered");
-        } else {
-          changeMenu("registered");
-        } 
+        if (this.readyState == 4 && this.status == 200) {
+          changeMenuAccordingToUser("registered");
+        }
+        if(this.readyState == 4 && this.status == 401) {
+          changeMenuAccordingToUser("no-registered");
+        }
       };
       xmlhttp.send();
     }
@@ -166,7 +179,7 @@
         let score = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${restaurant.restaurantID}`;
+        link.href = `http://localhost/SafeTaurant/view/restaurant.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
@@ -189,7 +202,7 @@
       found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
+        xmlhttp.open("GET", `http://localhost/SafeTaurant/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -228,7 +241,7 @@
     //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
     function search(event) {
       event.preventDefault();
-      window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+      window.location.href = `http://localhost/SafeTaurant/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
     }
 
     fillSelects();

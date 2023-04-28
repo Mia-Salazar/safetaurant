@@ -18,7 +18,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -28,6 +28,24 @@
           </h1>
         </a>
       </div>
+      <nav class="nav">
+        <button id="toggle" class="toggle" aria-label="Abrir menú">
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+        </button>
+        <ul class="nav-list" id="nav">
+          <li>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
+          </li>
+          <li>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
+          </li>
+          <li>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/register-user.html">Registrarse</a>
+          </li>
+        </ul>
+      </nav>
     </header>
     <main class="main form">
       <form class="register-form" id="register">
@@ -56,7 +74,7 @@
         </div>
         <small id="error" class="error"></small>
         <button type="submit" class="primary-button" id="buttonSubmit">Registrar</button>
-        <a class="link" href="https://foodiesaurus.miasalazar.com/view/login.html">Inicia sesión si ya tienes cuenta</a>
+        <a class="link" href="http://localhost/SafeTaurant/view/login.html">Inicia sesión si ya tienes cuenta</a>
       </form>
     </main>
     <footer class="footer">
@@ -116,12 +134,12 @@
         allergies: document.getElementById("allergies").value
       };
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/register-user.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/register-user.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si el usuario es creado correctamente, le enviamos a la página de inicio de sesión
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         } else if (this.status == 400) {
           //Si ocurre algún error le devolvemos este mensaje de error
           buttonSubmit.innerHTML = "Registrar";

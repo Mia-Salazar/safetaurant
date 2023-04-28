@@ -18,7 +18,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -36,17 +36,17 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
-          <li class="nav-link registered">
+          <li class="nav-link">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
               </li>
               <li>
                 <a class="nav-link" href="">Mis restaurantes</a>
@@ -148,7 +148,7 @@
         surname: surname.value,
       };
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/profile-edit.php", true);
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/profile-edit.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -158,7 +158,7 @@
           feedback.classList.remove("error");
         } else if (this.status == 401) {
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         } else if (this.status == 400) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
           feedback.innerHTML = "Hubo un error al crear el usuario";
@@ -174,12 +174,12 @@
     //Función para salir
     function logoutFunction() {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/logout.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/logout.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 401) {
           //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         }
       };
       xmlhttp.send();
@@ -209,7 +209,7 @@
     //Obtenemos los datos del usuario
     const getProfile = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/profile.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -219,7 +219,7 @@
           putData();
         } else if (this.status == 401) {
           //Si la persona no está autorizada, la expulsamos
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         } else if (this.status == 400) {
           //Si hay un error, devolvemos un error
           subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -239,7 +239,7 @@
     //Comprobamos si el usuario está activo
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -247,7 +247,7 @@
           getProfile();
         } else if (this.status == 401) {
           //Si no ha iniciado sesión, le expulsamos al login
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+          window.location.href = "http://localhost/SafeTaurant/view/login.html";
         }  
       };
       xmlhttp.send();
