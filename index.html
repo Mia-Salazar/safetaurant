@@ -18,7 +18,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -36,26 +36,26 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
           </li>
           <li class="registered hidden">
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
           </li>
           <li class="no-registered">
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
           </li>
           <li class="no-registered">
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/register-user.html">Registrarse</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/view/register-user.html">Registrarse</a>
           </li>
           <li class="nav-link registered hidden">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
                 <a class="nav-link" href="">Mis puntuaciones</a>
@@ -106,7 +106,7 @@
       <section class="register">
         <div class="register-container">
           <h3 class="register-text" id="register">¡Regístrate! <br /> Y empieza a utilizar todas las funcionalidades de <span class="logo-text">Foodiesaurus</span></h3>
-          <a href="https://foodiesaurus.miasalazar.com/view/register-user.html" class="primary-button" id="link">Registrar</a>
+          <a href="http://localhost/SafeTaurant/view/register-user.html" class="primary-button" id="link">Registrar</a>
         </div>
         <figure class="img-container">
           <img class="img" alt="" src="./assets/img/food.jpg" />
@@ -153,17 +153,17 @@
       event.preventDefault();
       const province = provinceSelect.value;
       const foodType = foodSelect.value;
-      window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
+      window.location.href = `http://localhost/SafeTaurant/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
     }
 
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           register.innerHTML = "¡Aprovecha las funcionalidades! <br />Empieza a crear restaurantes y a puntuarlos";
-          link.href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html";
+          link.href="http://localhost/SafeTaurant/view/add-restaurant.html";
           link.innerHTML = "¡Llévame!"
           changeMenuAccordingToUser("registered");
         }
