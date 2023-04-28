@@ -24,6 +24,38 @@ body {
 	max-height: 100%;
 }
 
+.subtitle {
+	max-width: 500px;
+}
+
+/*Information list*/
+.info-list {
+	width: fit-content;
+	padding: 16px;
+    border: 1px solid #bfcad7;
+    border-radius: 5px;
+    list-style-type: none;
+	margin-bottom: 30px;
+}
+
+.info-list-item {
+	position: relative;
+	margin-bottom: 5px;
+	font-size: 14px;
+	padding-left: 12px;
+}
+
+.info-list-item:after {
+	position: absolute;
+	content: '-';
+	color: #bfcad7;;
+	left: 0;
+}
+
+.info-list-item:last-of-type {
+	margin-bottom: 0;
+}
+
 /*Botones*/
 .primary-button, .secondary-button {
 	padding: 10px 20px;
@@ -181,13 +213,13 @@ body {
 .input, .select {
 	padding: 5px 0;
 	border: none;
-    border-bottom: 1px solid #8f949a;
+    border-bottom: 1px solid #bfcad7;
 }
 
 .link {
 	display: block;
 	margin-top: 15px;
-	color: #8f949a;
+	color: #bfcad7;
 }
 
 .primary-button, .secondary-button {

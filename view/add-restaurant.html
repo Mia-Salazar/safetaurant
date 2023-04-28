@@ -51,7 +51,7 @@
                 <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
                 <a class="nav-link" href="">Mis puntuaciones</a>
@@ -64,7 +64,11 @@
     </header>
     <main class="main add-restaurant container">
       <h2>Añadir restaurante</h2>
-      <p id="subtitle">Registra un restaurante para poder puntuarlo en <span class="logo-text">Foodiesaurus</span>. Los campos con un asterisco (*) son obligatorios.</p>
+      <ul class="info-list">
+        <li class="info-list-item">Aquí podrás registrar un nuevo restaurante</li>
+        <li class="info-list-item">Asegúrate de que no existe antes de crearlo usando la búsqueda</li>
+        <li class="info-list-item">Los campos con un asterisco (*) son obligatorios</li>
+      </ul>
       <div class="add-restaurant-wrapper">
         <form class="add-restaurant-form" id="add">
           <div class="input-group">
@@ -248,7 +252,10 @@
           fillSelects();
         } else if (this.status == 401) {
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
-        }  
+        } else if (this.status == 400) {
+          //Si hay un error, devolvemos un error
+          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+        } 
       };
       xmlhttp.send();
     }
