@@ -38,7 +38,7 @@ h3 {
 	position: relative;
 	margin-bottom: 20px;
 	padding: 20px;
-	border: 1px solid #bfcad7;
+	border: 1px solid var(--gray);
 }
 
 .scores-list p {
@@ -47,7 +47,7 @@ h3 {
 
 .scores-list h4 {
 	margin: 0;
-	color:  #319DA0;
+	color:  var(--primaryColor);
 	font-size: 18px;
 }
 

@@ -1,3 +1,14 @@
+/*Variables*/
+html {
+	--primaryColor: #319DA0;
+	--primaryColorDark: #177b7e;
+	--secondaryColor: #781C68;
+	--gray: #bfcad7;
+	--grayDark: #555;
+
+	--primaryTypo: 'Teko', sans-serif;
+}
+
 /*Estilos generales*/
 body {
 	margin: 0;
@@ -5,7 +16,7 @@ body {
 }
 
 .logo-text {
-	font-family: 'Teko', sans-serif;
+	font-family: var(--primaryTypo);
 	font-size:  20px;
 	font-weight: 500;
 }
@@ -17,7 +28,6 @@ body {
 .main {
 	padding: 30px 15px;
 }
-
 
 .img {
 	max-width: 100%;
@@ -32,7 +42,7 @@ body {
 .info-list {
 	width: fit-content;
 	padding: 16px;
-    border: 1px solid #bfcad7;
+    border: 1px solid var(--gray);
     border-radius: 5px;
     list-style-type: none;
 	margin-bottom: 30px;
@@ -48,7 +58,7 @@ body {
 .info-list-item:after {
 	position: absolute;
 	content: '-';
-	color: #bfcad7;;
+	color: var(--gray);
 	left: 0;
 }
 
@@ -59,7 +69,7 @@ body {
 /*Botones*/
 .primary-button, .secondary-button {
 	padding: 10px 20px;
-	background-color: #781C68;
+	background-color: var(--secondaryColor);
 	border-radius: 5px;
 	border: none;
 	color: white;
@@ -69,8 +79,8 @@ body {
 }
 
 .secondary-button {
-	color:  #781C68;
-	border:  1px solid #781C68;
+	color:  var(--secondaryColor);
+	border:  1px solid var(--secondaryColor);
 	background-color: transparent;
 }
 
@@ -84,8 +94,8 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 5px 15px;
-	background-color: #319DA0;
-	font-family: 'Teko', sans-serif;
+	background-color: var(--primaryColor);
+	font-family: var(--primaryTypo);
 }
 
 .title {
@@ -136,7 +146,7 @@ body {
 .account-dropdown-button {
 	border: none;
 	background: transparent;
-	font-family: 'Teko', sans-serif;
+	font-family: var(--primaryTypo);
 }
 
 .dropdown a {
@@ -191,7 +201,7 @@ body {
 /*Footer*/
 .footer {
 	padding: 15px;
-	background-color: #781C68;
+	background-color: var(--secondaryColor);
 }
 
 .footer a, .footer {
@@ -213,13 +223,13 @@ body {
 .input, .select {
 	padding: 5px 0;
 	border: none;
-    border-bottom: 1px solid #bfcad7;
+    border-bottom: 1px solid var(--gray);
 }
 
 .link {
 	display: block;
 	margin-top: 15px;
-	color: #bfcad7;
+	color: var(--gray);
 }
 
 .primary-button, .secondary-button {
@@ -234,12 +244,12 @@ body {
 
 /*Feedback*/
 .error {
-	color: #781C68;
+	color: var(--secondaryColor);
 	margin-top: 10px;
 }
 
 .success {
-	color:  #319DA0;
+	color:  var(--primaryColor);
 	margin-top: 10px;
 }
 
@@ -258,7 +268,7 @@ body {
 		display: flex;
 		position: absolute;
 		right: 0;
-    	background: #319DA0;
+    	background: var(--primaryColor);
 		transform: translate(0, -150%)
 	}
 
@@ -320,7 +330,7 @@ body {
 	    width: 100%;
 	    left: 0;
 	    bottom: 0;
-	    background: #319DA0;
+	    background: var(--primaryColor);
 	    height: calc(100vh - 55px);
 	    display: flex;
 	    flex-direction: column;

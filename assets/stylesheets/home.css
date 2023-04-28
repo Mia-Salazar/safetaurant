@@ -18,7 +18,7 @@
 .instructions {
 	margin: 20px 0;
 	padding:  20px;
-	background-color: #319DA0;
+	background-color: var(--primaryColor);
 }
 
 .instructions-wrapper {

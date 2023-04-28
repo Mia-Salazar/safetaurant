@@ -15,6 +15,6 @@
 .order-label {
 	margin-bottom: 0;
 	margin-right: 5px;
-	color: #781C68;
+	color: var(--secondaryColor);
     font-weight: 700;
 }

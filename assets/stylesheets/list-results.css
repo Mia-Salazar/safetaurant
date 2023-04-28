@@ -12,7 +12,7 @@
 	position: relative;
 	margin-bottom: 20px;
 	padding: 15px;
-    border: 1px solid #bfcad7;
+    border: 1px solid var(--gray);
     border-radius: 5px;
 }
 
@@ -33,7 +33,7 @@
 	position: absolute;
     right: 15px;
     top: 15px;
-    color: #319DA0;
+    color: var(--primaryColor);
     font-weight: 700;
     font-size: 24px;
 }
