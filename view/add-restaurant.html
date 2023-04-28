@@ -146,14 +146,8 @@
   </body>
   <script type="text/javascript" src="./shared.js"></script>
   <script type="text/javascript" src="./input-range.js"></script>
+  <script type="text/javascript" src="./arrays.js"></script>
   <script>
-    const provinces = ["Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres",
-            "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
-            "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra",
-            "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona",
-            "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"];
-    const foodType = ["Italiana", "Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa",
-    "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro"];
     const provinceSelect = document.getElementById("province");
     const foodSelect = document.getElementById("foodType");
     const feedback = document.getElementById("feedback");
@@ -192,7 +186,6 @@
       }
       allergenChartToggle = !allergenChartToggle;
     }
-
 
     function registerRestaurant(event){
       event.preventDefault();
@@ -247,13 +240,16 @@
     //Si la respuesta es afirmativa, continuamos con la carga de la página
     //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
+      console.log('aaa')
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          console.log(1)
           fillSelects();
         } else if (this.status == 401) {
+          console.log(2)
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         }  
       };
