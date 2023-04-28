@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/list-results.css">
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
     <title>Foodiesaurus, restaurantes sin alergias</title>
@@ -67,6 +68,8 @@
             <li class="info-list-item">Podrás editar los datos del local de restauración</li>
         </ul>
         <h3 id="found"></h3>
+        <ul class="list-results" id="list">
+        </ul>
       
     </main>
     <footer class="footer">
@@ -80,6 +83,27 @@
 
     //Variables que necesitamos de forma global
     let restaurants;
+
+    //Para cada restaurante encontrado, creamos un <li> con todos los datos
+    const viewList = () => {
+      restaurants.forEach((restaurant) => {
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+        let title = document.createElement("h4");
+        let province = document.createElement("p");
+
+        link.innerHTML = "Ver detalle";
+        link.href = `https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${restaurant.restaurantID}`;
+        title.innerHTML = restaurant.name;
+        link.classList.add("primary-button");
+        province.innerHTML = restaurant.province;
+
+        li.appendChild(title);
+        li.appendChild(link);
+        li.appendChild(province);
+        list.appendChild(li);
+      });
+    }
 
     //Obtenemos los datos del usuario
     const getRestaurants = () => {
@@ -96,7 +120,7 @@
             found.innerHTML = "No has registrado ningún local de restauración";
           }
           //Llamamos a la función que mete en los inputs los valores que se han obtenido
-          //putData();
+          viewList();
         } else if (this.status == 401) {
           //Si la persona no está autorizada, la expulsamos
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
@@ -107,14 +131,6 @@
       };
       xmlhttp.send();
     };
-
-    //Cambiamos los valores de los inputs
-    // const putData = () => {
-    //   name.value = user.name;
-    //   email.value = user.email;
-    //   birthDate.value = user.birthDate;
-    //   surname.value = user.surname;
-    // }
 
     //Comprobamos si el usuario está activo
     const checkIsLoggedIn = () => {
