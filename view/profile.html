@@ -18,16 +18,18 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <h1 class="title">
-          <span>Foodie</span>
-          <figure class="logo-container">
-            <img class="logo" src="../assets/img/foodiesaurus.png" alt="" />
-          </figure>
-          <span>saurus</span>
-        </h1>
+        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+          <h1 class="title">
+            <span>Foodie</span>
+            <figure class="logo-container">
+              <img class="logo" src="../assets/img/foodiesaurus.png" alt="" />
+            </figure>
+            <span>saurus</span>
+          </h1>
+        </a>
       </div>
       <nav class="nav">
-        <button id="toggle" class="toggle" aria-label="Abrir menú">
+        <button id="toggle" class="toggle" aria-label="Alternar menú">
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
@@ -39,8 +41,20 @@
           <li>
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
           </li>
-          <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+          <li class="nav-link registered">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis puntuaciones</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -82,7 +96,7 @@
         </form>
         <div class="decoration-wrapper">
           <figure class="img-container">
-            <img class="img" alt="" src="../assets/img/shield-3.png" />
+            <img class="img" alt="" src="../assets/img/foodiesaurus-v2.png" />
           </figure>
         </div>
       </div>
