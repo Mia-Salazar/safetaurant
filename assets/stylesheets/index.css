@@ -62,6 +62,10 @@ body {
 	font-weight: 400;
 }
 
+.home-link {
+	text-decoration: none;
+}
+
 .header .title {
 	margin: 0;
 	color:  white;
