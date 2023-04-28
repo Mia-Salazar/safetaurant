@@ -90,10 +90,11 @@ body {
 
 /*Mi cuenta dropdown*/
 .dropdown {
-	padding: 0;
+	padding: 10px 0;
 	display: none;
 	flex-direction: column;
 	list-style-type: none;
+	transition: transform 0.25s;
 }
 
 .account-dropdown-button {
@@ -217,10 +218,16 @@ body {
 	}
 
 	.dropdown {
+		width: 140px;
+		display: flex;
 		position: absolute;
 		right: 0;
-    	bottom: -118px;
     	background: #319DA0;
+		transform: translate(0, -150%)
+	}
+
+	.dropdown.open {
+		transform: translate(0, 23px);
 	}
 
 	.account-dropdown-button {
@@ -228,7 +235,7 @@ body {
 	}
 
 	.dropdown li {
-		padding: 5px 0;
+		padding: 3px 0;
 	}
 }
 
