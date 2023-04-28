@@ -15,7 +15,6 @@ function changeMenuAccordingToUser(userType) {
   navList.forEach((li)=> {
     if (userType === "no-registered") {
       if (li.classList.contains( "registered")) {
-        console.log('eliminararriba', li)
         li.remove();
       }
     } else {
@@ -23,7 +22,6 @@ function changeMenuAccordingToUser(userType) {
         li.classList.remove("hidden");
       }
       if (li.classList.contains( "no-registered")) {
-        console.log(li, 'eliminar')
         li.remove();
       }
     }
