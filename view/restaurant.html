@@ -39,17 +39,29 @@
           <li>
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional registered" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+          <li class="registered hidden">
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional registered" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+          <li class="no-registered">
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
+          <li class="no-registered">
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/register-user.html">Registrarse</a>
           </li>
-          <li>
-            <a class="nav-link nav-link-optional no-registered hidden" href="https://foodiesaurus.miasalazar.com/view/register-user.html">Registrarse</a>
+          <li class="nav-link registered hidden">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="">Mis puntuaciones</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -272,11 +284,12 @@
         if (this.readyState == 4 && this.status == 200) {
           //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
           addScore.href = `https://foodiesaurus.miasalazar.com/view/add-score.html?ID=${restaurantID}`;
-          changeMenu("registered");
-        } else if (this.status == 401) {
+          changeMenuAccordingToUser("registered");
+        }
+        if(this.readyState == 4 && this.status == 401) {
           addScore.classList.add("hidden");
-          changeMenu("no-registered");
-        } 
+          changeMenuAccordingToUser("no-registered");
+        }
       };
       xmlhttp.send();
     }
