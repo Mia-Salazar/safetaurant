@@ -1,0 +1,44 @@
+
+.list-results {
+	padding:  0;
+	list-style-type: none;
+}
+
+.list-results li h4 {
+	margin-top: 0;
+}
+
+.list-results li {
+	position: relative;
+	margin-bottom: 20px;
+	padding: 15px;
+    border: 1px solid #bfcad7;
+    border-radius: 5px;
+}
+
+.list-results li p {
+	margin: 5px 0;
+}
+
+.list-results .primary-button {
+    text-decoration: none;
+    position: absolute;
+    width: fit-content;
+    bottom: 15px;
+    right: 15px;
+}
+
+
+.list-score {
+	position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #319DA0;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.list-score span {
+	color: black;
+    font-size: 14px;
+}

@@ -3,17 +3,8 @@
 	min-height: calc(100vh - 56px - 125px);
 }
 
-.list-search-container {
+.list-results-container {
 	padding: 20px;
-}
-
-.list-search {
-	padding:  0;
-	list-style-type: none;
-}
-
-.list-search li h4 {
-	margin-top: 0;
 }
 
 .order-container {
@@ -26,37 +17,4 @@
 	margin-right: 5px;
 	color: #781C68;
     font-weight: 700;
-}
-
-.list-search li {
-	position: relative;
-	margin-bottom: 20px;
-	padding: 15px;
-    border: 1px solid #bfcad7;
-}
-
-.list-search li p {
-	margin: 5px 0;
-}
-
-.list-score {
-	position: absolute;
-    right: 15px;
-    top: 15px;
-    color: #319DA0;
-    font-weight: 700;
-    font-size: 24px;
-}
-
-.list-score span {
-	color: black;
-    font-size: 14px;
-}
-
-.list-search .primary-button {
-    text-decoration: none;
-    position: absolute;
-    width: fit-content;
-    bottom: 15px;
-    right: 15px;
 }
