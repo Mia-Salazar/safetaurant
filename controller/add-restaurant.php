@@ -26,7 +26,7 @@
 
   function createScore($data, $formInfo) {
     //Añadimos la nueva calificación
-    $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_COOKIE['userID'], $data, $formInfo['created']);
+    $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_COOKIE['userID'], $data, $formInfo['created'], $_COOKIE['allergicReaction']);
     if($score) {
       //Si tenemos éxito devolvemos un mensaje que indica que todo ha ido bien
       echo "OK";

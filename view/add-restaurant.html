@@ -122,6 +122,10 @@
             <label class="input-label" for="allergenChart">¿Carta de alérgenos?</label>
             <input class="input" id="allergenChart" name="allergenChart" type="checkbox" />
           </div>
+          <div class="checkbox-group">
+            <label class="input-label" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
+            <input class="input" id="allergicReaction" name="allergicReaction" type="checkbox" />
+          </div>
           <div class="input-group hidden" id="fidelityScoreContainer">
             <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
             <div class="range-input-container">
@@ -212,6 +216,7 @@
         generalScore: document.getElementById("generalScore").value,
         allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
         fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
+        allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,
         attentionScore: document.getElementById("attentionScore").value
       };
       //Hacemos la petición al back-end
