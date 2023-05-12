@@ -36,9 +36,20 @@
 		closeConnection($DDBB);
 	}
 
+	//Recuperamos el número de cartas de alérgenos que se han registrado
 	function getNumberOfCharts($restaurantID) {
 		$DDBB = createConnection();
 		$sql = "SELECT COUNT(*) as chartsFound FROM scores WHERE restaurantID ='" . $restaurantID . "' AND allergenChart > 0";
+		$result = mysqli_query($DDBB, $sql);
+
+		return mysqli_fetch_assoc($result); 
+		closeConnection($DDBB);
+	}
+
+	//Recuperamos el número de reacciones alérgicas que se han tenido
+	function getNumberOfAllergicReactions($restaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT COUNT(*) as allergicReactions FROM scores WHERE restaurantID ='" . $restaurantID . "' AND allergicReaction > 0";
 		$result = mysqli_query($DDBB, $sql);
 
 		return mysqli_fetch_assoc($result); 

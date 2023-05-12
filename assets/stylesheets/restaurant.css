@@ -35,6 +35,10 @@
 	margin-bottom: 0;
 }
 
+.averages {
+	margin-bottom: 0;
+}
+
 .info-list {
 	margin-bottom: 24px;
 }
@@ -47,11 +51,20 @@ h3 {
 	font-size: 20px;
 }
 
+.reviews {
+	margin-top: 40px;
+}
+
+.actions {
+	margin-bottom: 32px;
+}
+
 .scores-list li {
 	position: relative;
 	margin-bottom: 20px;
 	padding: 20px;
 	border: 1px solid var(--gray);
+	border-radius: 5px;
 }
 
 .scores-list p {

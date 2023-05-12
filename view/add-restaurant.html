@@ -54,7 +54,7 @@
                 <a class="nav-link" href="http://localhost/SafeTaurant/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="">Mis puntuaciones</a>
+                <a class="nav-link" href="">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -103,20 +103,30 @@
               <option selected disabled value="">Escoge el tipo</option>
             </select>
           </div>
-          <h3>Añade los primeros datos y puntuaciones sobre alérgenos</h3>
+          <h3>Añade los primeros datos y tu opinión sobre alérgenos</h3>
           <div class="input-group">
             <label class="input-label" for="generalScore">Puntuación general*: </label>
             <div class="range-input-container">
               <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
           <div class="input-group">
             <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
             <div class="range-input-container">
               <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
+          </div>
+          <div class="checkbox-group">
+            <label class="input-label" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
+            <input class="input" id="allergicReaction" name="allergicReaction" type="checkbox" />
           </div>
           <div class="checkbox-group">
             <label class="input-label" for="allergenChart">¿Carta de alérgenos?</label>
@@ -126,7 +136,10 @@
             <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
             <div class="range-input-container">
               <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
           <div class="input-group">
@@ -212,6 +225,7 @@
         generalScore: document.getElementById("generalScore").value,
         allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
         fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
+        allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,
         attentionScore: document.getElementById("attentionScore").value
       };
       //Hacemos la petición al back-end
