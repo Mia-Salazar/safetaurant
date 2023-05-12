@@ -106,13 +106,15 @@
             </div>
           </div>
         </div>
-        <h4 class="allergen-chart">Carta de alérgenos</h4>
-        <ul class="info-list">
-          <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
-          </li>
-          <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
-          </li>
-        </ul>
+        <div>
+          <h4 class="allergen-chart">Carta de alérgenos</h4>
+          <ul class="info-list">
+            <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+            </li>
+            <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
+            </li>
+          </ul>
+        </div>
         <div class="input-group hidden">
           <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
           <div class="range-input-container">
@@ -123,18 +125,24 @@
             </div>
           </div>
         </div>
-        <h4 class="allergen-chart">Reacciones alérgicas</h4>
-        <ul class="info-list">
-          <li class="info-list-item"> personas han tenido una reacción alérgicaHabía carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
-          </li>
-        </ul>
+        <div>
+          <h4 class="allergen-chart">Reacciones alérgicas</h4>
+          <ul class="info-list">
+            <li class="info-list-item"><span id="allergicNumber">-</span> personas han tenido una reacción alérgica
+            </li>
+            <li class="info-list-item">Esto supone el <span id="allergicPercent">-</span>%
+            </li>
+          </ul>
+        </div>
       </div>
+      <h3 id="scores">Comentarios y opiniones</h3>
+      <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
       <div class="scores-container">
-        <h3 id="scores">Comentarios y opiniones</h3>
+        
         <ul id="scoresList" class="scores-list">
         </ul>
       </div>
-      <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
+      
     </main>
     <footer class="footer">
       <p><span class="logo-text">Foodiesaurus</span>, restaurantes sin alergias</p>
@@ -269,6 +277,20 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
+
+    //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
+    const getAllergicReactions = () => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/allergic-reaction.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("allergicNumber").innerHTML = this.responseText;
+          document.getElementById("allergicPercent").innerHTML = this.responseText * 100 / average.totalReviews;
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
     //Obtenemos la información de todas las puntuaciones medias
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
@@ -281,7 +303,8 @@
           average = JSON.parse(this.responseText);
           document.getElementById("totalScores").innerHTML = average.totalReviews
           putAverage();
-          getChartsFound()
+          getChartsFound();
+          getAllergicReactions();
         } else if (this.status == 404) {
           //Si no se encuentra el ID del restaurante, le dejamos este mensaje
           document.getElementById("averages").innerHTML = "No hay puntuaciones medias para este restaurante";
