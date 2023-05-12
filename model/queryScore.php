@@ -21,7 +21,8 @@
 	//Funcionalidad para conocer la media de un restaurante por su ID
 	function getAverage($restaurantID) {
 		$DDBB = createConnection();
-		$sql = "SELECT AVG(generalScore) as generalScore, AVG(allergenChart) as allergenChart, AVG(fidelityScore) as fidelityScore, AVG(attentionScore) as attentionScore FROM scores WHERE restaurantID ='" . $restaurantID . "'";
+		$sql = "SELECT COUNT(*) as totalReviews, AVG(generalScore) as generalScore, AVG(fidelityScore) as fidelityScore, 
+		AVG(attentionScore) as attentionScore FROM scores WHERE restaurantID ='" . $restaurantID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
@@ -32,6 +33,15 @@
 			//Si no lo encontramso devolvemos false
 			return false;
 		} 
+		closeConnection($DDBB);
+	}
+
+	function getNumberOfCharts($restaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT COUNT(*) as chartsFound FROM scores WHERE restaurantID ='" . $restaurantID . "' AND allergenChart > 0";
+		$result = mysqli_query($DDBB, $sql);
+
+		return mysqli_fetch_assoc($result); 
 		closeConnection($DDBB);
 	}
 
