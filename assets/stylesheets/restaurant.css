@@ -51,6 +51,14 @@ h3 {
 	font-size: 20px;
 }
 
+.reviews {
+	margin-top: 40px;
+}
+
+.actions {
+	margin-bottom: 32px;
+}
+
 .scores-list li {
 	position: relative;
 	margin-bottom: 20px;
