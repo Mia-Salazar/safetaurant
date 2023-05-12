@@ -30,6 +30,19 @@
 	list-style-type: none;
 }
 
+.allergen-chart {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.info-list {
+	margin-bottom: 24px;
+}
+
+.info-list-item span {
+	font-weight: 600;
+}
+
 h3 {
 	font-size: 20px;
 }

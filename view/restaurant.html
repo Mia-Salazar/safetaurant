@@ -81,27 +81,28 @@
         </div>
       </div>
       <div class="averages-container">
-        <h3 id="averages">Puntuaciones medias</h3>
+        <h3 id="averages">Puntuaciones</h3>
         <div class="input-group">
-          <label class="input-label" for="generalScore">Puntuación general</label>
+          <label class="input-label" for="generalScore">General</label>
           <div class="range-input-container">
             <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
             <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
           </div>
         </div>
         <div class="input-group">
-          <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
+          <label class="input-label" for="attentionScore">Atención del personal*: </label>
           <div class="range-input-container">
             <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
             <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
           </div>
         </div>
-        <div class="checkbox-group">
-          <label class="input-label" for="allergenChart" >Carta de alérgenos</label>
-          <input class="input" id="allergenChart" name="allergenChart" type="checkbox" disabled />
-        </div>
+        <h4 class="allergen-chart">Carta de alérgenos</h4>
+        <ul class="info-list">
+          <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+          </li>
+        </ul>
         <div class="input-group hidden">
-          <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+          <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
           <div class="range-input-container">
             <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
             <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
@@ -171,7 +172,7 @@
 
         date.innerHTML = score.created;
         userName.innerHTML = score.userName;
-        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "0" ? "Sí" : "No"}`;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
         comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
         fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
         generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
@@ -211,8 +212,6 @@
       changeInputRangeBackground(averageAttentionId, averageAttention);
       document.getElementById("numberAttention").value = averageAttention;
       averageAttentionId.value = averageAttention;
-
-      document.getElementById("allergenChart").checked = Math.floor(average.allergenChart) === "0" ? false : true;
     }
 
     //Obtenemos los datos del restaurante
@@ -235,6 +234,19 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
+    //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
+    const getChartsFound = () => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/charts-found.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("chartNumber").innerHTML = this.responseText;
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
     //Obtenemos la información de todas las puntuaciones medias
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
@@ -245,7 +257,9 @@
           //Guardamos los datos en una variable
           //Colocamos los datos de las calificaciones medias en la página
           average = JSON.parse(this.responseText);
+          document.getElementById("totalScores").innerHTML = average.totalReviews
           putAverage();
+          getChartsFound()
         } else if (this.status == 404) {
           //Si no se encuentra el ID del restaurante, le dejamos este mensaje
           document.getElementById("averages").innerHTML = "No hay puntuaciones medias para este restaurante";
@@ -253,6 +267,7 @@
       };
       xmlhttp.send(JSON.stringify(data));
     }
+
 
     //Obtenemos las puntuaciones
     const getScores = () => {
