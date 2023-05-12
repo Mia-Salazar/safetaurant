@@ -59,7 +59,7 @@
                 <a class="nav-link" href="http://localhost/SafeTaurant/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="">Mis puntuaciones</a>
+                <a class="nav-link" href="">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -81,7 +81,11 @@
         </div>
       </div>
       <div class="averages-container">
-        <h3 id="averages">Puntuaciones</h3>
+        <h3 id="averages">Valoraciones</h3>
+        <ul class="info-list">
+          <li class="info-list-item">El número total de valoracionesHabía carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+          </li>
+        </ul>
         <div class="input-group">
           <label class="input-label" for="generalScore">General</label>
           <div class="range-input-container">
@@ -108,13 +112,25 @@
             <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
           </div>
         </div>
+        <h4 class="allergen-chart">Reacciones alérgicas</h4>
+        <ul class="info-list">
+          <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+          </li>
+        </ul>
+        <div class="input-group hidden">
+          <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
+          <div class="range-input-container">
+            <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
+            <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+          </div>
+        </div>
       </div>
       <div class="scores-container">
-        <h3 id="scores">Comentarios y puntuaciones</h3>
+        <h3 id="scores">Comentarios y opiniones</h3>
         <ul id="scoresList" class="scores-list">
         </ul>
       </div>
-      <a href="" class="primary-button" id="addScore">Añadir nueva puntuación</a>
+      <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
     </main>
     <footer class="footer">
       <p><span class="logo-text">Foodiesaurus</span>, restaurantes sin alergias</p>

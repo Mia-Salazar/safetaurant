@@ -53,7 +53,7 @@
                 <a class="nav-link" href="http://localhost/SafeTaurant/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="">Mis puntuaciones</a>
+                <a class="nav-link" href="">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -62,8 +62,8 @@
       </nav>
     </header>
     <main class="main add-restaurant container">
-      <h2>Añade puntuación</h2>
-      <p class="subtitle">Añade una puntuación neuva a un restaurante. Los campos con un asterisco (*) son obligatorios.</p>
+      <h2>Añade tu opinión</h2>
+      <p class="subtitle">Añade una opinión nueva a un restaurante. Los campos con un asterisco (*) son obligatorios.</p>
       <div class="add-restaurant-wrapper">
         <form class="add-restaurant-form" id="add">
           <div class="input-group">
@@ -96,7 +96,7 @@
             <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
           </div>
           <small id="feedback" class=""></small>
-          <button type="submit" class="primary-button" id="buttonSubmit">Añadir puntuación</button>
+          <button type="submit" class="primary-button" id="buttonSubmit">Añadir opinión</button>
         </form>
         <div class="decoration-wrapper">
           <figure class="img-container">
@@ -171,7 +171,7 @@
           window.location.href = "http://localhost/SafeTaurant/view/login.html";
         }
         //Mostramos al usuario que ya no está cargando
-        buttonSubmit.innerHTML = "Añadir puntuación";
+        buttonSubmit.innerHTML = "Añadir opinión";
       };
       xmlhttp.send(JSON.stringify(data));
     }
