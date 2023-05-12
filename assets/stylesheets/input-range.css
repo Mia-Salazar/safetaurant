@@ -93,3 +93,13 @@
 	margin-left: 5px;
 	color: var(--primaryColor)
 }
+
+.total-range {
+	color: var(--gray)
+}
+
+.range-container {
+	display: flex;
+	align-items: center;
+    font-size: 12px;
+}

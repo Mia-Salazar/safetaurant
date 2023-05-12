@@ -81,35 +81,46 @@
         </div>
       </div>
       <div class="averages-container">
-        <h3 id="averages">Valoraciones</h3>
+        <h3 id="averages" class="averages">Valoraciones</h3>
         <ul class="info-list">
-          <li class="info-list-item">El número total de valoracionesHabía carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+          <li class="info-list-item">El número total de valoraciones <span id="totalOpinions">-</span>
           </li>
         </ul>
         <div class="input-group">
           <label class="input-label" for="generalScore">General</label>
           <div class="range-input-container">
             <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
-            <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+            <div class="range-container">
+              <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+              <span class="total-range">/10</span>
+            </div>
           </div>
         </div>
         <div class="input-group">
           <label class="input-label" for="attentionScore">Atención del personal*: </label>
           <div class="range-input-container">
             <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
-            <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+            <div class="range-container">
+              <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+              <span class="total-range">/10</span>
+            </div>
           </div>
         </div>
         <h4 class="allergen-chart">Carta de alérgenos</h4>
         <ul class="info-list">
           <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
           </li>
+          <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
+          </li>
         </ul>
         <div class="input-group hidden">
           <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
           <div class="range-input-container">
             <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
-            <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+            <div class="range-container">
+              <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+              <span class="total-range">/10</span>
+            </div>
           </div>
         </div>
         <h4 class="allergen-chart">Reacciones alérgicas</h4>
@@ -121,7 +132,10 @@
           <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
           <div class="range-input-container">
             <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
-            <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+            <div class="range-container">
+              <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+              <span class="total-range">/10</span>
+            </div>
           </div>
         </div>
       </div>
@@ -216,6 +230,7 @@
       const averageAttentionId = document.getElementById("attentionScore");
 
       //General
+      document.getElementById("totalOpinions").innerHTML = average.totalReviews;
       changeInputRangeBackground(averageGeneralId, averageGeneral);
       averageGeneralId.value = averageGeneral;
       document.getElementById("numberGeneral").value = averageGeneral;
@@ -258,6 +273,7 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById("chartNumber").innerHTML = this.responseText;
+          document.getElementById("chartPercent").innerHTML = this.responseText * 100 / average.totalReviews;
         }   
       };
       xmlhttp.send(JSON.stringify(data));
