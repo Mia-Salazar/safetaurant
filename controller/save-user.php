@@ -1,6 +1,5 @@
-    <?php
+<?php
     session_start();
-    
     require_once '../google-api-php-client/vendor/autoload.php';
     require_once 'user-google.php';
     
@@ -11,10 +10,8 @@
     
     if ($payload) {
         $db = new DB();
-    
         // send user data to the database
         $db->upsert_user($payload);
-    
         // set user id in session aka log in the user
         if(!isset($_SESSION['uid'])) {
             $_SESSION['uid'] = $payload['sub'];

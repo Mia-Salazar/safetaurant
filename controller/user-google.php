@@ -1,9 +1,9 @@
 <?php
     class DB {
         private $dbHost     = "localhost";
-        private $dbUsername = "root";
-        private $dbPassword = "";
-        private $dbName     = "safetaurant";
+        private $dbUsername = "safetaurant";
+        private $dbPassword = "root";
+        private $dbName     = "";
     
         public function __construct(){
             if(!isset($this->db)){
