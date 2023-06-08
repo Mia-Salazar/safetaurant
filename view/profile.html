@@ -108,151 +108,152 @@
   </body>
   <script type="text/javascript" src="./shared.js"></script>
   <script>
-    const toggleEditButton = document.getElementById("toggleEdit");
-    const editButton = document.getElementById("edit");
-    const subtitle = document.getElementById("subtitle");
-    const password = document.getElementById("password");
-    const name = document.getElementById("name")
-    const email = document.getElementById("email")
-    const birthDate =document.getElementById("birthDate")
-    const surname = document.getElementById("surname")
-    const feedback = document.getElementById("feedback");
-    const submit = document.getElementById("profile");
-    const logout = document.getElementById("logout");
+    // const toggleEditButton = document.getElementById("toggleEdit");
+    // const editButton = document.getElementById("edit");
+    // const subtitle = document.getElementById("subtitle");
+    // const password = document.getElementById("password");
+    // const name = document.getElementById("name")
+    // const email = document.getElementById("email")
+    // const birthDate =document.getElementById("birthDate")
+    // const surname = document.getElementById("surname")
+    // const feedback = document.getElementById("feedback");
+    // const submit = document.getElementById("profile");
+    // const logout = document.getElementById("logout");
 
-    //Variables que necesitamos de forma global
-    let user;
-    let toggleEdit = false;
+    // //Variables que necesitamos de forma global
+    // let user;
+    // let toggleEdit = false;
 
-    toggleEditButton.addEventListener("click", toggleEditFunction, false);
-    profile.addEventListener("submit", editFunction, false);
-    logout.addEventListener("click", logoutFunction, false);
+    // toggleEditButton.addEventListener("click", toggleEditFunction, false);
+    // profile.addEventListener("submit", editFunction, false);
+    // logout.addEventListener("click", logoutFunction, false);
 
-    //Función para editar el perfil
-    function editFunction(event){
-      event.preventDefault();
-      //Comprobamos si la contraseña es correcta, si no lo es, se lanza una alerta
-      //En caso contrario se sigue ejecutando
-      if(password.value && !hasCorrectPassword(password.value)) {
-        alert("La contraseña debe tener 8 caracteres que sean números o letras");
-        return;
-      }
-      //Mostramos al usuario que la aplicación está en proceso
-      editButton.innerHTML = "Cargando...";
-      //Deshabilitamos los inputs para que no se puedan editar durante la carga
-      toggleEditFunction();
-      //Creamos un objeto con los datos a editar
-      const data = {
-        name: name.value,
-        password: password.value,
-        surname: surname.value,
-      };
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/profile-edit.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-           //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-          feedback.innerHTML = "Actualizado correctamente";
-          feedback.classList.add("success");
-          feedback.classList.remove("error");
-        } else if (this.status == 401) {
-          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
-        } else if (this.status == 400) {
-          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-          feedback.innerHTML = "Hubo un error al crear el usuario";
-          feedback.classList.add("error");
-          feedback.classList.remove("success");
-        }
-        //Mostramos al usuario que ya no está cargando
-        editButton.innerHTML = "Editar perfil";
-      };
-      xmlhttp.send(JSON.stringify(data));
-    };
+    // //Función para editar el perfil
+    // function editFunction(event){
+    //   event.preventDefault();
+    //   //Comprobamos si la contraseña es correcta, si no lo es, se lanza una alerta
+    //   //En caso contrario se sigue ejecutando
+    //   if(password.value && !hasCorrectPassword(password.value)) {
+    //     alert("La contraseña debe tener 8 caracteres que sean números o letras");
+    //     return;
+    //   }
+    //   //Mostramos al usuario que la aplicación está en proceso
+    //   editButton.innerHTML = "Cargando...";
+    //   //Deshabilitamos los inputs para que no se puedan editar durante la carga
+    //   toggleEditFunction();
+    //   //Creamos un objeto con los datos a editar
+    //   const data = {
+    //     name: name.value,
+    //     password: password.value,
+    //     surname: surname.value,
+    //   };
+    //   var xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/profile-edit.php", true);
+    //   xmlhttp.setRequestHeader("Content-Type", "application/json");
+    //   xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //        //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+    //       feedback.innerHTML = "Actualizado correctamente";
+    //       feedback.classList.add("success");
+    //       feedback.classList.remove("error");
+    //     } else if (this.status == 401) {
+    //       //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+    //       window.location.href = "http://localhost/SafeTaurant/view/login.html";
+    //     } else if (this.status == 400) {
+    //       //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+    //       feedback.innerHTML = "Hubo un error al crear el usuario";
+    //       feedback.classList.add("error");
+    //       feedback.classList.remove("success");
+    //     }
+    //     //Mostramos al usuario que ya no está cargando
+    //     editButton.innerHTML = "Editar perfil";
+    //   };
+    //   xmlhttp.send(JSON.stringify(data));
+    // };
 
-    //Función para salir
-    function logoutFunction() {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/logout.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 401) {
-          //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
-        }
-      };
-      xmlhttp.send();
-    }
+    // //Función para salir
+    // function logoutFunction() {
+    //   var xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/logout.php", true);
+    //   xmlhttp.setRequestHeader("Content-Type", "application/json");
+    //   xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 401) {
+    //       //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
+    //       window.location.href = "http://localhost/SafeTaurant/view/login.html";
+    //     }
+    //   };
+    //   xmlhttp.send();
+    // }
 
-    //Cada uno de los inputs del array es habilitado o deshabilitado
-    const toggleDisable = (value) => {
-      const elements = ["password", "name","surname"];
-      elements.forEach(element => {
-        document.getElementById(element).disabled = value;
-      });
-    }
+    // //Cada uno de los inputs del array es habilitado o deshabilitado
+    // const toggleDisable = (value) => {
+    //   const elements = ["password", "name","surname"];
+    //   elements.forEach(element => {
+    //     document.getElementById(element).disabled = value;
+    //   });
+    // }
 
-    //Habilitamos y deshabilitamos los inputs en función de la necesidad
-    function toggleEditFunction() {
-      if(!toggleEdit) {
-        toggleEditButton.innerHTML = "Rechazar";
-        editButton.classList.remove("hidden");
-      } else {
-        toggleEditButton.innerHTML = "Editar perfil";
-        editButton.classList.add("hidden");
-      }
-      toggleDisable(toggleEdit);
-      toggleEdit = !toggleEdit;
-    }
+    // //Habilitamos y deshabilitamos los inputs en función de la necesidad
+    // function toggleEditFunction() {
+    //   if(!toggleEdit) {
+    //     toggleEditButton.innerHTML = "Rechazar";
+    //     editButton.classList.remove("hidden");
+    //   } else {
+    //     toggleEditButton.innerHTML = "Editar perfil";
+    //     editButton.classList.add("hidden");
+    //   }
+    //   toggleDisable(toggleEdit);
+    //   toggleEdit = !toggleEdit;
+    // }
 
-    //Obtenemos los datos del usuario
-    const getProfile = () => {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/profile.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //Si ha habido éxito, guardamos los datos del usuario en la variable user
-          user = JSON.parse(this.responseText);
-          //Llamamos a la función que mete en los inputs los valores que se han obtenido
-          putData();
-        } else if (this.status == 401) {
-          //Si la persona no está autorizada, la expulsamos
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
-        } else if (this.status == 400) {
-          //Si hay un error, devolvemos un error
-          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
-        }  
-      };
-      xmlhttp.send();
-    };
+    // //Obtenemos los datos del usuario
+    // const getProfile = () => {
+    //   var xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/profile.php", true);
+    //   xmlhttp.setRequestHeader("Content-Type", "application/json");
+    //   xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //       //Si ha habido éxito, guardamos los datos del usuario en la variable user
+    //       user = JSON.parse(this.responseText);
+    //       //Llamamos a la función que mete en los inputs los valores que se han obtenido
+    //       putData();
+    //     } else if (this.status == 401) {
+    //       //Si la persona no está autorizada, la expulsamos
+    //       window.location.href = "http://localhost/SafeTaurant/view/login.html";
+    //     } else if (this.status == 400) {
+    //       //Si hay un error, devolvemos un error
+    //       subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+    //     }  
+    //   };
+    //   xmlhttp.send();
+    // };
 
-    //Cambiamos los valores de los inputs
-    const putData = () => {
-      name.value = user.name;
-      email.value = user.email;
-      birthDate.value = user.birthDate;
-      surname.value = user.surname;
-    }
+    // //Cambiamos los valores de los inputs
+    // const putData = () => {
+    //   name.value = user.name;
+    //   email.value = user.email;
+    //   birthDate.value = user.birthDate;
+    //   surname.value = user.surname;
+    // }
 
     //Comprobamos si el usuario está activo
-    const checkIsLoggedIn = () => {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //Si el usuario ha iniciado sesión, llamamos a la función que añade los datos a los inputs
-          getProfile();
-        } else if (this.status == 401) {
-          //Si no ha iniciado sesión, le expulsamos al login
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
-        }  
-      };
-      xmlhttp.send();
-    }
+    // const checkIsLoggedIn = () => {
+    //   var xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
+    //   xmlhttp.setRequestHeader("Content-Type", "application/json");
+    //   xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //       //Si el usuario ha iniciado sesión, llamamos a la función que añade los datos a los inputs
+    //       //getProfile();
+    //     } else if (this.status == 401) {
+    //       console.log('auch')
+    //       //Si no ha iniciado sesión, le expulsamos al login
+    //       //window.location.href = "http://localhost/SafeTaurant/view/login.html";
+    //     }  
+    //   };
+    //   xmlhttp.send();
+    // }
 
-    checkIsLoggedIn();
+    // checkIsLoggedIn();
   </script>
 </html>
