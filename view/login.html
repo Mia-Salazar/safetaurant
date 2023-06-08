@@ -66,9 +66,8 @@
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log('wiiiiii')
-          // redirect to profile page
-          location.href = 'http://localhost/SafeTaurant/index.html';
+        // redirect to profile page
+        location.href = 'http://localhost/SafeTaurant/index.html';
       }
     };
     xhttp.open("POST", "http://localhost/SafeTaurant/controller/save-user.php", true);
