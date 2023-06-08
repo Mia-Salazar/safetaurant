@@ -1,14 +1,11 @@
-<?php 
-  //Esta funcionalidad la usamos para comprobar si un usuario ha iniciado sesión
-  include "../model/queryRestaurant.php";
-
-  //Comprobamos si hay una cookie con el ID del usuario
-  if(!isset($_COOKIE['userID'])) {
-    //Si no hay cookie, devolvemos un 401 indicando que no está autorizado
+<?php
+  session_start();
+    
+  if(isset($_SESSION['uid'])) {
+    echo "OK";
+    header('Location: http://localhost/SafeTaurant/index.html');
+  } else  {
     http_response_code(401);
     exit;
-  } else {
-    //Si sí hay cookie mostramos un mensaje de éxito
-    echo "OK";
   }
 ?>

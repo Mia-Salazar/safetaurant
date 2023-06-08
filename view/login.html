@@ -50,17 +50,8 @@
     <main class="main form">
       <form class="login-form" id="register">
         <h2>¡Te damos la bienvenida de nuevo!</h2>
-        <div class="input-group">
-          <label class="input-label" for="email">Correo electrónico*: </label>
-          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="email" placeholder="Escribe tu email" name="email" type="email" required />
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="password">Contraseña*: </label>
-          <input pattern="^(?!.*<[^>]+>).*"  class="input" id="password" placeholder="Escribe tu contraseña" name="password" type="password" required />
-        </div>
         <small id="error" class="error"></small>
-        <button type="submit" class="primary-button" id="buttonSubmit">Iniciar sesión</button>
-        <a class="link" href="http://localhost/SafeTaurant/view/register-user.html">Regístrate</a>
+        <buttton id="buttonDiv">Iniciar sesión con Google</button>
       </form>
     </main>
     <footer class="footer">
@@ -69,44 +60,31 @@
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
-  <script>
-    document.getElementById("register").addEventListener("submit", login, false);
-
-    function login(event){
-      event.preventDefault();
-      const email = document.getElementById("email");
-      const password = document.getElementById("password");
-      const buttonSubmit = document.getElementById("buttonSubmit");
-      const error = document.getElementById("error");
-      //Mostramos al usuario que la aplicación está en proceso
-      buttonSubmit.innerHTML = "Cargando...";
-      error.innerHTML = "";
-      //Creamos un objeto con los datos para iniciar sesión
-      const data = {
-        email: email.value,
-        password: password.value,
-      };
-      //Comprobamos si la contraseña es correcta, sino se lanzará una alerta
-      if(!hasCorrectPassword(password.value)) {
-        buttonSubmit.innerHTML = "Registrar";
-        alert("La contraseña debe tener 8 caracteres que sean números o letras");
-        return;
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+  function handleCredentialResponse(response) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        if('success' == this.responseText) {
+          // redirect to profile page
+          location.href = 'http://localhost/SafeTaurant/index.html';
+        }
       }
-      //Hacemos la petición al back-end
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/login.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //Si el inicio de sesión es correcto, le enviamos a la página principal
-          window.location.href = "http://localhost/SafeTaurant/index.html";
-        } else if (this.status == 401) {
-          //Si el inicio de sesión no es correcto, le mostramos que la carga ha terminado y un mensaje de error
-          buttonSubmit.innerHTML = "Iniciar sesión";
-          error.innerHTML = "El email o la contraseña son incorrectos";
-        } 
-      };
-      xmlhttp.send(JSON.stringify(data));
-    }
-  </script>
-</html>
+    };
+    xhttp.open("POST", "http://localhost/SafeTaurant/controller/save-user.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("response="+response.credential);
+  }
+  window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: "276837291915-d0k06btbho776nl1orhe8luorjfsq4po.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "outline", size: "large", width: "200" }  // customization attributes
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+  }
+</script>
