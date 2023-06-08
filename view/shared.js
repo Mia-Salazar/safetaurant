@@ -7,6 +7,9 @@ const dropdownButton = document.getElementById("account-dropdown-button");
 
 if (toggle) {
   toggle.addEventListener("click", toggleMenu, false);
+}
+
+if (dropdownButton) {
   dropdownButton.addEventListener("click", dropdownToggle, false);
 }
 
