@@ -2,10 +2,11 @@
   //Esta funcionalidad la usamos en la página de perfil para obtene run usuario
   include "../model/queryPerson.php";
 
+  session_start();
   //Comprobamos si el usuario está activo
-  if(isset($_COOKIE['userID'])) {
+  if(isset($_SESSION['uid'])) {
     //Obtenemos el usuario buscando por su ID
-    $user = getUser($_COOKIE['userID']);
+    $user = getUser($_SESSION['uid']);
     if($user) {
       //Devolvemos los datos
       echo json_encode($user);

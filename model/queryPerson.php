@@ -51,7 +51,7 @@
 	//Devolvemos el usuario o false
 	function getUser($userID) {
 		$DDBB = createConnection();
-		$sql = "SELECT birthDate, email, name, surname FROM user WHERE userID ='" . $userID . "'";
+		$sql = "SELECT email, name, picture FROM users WHERE google_uid ='" . $userID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
