@@ -17,7 +17,7 @@
 		closeConnection($DDBB);
 	}
 
-	//En esta funcionalidad buscamos si un email ya está registrado y devolvemos true o false
+	//Deprecada desde login con Google
 	function checkUniqueEmail($email) {
 		$DDBB = createConnection();
 		$sql = "SELECT userID FROM user WHERE email = '" . $email . "'";
@@ -31,8 +31,7 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para iniciar sesión
-	//Devolvemos el usuario si hemos tenido éxito y sino false
+	//Deprecada desde login con Google
 	function login($email, $password) {
 		$DDBB = createConnection();
 		$sql = "SELECT userID, name FROM user WHERE email ='" . $email . "' AND password = '" . $password. "'";
@@ -63,8 +62,7 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para editar un usuario
-	//O devolvemos el resultado o un mensaje de error
+	//Deprecada desde login con Google
 	function editUser($userID, $name, $surname, $password) {
 		$DDBB = createConnection();
 		//Si se ha escrito una contraseña, la modificaremos y sino no
