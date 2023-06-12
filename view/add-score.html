@@ -19,7 +19,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -37,20 +37,20 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
           </li>
           <li class="nav-link">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile.html">Perfil</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="http://localhost/SafeTaurant/view/profile-restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
                 <a class="nav-link" href="">Mis opiniones</a>
@@ -152,7 +152,7 @@
       };
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "http://localhost/SafeTaurant/controller/add-score.php", true);
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-score.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -160,7 +160,7 @@
           feedback.innerHTML = "Creado correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
-          window.location.href = "http://localhost/SafeTaurant/index.html";
+          window.location.href = "https://foodiesaurus.miasalazar.com/index.html";
         } else if (this.status == 424) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
           feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
@@ -168,7 +168,7 @@
           feedback.classList.remove("success");
         } else if (this.status == 401) {
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         }
         //Mostramos al usuario que ya no está cargando
         buttonSubmit.innerHTML = "Añadir opinión";
@@ -181,11 +181,11 @@
     //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "http://localhost/SafeTaurant/controller/isLoggued.php", true);
+      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 &&  this.status == 401) {
-          window.location.href = "http://localhost/SafeTaurant/view/login.html";
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         }  
       };
       xmlhttp.send();
