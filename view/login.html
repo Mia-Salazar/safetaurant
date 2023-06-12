@@ -18,7 +18,7 @@
   <body>
     <header class="header">
       <div class="title-container">
-        <a href="http://localhost/SafeTaurant/index.html" class="home-link" aria-label="Ir a la home">
+        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -36,10 +36,10 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/index.html">Buscar</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/view/login.html">Iniciar sesión</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
           </li>
         </ul>
       </nav>
@@ -64,10 +64,10 @@
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         // redirect to profile page
-        location.href = 'http://localhost/SafeTaurant/index.html';
+        location.href = 'https://foodiesaurus.miasalazar.com/index.html';
       }
     };
-    xhttp.open("POST", "http://localhost/SafeTaurant/controller/save-user.php", true);
+    xhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/save-user.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("response="+response.credential);
   }
