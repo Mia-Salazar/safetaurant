@@ -9,7 +9,7 @@
   //Comprobamos si el usuario está autentificado mirando las cookies
   if(isset($_SESSION['uid'])) {
     //Añadimos la nueva calificación
-    $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $_COOKIE['userName'], $_SESSION['uid'], $formInfo['restaurantID'], $formInfo['created'], $formInfo['allergicReaction']);
+    $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $formInfo['userName'], $formInfo['id'], $formInfo['restaurantID'], $formInfo['created'], $formInfo['allergicReaction']);
     if($score) {
       //Si tenemos éxito devolvemos un mensaje mostrando que todo ha ido bien
       echo "OK";

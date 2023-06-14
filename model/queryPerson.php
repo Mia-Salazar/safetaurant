@@ -1,6 +1,6 @@
 <?php 
 
-	include "connection.php";
+	include_once "connection.php";
 
 	//Funcionalidad para crear usuario
 	function registerUser($name, $email, $birthDate, $password, $surname) {
@@ -50,7 +50,7 @@
 	//Devolvemos el usuario o false
 	function getUser($userID) {
 		$DDBB = createConnection();
-		$sql = "SELECT email, name, picture FROM users WHERE google_uid ='" . $userID . "'";
+		$sql = "SELECT email, name, picture, id FROM users WHERE google_uid ='" . $userID . "'";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {

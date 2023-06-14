@@ -33,9 +33,10 @@ CREATE TABLE `restaurant` (
   `province` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `ZIP` int(6) NOT NULL,
+  `url` int(25) DEFAULT NULL,
   `phone` int(12) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
-  `userID` int(10) NOT NULL
+  `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -52,7 +53,7 @@ CREATE TABLE `scores` (
   `allergenChart` int(1) NOT NULL,
   `fidelityScore` int(1) NOT NULL,
   `attentionScore` int(1) NOT NULL,
-  `userID` int(10) NOT NULL,
+  `userID` int(11) NOT NULL,
   `restaurantID` int(11) NOT NULL,
   `userName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -63,17 +64,26 @@ CREATE TABLE `scores` (
 -- Estructura de tabla para la tabla `user`
 --
 
-CREATE TABLE `user` (
-  `userID` int(10) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `birthDate` date NOT NULL,
-  `password` varchar(12) NOT NULL,
-  `surname` varchar(50) DEFAULT NULL,
-  `lactoseIntolerance` int(1) DEFAULT NULL,
-  `celiacDisease` int(1) DEFAULT NULL,
-  `allergies` varchar(200) DEFAULT NULL
+CREATE TABLE `users` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `google_uid` varchar(255) NOT NULL,
+ `name` varchar(255) NOT NULL,
+ `email` varchar(255) NOT NULL,
+ `picture` text NOT NULL,
+ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- CREATE TABLE `user` (
+--   `userID` int(10) NOT NULL,
+--   `name` varchar(50) NOT NULL,
+--   `email` varchar(100) NOT NULL,
+--   `birthDate` date NOT NULL,
+--   `password` varchar(12) NOT NULL,
+--   `surname` varchar(50) DEFAULT NULL,
+--   `lactoseIntolerance` int(1) DEFAULT NULL,
+--   `celiacDisease` int(1) DEFAULT NULL,
+--   `allergies` varchar(200) DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -97,8 +107,8 @@ ALTER TABLE `scores`
 --
 -- Indices de la tabla `user`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`userID`);
+-- ALTER TABLE `user`
+--   ADD PRIMARY KEY (`userID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -117,12 +127,6 @@ ALTER TABLE `scores`
   MODIFY `scoreID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `userID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -130,14 +134,14 @@ ALTER TABLE `user`
 -- Filtros para la tabla `restaurant`
 --
 ALTER TABLE `restaurant`
-  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
+  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `scores`
 --
 ALTER TABLE `scores`
   ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`),
-  ADD CONSTRAINT `scores_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
+  ADD CONSTRAINT `scores_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
