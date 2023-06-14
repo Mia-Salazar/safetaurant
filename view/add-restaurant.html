@@ -169,6 +169,8 @@
     const foodSelect = document.getElementById("foodType");
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
+    const buttonSubmit = document.getElementById("buttonSubmit");
+    const error = document.getElementById("error");
 
     //Variable para comprobar si hay carta de alérgenos
     //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
@@ -207,8 +209,6 @@
 
     function registerRestaurant(event){
       event.preventDefault();
-      const buttonSubmit = document.getElementById("buttonSubmit");
-      const error = document.getElementById("error");
       //Mostramos al usuario que la aplicación está en proceso
       buttonSubmit.innerHTML = "Cargando...";
       feedback.innerHTML = "";
@@ -238,13 +238,37 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+          data.restaurantID = this.responseText;
+          addScore(data);
+        } else if (this.status == 424) {
+          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+          feedback.innerHTML = "Hubo un error en la creación del restaurante";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
+        } else if (this.status == 401) {
+          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        }
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    const addScore = (data) =>{
+      //Hacemos la petición al back-end
+      
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-score.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
           feedback.innerHTML = "Creado correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
           window.location.href = "https://foodiesaurus.miasalazar.com/index.html";
         } else if (this.status == 424) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-          feedback.innerHTML = "Hubo un error en la creación del restaurante";
+          feedback.innerHTML = "Hubo un error en la creación de la puntuación";
           feedback.classList.add("error");
           feedback.classList.remove("success");
         } else if (this.status == 401) {
