@@ -1,6 +1,6 @@
 <?php 
 
-	include "connection.php";
+	include_once "connection.php";
 
 	//Funcionalidad para añadir una nueva puntuación
 	//O devolvemos el resultado o false

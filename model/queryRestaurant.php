@@ -1,6 +1,6 @@
 <?php 
 
-	include "connection.php";
+	include_once "connection.php";
 
 	//Funcionalidad para crear un restaurante
 	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false
