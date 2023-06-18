@@ -215,12 +215,72 @@ body {
 
 /*Footer*/
 .footer {
-	padding: 15px;
+	position: relative;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 15px 15px 55px 15px;
 	background-color: var(--secondaryColor);
 }
 
 .footer a, .footer {
 	color:  var(--white);
+}
+
+.footer__logo {
+	display: flex;
+	align-items: center;
+	color: var(--white);
+    font-weight: 500;
+	font-family: var(--primaryTypo);
+	margin: 0;
+	font-size: 28px;
+}
+
+.footer__logo p {
+	margin: 0;
+}
+
+
+.footer-img {
+	height: 45px;
+	margin: 0 2px;
+}
+
+.footer__name {
+	font-family: var(--primaryTypo);
+	font-size: 20px;
+    text-decoration: none;
+}
+
+.copyright  {
+	font-size: 10px;
+}
+
+.footer__by {
+	margin-top: 32px;
+	margin-bottom: 0;
+	font-size: 12px;
+	text-align: center;
+}
+
+.footer i {
+	color: var(--white);
+}
+
+.footer__list {
+	display: flex;
+	margin-top: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.footer__list li {
+	margin-right: 16px;
+}
+
+.footer__list li:last-of-type {
+	margin-right: 0;
 }
 
 /*Form*/
@@ -278,6 +338,17 @@ body {
 		font-size: 20px;
 	}
 
+	.footer {
+		display: grid;
+    	grid-template-columns: 1fr 1fr;
+		padding: 15px 20px;
+		align-items: flex-start;
+	}
+
+	.footer__logo {
+		margin-bottom: 28px;
+	}
+
 	.dropdown {
 		width: 140px;
 		display: flex;
@@ -298,6 +369,17 @@ body {
 	.dropdown li {
 		padding: 3px 0;
 	}
+
+	.footer__by {
+		margin-top: 10px;
+		margin-bottom: 6px;
+	}
+
+	.footer__container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
 }
 
 /*Estilo al contenedor de las páginas para que no cojan el 100% del ancho*/
@@ -312,6 +394,12 @@ body {
 
 /*Hamburguer menu*/
 @media (max-width: 767px) {
+
+	.copyright  {
+		position: absolute;
+		bottom: 16px;
+	}
+
 	.toggle {
 		width: 36px;
 		height: 32px;
