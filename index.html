@@ -183,9 +183,6 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          register.innerHTML = "¡Aprovecha las funcionalidades! <br />Empieza a crear restaurantes y a puntuarlos";
-          link.href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html";
-          link.innerHTML = "¡Llévame!"
           changeMenuAccordingToUser("registered");
         }
         if(this.readyState == 4 && this.status == 401) {
