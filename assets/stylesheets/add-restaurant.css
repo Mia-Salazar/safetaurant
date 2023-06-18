@@ -1,8 +1,8 @@
 /*Estilos de la página para crear un restaurante*/
 
 .add-restaurant .img-container {
-	max-width: 400px;
-	margin: 0 60px;
+	max-width: 25rem;
+	margin: 0 3.75rem;
 }
 
 .add-restaurant .hidden {
@@ -10,5 +10,5 @@
 }
 
 .checkbox-group {
-	margin-bottom: 20px;
+	margin-bottom: 1.25rem;
 }
