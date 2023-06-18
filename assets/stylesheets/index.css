@@ -25,7 +25,7 @@ body {
 
 .logo-text {
 	font-family: var(--primaryTypo);
-	font-size:  20px;
+	font-size:  1.25rem;
 	font-weight: 500;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .main {
-	padding: 30px 15px;
+	padding: 1.875rem 0.938rem;
 	margin-bottom: auto;
 }
 
@@ -44,7 +44,7 @@ body {
 }
 
 .subtitle {
-	max-width: 500px;
+	max-width: 31.25rem;
 }
 
 /*Utility clases*/
@@ -55,18 +55,18 @@ body {
 /*Information list*/
 .info-list {
 	width: fit-content;
-	padding: 16px;
+	padding: 1rem;
 	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-radius: 5px;
     list-style-type: none;
-	margin-bottom: 30px;
+	margin-bottom: 1.875rem;
 }
 
 .info-list-item {
 	position: relative;
 	margin-bottom: 5px;
-	font-size: 14px;
-	padding-left: 12px;
+	font-size: 0.875rem;
+	padding-left: 0.75rem;
 }
 
 .info-list-item:after {
@@ -82,7 +82,7 @@ body {
 
 /*Botones*/
 .primary-button, .secondary-button {
-	padding: 10px 20px;
+	padding: 0.625rem 1.25rem;
 	background-color: var(--secondaryColor);
 	border-radius: 5px;
 	border: none;
@@ -107,7 +107,7 @@ body {
 	display:  flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 5px 15px;
+	padding: 5px 0.938rem;
 	background-color: var(--primaryColor);
 	font-family: var(--primaryTypo);
 }
@@ -144,13 +144,13 @@ body {
 
 .logo-container {
 	display: flex;
-	width: 42px;
+	width: 2.625rem;
 	margin: 0 2px 0 2px;
 }
 
 /*Mi cuenta dropdown*/
 .dropdown {
-	padding: 10px 0;
+	padding: 0.625rem 0;
 	display: none;
 	flex-direction: column;
 	list-style-type: none;
@@ -164,7 +164,7 @@ body {
 }
 
 .dropdown a {
-	font-size: 14px;
+	font-size: 0.875rem;
 }
 
 .arrow {
@@ -208,7 +208,7 @@ body {
 .nav-link {
 	padding:  0 4px;
 	color: var(--white);
-	font-size: 18px;
+	font-size: 1.125rem;
 	text-decoration: none;
 	text-align: center;
 }
@@ -219,7 +219,7 @@ body {
 	display: flex;
     flex-direction: column;
     align-items: center;
-	padding: 15px 15px 55px 15px;
+	padding: 0.938rem 0.938rem 3.438rem 0.938rem;
 	background-color: var(--secondaryColor);
 }
 
@@ -234,7 +234,7 @@ body {
     font-weight: 500;
 	font-family: var(--primaryTypo);
 	margin: 0;
-	font-size: 28px;
+	font-size: 1.75rem;
 }
 
 .footer__logo p {
@@ -243,24 +243,24 @@ body {
 
 
 .footer-img {
-	height: 45px;
+	height: 2.813rem;
 	margin: 0 2px;
 }
 
 .footer__name {
 	font-family: var(--primaryTypo);
-	font-size: 20px;
+	font-size: 1.25rem;
     text-decoration: none;
 }
 
 .copyright  {
-	font-size: 10px;
+	font-size: 0.625rem;
 }
 
 .footer__by {
-	margin-top: 32px;
+	margin-top: 2rem;
 	margin-bottom: 0;
-	font-size: 12px;
+	font-size: 0.75rem;
 	text-align: center;
 }
 
@@ -276,7 +276,7 @@ body {
 }
 
 .footer__list li {
-	margin-right: 16px;
+	margin-right: 1rem;
 }
 
 .footer__list li:last-of-type {
@@ -288,7 +288,7 @@ body {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 20px;
+	margin-bottom: 1.25rem;
 }
 
 .input-label {
@@ -303,13 +303,13 @@ body {
 
 .link {
 	display: block;
-	margin-top: 15px;
+	margin-top: 0.938rem;
 	color: var(--gray);
 }
 
 .primary-button, .secondary-button {
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 0.625rem;
 }
 
 .checkbox-group {
@@ -320,12 +320,12 @@ body {
 /*Feedback*/
 .error {
 	color: var(--secondaryColor);
-	margin-top: 10px;
+	margin-top: 0.625rem;
 }
 
 .success {
 	color:  var(--primaryColor);
-	margin-top: 10px;
+	margin-top: 0.625rem;
 }
 
 /*Medias queries*/
@@ -335,22 +335,22 @@ body {
 		display: flex;
 	}
 	.nav-list a {
-		font-size: 20px;
+		font-size: 1.25rem;
 	}
 
 	.footer {
 		display: grid;
     	grid-template-columns: 1fr 1fr;
-		padding: 15px 20px;
+		padding: 0.938rem 1.25rem;
 		align-items: flex-start;
 	}
 
 	.footer__logo {
-		margin-bottom: 28px;
+		margin-bottom: 1.75rem;
 	}
 
 	.dropdown {
-		width: 140px;
+		width: 8.75rem;
 		display: flex;
 		position: absolute;
 		right: 0;
@@ -359,11 +359,11 @@ body {
 	}
 
 	.dropdown.open {
-		transform: translate(0, 23px);
+		transform: translate(0, 1.438rem);
 	}
 
 	.account-dropdown-button {
-		font-size: 20px;
+		font-size: 1.25rem;
 	}
 
 	.dropdown li {
@@ -371,7 +371,7 @@ body {
 	}
 
 	.footer__by {
-		margin-top: 10px;
+		margin-top: 0.625rem;
 		margin-bottom: 6px;
 	}
 
@@ -386,7 +386,7 @@ body {
 
 @media (min-width: 1100px) {
 	.container {
-		max-width: 900px;
+		max-width: 56.25rem;
 		margin-right: auto;
 		margin-left: auto;
 	}
@@ -397,12 +397,12 @@ body {
 
 	.copyright  {
 		position: absolute;
-		bottom: 16px;
+		bottom: 1rem;
 	}
 
 	.toggle {
-		width: 36px;
-		height: 32px;
+		width: 2.25rem;
+		height: 2rem;
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -434,7 +434,7 @@ body {
 	    left: 0;
 	    bottom: 0;
 	    background: var(--primaryColor);
-	    height: calc(100vh - 55px);
+	    height: calc(100vh - 3.438rem);
 	    display: flex;
 	    flex-direction: column;
 	    justify-content: center;

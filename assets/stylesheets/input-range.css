@@ -13,8 +13,8 @@
   /* Input Thumb */
   .range-input::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	height: 20px;
-	width: 20px;
+	height: 1.25rem;
+	width: 1.25rem;
 	border-radius: 50%;
 	background: var(--primaryColor);
 	cursor: ew-resize;
@@ -24,8 +24,8 @@
   
   .range-input::-moz-range-thumb {
 	-webkit-appearance: none;
-	height: 20px;
-	width: 20px;
+	height: 1.25rem;
+	width: 1.25rem;
 	border-radius: 50%;
 	background: var(--primaryColor);
 	cursor: ew-resize;
@@ -35,8 +35,8 @@
   
   .range-input::-ms-thumb {
 	-webkit-appearance: none;
-	height: 20px;
-	width: 20px;
+	height: 1.25rem;
+	width: 1.25rem;
 	border-radius: 50%;
 	background: var(--primaryColor);
 	cursor: ew-resize;
@@ -79,7 +79,7 @@
 
 .range-input-container {
 	display: grid;
-    grid-template-columns: 1fr 40px;
+    grid-template-columns: 1fr 2.5rem;
 	align-items: center;
 }
 
@@ -88,7 +88,7 @@
     background: transparent;
     text-align: center;
     font-weight: bold;
-	font-size: 20px;
+	font-size: 1.25rem;
     padding: 5px;
 	margin-left: 5px;
 	color: var(--primaryColor)
@@ -101,5 +101,5 @@
 .range-container {
 	display: flex;
 	align-items: center;
-    font-size: 12px;
+    font-size: 0.75rem;
 }

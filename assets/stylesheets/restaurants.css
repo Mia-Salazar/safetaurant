@@ -1,10 +1,10 @@
 /*Estilos de la página de resultados de restaurantes*/
 .home {
-	min-height: calc(100vh - 56px - 125px);
+	min-height: calc(100vh - 3.5rem - 7.813rem);
 }
 
 .list-results-container {
-	padding: 20px;
+	padding: 1.25rem;
 }
 
 .order-container {

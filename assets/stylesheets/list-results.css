@@ -10,8 +10,8 @@
 
 .list-results li {
 	position: relative;
-	margin-bottom: 20px;
-	padding: 15px;
+	margin-bottom: 1.25rem;
+	padding: 0.938rem;
     border: 1px solid var(--gray);
     border-radius: 5px;
 }
@@ -24,21 +24,21 @@
     text-decoration: none;
     position: absolute;
     width: fit-content;
-    bottom: 15px;
-    right: 15px;
+    bottom: 0.938rem;
+    right: 0.938rem;
 }
 
 
 .list-score {
 	position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 0.938rem;
+    top: 0.938rem;
     color: var(--primaryColor);
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .list-score span {
 	color: black;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
