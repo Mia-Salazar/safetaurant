@@ -6,6 +6,7 @@ html {
 	--gray: #bfcad7;
 	--grayDark: #555;
 	--white: #fff;
+	--black: #0a0a0a;
 
 	--primaryTypo: 'Teko', sans-serif;
 }
@@ -19,6 +20,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+	color: var(--black);
 }
 
 .logo-text {
