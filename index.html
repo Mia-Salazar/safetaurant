@@ -63,25 +63,34 @@
       </nav>
     </header>
     <main class="home">
-      <figure class="img-container">
-        <img class="img" alt="" src="./assets/img/happy.jpg" />
-      </figure>
+      <div class="hero">
+        <div class="wrapper">
+          <div>
+            <h3 class="hero__title">Encuentra restaurantes seguros para alergias alimentarias</h3>
+            <p class="hero__subtitle">La única plataforma donde puedes valorar establecimientos de comida según cómo tratan las alergias y las intolencias</p>
+          </div>
+          <figure class="img-container">
+            <img class="img" alt="" src="./assets/img/poke.png" />
+          </figure>
+        </div>
+      </div>
+
       <section class="search-container">
-        <h2>Disfruta la comida con total seguridad</h2>
+        <h4 class="second-title">Empieza a buscar restaurantes</h4>
         <form id="search">
           <div class="input-group">
-            <label class="input-label" for="name">Busca un restaurante</label>
+            <label class="input-label" for="name">Nombre</label>
             <input pattern="^(?!.*<[^>]+>).*" class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
           </div>
           <div class="form-selects">
             <div class="input-group">
-              <label class="input-label" for="province">Provincia: </label>
+              <label class="input-label" for="province">Provincia</label>
               <select name="province" id="province" class="select">
                 <option selected value="">Escoge Provincia</option>
               </select>
             </div>
             <div class="input-group">
-              <label class="input-label" for="foodType">Tipo de comida: </label>
+              <label class="input-label" for="foodType">Tipo de comida</label>
               <select name="foodType" id="foodType" class="select">
                 <option selected value="">Escoge el tipo</option>
               </select>
@@ -90,25 +99,32 @@
           </div>
         </form>
       </section>
-      <section class="instructions">
-        <div class="instructions-wrapper">
-          <ol class="instructions-list">
-            <li>Busca el restaurante en <span class="logo-text">Foodiesaurus</span></li>
-            <li>Consulta las opiniones de otros <i>foodies</i></li>
-            <li>Ve al restaurante y disfruta la comida</li>
-            <li>Puntúa la experiencia y ayuda a otros</li>
-          </ol>
-        </div>
+      <section class="question">
+        <h5 class="second-title second-title--light">¿Quieres saber si un restaurante es seguro para ti?</h5>
       </section>
-      <section class="register">
+      <section class="instructions">
+        <figure class="img-container instruction__img-container">
+          <img class="img instruction__img" alt="" src="./assets/img/middle.jpg" />
+        </figure>
+        <ol class="instructions-list">
+          <li>Buscar por nombre, ciudad o tipo de comida</li>
+          <li>Consulta opiniones de otros <span class="bold">foodies</span></li>
+          <li>Comprueba si la <span class="bold">carta de alérgenos</span> es de fiar</li>
+          <li>O si alguien ha reportado una <span class="bold">reacción alérgica</span></li>
+          <li>Ve al restaurante y disfruta la comida</li>
+          <li><span class="bold">Puntúa la experiencia</span> y ayuda a otros</li>
+        </ol>
+      </section>
+
+      <!-- <section class="register">
         <div class="register-container">
-          <h3 class="register-text" id="register">¡Regístrate! <br /> Y empieza a utilizar todas las funcionalidades de <span class="logo-text">Foodiesaurus</span></h3>
-          <a href="https://foodiesaurus.miasalazar.com/view/register-user.html" class="primary-button" id="link">Registrar</a>
+          <h3 class="register-text" id="register">¡Inicia sesión! <br /> Y empieza a utilizar todas las funcionalidades de <span class="logo-text">Foodiesaurus</span></h3>
+          <a href="https://foodiesaurus.miasalazar.com/view/login.html" class="primary-button" id="link">Llévame al inicio de sesión</a>
         </div>
         <figure class="img-container">
           <img class="img" alt="" src="./assets/img/food.jpg" />
         </figure>
-      </section>
+      </section> -->
     </main>
     <footer class="footer">
       <p><span class="logo-text">Foodiesaurus</span>, restaurantes sin alergias</p>
