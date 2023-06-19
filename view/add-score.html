@@ -170,7 +170,8 @@
         attentionScore: document.getElementById("attentionScore").value,
         restaurantID: ID,
         userName: user.name,
-        id: user.id
+        id: user.id,
+        allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,
       };
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
