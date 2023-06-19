@@ -107,7 +107,7 @@
     height: 8.438rem;
     background-color: var(--primaryColor);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    top: 27%;
+    top: 30%;
     z-index: -1;
 }
 
@@ -159,7 +159,7 @@
 
 	.hero:after {
 		height: 11.25rem;
-		top: 40%;
+		top: 45%;
 	}
 
 	.hero__img {
@@ -213,9 +213,5 @@
 
 	.instructions {
 		margin: 6.25rem auto;
-	}
-
-	.hero:after {
-		top:40%;
 	}
 }
