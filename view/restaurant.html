@@ -64,7 +64,7 @@
         </ul>
       </nav>
     </header>
-    <main class="main add-restaurant container">
+    <main class="main add-restaurant">
       <h2 id="name">Restaurante</h2>
       <div class="data-container">
         <div>
@@ -78,71 +78,63 @@
           <p class="data-text">Tipo de comida: <span class="data-info" id="foodType">-</span></p>
         </div>
       </div>
-      <div class="averages-container">
-        <h3 id="averages" class="averages">Valoraciones</h3>
-        <ul class="info-list">
-          <li class="info-list-item">El número total de valoraciones <span id="totalOpinions">-</span>
-          </li>
-        </ul>
-        <div class="input-group">
-          <label class="input-label" for="generalScore">General</label>
-          <div class="range-input-container">
-            <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value" disabled/>
-            <div class="range-container">
-              <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
-              <span class="total-range">/10</span>
+      <section class="restaurant-container">
+        <h3 id="averages" class="averages">Puntuaciones (<span id="totalOpinions"></span>)</h3>
+        <div class="averages-container">
+          <div class="box">
+            <h4 class="allergen-chart">Puntuaciones generales</h4>
+            <div class="input-group">
+              <h5>General</h5>
+              <div class="range-container">
+                <div class="bar">
+                  <span id="numberGeneralBar"></span>
+                </div>
+                <span class="range-number" id="numberGeneral">5</span>
+                <span class="total-range">/10</span>
+              </div>
+            </div>
+            <div class="input-group input-group--last">
+              <h5>Atención del personal</h5>
+              <div class="range-container">
+                <div class="bar">
+                  <span id="attentionScoreBar"></span>
+                </div>
+                <span class="range-number" id="attentionScore">5</span>
+                <span class="total-range">/10</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <h4 class="allergen-chart">Alérgenos</h4>
+            <ul class="info-list">
+              <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+              </li>
+              <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
+              </li>
+            </ul>
+            <div class="input-group input-group--last">
+              <h5>Fidelidad de los platos</h5>
+              <div class="range-container">
+                <div class="bar">
+                  <span id="numberFidelityBar"></span>
+                </div>
+                <span class="range-number" id="numberFidelity">5</span>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="input-group">
-          <label class="input-label" for="attentionScore">Atención del personal*: </label>
-          <div class="range-input-container">
-            <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value" disabled/>
-            <div class="range-container">
-              <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
-              <span class="total-range">/10</span>
-            </div>
-          </div>
+        <h3 class="actions" id="scoreText">Acciones</h3>
+        <div class="actions-container">
+          <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
         </div>
-        <div>
-          <h4 class="allergen-chart">Carta de alérgenos</h4>
-          <ul class="info-list">
-            <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
-            </li>
-            <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
-            </li>
-          </ul>
-        </div>
-        <div class="input-group hidden">
-          <label class="input-label" for="fidelityScore">Fidelidad de los platos*: </label>
-          <div class="range-input-container">
-            <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value" disabled/>
-            <div class="range-container">
-              <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
-              <span class="total-range">/10</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h4 class="allergen-chart">Reacciones alérgicas</h4>
-          <ul class="info-list">
-            <li class="info-list-item"><span id="allergicNumber">-</span> personas han tenido una reacción alérgica
-            </li>
-            <li class="info-list-item">Esto supone el <span id="allergicPercent">-</span>%
-            </li>
-          </ul>
-        </div>
-      </div>
-      <h3 class="actions">Acciones</h3>
-      <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
-      <h3 class="reviews">Comentarios y opiniones</h3>
-      
-      <div class="scores-container" id="scores">
         
-        <ul id="scoresList" class="scores-list">
-        </ul>
-      </div>
-      
+        <h3 class="reviews">Comentarios (<span id="totalComments"></span>)</h3>
+        <div class="scores-container" id="scores">
+          <ul id="scoresList" class="scores-list">
+          </ul>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <div>
@@ -176,16 +168,16 @@
     const restaurantID = new URL(document.URL).searchParams.get('ID');
     const add = document.getElementById("add");
     const addScore = document.getElementById("addScore");
+    const scoreText = document.getElementById("scoreText");
     const data = {ID: restaurantID};
+    const numberGeneralBar = document.getElementById("numberGeneralBar");
+    const attentionScoreBar = document.getElementById("attentionScoreBar");
+    const numberFidelityBar = document.getElementById("numberFidelityBar");
 
     //Creamos las variables necesarias que usaremos para guardar los datos
     let restaurant;
     let scores;
     let average;
-
-    //Variable para comprobar si hay carta de alérgenos
-    //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
-    let allergenChartToggle = false;
 
     //Mostramos los datos del restaurante en los inputs
     const putData = () => {
@@ -206,7 +198,9 @@
     //Para cada puntuación creamos un <li> con los datos y lo introducimos en la <ul>
     const putScores = () => {
       const scoresList = document.getElementById("scoresList");
-      scores.forEach((score) => {
+      const scoresWithComments = scores.filter(score => score.comment !== '')
+      document.getElementById("totalComments").innerHTML = scoresWithComments.length;
+      scoresWithComments.forEach((score) => {
         let li = document.createElement("li");
         let date = document.createElement("small");
         let userName = document.createElement("h4");
@@ -241,24 +235,21 @@
       const averageGeneral = Math.floor(average.generalScore);
       const averageFidelity = Math.floor(average.fidelityScore);
       const averageAttention = Math.floor(average.attentionScore);
-      const averageGeneralId = document.getElementById("generalScore");
-      const averageFidelityId = document.getElementById("fidelityScore");
+      const averageGeneralId = document.getElementById("numberGeneral");
+      const averageFidelityId = document.getElementById("numberFidelity");
       const averageAttentionId = document.getElementById("attentionScore");
 
       //General
       document.getElementById("totalOpinions").innerHTML = average.totalReviews;
-      changeInputRangeBackground(averageGeneralId, averageGeneral);
-      averageGeneralId.value = averageGeneral;
-      document.getElementById("numberGeneral").value = averageGeneral;
+      numberGeneralBar.style.width = `${averageGeneral}0%`;
+      averageGeneralId.innerHTML = averageGeneral;
       //Fidelity
-      changeInputRangeBackground(averageFidelityId, averageFidelity);
-      averageFidelityId.value = averageFidelity;
-      document.getElementById("numberFidelity").value = averageFidelity;
+      averageFidelityId.innerHTML = averageFidelity;
+      numberFidelityBar.style.width = `${averageFidelity}0%`;
       
       //Attention
-      changeInputRangeBackground(averageAttentionId, averageAttention);
-      document.getElementById("numberAttention").value = averageAttention;
-      averageAttentionId.value = averageAttention;
+      averageAttentionId.innerHTML = averageAttention;
+      attentionScoreBar.style.width = `${averageAttention}0%`;
     }
 
     //Obtenemos los datos del restaurante
@@ -295,7 +286,6 @@
       xmlhttp.send(JSON.stringify(data));
     }
 
-
     //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
     const getAllergicReactions = () => {
       var xmlhttp = new XMLHttpRequest();
@@ -309,6 +299,7 @@
       };
       xmlhttp.send(JSON.stringify(data));
     }
+
     //Obtenemos la información de todas las puntuaciones medias
     const getAverage = () => {
       var xmlhttp = new XMLHttpRequest();
@@ -330,7 +321,6 @@
       };
       xmlhttp.send(JSON.stringify(data));
     }
-
 
     //Obtenemos las puntuaciones
     const getScores = () => {
@@ -366,6 +356,7 @@
         }
         if(this.readyState == 4 && this.status == 401) {
           addScore.classList.add("hidden");
+          scoreText.classList.add("hidden");
           changeMenuAccordingToUser("no-registered");
         }
       };
