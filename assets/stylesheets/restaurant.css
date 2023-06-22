@@ -61,6 +61,7 @@ h5 {
 }
 
 .actions {
+	margin-top: 1rem;
 	margin-bottom: 2rem;
 }
 
@@ -87,10 +88,6 @@ h5 {
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-}
-
-.actions-container {
-	margin-left: 1.875rem;
 }
 
 h2 {

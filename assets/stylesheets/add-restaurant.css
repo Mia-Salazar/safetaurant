@@ -3,6 +3,11 @@
 	display: none;
 }
 
+
+.add-restaurant {
+	margin-bottom: 3rem;
+}
+
 .checkbox-group {
 	margin-bottom: 1.25rem;
 }
