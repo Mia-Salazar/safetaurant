@@ -1,0 +1,33 @@
+.checkbox-group {
+    margin-bottom: 1.25rem;
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    grid-gap: 0.625rem;
+    grid-auto-flow: dense;
+    align-items: center;
+}
+
+.checkbox {
+    appearance: none;
+    background-color: var(--form-background);
+    color: var(--black);
+    width: 1.25em;
+    height: 1.25em;
+    border-radius: 5px;
+    border: 1px solid var(--grayDark);
+    display: grid;
+    place-content: center;
+}
+  
+.checkbox::before {
+    content: "";
+    width: 0.65rem;
+    height: 0.65rem;
+    transform: scale(0);
+    background-color: var(--primaryColor);
+    border-radius: 2px;
+}
+  
+.checkbox:checked::before {
+    transform: scale(1);
+}

@@ -11,7 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/checkboxes.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
@@ -71,25 +73,38 @@
             <label class="input-label" for="generalScore">Puntuación general*: </label>
             <div class="range-input-container">
               <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <input type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled oninput="generalScore.value=value">
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
           <div class="checkbox-group">
-            <label class="input-label" for="allergenChart">¿Carta de alérgenos?</label>
-            <input class="input" id="allergenChart" name="allergenChart" type="checkbox" />
+            <input class="input checkbox" id="allergicReaction" name="allergicReaction" type="checkbox" />
+            <label class="" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
+          </div>
+          <div class="checkbox-group">
+            <input class="input checkbox" id="allergenChart" name="allergenChart" type="checkbox" />
+            <label class="" for="allergenChart">¿Carta de alérgenos?</label>
           </div>
           <div class="input-group hidden" id="fidelityScoreContainer">
             <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
             <div class="range-input-container">
               <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <input type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled oninput="fidelityScore.value=value">
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
           <div class="input-group">
             <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
             <div class="range-input-container">
               <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <input type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled oninput="attentionScore.value=value">
+              <div class="range-container">
+                <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+                <span class="total-range">/10</span>
+              </div>
             </div>
           </div>
           <div class="input-group">
@@ -130,6 +145,7 @@
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
+  <script type="text/javascript" src="./input-range.js"></script>
   <script>
     const feedback = document.getElementById("feedback");
     const fidelity = document.getElementById("fidelityScoreContainer");
