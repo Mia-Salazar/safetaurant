@@ -155,6 +155,7 @@ body {
 	flex-direction: column;
 	list-style-type: none;
 	transition: transform 0.25s;
+	z-index: 1;
 }
 
 .account-dropdown-button {
@@ -179,7 +180,7 @@ body {
 
 /*Nav*/
 .nav-list {
-	display: none;
+	display: flex;
     padding: 0;
     list-style-type: none;
 	z-index:1;
@@ -195,6 +196,7 @@ body {
 	background-color: var(--white);
 	margin-bottom: 4px;
 	transform-origin: top left;
+	transition: 0.5s;
 }
 
 .toggle-item:last-of-type {
@@ -331,9 +333,6 @@ body {
 /*Medias queries*/
 
 @media (min-width: 768px) {
-	.nav-list {
-		display: flex;
-	}
 	.nav-list a {
 		font-size: 1.25rem;
 	}
@@ -407,6 +406,7 @@ body {
 		appearance: none;
 		background-color: transparent;
 		border: none;
+		z-index: 2;
 	}
 
 	.toggle.open .toggle-item {
@@ -424,17 +424,23 @@ body {
 		display:  none;
 	}
 
-	.nav-list.open {
+	.nav-list {
 		position: absolute;
-	    width: 100%;
-	    left: 0;
-	    bottom: 0;
-	    background: var(--primaryColor);
-	    height: calc(100vh - 3.438rem);
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: center;
-	    align-items: center;
-	    margin: 0;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		background: var(--primaryColor);
+		height: calc(100vh - 3.438rem);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 0;
+		transform: translate(0%, -100%);
+		transition: transform 0.5s;
+	}
+
+	.nav-list.open {
+		transform: translate(0%);
 	}
 }
