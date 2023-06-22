@@ -1,14 +1,40 @@
 /*Estilos de la página para crear un restaurante*/
-
-.add-restaurant .img-container {
-	max-width: 25rem;
-	margin: 0 3.75rem;
-}
-
 .add-restaurant .hidden {
 	display: none;
 }
 
 .checkbox-group {
 	margin-bottom: 1.25rem;
+}
+
+.add-restaurant .img-container {
+	width: 100%;
+	margin: 0;
+	max-width: unset;
+}
+
+@media (min-width: 768px) {
+
+	.add-restaurant .img-container {
+		display: flex;
+		justify-content: center;
+	}
+
+	.add-restaurant .img {
+		width: 16rem;
+		height: 16rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.add-restaurant .img {
+		width: 25rem;
+		height: 25rem;
+	}
+
+	.add-restaurant-wrapper {
+		grid-template-columns: 1fr 25rem;
+		align-items: center;
+		gap: 2.375rem;
+	}
 }
