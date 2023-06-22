@@ -24,11 +24,6 @@
 	margin-bottom: 1.25rem;
 }
 
-.scores-container {
-	margin: 0 auto 2rem auto;
-    max-width: 56.25rem;
-}
-
 .scores-list {
 	display: grid;
    	grid-template-columns: 1fr;
