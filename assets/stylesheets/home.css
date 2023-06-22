@@ -94,8 +94,9 @@
 
 /*Header*/
 .hero {
+	position: relative;
 	padding: 1.25rem;
-	height: 11.25rem;
+	height: 12rem;
 	background-color: var(--primaryColor);
 }
 
@@ -107,7 +108,7 @@
     height: 8.438rem;
     background-color: var(--primaryColor);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    top: 30%;
+	bottom: -24%;
     z-index: -1;
 }
 
@@ -159,7 +160,7 @@
 
 	.hero:after {
 		height: 11.25rem;
-		top: 45%;
+		bottom: -21%;
 	}
 
 	.hero__img {
