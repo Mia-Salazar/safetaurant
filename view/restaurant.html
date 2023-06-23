@@ -57,7 +57,7 @@
                 <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="">Mis opiniones</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-scores.html">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -212,6 +212,7 @@
 
         date.innerHTML = score.created;
         userName.innerHTML = score.userName;
+        allergicReaction.innerHTML= `<span class='highlight'>¿Tuviste una reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
         allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
         comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
         fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
