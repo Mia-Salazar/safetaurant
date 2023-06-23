@@ -7,6 +7,7 @@ html {
 	--grayDark: #555;
 	--white: #fff;
 	--black: #0a0a0a;
+	--bg: #eff2f5c2;
 
 	--primaryTypo: 'Teko', sans-serif;
 }
@@ -59,7 +60,7 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-radius: 5px;
     list-style-type: none;
-	margin-bottom: 1.875rem;
+	margin: 1rem 1rem 1.875rem 1rem;
 }
 
 .info-list-item {

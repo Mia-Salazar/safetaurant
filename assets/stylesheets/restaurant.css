@@ -104,7 +104,7 @@ h2 {
 }
 
 .restaurant-container {
-    background: #eff2f5c2;
+    background: var(--bg);
     padding: 2rem 0.938rem 0.938rem 0.938rem;
     margin-top: 32px;
 }
