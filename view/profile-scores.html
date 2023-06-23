@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#319DA0" />
+    <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
+    <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/list-results.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/restaurant.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile-details.css">
+    <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/img/logo.png" />
+    <title>Foodiesaurus, restaurantes sin alergias</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="title-container">
+        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+          <h1 class="title">
+            <span>Foodie</span>
+            <figure class="logo-container">
+              <img class="logo" src="../assets/img/foodiesaurus.png" alt="" />
+            </figure>
+            <span>saurus</span>
+          </h1>
+        </a>
+      </div>
+      <nav class="nav">
+        <button id="toggle" class="toggle" aria-label="Alternar menú">
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+        </button>
+        <ul class="nav-list" id="nav">
+          <li>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
+          </li>
+          <li>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+          </li>
+          <li class="nav-link">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-scores.html">Mis opiniones</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main profile-details">
+        <h2>Mis opiniones</h2>
+        <ul class="info-list">
+            <li class="info-list-item">Aquí están todos las opiniones que has creado tú</li>
+            <li class="info-list-item">Podrás borrar todas las valoraciones de tu propiedad</li>
+        </ul>
+        <h3 id="found"></h3>
+        <ul class="list-results scores-list" id="list">
+        </ul>
+      
+    </main>
+    <footer class="footer">
+      <div>
+        <div class="footer__logo">
+          <p>Foodie</p>
+          <figure class="footer-img">
+            <img class="img" alt="" src="../assets/img/foodiesaurus-transparent.png"  />
+           </figure>
+          <p>saurus</p>
+        </div>
+        <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+      </div>
+      <div class="footer__container">
+        <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
+        <ul class="footer__list">
+          <li><a href="https://twitter.com/miadeveloper" aria-label="Ir a mi Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/miasalazar/" aria-label="Ir a mi Linked"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+          <li><a href="https://dev.to/miasalazar" aria-label="Ir a mi Dev.to"><i class="fa-brands fa-dev" aria-hidden="true"></i></a></li>
+          <li><a href="https://marasalazar.medium.com/" aria-label="Ir a mi Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/Mia-Salazar" aria-label="Ir a mi GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./shared.js"></script>
+  <script>
+    const found = document.getElementById("found");
+    let scores;
+
+    //Obtenemos los datos del usuario
+    const putScores = () => {
+      const scoresList = document.getElementById("list");
+      scores.forEach((score) => {
+        let li = document.createElement("li");
+        let date = document.createElement("small");
+        let userName = document.createElement("h4");
+        let allergenChart = document.createElement("p");
+        let comment = document.createElement("p");
+        let fidelityScore = document.createElement("p");
+        let generalScore = document.createElement("p");
+        let attentionScore = document.createElement("p");
+        let allergicReaction = document.createElement("p");
+
+        date.innerHTML = score.created;
+        userName.innerHTML = score.userName;
+        allergicReaction.innerHTML= `<span class='highlight'>¿Tuviste una reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
+        comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
+        fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
+        generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
+        attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
+
+        li.appendChild(userName);
+        li.appendChild(date);
+        li.appendChild(generalScore);
+        li.appendChild(allergenChart);
+        li.appendChild(allergicReaction);
+        li.appendChild(fidelityScore);
+        li.appendChild(attentionScore);
+        li.appendChild(comment);
+
+        scoresList.appendChild(li);
+      })
+    };
+
+    //Obtenemos los datos del usuario
+    const getScores = () => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile-scores.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //Si ha habido éxito, guardamos los datos del usuario en la variable user
+          scores = JSON.parse(this.responseText);
+          if (scores.length !== 0) {
+            found.innerHTML = `Has registrado ${scores.length} locales de restauración`;
+            putScores();
+          } else {
+            found.innerHTML = "No has registrado ningún local de restauración";
+          }
+        } else if (this.status == 401) {
+          //Si la persona no está autorizada, la expulsamos
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        } else if (this.status == 400) {
+          //Si hay un error, devolvemos un error
+          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+        }  
+      };
+      xmlhttp.send();
+    };
+
+    //Comprobamos si el usuario está activo
+    const checkIsLoggedIn = () => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //Si el usuario ha iniciado sesión, llamamos a la función que añade los datos a los inputs
+          getScores();
+        } else if (this.status == 401) {
+          //Si no ha iniciado sesión, le expulsamos al login
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        }  
+      };
+      xmlhttp.send();
+    }
+
+    checkIsLoggedIn();
+  </script>
+</html>

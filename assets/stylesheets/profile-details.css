@@ -1,4 +1,4 @@
-.profile-restaurants {
+.profile-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,4 +8,10 @@
 .list-results {
     width: 100%;
     max-width: 56.25rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+h3 {
+    margin-top: 1.5rem;
 }

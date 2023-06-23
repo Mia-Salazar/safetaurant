@@ -119,4 +119,23 @@
 		} 
 		closeConnection($DDBB);
 	}
+
+	function getPersonComments($userID) {
+		$DDBB = createConnection();
+		$sql = "SELECT * FROM scores WHERE userID ='" . $userID . "' ORDER BY generalScore";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			//Creamos un array con los resultados y lo devolvemos
+			$restaurants = array();
+		    while ($resultsrows = mysqli_fetch_assoc($result)) {
+		      $restaurants[] = $resultsrows;
+		    }
+			return $restaurants;
+		} else {
+			//Si ha habido algún error devolvemos false
+			return false;
+		} 
+		closeConnection($DDBB);
+	}
 ?>
