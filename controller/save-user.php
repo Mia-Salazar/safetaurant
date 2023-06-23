@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include "../model/queryPerson.php";
     require_once '../google-api-php-client/vendor/autoload.php';
     require_once 'user-google.php';
