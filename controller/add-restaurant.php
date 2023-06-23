@@ -8,7 +8,7 @@
   $formInfo = json_decode(file_get_contents("php://input"), true);
 
   //Comprobamos si el usuario está autentificado mirando las cookies
-  if(isset($_SESSION['uid'])) {
+  if(isset($_COOKIE['userID'])) {
     //Enviamos los datos para crear un restaurante
     $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $formInfo['id'], $formInfo['url']);
     if($data) {

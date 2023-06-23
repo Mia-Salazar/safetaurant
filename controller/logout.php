@@ -2,7 +2,8 @@
   //Esta funcionalidad la usamos para que el usuario salga
   //Borramos las cookies
   session_start();
-  unset($_SESSION['uid']);
+  unset($_COOKIE['userID']);
+  setcookie('userID', false, -1, "/");
   session_unset();
   session_destroy();
   //Devolvemos el error 401

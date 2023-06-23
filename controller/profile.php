@@ -4,9 +4,9 @@
 
   session_start();
   //Comprobamos si el usuario está activo
-  if(isset($_SESSION['uid'])) {
+  if(isset($_COOKIE['userID'])) {
     //Obtenemos el usuario buscando por su ID
-    $user = getUser($_SESSION['uid']);
+    $user = getUserById($_COOKIE['userID']);
     if($user) {
       //Devolvemos los datos
       echo json_encode($user);

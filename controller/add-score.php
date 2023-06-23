@@ -7,7 +7,7 @@
   $formInfo = json_decode(file_get_contents("php://input"), true);
 
   //Comprobamos si el usuario está autentificado mirando las cookies
-  if(isset($_SESSION['uid'])) {
+  if(isset($_COOKIE['userID'])) {
     //Añadimos la nueva calificación
     $score = addScore($formInfo['comment'], $formInfo['generalScore'], $formInfo['allergenChart'],  $formInfo['fidelityScore'], $formInfo['attentionScore'], $formInfo['userName'], $formInfo['id'], $formInfo['restaurantID'], $formInfo['created'], $formInfo['allergicReaction']);
     if($score) {

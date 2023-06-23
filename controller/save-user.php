@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "../model/queryPerson.php";
     require_once '../google-api-php-client/vendor/autoload.php';
     require_once 'user-google.php';
     
@@ -13,10 +14,11 @@
         // send user data to the database
         $db->upsert_user($payload);
         // set user id in session aka log in the user
-        if(!isset($_SESSION['uid'])) {
-            $_SESSION['uid'] = $payload['sub'];
+        if(!isset($_COOKIE['userID'])) {
+            $user = getUser($payload['sub']);
+            setcookie("userID", $user['id'], time() + 7200, "/", NULL);
         }
-    
+        
         echo 'success';
     } else {
         echo 'Invalid Token';
