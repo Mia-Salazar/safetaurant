@@ -92,7 +92,7 @@ h5 {
 
 h2 {
 	font-size: 2rem;
-	padding-left: 0.938rem;
+	padding-left: 1rem;
 }
 
 .highlight {
@@ -100,12 +100,12 @@ h2 {
 }
 
 .data-container {
-	padding-left: 0.938rem;
+	padding-left: 1rem;
 }
 
 .restaurant-container {
     background: var(--bg);
-    padding: 2rem 0.938rem 0.938rem 0.938rem;
+    padding: 2rem 1rem 0.938rem 1rem;
     margin-top: 32px;
 }
 
