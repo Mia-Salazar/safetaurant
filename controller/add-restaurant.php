@@ -3,7 +3,6 @@
   include "../model/queryRestaurant.php";
   include "../model/queryScore.php";
   
-  session_start();
   //Obtenemos los datos que han sido enviados
   $formInfo = json_decode(file_get_contents("php://input"), true);
 

@@ -1,5 +1,4 @@
 <?php
-  session_start();
     
   if(isset($_COOKIE['userID'])) {
     echo "OK";
