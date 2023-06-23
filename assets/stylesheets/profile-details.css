@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1.875rem 1rem;
+    padding: 1.875rem 0 0 0;
 }
 
 h3 {
@@ -11,13 +11,13 @@ h3 {
 }
 
 .info-list {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 .list-container {
     margin-top: 2rem;
-    padding: 1rem 1rem 0 1rem;
+    padding: 1rem 1rem 3rem 1rem;
     background: var(--bg);
     width: 100%;
     box-sizing: border-box;
