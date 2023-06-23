@@ -6,7 +6,6 @@
   if(isset($_COOKIE['userID'])) {
     //Obtenemos los restaurantes buscando por su ID
     $restaurants = getPersonRestaurants($_COOKIE['userID']);
-    echo $_COOKIE['userID'];
     if($restaurants) {
       //Enviamos los resultados
       echo json_encode($restaurants);
