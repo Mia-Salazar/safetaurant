@@ -103,7 +103,7 @@
 
 	function getPersonRestaurants($userID) {
 		$DDBB = createConnection();
-		$sql = "SELECT * FROM restaurant WHERE userID ='" . $userID . "' ORDER BY name";
+		$sql = "SELECT restaurantID, name, province FROM restaurant WHERE userID ='" . $userID . "' ORDER BY name";
 		$result = mysqli_query($DDBB, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
