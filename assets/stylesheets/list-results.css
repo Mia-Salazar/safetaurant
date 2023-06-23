@@ -10,6 +10,7 @@
 	padding: 0.938rem;
     border: 1px solid var(--gray);
     border-radius: 5px;
+    background: var(--white);
 }
 
 .list-results li p {
