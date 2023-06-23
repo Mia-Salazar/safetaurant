@@ -4,9 +4,10 @@
 
   session_start();
   //Comprobamos si el usuario está activo
-  if(isset($_SESSION['uid'])) {
+  if(isset($_COOKIE['userID'])) {
     //Obtenemos los restaurantes buscando por su ID
-    $restaurants = getPersonRestaurants($_SESSION['uid']);
+    $restaurants = getPersonRestaurants($_COOKIE['userID']);
+    echo $_COOKIE['userID'];
     if($restaurants) {
       //Enviamos los resultados
       echo json_encode($restaurants);

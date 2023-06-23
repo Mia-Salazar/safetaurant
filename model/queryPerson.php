@@ -62,6 +62,20 @@
 		closeConnection($DDBB);
 	}
 
+	function getUserById($userID) {
+		$DDBB = createConnection();
+		$sql = "SELECT email, name, picture, id FROM users WHERE id ='" . $userID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			$user = mysqli_fetch_assoc($result);
+			return $user;
+		} else {
+			return false;
+		} 
+		closeConnection($DDBB);
+	}
+
 	//Deprecada desde login con Google
 	function editUser($userID, $name, $surname, $password) {
 		$DDBB = createConnection();
