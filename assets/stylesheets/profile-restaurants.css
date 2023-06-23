@@ -1,0 +1,11 @@
+.profile-restaurants {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-results {
+    width: 100%;
+    max-width: 56.25rem;
+}
