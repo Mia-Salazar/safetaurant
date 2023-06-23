@@ -63,15 +63,17 @@
       </nav>
     </header>
     <main class="main profile-details">
-        <h2>Mis opiniones</h2>
-        <ul class="info-list">
-            <li class="info-list-item">Aquí están todos las opiniones que has creado tú</li>
-            <li class="info-list-item">Podrás borrar todas las valoraciones de tu propiedad</li>
-        </ul>
-        <h3 id="found"></h3>
-        <ul class="list-results scores-list" id="list">
-        </ul>
-      
+      <h2>Mis opiniones</h2>
+      <ul class="info-list">
+          <li class="info-list-item">Aquí están todos las opiniones que has creado tú</li>
+          <li class="info-list-item">Podrás borrar todas las valoraciones de tu propiedad</li>
+      </ul>
+      <section class="list-container">
+        <div class="container">
+          <h3 id="found"></h3>
+          <ul class="list-results scores-list" id="list"></ul>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <div>
@@ -117,7 +119,7 @@
 
         date.innerHTML = score.created;
         userName.innerHTML = score.userName;
-        allergicReaction.innerHTML= `<span class='highlight'>¿Tuviste una reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
+        allergicReaction.innerHTML= `<span class='highlight'>¿Reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
         allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
         comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
         fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
@@ -147,10 +149,10 @@
           //Si ha habido éxito, guardamos los datos del usuario en la variable user
           scores = JSON.parse(this.responseText);
           if (scores.length !== 0) {
-            found.innerHTML = `Has registrado ${scores.length} locales de restauración`;
+            found.innerHTML = `Has realizado ${scores.length} evaluaciones`;
             putScores();
           } else {
-            found.innerHTML = "No has registrado ningún local de restauración";
+            found.innerHTML = "No has hecho ninguna evaluación";
           }
         } else if (this.status == 401) {
           //Si la persona no está autorizada, la expulsamos
