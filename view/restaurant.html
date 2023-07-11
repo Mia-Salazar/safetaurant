@@ -219,11 +219,13 @@
     const putScores = () => {
       const scoresList = document.getElementById("scoresList");
       const scoresWithComments = scores.filter(score => score.comment !== '')
+      console.log(scoresWithComments, 'aaa')
       document.getElementById("totalComments").innerHTML = scoresWithComments.length;
       scoresWithComments.forEach((score) => {
         let li = document.createElement("li");
         let date = document.createElement("small");
         let userName = document.createElement("h4");
+        let allergicReaction = document.createElement("p");
         let allergenChart = document.createElement("p");
         let comment = document.createElement("p");
         let fidelityScore = document.createElement("p");
@@ -242,6 +244,7 @@
         li.appendChild(userName);
         li.appendChild(date);
         li.appendChild(generalScore);
+        li.appendChild(allergicReaction);
         li.appendChild(allergenChart);
         li.appendChild(fidelityScore);
         li.appendChild(attentionScore);
