@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 1.875rem 0 0 0;
+    margin-bottom: 0;
 }
 
 h3 {
@@ -17,7 +18,7 @@ h3 {
 
 .list-container {
     margin-top: 2rem;
-    padding: 1rem 1rem 3rem 1rem;
+    padding: 1rem 1rem 5.5rem 1rem;
     background: var(--bg);
     width: 100%;
     box-sizing: border-box;
