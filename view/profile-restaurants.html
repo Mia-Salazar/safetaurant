@@ -118,8 +118,8 @@
         province.innerHTML = restaurant.province;
 
         li.appendChild(title);
-        li.appendChild(link);
         li.appendChild(province);
+        li.appendChild(link);
         list.appendChild(li);
       });
     }
@@ -139,8 +139,6 @@
           } else {
             found.innerHTML = "No has registrado ningún local de restauración";
           }
-          //Llamamos a la función que mete en los inputs los valores que se han obtenido
-          viewList();
         } else if (this.status == 401) {
           //Si la persona no está autorizada, la expulsamos
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";

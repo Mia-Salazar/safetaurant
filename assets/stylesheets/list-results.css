@@ -4,6 +4,10 @@
 	list-style-type: none;
 }
 
+.list-results h4  {
+    margin-top: 0;
+}
+
 .list-results li {
 	position: relative;
 	margin-bottom: 1.25rem;
@@ -22,11 +26,9 @@
 }
 
 .list-results .primary-button {
+    display: block;
     text-decoration: none;
-    position: absolute;
     width: fit-content;
-    bottom: 0.938rem;
-    right: 0.938rem;
 }
 
 .list-score {
@@ -41,4 +43,20 @@
 .list-score span {
 	color: black;
     font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .list-results .primary-button {
+        position: absolute;
+        bottom: 0.938rem;
+        right: 0.938rem;
+    }
+
+    .list-results h4 {
+        margin-bottom: 1rem;
+    }
+
+    .list-results li p:last-of-type {
+        margin-bottom: 1rem;
+    }       
 }
