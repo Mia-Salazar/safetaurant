@@ -76,4 +76,13 @@
 		closeConnection($DDBB);
 	}
 
+	function getScoresNumber($restaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT COUNT(*) as scoreNumber FROM scores WHERE restaurantID ='" . $restaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		return mysqli_fetch_assoc($result); 
+		closeConnection($DDBB);
+	}
+
 ?>
