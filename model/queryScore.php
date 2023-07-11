@@ -6,8 +6,8 @@
 	//O devolvemos el resultado o false
 	function addScore($comment, $generalScore, $allergenChart, $fidelityScore, $attentionScore, $userName, $userID, $restaurantID, $today, $allergicReaction) {
 		$DDBB = createConnection();
-		$sql = "INSERT INTO scores (comment, created, generalScore, allergenChart, fidelityScore, attentionScore, userName, userID, restaurantID, allergicReactio) 
-				VALUES ('" . $comment . "', '" . $today . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $fidelityScore . "', '" . $attentionScore . "', '" . $userName . "', '"  . $userID . "', '"  . $restaurantID . "', '"  . $allergicReactio . "')";
+		$sql = "INSERT INTO scores (comment, created, generalScore, allergenChart, fidelityScore, attentionScore, userName, userID, restaurantID, allergicReaction) 
+				VALUES ('" . $comment . "', '" . $today . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $fidelityScore . "', '" . $attentionScore . "', '" . $userName . "', '"  . $userID . "', '"  . $restaurantID . "', '"  . $allergicReaction . "')";
 		$result = mysqli_query($DDBB, $sql);
 
 		if ($result) {
@@ -73,6 +73,15 @@
 			//Si ha habido algún error devolvemos false
 			return false;
 		} 
+		closeConnection($DDBB);
+	}
+
+	function getScoresNumber($restaurantID) {
+		$DDBB = createConnection();
+		$sql = "SELECT COUNT(*) as scoreNumber FROM scores WHERE restaurantID ='" . $restaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		return mysqli_fetch_assoc($result); 
 		closeConnection($DDBB);
 	}
 

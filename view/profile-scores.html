@@ -116,6 +116,8 @@
         let generalScore = document.createElement("p");
         let attentionScore = document.createElement("p");
         let allergicReaction = document.createElement("p");
+        let feedback = document.createElement("p");
+        let button = document.createElement("button");
 
         date.innerHTML = score.created;
         userName.innerHTML = score.userName;
@@ -125,6 +127,14 @@
         fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
         generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
         attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
+        button.innerHTML = `Eliminar`;
+
+        button.classList.add("primary-button");
+        button.setAttribute("id", `score-${score.scoreID}`);
+        button.addEventListener("click", () => {
+          deleteComment(score.scoreID, score.restaurantID)
+        });
+        feedback.setAttribute("id", `feedback-${score.scoreID}`);
 
         li.appendChild(userName);
         li.appendChild(date);
@@ -134,10 +144,46 @@
         li.appendChild(fidelityScore);
         li.appendChild(attentionScore);
         li.appendChild(comment);
+        li.appendChild(feedback);
+        li.appendChild(button);
 
         scoresList.appendChild(li);
       })
     };
+
+    const deleteComment = (scoreID, restaurantID) => {
+      const feedback = document.getElementById(`feedback-${scoreID}`);
+      const buttonSubmit = document.getElementById(`score-${scoreID}`);
+      buttonSubmit.innerHTML = "Cargando...";
+      //Creamos un objeto con los datos
+      const data = {
+        scoreID,
+        restaurantID
+      };
+      //Hacemos la petición al back-end
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/delete-comment.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          location.reload();
+        } else if (this.status == 424) {
+          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+          feedback.innerHTML = "Error";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
+        } else if (this.status == 401) {
+          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        } else if (this.status == 409) {
+          feedback.innerHTML = "No puedes eliminar todas las puntuaciones de un restaurante";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
+        }
+        buttonSubmit.innerHTML = "Eliminar";
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
 
     //Obtenemos los datos del usuario
     const getScores = () => {

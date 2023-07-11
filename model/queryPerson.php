@@ -138,4 +138,18 @@
 		} 
 		closeConnection($DDBB);
 	}
+
+	function deleteComments($scoreID) {
+		$DDBB = createConnection();
+		$sql = "DELETE FROM scores WHERE scoreID ='" . $scoreID . "'";
+		$result = mysqli_query($DDBB, $sql);
+
+		if ($result) {
+			return $result;
+		} else {
+			//Si ha habido algún error devolvemos false
+			return false;
+		} 
+		closeConnection($DDBB);
+	}
 ?>
