@@ -123,6 +123,26 @@
               </div>
             </div>
           </div>
+          <div class="box">
+            <h4 class="allergen-chart">Reacciones alérgicas</h4>
+            <ul class="info-list">
+              <li class="info-list-item">Han tenido una reacción alérgica en <span id="chartAllergenNumber">-</span> de las <span id="totalScoresAllergen">-</span> visitas
+              </li>
+              <li class="info-list-item">Esto supone el <span id="chartAllergenPercent">-</span>%
+              </li>
+            </ul>
+            <div class="input-group input-group--last">
+              <h5>Porcentaje de reacciones</h5>
+              <div class="range-container">
+                <div class="bar">
+                  <span id="allergenScoreBar"></span>
+                </div>
+                <span class="range-number" id="numberBarAllergen">5</span>
+                <span class="total-range">/<span id="totalBarAllergen">10</span></span>
+              </div>
+            </div>
+
+          </div>
         </div>
         <h3 class="actions" id="scoreText">Acciones</h3>
         <div class="container">
@@ -294,8 +314,13 @@
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("allergicNumber").innerHTML = this.responseText;
-          document.getElementById("allergicPercent").innerHTML = this.responseText * 100 / average.totalReviews;
+          const percent = Math.floor(this.responseText * 100 / average.totalReviews);
+          document.getElementById("chartAllergenNumber").innerHTML = this.responseText;
+          document.getElementById("totalBarAllergen").innerHTML = average.totalReviews;
+          document.getElementById("numberBarAllergen").innerHTML = this.responseText;
+          document.getElementById("chartAllergenPercent").innerHTML = percent;
+          
+          document.getElementById("allergenScoreBar").style.width = `${percent}%`;
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -312,6 +337,7 @@
           //Colocamos los datos de las calificaciones medias en la página
           average = JSON.parse(this.responseText);
           document.getElementById("totalScores").innerHTML = average.totalReviews
+          document.getElementById("totalScoresAllergen").innerHTML = average.totalReviews
           putAverage();
           getChartsFound();
           getAllergicReactions();
