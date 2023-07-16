@@ -73,14 +73,14 @@
 
 	//Funcionalidad para obtener la información de un restaurante por su ID
 	function getRestaurant($restaurantID) {
-		$connection = new Connection();
-		$query = $connection->prepare("SELECT * FROM restaurant WHERE restaurantID = :restaurantID");
-		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
-		$query->execute();
-		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		$DDBB = createConnection();
+		$sql = "SELECT * FROM restaurant WHERE restaurantID ='" . $restaurantID . "'";
+		$result = mysqli_query($DDBB, $sql);
 
-		if (!empty($rows)) {
-			return $rows[0];
+		if (mysqli_num_rows($result) > 0) {
+			//Lo devolvemos con el formato adecuado
+			$restaurant = mysqli_fetch_assoc($result);
+			return $restaurant;
 		} else {
 			//Si no lo encontramso devolvemos false
 			return false;
