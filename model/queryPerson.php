@@ -46,20 +46,20 @@
 		closeConnection($DDBB);
 	}
 
-	//Funcionalidad para obtener un usuario por ID
-	//Devolvemos el usuario o false
-	function getUser($userID) {
-		$DDBB = createConnection();
-		$sql = "SELECT email, name, picture, id FROM users WHERE google_uid ='" . $userID . "'";
-		$result = mysqli_query($DDBB, $sql);
 
-		if (mysqli_num_rows($result) > 0) {
-			$user = mysqli_fetch_assoc($result);
-			return $user;
+	function getUser($userID) {
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT * FROM users WHERE google_uid=:userID");
+		$query->bindParam(":userID", $userID, PDO::PARAM_STR);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+	
+		if (!empty($rows)) {
+			return $rows;
 		} else {
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	function getUserById($userID) {
