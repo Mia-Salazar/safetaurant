@@ -63,14 +63,13 @@
 	}
 
 	function getUserById($userID) {
-		$connection = new Connection();
-		$query = $connection->prepare("SELECT * FROM users WHERE id=:userID");
-		$query->bindParam(":userID", $userID, PDO::PARAM_INT);
-		$query->execute();
-		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		$DDBB = createConnection();
+		$sql = "SELECT email, name, picture, id FROM users WHERE id ='" . $userID . "'";
+		$result = mysqli_query($DDBB, $sql);
 
-		if (!empty($rows)) {
-			return $rows[0];
+		if (mysqli_num_rows($result) > 0) {
+			$user = mysqli_fetch_assoc($result);
+			return $user;
 		} else {
 			return false;
 		} 
@@ -103,14 +102,17 @@
 	}
 
 	function getPersonRestaurants($userID) {
-		$connection = new Connection();
-		$query = $connection->prepare("SELECT restaurantID, name, province FROM restaurant WHERE userID = :userID  ORDER BY name");
-		$query->bindParam(":userID", $userID, PDO::PARAM_INT);
-		$query->execute();
-		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		$DDBB = createConnection();
+		$sql = "SELECT restaurantID, name, province FROM restaurant WHERE userID ='" . $userID . "' ORDER BY name";
+		$result = mysqli_query($DDBB, $sql);
 
-		if (!empty($rows)) {
-			return $rows;
+		if (mysqli_num_rows($result) > 0) {
+			//Creamos un array con los resultados y lo devolvemos
+			$restaurants = array();
+		    while ($resultsrows = mysqli_fetch_assoc($result)) {
+		      $restaurants[] = $resultsrows;
+		    }
+			return $restaurants;
 		} else {
 			//Si ha habido algún error devolvemos false
 			return false;
