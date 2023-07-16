@@ -119,17 +119,14 @@
 	}
 
 	function getPersonComments($userID) {
-		$DDBB = createConnection();
-		$sql = "SELECT * FROM scores WHERE userID ='" . $userID . "' ORDER BY generalScore";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT * FROM scores WHERE userID = :userID  ORDER BY generalScore");
+		$query->bindParam(":userID", $userID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		if (mysqli_num_rows($result) > 0) {
-			//Creamos un array con los resultados y lo devolvemos
-			$restaurants = array();
-		    while ($resultsrows = mysqli_fetch_assoc($result)) {
-		      $restaurants[] = $resultsrows;
-		    }
-			return $restaurants;
+		if (!empty($rows)) {
+			return $rows;
 		} else {
 			//Si ha habido algún error devolvemos false
 			return false;
@@ -138,12 +135,14 @@
 	}
 
 	function deleteComments($scoreID) {
-		$DDBB = createConnection();
-		$sql = "DELETE FROM scores WHERE scoreID ='" . $scoreID . "'";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("DELETE FROM scores WHERE scoreID = :scoreID");
+		$query->bindParam(":scoreID", $scoreID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		if ($result) {
-			return $result;
+		if ($rows) {
+			return $rows;
 		} else {
 			//Si ha habido algún error devolvemos false
 			return false;
