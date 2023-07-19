@@ -19,4 +19,39 @@
 	function closeConnection($connection) {
 		mysqli_close($connection);
 	}
+
+
+
+	class Connection {
+        private $pdo;
+    
+        public function __construct() {
+            try {
+                $type = 'mysql';
+
+                // $host = 'localhost';
+                // $database = 'safetaurant';
+                // $user = 'root';
+                // $pass = '';
+
+                $host = 'db5012427505.hosting-data.io';
+                $database =  'dbs10448932';
+                $user = 'dbu631847';
+                $pass = '*jHJ$6nA60hU';
+    
+                $this->pdo = new PDO($type . ':host=' . $host . ';dbname=' . $database, $user, $pass);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+    
+        public function getPdo() {
+            return $this->pdo;
+        }
+    }
+
+	//Cerramos la conexión de la BBDD
+	function closeConnection($connection) {
+		$connection=null;
+	}
 ?>

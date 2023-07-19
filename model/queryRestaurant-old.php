@@ -87,4 +87,104 @@
 		} 
 		closeConnection($DDBB);
 	}
+
+
+
+
+	////
+	
+	function getRestaurants($name, $province, $foodType, $order) {
+		$connection = new Connection();
+		$pdo = $connection->getPdo();
+
+		if ($name == "") {
+			$stmt = getRestaurantWithoutName($province, $foodType, $order, $pdo);
+		} else {
+			$stmt = getRestaurantWithName($province, $foodType, $order, $pdo, $name);
+			$stmt->bindValue(':name', '%' . $name . '%');
+			$stmt->execute();
+		}
+
+		if ($stmt) {
+			$restaurants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $restaurants;
+		} else {
+			return false;
+		}
+	}
+
+	function getRestaurantWithName($province, $foodType, $order, $pdo, $name) {
+		$params = array();
+		$whereClause = "";
+
+		if (!empty($province)) {
+			$whereClause .= " AND province = :province";
+			$params[':province'] = $province;
+		}
+
+		if (!empty($foodType)) {
+			$whereClause .= " AND foodType = :foodType";
+			$params[':foodType'] = $foodType;
+		}
+
+		$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+				FROM restaurant 
+				INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
+				WHERE 1 = 1" . $whereClause . " AND LOWER(restaurant.name) LIKE :name 
+				GROUP BY restaurant.restaurantID 
+				ORDER BY AVG(scores.generalScore) " . $order;
+
+		$stmt = $pdo->prepare($sql);
+		foreach ($params as $param => $value) {
+			$stmt->bindValue($param, $value);
+		}
+		$stmt->bindValue(':name', '%' . $name . '%');
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	function getRestaurantWithoutName($province, $foodType, $order, $pdo) {
+		$params = array();
+		$whereClause = "";
+
+		if (!empty($province)) {
+			$whereClause .= " AND province = :province";
+			$params[':province'] = $province;
+		}
+
+		if (!empty($foodType)) {
+			$whereClause .= " AND foodType = :foodType";
+			$params[':foodType'] = $foodType;
+		}
+
+		$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE 1 = 1" . $whereClause . " GROUP BY restaurantID ORDER BY AVG(scores.generalScore) " . $order;
+
+		$stmt = $pdo->prepare($sql);
+		foreach ($params as $param => $value) {
+			$stmt->bindValue($param, $value);
+		}
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+
+	//Funcionalidad para obtener la información de un restaurante por su ID
+	function getRestaurant($restaurantID) {
+		$connection = new Connection();
+		$pdo = $connection->getPdo();
+		$query = $pdo->prepare("SELECT * FROM restaurant WHERE restaurantID = :restaurantID");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		if (!empty($rows)) {
+			return $rows[0];
+		} else {
+			//Si no lo encontramso devolvemos false
+			return false;
+		} 
+		closeConnection($pdo);
+	}
 ?>

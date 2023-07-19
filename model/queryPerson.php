@@ -29,7 +29,7 @@
 		} else {
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	function getPersonRestaurants($userID) {
@@ -45,7 +45,7 @@
 			//Si ha habido algún error devolvemos false
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	function getPersonComments($userID) {
@@ -61,7 +61,7 @@
 			//Si ha habido algún error devolvemos false
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	function deleteComments($scoreID) {
@@ -77,6 +77,6 @@
 			//Si ha habido algún error devolvemos false
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 ?>

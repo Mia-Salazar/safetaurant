@@ -85,6 +85,6 @@
 			//Si no lo encontramso devolvemos false
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 ?>
