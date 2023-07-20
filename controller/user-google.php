@@ -1,5 +1,10 @@
 <?php
     class DB {
+        // private $dbHost     = "localhost";
+        // private $dbUsername = "root";
+        // private $dbPassword = "";
+        // private $dbName     = "safetaurant";
+
         private $dbHost     = "db5012427505.hosting-data.io";
         private $dbUsername = "dbu631847";
         private $dbPassword = "*jHJ$6nA60hU";

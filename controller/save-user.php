@@ -10,12 +10,10 @@
     
     if ($payload) {
         $db = new DB();
-        // send user data to the database
         $db->upsert_user($payload);
-        // set user id in session aka log in the user
         if(!isset($_COOKIE['userID'])) {
             $user = getUser($payload['sub']);
-            setcookie("userID", $user['id'], time() + 7200, "/", NULL);
+            setcookie("userID", $user[0]['id'], time() + 7200, "/", NULL);
         }
         
         echo 'success';
