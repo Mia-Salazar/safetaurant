@@ -26,60 +26,61 @@
 		} else {
 			return false;
 		}
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	//Funcionalidad para conocer la media de un restaurante por su ID
 	function getAverage($restaurantID) {
-		$DDBB = createConnection();
-		$sql = "SELECT COUNT(*) as totalReviews, AVG(generalScore) as generalScore, AVG(fidelityScore) as fidelityScore, 
-		AVG(attentionScore) as attentionScore FROM scores WHERE restaurantID ='" . $restaurantID . "'";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT COUNT(*) as totalReviews, AVG(generalScore) as generalScore, AVG(fidelityScore) as fidelityScore, 
+		AVG(attentionScore) as attentionScore FROM scores WHERE restaurantID = :restaurantID");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		if (mysqli_num_rows($result) > 0) {
-			//Lo devolvemos con el formato adecuado
-			$scores = mysqli_fetch_assoc($result);
-			return $scores;
+		if (!empty($rows)) {
+			return $rows[0];
 		} else {
 			//Si no lo encontramso devolvemos false
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	//Recuperamos el número de cartas de alérgenos que se han registrado
 	function getNumberOfCharts($restaurantID) {
-		$DDBB = createConnection();
-		$sql = "SELECT COUNT(*) as chartsFound FROM scores WHERE restaurantID ='" . $restaurantID . "' AND allergenChart > 0";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT COUNT(*) as chartsFound FROM scores WHERE restaurantID = :restaurantID AND allergenChart > 0");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		return mysqli_fetch_assoc($result); 
-		closeConnection($DDBB);
+		return $rows; 
+		closeConnection($connection);
 	}
 
 	//Recuperamos el número de reacciones alérgicas que se han tenido
 	function getNumberOfAllergicReactions($restaurantID) {
-		$DDBB = createConnection();
-		$sql = "SELECT COUNT(*) as allergicReactions FROM scores WHERE restaurantID ='" . $restaurantID . "' AND allergicReaction > 0";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT COUNT(*) as allergicReactions FROM scores WHERE restaurantID = :restaurantID AND allergicReaction > 0");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		return mysqli_fetch_assoc($result); 
-		closeConnection($DDBB);
+		return $rows; 
+		closeConnection($connection);
 	}
 
 	//Funcionalidad para obtener todas las puntuaciones de un restaurante
 	function getScores($restaurantID) {
-		$DDBB = createConnection();
-		$sql = "SELECT * FROM scores WHERE restaurantID ='" . $restaurantID . "'";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT * FROM scores WHERE restaurantID = :restaurantID");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		if (mysqli_num_rows($result) > 0) {
-			//Creamos un array con los resultados y lo devolvemos
-			$scores = array();
-		    while ($resultsrows = mysqli_fetch_assoc($result)) {
-		      $scores[] = $resultsrows;
-		    }
-			return $scores;
+		if (!empty($rows)) {
+			return $rows;
 		} else {
 			//Si ha habido algún error devolvemos false
 			return false;
@@ -88,12 +89,14 @@
 	}
 
 	function getScoresNumber($restaurantID) {
-		$DDBB = createConnection();
-		$sql = "SELECT COUNT(*) as scoreNumber FROM scores WHERE restaurantID ='" . $restaurantID . "'";
-		$result = mysqli_query($DDBB, $sql);
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT COUNT(*) as scoreNumber FROM scores WHERE restaurantID = :restaurantID");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		return mysqli_fetch_assoc($result); 
-		closeConnection($DDBB);
+		return $rows; 
+		closeConnection($connection);
 	}
 
 ?>

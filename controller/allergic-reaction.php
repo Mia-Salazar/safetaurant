@@ -9,7 +9,7 @@
   if(isset($formInfo['ID'])) {
     //Solicitamos la media de un restaurante concreto
     $allergicReactions = getNumberOfAllergicReactions($formInfo['ID']);
-    echo $allergicReactions["allergicReactions"];
+    echo $allergicReactions[0]["allergicReactions"];
   } else {
     //Si no hemos recibido un ID respondemos con un 400
     http_response_code(400);
