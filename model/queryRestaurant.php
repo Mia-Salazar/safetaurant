@@ -5,17 +5,26 @@
 	//Funcionalidad para crear un restaurante
 	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false
 	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID, $url) {
-		$DDBB = createConnection();
+		$connection = new Connection();
 		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID, url) 
-				VALUES ('" . $name . "', '" . $province . "', '" . $address . "', '" . $ZIP . "', '" . $phone . "', '" . $foodType . "', '"  . $userID . "', '"  . $url . "')";
-		$result = mysqli_query($DDBB, $sql);
-		$lastID = mysqli_insert_id($DDBB);
-		if ($result) {
-			return $lastID;
+				VALUES (:name, :province, :address, :ZIP, :phone, :foodType, :userID,  :url)";
+		$query = $connection->prepare($sql);
+		$query->bindParam(':name',$name);
+		$query->bindParam(':province', $province);
+		$query->bindParam(':address', $address);
+		$query->bindParam(':ZIP', $ZIP);
+		$query->bindParam(':phone', $phone);
+		$query->bindParam(':foodType', $foodType);
+		$query->bindParam(':userID', $userID);
+		$query->bindParam(':url', $url);
+		$query->execute();
+		$lastInsertId = $connection->lastInsertId();
+		if ($lastInsertId>0) {
+			return $lastInsertId;
 		} else {
 			return false;
 		} 
-		closeConnection($DDBB);
+		closeConnection($connection);
 	}
 
 	function getRestaurants($name, $province, $foodType, $order) {
