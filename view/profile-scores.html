@@ -117,6 +117,7 @@
         let attentionScore = document.createElement("p");
         let allergicReaction = document.createElement("p");
         let feedback = document.createElement("p");
+        let link = document.createElement("a");
         let button = document.createElement("button");
 
         date.innerHTML = score.created;
@@ -127,9 +128,13 @@
         fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
         generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
         attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
-        button.innerHTML = `Eliminar`;
+        link.innerHTML = `Ver restaurante`;
+        link.href=`https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${score.restaurantID}`
+        button.innerHTML = "Eliminar";
 
         button.classList.add("primary-button");
+        button.classList.add("primary-button--ghost");
+        link.classList.add("primary-button");
         button.setAttribute("id", `score-${score.scoreID}`);
         button.addEventListener("click", () => {
           deleteComment(score.scoreID, score.restaurantID)
@@ -146,6 +151,7 @@
         li.appendChild(comment);
         li.appendChild(feedback);
         li.appendChild(button);
+        li.appendChild(link);
 
         scoresList.appendChild(li);
       })

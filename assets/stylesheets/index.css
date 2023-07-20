@@ -103,6 +103,12 @@ body {
 	opacity: 0.8;
 }
 
+.primary-button--ghost {
+    border: 1px solid var(--secondaryColor);
+    background: transparent;
+    color: var(--secondaryColor);
+}
+
 /*Header*/
 .header {
 	display:  flex;
