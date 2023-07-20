@@ -5,27 +5,16 @@
 	//Funcionalidad para añadir una nueva puntuación
 	//O devolvemos el resultado o false
 	function addScore($comment, $generalScore, $allergenChart, $fidelityScore, $attentionScore, $userName, $userID, $restaurantID, $today, $allergicReaction) {
-		$connection = new Connection();
+		$DDBB = createConnection();
 		$sql = "INSERT INTO scores (comment, created, generalScore, allergenChart, fidelityScore, attentionScore, userName, userID, restaurantID, allergicReaction) 
-				VALUES (:comment, :today, :generalScore, :allergenChart, :fidelityScore, :attentionScore, :userName, :userID, :restaurantID, :allergicReaction)";
-		$query = $connection->prepare($sql);
-		$query->bindParam(':comment',$comment);
-		$query->bindParam(':today', $today);
-		$query->bindParam(':generalScore', $generalScore);
-		$query->bindParam(':allergenChart', $allergenChart);
-		$query->bindParam(':fidelityScore', $fidelityScore);
-		$query->bindParam(':attentionScore', $attentionScore);
-		$query->bindParam(':userName', $userName);
-		$query->bindParam(':userID', $userID);
-		$query->bindParam(':restaurantID', $restaurantID);
-		$query->bindParam(':allergicReaction', $allergicReaction);
-		$query->execute();
-		$lastInsertId = $connection->lastInsertId();
-		if ($lastInsertId>0) {
-			return $lastInsertId;
+				VALUES ('" . $comment . "', '" . $today . "', '" . $generalScore . "', '" . $allergenChart . "', '" . $fidelityScore . "', '" . $attentionScore . "', '" . $userName . "', '"  . $userID . "', '"  . $restaurantID . "', '"  . $allergicReaction . "')";
+		$result = mysqli_query($DDBB, $sql);
+
+		if ($result) {
+			return $result;
 		} else {
 			return false;
-		}
+		} 
 		closeConnection($DDBB);
 	}
 
