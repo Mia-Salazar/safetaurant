@@ -27,6 +27,26 @@
 		closeConnection($connection);
 	}
 
+	function editRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $url, $restaurantID) {
+		$connection = new Connection();
+		$sql = "UPDATE restaurant SET name = :name, province = :province, address = :address, ZIP = :ZIP, phone = :phone, foodType = :foodType, url = :url WHERE restaurantID = :restaurantID";
+		$query = $connection->prepare($sql);
+		$query->bindParam(':name',$name);
+		$query->bindParam(':province', $province);
+		$query->bindParam(':address', $address);
+		$query->bindParam(':ZIP', $ZIP);
+		$query->bindParam(':phone', $phone);
+		$query->bindParam(':foodType', $foodType);
+		$query->bindParam(':url', $url);
+		$query->bindParam(':restaurantID', $restaurantID);
+		if ($query->execute()) {
+			return true;
+		} else {
+			return false;
+		} 
+		closeConnection($connection);
+	}
+
 	function getRestaurants($name, $province, $foodType, $order) {
 		$connection = new Connection();
 		if ($name == "") {

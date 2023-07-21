@@ -148,6 +148,7 @@
         <h3 class="actions" id="scoreText">Acciones</h3>
         <div class="container">
           <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
+          <a href="" class="secondary-button" id="edit">Editar restarante</a>
         </div>
         
         <h3 class="reviews">Comentarios (<span id="totalComments"></span>)</h3>
@@ -190,13 +191,13 @@
     const restaurantID = new URL(document.URL).searchParams.get('ID');
     const add = document.getElementById("add");
     const addScore = document.getElementById("addScore");
+    const edit = document.getElementById("edit");
     const scoreText = document.getElementById("scoreText");
     const data = {ID: restaurantID};
     const numberGeneralBar = document.getElementById("numberGeneralBar");
     const attentionScoreBar = document.getElementById("attentionScoreBar");
     const numberFidelityBar = document.getElementById("numberFidelityBar");
     const loader = document.getElementById("loader");
-
 
     //Creamos las variables necesarias que usaremos para guardar los datos
     let restaurant;
@@ -388,10 +389,12 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
+          edit.href=`https://foodiesaurus.miasalazar.com/view/edit-restaurant.html?ID=${restaurantID}`
           addScore.href = `https://foodiesaurus.miasalazar.com/view/add-score.html?ID=${restaurantID}`;
           changeMenuAccordingToUser("registered");
         }
         if(this.readyState == 4 && this.status == 401) {
+          edit.classList.add("hidden");
           addScore.classList.add("hidden");
           scoreText.classList.add("hidden");
           changeMenuAccordingToUser("no-registered");

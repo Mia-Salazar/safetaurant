@@ -65,12 +65,7 @@
       </nav>
     </header>
     <main class="main add-restaurant container">
-      <h2>Añadir restaurante</h2>
-      <ul class="info-list">
-        <li class="info-list-item">Aquí podrás registrar un nuevo restaurante</li>
-        <li class="info-list-item">Asegúrate de que no existe antes de crearlo usando la búsqueda</li>
-        <li class="info-list-item">Los campos con un asterisco (*) son obligatorios</li>
-      </ul>
+      <h2>Editar restaurante</h2>
       <div class="add-restaurant-wrapper">
         <form class="add-restaurant-form" id="add">
           <div class="input-group">
@@ -105,53 +100,10 @@
               <option selected disabled value="">Escoge el tipo</option>
             </select>
           </div>
-          <h3>Añade los primeros datos y tu opinión sobre alérgenos</h3>
-          <div class="input-group">
-            <label class="input-label" for="generalScore">Puntuación general*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
-              </div>
-            </div>
-          </div>
-          <div class="checkbox-group">
-            <input class="input checkbox" id="allergicReaction" name="allergicReaction" type="checkbox" />
-            <label class="" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
-          </div>
-          <div class="checkbox-group">
-            <input class="input checkbox" id="allergenChart" name="allergenChart" type="checkbox" />
-            <label class="" for="allergenChart">¿Carta de alérgenos?</label>
-          </div>
-          <div class="input-group hidden" id="fidelityScoreContainer">
-            <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="comment">Comentario: </label>
-            <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
-          </div>
           <small id="feedback" class=""></small>
           <button type="submit" class="primary-button" id="buttonSubmit">
             <div class="loader-container">
-              <span id="buttonText">Crear restaurante</span>
+              <span id="buttonText">Editar restaurante</span>
               <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
             </div>
           </button>
@@ -185,26 +137,19 @@
     </footer>
   </body>
   <script type="text/javascript" src="./shared.js"></script>
-  <script type="text/javascript" src="./input-range.js"></script>
   <script type="text/javascript" src="./arrays.js"></script>
   <script>
+    const restaurantID = new URL(document.URL).searchParams.get('ID');
+    const data = {ID: restaurantID};
     const provinceSelect = document.getElementById("province");
     const foodSelect = document.getElementById("foodType");
     const feedback = document.getElementById("feedback");
-    const fidelity = document.getElementById("fidelityScoreContainer");
     const buttonSubmit = document.getElementById("buttonSubmit");
-    const error = document.getElementById("error");
-    const loader = document.getElementById("loader");
     const buttonText = document.getElementById("buttonText");
+    const loader = document.getElementById("loader");
     loader.style.display = 'none';
 
-    //Variable para comprobar si hay carta de alérgenos
-    //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
-    let allergenChartToggle = false;
-    let user;
-
-    document.getElementById("add").addEventListener("submit", registerRestaurant, false);
-    document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
+    document.getElementById("add").addEventListener("submit", editRestaurant, false);
 
     //Rellenamos los select con los array que encontramos arriba
     const fillSelects = () => {
@@ -223,17 +168,7 @@
       });
     }
 
-    //Mostramos u ocultamos el range input de la puntuación de fidelidad
-    function allergenToggle() {
-      if(!allergenChartToggle) {
-        fidelity.classList.remove("hidden");
-      } else {
-        fidelity.classList.add("hidden");
-      }
-      allergenChartToggle = !allergenChartToggle;
-    }
-
-    function registerRestaurant(event){
+    function editRestaurant(event){
       loader.style.display = 'flex';
       event.preventDefault();
       //Mostramos al usuario que la aplicación está en proceso
@@ -241,6 +176,7 @@
       feedback.innerHTML = "";
       //Creamos el objeto con todos los datos del nuevo restaurante
       const data = {
+        restaurantID: restaurantID,
         name: document.getElementById("name").value,
         province: document.getElementById("province").value,
         address: document.getElementById("address").value,
@@ -248,55 +184,21 @@
         phone: Number(document.getElementById("phone").value),
         url: document.getElementById("url").value,
         foodType: document.getElementById("foodType").value,
-        created: new Date(),
-        comment: document.getElementById("comment").value,
-        generalScore: document.getElementById("generalScore").value,
-        allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
-        fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
-        allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,
-        attentionScore: document.getElementById("attentionScore").value,
-        userName: user.name,
-        id: user.id
       };
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-restaurant.php", true);
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/edit-restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-          data.restaurantID = this.responseText;
-          addScore(data);
-        } else if (this.status == 424) {
-          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-          feedback.innerHTML = "Hubo un error en la creación del restaurante";
-          feedback.classList.add("error");
-          feedback.classList.remove("success");
-          loader.style.display = 'none';
-        } else if (this.status == 401) {
-          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
-        }
-      };
-      xmlhttp.send(JSON.stringify(data));
-    }
-
-    const addScore = (data) =>{
-      //Hacemos la petición al back-end
-      
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-score.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-          feedback.innerHTML = "Creado correctamente";
+          feedback.innerHTML = "Se editó correctamente";
           feedback.classList.add("success");
           feedback.classList.remove("error");
-          window.location.href = "https://foodiesaurus.miasalazar.com/index.html";
+          loader.style.display = 'none';
         } else if (this.status == 424) {
           //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-          feedback.innerHTML = "Hubo un error en la creación de la puntuación";
+          feedback.innerHTML = "Hubo un error en la edición del restaurante";
           feedback.classList.add("error");
           feedback.classList.remove("success");
           loader.style.display = 'none';
@@ -304,35 +206,45 @@
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         }
-        //Mostramos al usuario que ya no está cargando
-        buttonText.innerHTML = "Crear restaurante";
+        buttonText.innerHTML = "Editar restaurante";
       };
       xmlhttp.send(JSON.stringify(data));
     }
 
-    //Obtenemos los datos del usuario
-    const getProfile = () => {
+    const putData = () => {
+      document.getElementById("name").value = restaurant.name;
+      document.getElementById("address").value = restaurant.address;
+      document.getElementById("province").value = restaurant.province;
+      document.getElementById("ZIP").value = restaurant.ZIP;
+      //Si se ha guardado el teléfono, lo mostramos
+      if (restaurant.phone && restaurant.phone !== "0") {
+        document.getElementById("phone").value = restaurant.phone;
+      }
+      //Si se ha guardado el tipo de comida, lo mostramos
+      if (restaurant.foodType && restaurant.foodType !== "") {
+        document.getElementById("foodType").value = restaurant.foodType;
+      }
+    }
+
+    const getRestaurant = () => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/restaurant.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          //Si ha habido éxito, guardamos los datos del usuario en la variable user
-          user = JSON.parse(this.responseText);
-        } else if (this.status == 401) {
-          //Si la persona no está autorizada, la expulsamos
-          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
-        } else if (this.status == 400) {
-          //Si hay un error, devolvemos un error
-          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
-        }  
+          //Si se ha encontrado el restaurante, llamamos a las funciones que muestran la información en la página y a la que  busca las calificaciones
+          //Se guarda la información del restaurante
+          restaurant = JSON.parse(this.responseText);
+          putData();
+        } else if (this.status == 404) {
+          //Si no se encuentra el ID del restaurante, le dejamos este mensaje
+          restaurantContainer.innerHTML = "No hay un restaurante con este ID";
+          loader.style.display = 'none';
+        }   
       };
-      xmlhttp.send();
-    };
+      xmlhttp.send(JSON.stringify(data));
+    }
 
-    //Comprobamos si el usuario ha iniciado sesión
-    //Si la respuesta es afirmativa, continuamos con la carga de la página
-    //En caso contrario le expulsamos al login
     const checkIsLoggedIn = () => {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
@@ -340,12 +252,11 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           fillSelects();
-          getProfile()
+          getRestaurant();
         } else if (this.status == 401) {
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         } else if (this.status == 400) {
-          //Si hay un error, devolvemos un error
-          subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         } 
       };
       xmlhttp.send();

@@ -114,7 +114,7 @@
           <small id="feedback" class=""></small>
           <button type="submit" class="primary-button" id="buttonSubmit">
             <div class="loader-container">
-              Añadir opinión
+              <span id="buttonText">Añadir opinión</span>
               <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
             </div>
           </button>
@@ -156,6 +156,7 @@
     const fidelity = document.getElementById("fidelityScoreContainer");
     const ID = new URL(document.URL).searchParams.get('ID');
     const loader = document.getElementById("loader");
+    const buttonText = document.getElementById("buttonText");
     loader.style.display = 'none';
 
     //Variable para comprobar si hay carta de alérgenos
@@ -179,10 +180,9 @@
     function addNewScore(event){
       loader.style.display = 'flex';
       event.preventDefault();
-      const buttonSubmit = document.getElementById("buttonSubmit");
       const feedback = document.getElementById("feedback");
       //Mostramos al usuario que la aplicación está en proceso
-      buttonSubmit.innerHTML = "Cargando...";
+      buttonText.innerHTML = "Cargando...";
       feedback.innerHTML = "";
       //Creamos un objeto con los datos
       const data = {
@@ -219,7 +219,7 @@
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
         }
         //Mostramos al usuario que ya no está cargando
-        buttonSubmit.innerHTML = "Añadir opinión";
+        buttonText.innerHTML = "Añadir opinión";
       };
       xmlhttp.send(JSON.stringify(data));
     }
