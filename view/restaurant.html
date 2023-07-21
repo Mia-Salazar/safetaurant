@@ -78,7 +78,8 @@
           <p class="data-text">Tipo de comida: <span class="data-info" id="foodType">-</span></p>
         </div>
       </div>
-      <section class="restaurant-container">
+      <span class="loader" role="alert" aria-busy="true" id="loader"></span>
+      <section class="restaurant-container" id="restaurantContainer" style="display: none">
         <h3 id="averages" class="averages">Puntuaciones (<span id="totalOpinions"></span>)</h3>
         <div class="averages-container">
           <div class="box">
@@ -182,6 +183,7 @@
   <script type="text/javascript" src="./shared.js"></script>
   <script type="text/javascript" src="./input-range.js"></script>
   <script>
+    const restaurantContainer = document.getElementById("restaurantContainer");
     const feedback = document.getElementById("feedback");
     const nav = document.getElementById("nav");
     const toggleButton = document.getElementById("toggle");
@@ -193,6 +195,8 @@
     const numberGeneralBar = document.getElementById("numberGeneralBar");
     const attentionScoreBar = document.getElementById("attentionScoreBar");
     const numberFidelityBar = document.getElementById("numberFidelityBar");
+    const loader = document.getElementById("loader");
+
 
     //Creamos las variables necesarias que usaremos para guardar los datos
     let restaurant;
@@ -213,6 +217,7 @@
       if (restaurant.foodType && restaurant.foodType !== "") {
         document.getElementById("foodType").innerHTML = restaurant.foodType;
       }
+      getScores();
     }
 
     //Para cada puntuación creamos un <li> con los datos y lo introducimos en la <ul>
@@ -251,7 +256,8 @@
         li.appendChild(comment);
 
         scoresList.appendChild(li);
-      })
+      });
+      getAverage();
     }
 
     //Mostramos la puntuación media del restaurante en los inputs
@@ -274,6 +280,7 @@
       //Attention
       averageAttentionId.innerHTML = averageAttention;
       attentionScoreBar.style.width = `${averageAttention}0%`;
+      getChartsFound();
     }
 
     //Obtenemos los datos del restaurante
@@ -287,10 +294,10 @@
           //Se guarda la información del restaurante
           restaurant = JSON.parse(this.responseText);
           putData();
-          getScores();
         } else if (this.status == 404) {
           //Si no se encuentra el ID del restaurante, le dejamos este mensaje
-          document.getElementById("subtitle").innerHTML = "No hay un restaurante con este ID";
+          restaurantContainer.innerHTML = "No hay un restaurante con este ID";
+          loader.style.display = 'none';
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -305,6 +312,7 @@
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById("chartNumber").innerHTML = this.responseText;
           document.getElementById("chartPercent").innerHTML = this.responseText * 100 / average.totalReviews;
+          getAllergicReactions();
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -322,8 +330,9 @@
           document.getElementById("totalBarAllergen").innerHTML = average.totalReviews;
           document.getElementById("numberBarAllergen").innerHTML = this.responseText;
           document.getElementById("chartAllergenPercent").innerHTML = percent;
-          
           document.getElementById("allergenScoreBar").style.width = `${percent}%`;
+          loader.style.display = 'none';
+          restaurantContainer.style.display = 'block';
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -342,11 +351,10 @@
           document.getElementById("totalScores").innerHTML = average.totalReviews
           document.getElementById("totalScoresAllergen").innerHTML = average.totalReviews
           putAverage();
-          getChartsFound();
-          getAllergicReactions();
         } else if (this.status == 404) {
           //Si no se encuentra el ID del restaurante, le dejamos este mensaje
-          document.getElementById("averages").innerHTML = "No hay puntuaciones medias para este restaurante";
+          restaurantContainer.innerHTML = "No hay puntuaciones medias para este restaurante";
+          loader.style.display = 'none';
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -361,13 +369,12 @@
         if (this.readyState == 4 && this.status == 200) {
           //Se guardan las calificaciones en una variable
           scores = JSON.parse(this.responseText);
-          //Llamamos a la función que obtiene las medias
-          getAverage();
           //Llamamos a la función que añade en la página todas las puntuaciones
           putScores();
         } else if (this.status == 400) {
           //Si no encontramos las puntuaciones, mostramos un mensaje
           document.getElementById("scores").innerHTML = "No hay comentarios para este restaurante";
+          loader.style.display = 'none';
         }   
       };
       xmlhttp.send(JSON.stringify(data));
