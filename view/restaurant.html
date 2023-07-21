@@ -190,7 +190,6 @@
     const restaurantID = new URL(document.URL).searchParams.get('ID');
     const add = document.getElementById("add");
     const addScore = document.getElementById("addScore");
-    const edit = document.getElementById("edit");
     const scoreText = document.getElementById("scoreText");
     const data = {ID: restaurantID};
     const numberGeneralBar = document.getElementById("numberGeneralBar");
@@ -225,7 +224,6 @@
     const putScores = () => {
       const scoresList = document.getElementById("scoresList");
       const scoresWithComments = scores.filter(score => score.comment !== '')
-      console.log(scoresWithComments, 'aaa')
       document.getElementById("totalComments").innerHTML = scoresWithComments.length;
       scoresWithComments.forEach((score) => {
         let li = document.createElement("li");
@@ -393,7 +391,6 @@
           changeMenuAccordingToUser("registered");
         }
         if(this.readyState == 4 && this.status == 401) {
-          edit.classList.add("hidden");
           addScore.classList.add("hidden");
           scoreText.classList.add("hidden");
           changeMenuAccordingToUser("no-registered");
