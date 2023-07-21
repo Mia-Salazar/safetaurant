@@ -148,7 +148,6 @@
         <h3 class="actions" id="scoreText">Acciones</h3>
         <div class="container">
           <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
-          <a href="" class="secondary-button" id="edit">Editar restarante</a>
         </div>
         
         <h3 class="reviews">Comentarios (<span id="totalComments"></span>)</h3>
@@ -221,21 +220,6 @@
       }
       getScores();
     }
-
-    const getProfile = () => {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //Si ha habido éxito, guardamos los datos del usuario en la variable user
-          user = JSON.parse(this.responseText);
-          if (user.ID === restaurant.userID) {
-            edit.href=`https://foodiesaurus.miasalazar.com/view/edit-restaurant.html?ID=${restaurantID}`
-          }
-        }
-      xmlhttp.send();
-    };
 
     //Para cada puntuación creamos un <li> con los datos y lo introducimos en la <ul>
     const putScores = () => {
@@ -407,7 +391,6 @@
           //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
           addScore.href = `https://foodiesaurus.miasalazar.com/view/add-score.html?ID=${restaurantID}`;
           changeMenuAccordingToUser("registered");
-          getProfile();
         }
         if(this.readyState == 4 && this.status == 401) {
           edit.classList.add("hidden");
