@@ -71,7 +71,9 @@
       <section class="list-container">
         <div class="container">
           <h3 id="found"></h3>
-          <ul class="list-results scores-list" id="list"></ul>
+          <ul class="list-results scores-list" id="list">
+            <span class="loader" role="alert" aria-busy="true" id="loader"></span>
+          </ul>
         </div>
       </section>
     </main>
@@ -101,6 +103,7 @@
   <script type="text/javascript" src="./shared.js"></script>
   <script>
     const found = document.getElementById("found");
+    const loader = document.getElementById("loader");
     let restaurants;
 
     //Para cada restaurante encontrado, creamos un <li> con todos los datos
@@ -122,6 +125,7 @@
         li.appendChild(link);
         list.appendChild(li);
       });
+      loader.style.display = 'none';
     }
 
     //Obtenemos los datos del usuario
@@ -138,6 +142,7 @@
             viewList();
           } else {
             found.innerHTML = "No has registrado ningún local de restauración";
+            loader.style.display = 'none';
           }
         } else if (this.status == 401) {
           //Si la persona no está autorizada, la expulsamos
@@ -145,6 +150,7 @@
         } else if (this.status == 400) {
           //Si hay un error, devolvemos un error
           subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+          loader.style.display = 'none';
         }  
       };
       xmlhttp.send();
