@@ -27,6 +27,11 @@
 	text-align: center;
 }
 
+button {
+    border: none;
+    background: transparent;
+}
+
 /*Adaptando estilos a dispositivos grandes*/
 @media (min-width: 768px) {
 	.register-form, .login-form {
