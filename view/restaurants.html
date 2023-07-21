@@ -99,6 +99,7 @@
           </select>
         </div>
         <h3 id="found"></h3>
+        <span class="loader" role="alert" aria-busy="true" id="loader"></span>
         <ul class="list-results" id="list">
         </ul>
       </section>
@@ -139,6 +140,7 @@
     const orderContainer = document.getElementById("orderContainer");
     const list = document.getElementById("list");
     const order = document.getElementById("order");
+    const loader = document.getElementById("loader");
     document.getElementById("search").addEventListener("submit", search, false);
     document.getElementById("order").addEventListener("change", search, false);
 
@@ -209,7 +211,6 @@
 
     //Función para buscar restaurantes con los datos recabados en el buscador
     const getRestaurants = () => {
-      found.innerHTML = "Cargando...";
       if(name && name != "") {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controller/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
@@ -222,18 +223,22 @@
             if (restaurants[0].restaurantID !== null) {
               viewList();
               found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
+              loader.style.display = 'none';
             } else {
               found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+              loader.style.display = 'none';
             }
           } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             orderContainer.classList.add("hidden");
+            loader.style.display = 'none';
           }
         };
         xmlhttp.send();
       } else {
         found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+        loader.style.display = 'none';
       }
     }
 
