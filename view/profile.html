@@ -73,7 +73,12 @@
             <p class="input-label">Correo electrónico: </p>
             <p class="input" id="email"></p>
           </div>
-          <button class="primary-button logout" type="button" id="logout">Salir</button>
+          <button class="primary-button logout" type="button" id="logout">
+            <div class="loader-container">
+              <span id="button-text">Cargando...</span>
+              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+            </div>
+          </button>
         </div>
         <div class="decoration-wrapper">
           <figure class="img-container">
@@ -112,6 +117,8 @@
     const email = document.getElementById("email")
     const img = document.getElementById("img")
     const logout = document.getElementById("logout");
+    const loader = document.getElementById("loader");
+    const buttonText = document.getElementById("button-text");
     let user;
 
     logout.addEventListener("click", logoutFunction, false);
@@ -122,6 +129,8 @@
       xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/logout.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
+        loader.style.display = 'flex';
+        buttonText.innerHTML = 'Cargando...'
         if (this.readyState == 4 && this.status == 401) {
           //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
@@ -136,6 +145,7 @@
       xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
+        buttonText.innerHTML = 'Cargando...'
         if (this.readyState == 4 && this.status == 200) {
           //Si ha habido éxito, guardamos los datos del usuario en la variable user
           user = JSON.parse(this.responseText);
@@ -146,6 +156,8 @@
         } else if (this.status == 400) {
           //Si hay un error, devolvemos un error
           subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+          loader.style.display = 'none';
+          buttonText.innerHTML = 'Salir';
         }  
       };
       xmlhttp.send();
@@ -156,6 +168,8 @@
       name.innerHTML = user.name;
       email.innerHTML = user.email;
       img.src = user.picture;
+      loader.style.display = 'none';
+      buttonText.innerHTML = 'Salir';
     }
 
     //Comprobamos si el usuario está activo
