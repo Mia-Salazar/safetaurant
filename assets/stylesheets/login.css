@@ -27,6 +27,15 @@
 	text-align: center;
 }
 
+button {
+    border: none;
+    background: transparent;
+}
+
+.loader {
+    margin-top: 1.5rem;
+}
+
 /*Adaptando estilos a dispositivos grandes*/
 @media (min-width: 768px) {
 	.register-form, .login-form {

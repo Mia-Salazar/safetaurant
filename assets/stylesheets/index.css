@@ -91,12 +91,14 @@ body {
 	font-weight: 700;
 	cursor:  pointer;
 	text-decoration: none;
+	height: 40px;
 }
 
 .secondary-button {
 	color:  var(--secondaryColor);
 	border:  1px solid var(--secondaryColor);
 	background-color: transparent;
+	height: 40px;
 }
 
 .primary-button:hover, .secondary-button:hover {
@@ -335,6 +337,39 @@ body {
 .success {
 	color:  var(--primaryColor);
 	margin-top: 0.625rem;
+}
+
+/*Loader*/
+.loader {
+    width: 1.25rem;
+    height: 1.25rem;
+	margin: 0 6px;
+    border: 3px solid var(--black);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader--light {
+	border-color: var(--white);
+    border-bottom-color: transparent;
+}
+
+.loader-container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /*Medias queries*/

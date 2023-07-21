@@ -149,7 +149,12 @@
             <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
           </div>
           <small id="feedback" class=""></small>
-          <button type="submit" class="primary-button" id="buttonSubmit">Crear restaurante</button>
+          <button type="submit" class="primary-button" id="buttonSubmit">
+            <div class="loader-container">
+              Crear restaurante
+              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+            </div>
+          </button>
         </form>
         <figure class="img-container">
           <img class="img" alt="" src="../assets/img/food.jpg" />
@@ -189,6 +194,8 @@
     const fidelity = document.getElementById("fidelityScoreContainer");
     const buttonSubmit = document.getElementById("buttonSubmit");
     const error = document.getElementById("error");
+    const loader = document.getElementById("loader");
+    loader.style.display = 'none';
 
     //Variable para comprobar si hay carta de alérgenos
     //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
@@ -226,6 +233,7 @@
     }
 
     function registerRestaurant(event){
+      loader.style.display = 'flex';
       event.preventDefault();
       //Mostramos al usuario que la aplicación está en proceso
       buttonSubmit.innerHTML = "Cargando...";
@@ -263,6 +271,7 @@
           feedback.innerHTML = "Hubo un error en la creación del restaurante";
           feedback.classList.add("error");
           feedback.classList.remove("success");
+          loader.style.display = 'none';
         } else if (this.status == 401) {
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
@@ -289,6 +298,7 @@
           feedback.innerHTML = "Hubo un error en la creación de la puntuación";
           feedback.classList.add("error");
           feedback.classList.remove("success");
+          loader.style.display = 'none';
         } else if (this.status == 401) {
           //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
           window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";

@@ -29,6 +29,7 @@
     display: block;
     text-decoration: none;
     width: fit-content;
+    height: auto;
 }
 
 .list-score {
