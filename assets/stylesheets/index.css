@@ -83,9 +83,6 @@ body {
 
 /*Botones*/
 .primary-button, .secondary-button {
-	display: flex;
-    justify-content: center;
-    align-items: center;
 	padding: 0.625rem 1.25rem;
 	background-color: var(--secondaryColor);
 	border-radius: 5px;
@@ -358,6 +355,12 @@ body {
 .loader--light {
 	border-color: var(--white);
     border-bottom-color: transparent;
+}
+
+.loader-container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes rotation {
