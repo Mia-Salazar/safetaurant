@@ -80,8 +80,8 @@ CREATE TABLE `menuOptions` (
   `diabetes` int(1) NOT NULL,
   `lactoseIntolerant` int(1) NOT NULL,
   `fructoseIntolerant` int(1) NOT NULL,
-  `Vegan` int(1) NOT NULL,
-  `Vegetarian` int(1) NOT NULL,
+  `vegan` int(1) NOT NULL,
+  `vegetarian` int(1) NOT NULL,
   `restaurantID` int(11) NOT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
