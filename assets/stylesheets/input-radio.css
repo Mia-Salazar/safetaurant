@@ -1,0 +1,36 @@
+.radio-container {
+    display: flex;
+    margin-bottom: 1.75rem;
+    margin-top: 0;
+}
+
+.input-radio {
+    margin-right: 1rem;
+}
+
+.radio-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+input[type="radio"] {
+	appearance: none;
+	width: 1rem;
+	height: 1rem;
+	border: 1px solid var(--grayDark);
+	border-radius: 50%;
+	position: relative;
+	top: 2px;
+}
+
+input[type="radio"]:checked::before {
+	content: "";
+	width: 0.65rem;
+	height: 0.65rem;
+	background-color: var(--primaryColor);
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
