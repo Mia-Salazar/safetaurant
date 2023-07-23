@@ -74,6 +74,19 @@ CREATE TABLE `users` (
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `menuOptions` (
+  `optionID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `celiacDisease` int(1) NOT NULL,
+  `diabetes` int(1) NOT NULL,
+  `lactoseIntolerant` int(1) NOT NULL,
+  `fructoseIntolerant` int(1) NOT NULL,
+  `Vegan` int(1) NOT NULL,
+  `Vegetarian` int(1) NOT NULL,
+  `restaurantID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 -- CREATE TABLE `user` (
 --   `userID` int(10) NOT NULL,
 --   `name` varchar(50) NOT NULL,
@@ -89,6 +102,17 @@ CREATE TABLE `users` (
 --
 -- Índices para tablas volcadas
 --
+
+-- Indices de la tabla `menuOptions`
+-- ALTER TABLE `menuOptions`
+--   ADD PRIMARY KEY (`optionID`),
+--   ADD KEY `restaurantID` (`restaurantID`),
+--   ADD KEY `userID` (`userID`);
+
+ALTER TABLE `menuOptions`
+  ADD CONSTRAINT `restaurant_ibfk_4` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`);
+ALTER TABLE `menuOptions`
+  ADD CONSTRAINT `restaurant_ibfk_5` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 
 --
 -- Indices de la tabla `restaurant`
