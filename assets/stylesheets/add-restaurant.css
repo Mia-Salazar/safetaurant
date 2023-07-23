@@ -3,10 +3,8 @@
 	display: none;
 }
 
-
 .add-restaurant {
 	margin-bottom: 3rem;
-	width: 100%;
 }
 
 .checkbox-group {
@@ -42,5 +40,11 @@
 		grid-template-columns: 1fr 25rem;
 		align-items: center;
 		gap: 2.375rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.add-restaurant__decoration {
+		display: none;
 	}
 }
