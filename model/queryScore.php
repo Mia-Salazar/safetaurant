@@ -29,6 +29,29 @@
 		closeConnection($connection);
 	}
 
+	function addOptions($celiacDisease, $diabetes, $lactoseIntolerant, $fructoseIntolerant, $vegan, $vegetarian, $restaurantID, $userID) {
+		$connection = new Connection();
+		$sql = "INSERT INTO menuOptions (celiacDisease, diabetes, lactoseIntolerant, fructoseIntolerant, vegan, vegetarian, restaurantID, userID) 
+				VALUES (:celiacDisease, :diabetes, :lactoseIntolerant, :fructoseIntolerant, :vegan, :vegetarian, :restaurantID, :userID)";
+		$query = $connection->prepare($sql);
+		$query->bindParam(':celiacDisease',$celiacDisease);
+		$query->bindParam(':diabetes', $diabetes);
+		$query->bindParam(':lactoseIntolerant', $lactoseIntolerant);
+		$query->bindParam(':fructoseIntolerant', $fructoseIntolerant);
+		$query->bindParam(':vegan', $vegan);
+		$query->bindParam(':vegetarian', $vegetarian);
+		$query->bindParam(':restaurantID', $restaurantID);
+		$query->bindParam(':userID', $userID);
+		$query->execute();
+		$lastInsertId = $connection->lastInsertId();
+		if ($lastInsertId>0) {
+			return $lastInsertId;
+		} else {
+			return false;
+		}
+		closeConnection($connection);
+	}
+
 	//Funcionalidad para conocer la media de un restaurante por su ID
 	function getAverage($restaurantID) {
 		$connection = new Connection();

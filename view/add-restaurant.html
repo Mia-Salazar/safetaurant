@@ -248,7 +248,7 @@
             </div>
           </button>
         </form>
-        <figure class="img-container">
+        <figure class="img-container add-restaurant__decoration">
           <img class="img" alt="" src="../assets/img/food.jpg" />
         </figure>
       </div>
@@ -348,7 +348,13 @@
         allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,
         attentionScore: document.getElementById("attentionScore").value,
         userName: user.name,
-        id: user.id
+        id: user.id,
+        celiacDisease: document.querySelector('input[name="celiac"]:checked').value,
+        diabetes: document.querySelector('input[name="diabetes"]:checked').value,
+        lactoseIntolerant: document.querySelector('input[name="lactose"]:checked').value,
+        fructoseIntolerant: document.querySelector('input[name="fructose"]:checked').value,
+        vegan: document.querySelector('input[name="vegan"]:checked').value,
+        vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
       };
       //Hacemos la petición al back-end
       var xmlhttp = new XMLHttpRequest();
@@ -374,10 +380,33 @@
     }
 
     const addScore = (data) =>{
-      //Hacemos la petición al back-end
-      
+      //Hacemos la petición al back-end      
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-score.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+          addOptions(data);
+        } else if (this.status == 424) {
+          //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+          feedback.innerHTML = "Hubo un error en la creación de la puntuación";
+          feedback.classList.add("error");
+          feedback.classList.remove("success");
+          loader.style.display = 'none';
+        } else if (this.status == 401) {
+          //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+          window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        }
+        //Mostramos al usuario que ya no está cargando
+        buttonText.innerHTML = "Crear restaurante";
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    const addOptions = (data) => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-options.php", true);
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
