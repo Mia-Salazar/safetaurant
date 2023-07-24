@@ -72,186 +72,190 @@
         <li class="info-list-item">Asegúrate de que no existe antes de crearlo usando la búsqueda</li>
         <li class="info-list-item">Los campos con un asterisco (*) son obligatorios</li>
       </ul>
-      <div class="add-restaurant-wrapper">
-        <form class="add-restaurant-form" id="add">
-          <div class="input-group">
-            <label class="input-label" for="name">Nombre del restaurante*: </label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
+      <form class="add-restaurant-form" id="add">
+        <div class="add-restaurant-wrapper">
+          <div>
+            <h3>Datos generales</h3>
+            <div class="input-group">
+              <label class="input-label" for="name">Nombre del restaurante*: </label>
+              <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="province">Provincia*: </label>
+              <select name="province" id="province" class="select" required>
+                <option selected disabled value="">Escoge Provincia</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="address">Dirección*: </label>
+              <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="ZIP">Código Postal*: </label>
+              <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="phone">Teléfono: </label>
+              <input class="input" id="phone" name="phone" type="number" />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="url">Sitio web: </label>
+              <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="foodType">Tipo de comida: </label>
+              <select name="foodType" id="foodType" class="select">
+                <option selected disabled value="">Escoge el tipo</option>
+              </select>
+            </div>
+            <h3>Tu opinión sobre alérgenos</h3>
+            <div class="input-group">
+              <label class="input-label" for="generalScore">Puntuación general*: </label>
+              <div class="range-input-container">
+                <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
+                <div class="range-container">
+                  <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
+                  <span class="total-range">/10</span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
+              <div class="range-input-container">
+                <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
+                <div class="range-container">
+                  <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
+                  <span class="total-range">/10</span>
+                </div>
+              </div>
+            </div>
+            <div class="checkbox-group">
+              <input class="input checkbox" id="allergicReaction" name="allergicReaction" type="checkbox" />
+              <label class="" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
+            </div>
+            <div class="checkbox-group">
+              <input class="input checkbox" id="allergenChart" name="allergenChart" type="checkbox" />
+              <label class="" for="allergenChart">¿Carta de alérgenos?</label>
+            </div>
+            <div class="input-group hidden" id="fidelityScoreContainer">
+              <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
+              <div class="range-input-container">
+                <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
+                <div class="range-container">
+                  <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+                  <span class="total-range">/10</span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="comment">Comentario: </label>
+              <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+            </div>
           </div>
-          <div class="input-group">
-            <label class="input-label" for="province">Provincia*: </label>
-            <select name="province" id="province" class="select" required>
-              <option selected disabled value="">Escoge Provincia</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="address">Dirección*: </label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="ZIP">Código Postal*: </label>
-            <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="phone">Teléfono: </label>
-            <input class="input" id="phone" name="phone" type="number" />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="url">Sitio web: </label>
-            <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="foodType">Tipo de comida: </label>
-            <select name="foodType" id="foodType" class="select">
-              <option selected disabled value="">Escoge el tipo</option>
-            </select>
-          </div>
-          <h3>Tu opinión sobre alérgenos</h3>
-          <div class="input-group">
-            <label class="input-label" for="generalScore">Puntuación general*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
+          <div>
+            <h3>Las opciones que ofrece el restaurante</h3>
+            <p class="radio-title">Opciones para celíacos</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="celiacYes" name="celiac" value="0">
+                <label for="celiacYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="celiacNo" name="celiac" value="1">
+                <label for="celiacNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
+                <label for="celiacIDK">No sé</label>
+              </div>
+            </div>
+            <p class="radio-title">Opciones para diabéticos</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="diabetesYes" name="diabetes" value="0">
+                <label for="diabetesYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="diabetesNo" name="diabetes" value="1">
+                <label for="diabetesNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
+                <label for="diabetesIDK">No sé</label>
+              </div>
+            </div>
+            <p class="radio-title">Opciones para intolerantes a la lactosa</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="lactoseYes" name="lactose" value="0">
+                <label for="lactoseYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="lactoseNo" name="lactose" value="1">
+                <label for="lactoseNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
+                <label for="lactoseIDK">No sé</label>
+              </div>
+            </div>
+            <p class="radio-title">Opciones para intolerantes a la fructosa</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="fructoseYes" name="fructose" value="0">
+                <label for="fructoseYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="fructoseNo" name="fructose" value="1">
+                <label for="fructoseNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
+                <label for="fructoseIDK">No sé</label>
+              </div>
+            </div>
+            <p class="radio-title">Opciones para vegetarianos</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
+                <label for="vegetarianYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
+                <label for="vegetarianNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
+                <label for="vegetarianIDK">No sé</label>
+              </div>
+            </div>
+            <p class="radio-title">Opciones para veganos</p>
+            <div class="radio-container">
+              <div class="input-radio">
+                <input type="radio" id="veganYes" name="vegan" value="0">
+                <label for="veganYes">Sí</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="veganNo" name="vegan" value="1">
+                <label for="veganNo">No</label>
+              </div>
+              <div class="input-radio">
+                <input type="radio" id="veganIDK" name="vegan" value="2" checked>
+                <label for="veganIDK">No sé</label>
               </div>
             </div>
           </div>
-          <div class="input-group">
-            <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
-              </div>
-            </div>
+        </div>
+
+        
+        <small id="feedback" class=""></small>
+        <button type="submit" class="primary-button" id="buttonSubmit">
+          <div class="loader-container">
+            <span id="buttonText">Crear restaurante</span>
+            <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
           </div>
-          <div class="checkbox-group">
-            <input class="input checkbox" id="allergicReaction" name="allergicReaction" type="checkbox" />
-            <label class="" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
-          </div>
-          <div class="checkbox-group">
-            <input class="input checkbox" id="allergenChart" name="allergenChart" type="checkbox" />
-            <label class="" for="allergenChart">¿Carta de alérgenos?</label>
-          </div>
-          <div class="input-group hidden" id="fidelityScoreContainer">
-            <label class="input-label" for="fidelityScore">Fidelidad de la carta de alérgenos con respecto a los platos una vez preparados*: </label>
-            <div class="range-input-container">
-              <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
-              <div class="range-container">
-                <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
-                <span class="total-range">/10</span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="comment">Comentario: </label>
-            <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
-          </div>
-          <h3>Las opciones que ofrece el restaurante</h3>
-          <p class="radio-title">Opciones para celíacos</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="celiacYes" name="celiac" value="0">
-              <label for="celiacYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="celiacNo" name="celiac" value="1">
-              <label for="celiacNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
-              <label for="celiacIDK">No sé</label>
-            </div>
-          </div>
-          <p class="radio-title">Opciones para diabéticos</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="diabetesYes" name="diabetes" value="0">
-              <label for="diabetesYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="diabetesNo" name="diabetes" value="1">
-              <label for="diabetesNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
-              <label for="diabetesIDK">No sé</label>
-            </div>
-          </div>
-          <p class="radio-title">Opciones para intolerantes a la lactosa</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="lactoseYes" name="lactose" value="0">
-              <label for="lactoseYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="lactoseNo" name="lactose" value="1">
-              <label for="lactoseNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
-              <label for="lactoseIDK">No sé</label>
-            </div>
-          </div>
-          <p class="radio-title">Opciones para intolerantes a la fructosa</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="fructoseYes" name="fructose" value="0">
-              <label for="fructoseYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="fructoseNo" name="fructose" value="1">
-              <label for="fructoseNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
-              <label for="fructoseIDK">No sé</label>
-            </div>
-          </div>
-          <p class="radio-title">Opciones para vegetarianos</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
-              <label for="vegetarianYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
-              <label for="vegetarianNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
-              <label for="vegetarianIDK">No sé</label>
-            </div>
-          </div>
-          <p class="radio-title">Opciones para veganos</p>
-          <div class="radio-container">
-            <div class="input-radio">
-              <input type="radio" id="veganYes" name="vegan" value="0">
-              <label for="veganYes">Sí</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="veganNo" name="vegan" value="1">
-              <label for="veganNo">No</label>
-            </div>
-            <div class="input-radio">
-              <input type="radio" id="veganIDK" name="vegan" value="2" checked>
-              <label for="veganIDK">No sé</label>
-            </div>
-          </div>
-          <small id="feedback" class=""></small>
-          <button type="submit" class="primary-button" id="buttonSubmit">
-            <div class="loader-container">
-              <span id="buttonText">Crear restaurante</span>
-              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
-            </div>
-          </button>
-        </form>
-        <figure class="img-container add-restaurant__decoration">
-          <img class="img" alt="" src="../assets/img/food.jpg" />
-        </figure>
-      </div>
+        </button>
+      </form>
     </main>
     <footer class="footer">
       <div>
