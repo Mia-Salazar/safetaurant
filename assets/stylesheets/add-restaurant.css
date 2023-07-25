@@ -25,6 +25,14 @@
 	margin-top: 2rem;;
 }
 
+.top-wrapper {
+	margin-bottom: 2rem;
+}
+
+label {
+	max-width: 28.125rem;
+}
+
 @media (min-width: 768px) {
 
 	.add-restaurant .img-container {
