@@ -142,7 +142,18 @@
                 <span class="total-range">/<span id="totalBarAllergen">10</span></span>
               </div>
             </div>
-
+          </div>
+          <div class="box">
+            <h4 class="allergen-chart">Opciones alimentarias</h4>
+            <ul class="info-list">
+              <li class="info-list-item">Comida para celíacos: <i class="fa-solid" id="celiacDiseaseOption"></i></li>
+              <li class="info-list-item">Comida para diabéticos: <i class="fa-solid" id="diabetesOption"></i></li>
+              <li class="info-list-item">Comida para intolerantes a la lactosa: <i class="fa-solid" id="lactoseIntolerantOption"></i></li>
+              <li class="info-list-item">Comida para intolerantes a la fructosa: <i class="fa-solid" id="fructoseIntolerantOption"></i></li>
+              <li class="info-list-item">Comida para vegetarianos: <i class="fa-solid" id="veganOption"></i></li>
+              <li class="info-list-item">Comida para veganos: <i class="fa-solid" id="vegetarianOption"></i></li>
+              </li>
+            </ul>
           </div>
         </div>
         <h3 class="actions" id="scoreText">Acciones</h3>
@@ -330,8 +341,7 @@
           document.getElementById("numberBarAllergen").innerHTML = this.responseText;
           document.getElementById("chartAllergenPercent").innerHTML = percent;
           document.getElementById("allergenScoreBar").style.width = `${percent}%`;
-          loader.style.display = 'none';
-          restaurantContainer.style.display = 'block';
+          getOptions();
         }   
       };
       xmlhttp.send(JSON.stringify(data));
@@ -373,6 +383,50 @@
         } else if (this.status == 400) {
           //Si no encontramos las puntuaciones, mostramos un mensaje
           document.getElementById("scores").innerHTML = "No hay comentarios para este restaurante";
+          loader.style.display = 'none';
+        }   
+      };
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    const getAriaLabel = (hasOption) => {
+      if (hasOption) return "Sí hay esta opción";
+      return "No hay esta opción";
+    }
+    
+    const getOptions = () => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/get-options.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //Se guardan las calificaciones en una variable
+          options = JSON.parse(this.responseText);
+
+          const celiac = options.celiacDiseaseYes > options.celiacDiseaseNo ? "fa-check" : "fa-xmark";
+          document.getElementById("celiacDiseaseOption").classList.add(celiac);
+          document.getElementById("celiacDiseaseOption").setAttribute('aria-label', getAriaLabel(celiac))
+          const diabetes = options.diabetesYes > options.diabetesNo ? "fa-check" : "fa-xmark";
+          document.getElementById("diabetesOption").classList.add(diabetes);
+          document.getElementById("diabetesOption").setAttribute('aria-label', getAriaLabel(diabetes))
+          const fructose = options.fructoseIntolerantYes > options.fructoseIntolerantNo ? "fa-check" : "fa-xmark";
+          document.getElementById("fructoseIntolerantOption").classList.add(fructose);
+          document.getElementById("fructoseIntolerantOption").setAttribute('aria-label', getAriaLabel(fructose))
+          const lactose = options.lactoseIntolerantYes > options.lactoseIntolerantNo ? "fa-check" : "fa-xmark";
+          document.getElementById("lactoseIntolerantOption").classList.add(lactose);
+          document.getElementById("lactoseIntolerantOption").setAttribute('aria-label', getAriaLabel(lactose))
+          const vegetarian = options.vegetarianYes > options.vegetarianNo ? "fa-check" : "fa-xmark";
+          document.getElementById("vegetarianOption").classList.add(vegetarian);
+          document.getElementById("vegetarianOption").setAttribute('aria-label', getAriaLabel(vegetarian))
+          const vegan = options.veganYes > options.veganNo ? "fa-check" : "fa-xmark";
+          document.getElementById("veganOption").classList.add(vegan);
+          document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(vegan))
+
+          loader.style.display = 'none';
+          restaurantContainer.style.display = 'block';
+        } else if (this.status == 400) {
+          //Si no encontramos las puntuaciones, mostramos un mensaje
+          document.getElementById("scores").innerHTML = "No hay opciones disponibles para este restaurante";
           loader.style.display = 'none';
         }   
       };
