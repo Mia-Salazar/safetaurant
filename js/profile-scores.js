@@ -69,7 +69,7 @@ const deleteComment = (scoreID, restaurantID) => {
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/delete-comment.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/deleteComment.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -97,7 +97,7 @@ const deleteComment = (scoreID, restaurantID) => {
 //Obtenemos los datos del usuario
 const getScores = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile-scores.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/profileScores.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -125,7 +125,7 @@ const getScores = () => {
 //Comprobamos si el usuario está activo
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
