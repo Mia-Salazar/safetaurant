@@ -238,6 +238,10 @@ body {
 	color:  var(--white);
 }
 
+.footer a {
+	padding: 0.5rem;
+}
+
 .footer__logo {
 	display: flex;
 	align-items: center;
@@ -284,10 +288,6 @@ body {
 	margin-top: 0;
 	padding: 0;
 	list-style-type: none;
-}
-
-.footer__list li {
-	margin-right: 1rem;
 }
 
 .footer__list li:last-of-type {
