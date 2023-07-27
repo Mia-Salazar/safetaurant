@@ -59,7 +59,7 @@ const viewList = () => {
     let score = document.createElement("p");
 
     link.innerHTML = "Ver detalle";
-    link.href = `https://foodiesaurus.miasalazar.com/restaurant.html?ID=${restaurant.restaurantID}`;
+    link.href = `https://foodiesaurus.miasalazar.com/index.html?ID=${restaurant.restaurantID}`;
     title.innerHTML = restaurant.name;
     address.innerHTML = restaurant.address;
     province.innerHTML = restaurant.province;
