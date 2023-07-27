@@ -10,10 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/checkboxes.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/home.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/restaurants.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/list-results.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
@@ -42,76 +41,68 @@
           <li>
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
-          <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+          <li class="registered hidden">
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/add-restaurant.html">Crear restaurante</a>
           </li>
-          <li class="nav-link">
+          <li class="no-registered">
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/login.html">Iniciar sesión</a>
+          </li>
+          <li class="nav-link registered hidden">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/index.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile-restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-scores.html">Mis opiniones</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile-scores.html">Mis opiniones</a>
               </li>
             </ul>
           </li>
         </ul>
-
       </nav>
     </header>
-    <main class="main add-restaurant container">
-      <h2>Editar restaurante</h2>
-      <div class="add-restaurant-wrapper">
-        <form class="add-restaurant-form" id="add">
+    <main class="">
+      <section class="search-container">
+        <h2>Resultados de la búsqueda</h2>
+        <form id="search">
           <div class="input-group">
-            <label class="input-label" for="name">Nombre del restaurante*: </label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
+            <label class="input-label" for="name">Busca un restaurante</label>
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
           </div>
-          <div class="input-group">
-            <label class="input-label" for="province">Provincia*: </label>
-            <select name="province" id="province" class="select" required>
-              <option selected disabled value="">Escoge Provincia</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="address">Dirección*: </label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="ZIP">Código Postal*: </label>
-            <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="phone">Teléfono: </label>
-            <input class="input" id="phone" name="phone" type="number" />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="url">Sitio web: </label>
-            <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="foodType">Tipo de comida: </label>
-            <select name="foodType" id="foodType" class="select">
-              <option selected disabled value="">Escoge el tipo</option>
-            </select>
-          </div>
-          <small id="feedback" class=""></small>
-          <button type="submit" class="primary-button" id="buttonSubmit">
-            <div class="loader-container">
-              <span id="buttonText">Editar restaurante</span>
-              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+          <div class="form-selects">
+            <div class="input-group">
+              <label class="input-label" for="province">Provincia: </label>
+              <select name="province" id="province" class="select">
+                <option selected value="">Escoge Provincia</option>
+              </select>
             </div>
-          </button>
+            <div class="input-group">
+              <label class="input-label" for="foodType">Tipo de comida: </label>
+              <select name="foodType" id="foodType" class="select">
+                <option selected value="">Escoge el tipo</option>
+              </select>
+            </div>
+            <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
+          </div>
         </form>
-        <figure class="img-container">
-          <img class="img" alt="" src="../assets/img/food.jpg" />
-        </figure>
-      </div>
+      </section>
+      <section class="list-results-container container">
+        <div class="order-container" id="orderContainer">
+          <label class="input-label order-label" for="order">Ordernar de forma: </label>
+          <select name="order" id="order" class="select">
+            <option value="asc">Ascendente</option>
+            <option selected value="desc">Descendente</option>
+          </select>
+        </div>
+        <h3 id="found"></h3>
+        <span class="loader" role="alert" aria-busy="true" id="loader"></span>
+        <ul class="list-results" id="list">
+        </ul>
+      </section>
     </main>
     <footer class="footer">
       <div>
@@ -138,5 +129,5 @@
   </body>
   <script type="text/javascript" src="./js/shared.js"></script>
   <script type="text/javascript" src="./js/arrays.js"></script>
-  <script type="text/javascript" src="./js/edit-restaurant.js"></script>
+  <script type="text/javascript" src="./js/restaurants.js"></script>
 </html>

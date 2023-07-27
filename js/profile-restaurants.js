@@ -11,7 +11,7 @@ const viewList = () => {
         let province = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${restaurant.restaurantID}`;
+        link.href = `https://foodiesaurus.miasalazar.com/restaurant.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         link.classList.add("primary-button");
         province.innerHTML = restaurant.province;
@@ -42,7 +42,7 @@ const getRestaurants = () => {
             }
         } else if (this.status == 401) {
             //Si la persona no está autorizada, la expulsamos
-            window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+            window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -63,7 +63,7 @@ const checkIsLoggedIn = () => {
             getRestaurants();
         } else if (this.status == 401) {
             //Si no ha iniciado sesión, le expulsamos al login
-            window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+            window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
         }  
     };
     xmlhttp.send();

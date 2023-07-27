@@ -19,7 +19,7 @@ function logoutFunction() {
     buttonText.innerHTML = 'Cargando...'
     if (this.readyState == 4 && this.status == 401) {
         //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     }
     };
     xmlhttp.send();
@@ -38,7 +38,7 @@ const getProfile = () => {
         putData();
     } else if (this.status == 401) {
         //Si la persona no está autorizada, la expulsamos
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     } else if (this.status == 400) {
         //Si hay un error, devolvemos un error
         subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -69,7 +69,7 @@ const checkIsLoggedIn = () => {
         getProfile();
     } else if (this.status == 401) {
         //Si no ha iniciado sesión, le expulsamos al login
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     }  
     };
     xmlhttp.send();

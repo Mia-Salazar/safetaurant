@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/login.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
@@ -30,7 +30,7 @@
         </a>
       </div>
       <nav class="nav">
-        <button id="toggle" class="toggle" aria-label="Abrir menú">
+        <button id="toggle" class="toggle" aria-label="Alternar menú">
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
@@ -40,18 +40,52 @@
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/login.html">Iniciar sesión</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/add-restaurant.html">Crear restaurante</a>
+          </li>
+          <li class="nav-link">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/index.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile-restaurants.html">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile-scores.html">Mis opiniones</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
     </header>
-    <main class="main form">
-      <form class="login-form" id="register">
-        <h2>¡Te damos la bienvenida de nuevo!</h2>
-        <small id="error" class="error"></small>
-        <button id="buttonDiv">Iniciar sesión con Google</button>
-        <div class="loader" role="alert" aria-busy="true" id="loader"></div>
-      </form>
+    <main class="main profile container">
+      <h2>Perfil</h2>
+      <p class="subtitle">En esta pagina podrás ver los datos de tu perfil y podrás editarlos.</p>
+      <div class="profile-wrapper">
+        <div>
+          <div class="input-group">
+            <p class="input-label">Nombre: </p>
+            <p class="input" id="name"></p>
+          </div>
+          <div class="input-group">
+            <p class="input-label">Correo electrónico: </p>
+            <p class="input" id="email"></p>
+          </div>
+          <button class="primary-button logout" type="button" id="logout">
+            <div class="loader-container">
+              <span id="button-text">Cargando...</span>
+              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+            </div>
+          </button>
+        </div>
+        <div class="decoration-wrapper">
+          <figure class="img-container">
+            <img class="img" alt="" id="img" src="../assets/img/foodiesaurus-v2.png" />
+          </figure>
+        </div>
+      </div>
     </main>
     <footer class="footer">
       <div>
@@ -76,6 +110,6 @@
       </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./js/shared.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script type="text/javascript" src="./js/login.js"></script>
+  <script type="text/javascript" src="../js/shared.js"></script>
+  <script type="text/javascript" src="../js/profile.js"></script>
+</html>
