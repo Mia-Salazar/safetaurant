@@ -51,7 +51,7 @@ function addNewScore(event){
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-score.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/addScore.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -75,7 +75,7 @@ function addNewScore(event){
 
 const addOptions = (data) => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/add-options.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/addOptions.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -103,7 +103,7 @@ const addOptions = (data) => {
 //Obtenemos los datos del usuario
 const getProfile = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/profile.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -125,7 +125,7 @@ const getProfile = () => {
 //En caso contrario le expulsamos al login
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 &&  this.status == 401) {

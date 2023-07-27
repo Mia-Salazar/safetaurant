@@ -12,7 +12,7 @@ logout.addEventListener("click", logoutFunction, false);
 //Función para salir
 function logoutFunction() {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/logout.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/logout.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     loader.style.display = 'flex';
@@ -28,7 +28,7 @@ function logoutFunction() {
 //Obtenemos los datos del usuario
 const getProfile = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/profile.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/profile.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     buttonText.innerHTML = 'Cargando...'
@@ -61,7 +61,7 @@ const putData = () => {
 //Comprobamos si el usuario está activo
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

@@ -11,7 +11,7 @@ function handleCredentialResponse(response) {
       location.href = 'https://foodiesaurus.miasalazar.com/index.html';
     }
   };
-  xhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/save-user.php", true);
+  xhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/save-user.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("response="+response.credential);
 }

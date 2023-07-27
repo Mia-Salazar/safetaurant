@@ -44,7 +44,7 @@ function editRestaurant(event){
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/edit-restaurant.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/editRestaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -85,7 +85,7 @@ const putData = () => {
 
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/restaurant.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/restaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -104,7 +104,7 @@ const getRestaurant = () => {
 
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

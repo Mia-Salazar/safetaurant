@@ -35,7 +35,7 @@ function search(event) {
 
 const checkIsLoggedIn = () => {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+  xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

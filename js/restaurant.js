@@ -100,7 +100,7 @@ const putAverage = () => {
 //Obtenemos los datos del restaurante
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/restaurant.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/restaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -120,7 +120,7 @@ const getRestaurant = () => {
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getChartsFound = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/charts-found.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/chartsFound.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -135,7 +135,7 @@ const getChartsFound = () => {
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getAllergicReactions = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/allergic-reaction.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/allergicReaction.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -154,7 +154,7 @@ const getAllergicReactions = () => {
 //Obtenemos la información de todas las puntuaciones medias
 const getAverage = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/average.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/average.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -176,7 +176,7 @@ const getAverage = () => {
 //Obtenemos las puntuaciones
 const getScores = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/scores.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/scores.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -200,7 +200,7 @@ const getAriaLabel = (hasOption) => {
 
 const getOptions = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controller/get-options.php", true);
+    xmlhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/options.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -240,12 +240,12 @@ const getOptions = () => {
 //Comprobamos si se ha iniciado sesión
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controller/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
-        addScore.href = `https://foodiesaurus.miasalazar.com/restaurant/add-score.html?ID=${restaurantID}`;
+        addScore.href = `https://foodiesaurus.miasalazar.com/restaurant/addScore.html?ID=${restaurantID}`;
         changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
