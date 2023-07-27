@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-radio.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/checkboxes.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
@@ -44,20 +44,20 @@
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/restaurant/add.html">Crear restaurante</a>
           </li>
           <li class="nav-link">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/index.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-scores.html">Mis opiniones</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/scores.html">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -66,48 +66,12 @@
       </nav>
     </header>
     <main class="main add-restaurant container">
-      <h2>Añadir restaurante</h2>
-      <ul class="info-list">
-        <li class="info-list-item">Aquí podrás registrar un nuevo restaurante</li>
-        <li class="info-list-item">Asegúrate de que no existe antes de crearlo usando la búsqueda</li>
-        <li class="info-list-item">Los campos con un asterisco (*) son obligatorios</li>
-      </ul>
+      <h2>Añade una nueva opinión</h2>
+      <p class="subtitle">Añade una opinión nueva a un restaurante. Los campos con un asterisco (*) son obligatorios.</p>
+
       <form class="add-restaurant-form" id="add">
         <div class="add-restaurant-wrapper">
-          <div>
-            <h3>Datos generales</h3>
-            <div class="input-group">
-              <label class="input-label" for="name">Nombre del restaurante*: </label>
-              <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="province">Provincia*: </label>
-              <select name="province" id="province" class="select" required>
-                <option selected disabled value="">Escoge Provincia</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="address">Dirección*: </label>
-              <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="ZIP">Código Postal*: </label>
-              <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="phone">Teléfono: </label>
-              <input class="input" id="phone" name="phone" type="number" />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="url">Sitio web: </label>
-              <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="foodType">Tipo de comida: </label>
-              <select name="foodType" id="foodType" class="select">
-                <option selected disabled value="">Escoge el tipo</option>
-              </select>
-            </div>
+          <div class="top-wrapper">
             <h3>Tu opinión sobre alérgenos</h3>
             <div class="input-group">
               <label class="input-label" for="generalScore">Puntuación general*: </label>
@@ -115,16 +79,6 @@
                 <input class="range-input" id="generalScore" name="generalScore" value="5" type="range" min="1" max="10" required oninput="numberGeneral.value=value"/>
                 <div class="range-container">
                   <output type="number" class="range-number" id="numberGeneral" min="1" max="10" value="5" disabled>5</output>
-                  <span class="total-range">/10</span>
-                </div>
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
-              <div class="range-input-container">
-                <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
-                <div class="range-container">
-                  <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
                   <span class="total-range">/10</span>
                 </div>
               </div>
@@ -143,6 +97,16 @@
                 <input class="range-input" id="fidelityScore" name="fidelityScore" value="5" type="range" min="1" max="10" required oninput="numberFidelity.value=value"/>
                 <div class="range-container">
                   <output type="number" class="range-number" id="numberFidelity" min="1" max="10" value="5" disabled>5</output>
+                  <span class="total-range">/10</span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
+              <div class="range-input-container">
+                <input class="range-input" id="attentionScore" name="attentionScore" value="5" type="range" min="1" max="10" required oninput="numberAttention.value=value"/>
+                <div class="range-container">
+                  <output type="number" class="range-number" id="numberAttention" min="1" max="10" value="5" disabled>5</output>
                   <span class="total-range">/10</span>
                 </div>
               </div>
@@ -249,7 +213,7 @@
         <small id="feedback" class=""></small>
         <button type="submit" class="primary-button" id="buttonSubmit">
           <div class="loader-container">
-            <span id="buttonText">Crear restaurante</span>
+            <span id="buttonText">Añadir opinión</span>
             <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
           </div>
         </button>
@@ -280,6 +244,5 @@
   </body>
   <script type="text/javascript" src="./js/shared.js"></script>
   <script type="text/javascript" src="./js/input-range.js"></script>
-  <script type="text/javascript" src="./js/arrays.js"></script>
-  <script type="text/javascript" src="./js/add-restaurant.js"></script>
+  <script type="text/javascript" src="./js/add-score.js"></script>
 </html>

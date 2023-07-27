@@ -30,7 +30,7 @@ function search(event) {
   event.preventDefault();
   const province = provinceSelect.value;
   const foodType = foodSelect.value;
-  window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
+  window.location.href = `https://foodiesaurus.miasalazar.com/restaurants.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
 }
 
 const checkIsLoggedIn = () => {

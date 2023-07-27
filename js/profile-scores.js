@@ -28,7 +28,7 @@ const putScores = () => {
     generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
     attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
     link.innerHTML = `Ver restaurante`;
-    link.href=`https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${score.restaurantID}`
+    link.href=`https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${score.restaurantID}`
     button.innerHTML = "Eliminar";
 
     button.classList.add("primary-button");
@@ -82,7 +82,7 @@ const deleteComment = (scoreID, restaurantID) => {
         loader.style.display = 'none';
     } else if (this.status == 401) {
         //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     } else if (this.status == 409) {
         feedback.innerHTML = "No puedes eliminar todas las puntuaciones de un restaurante";
         feedback.classList.add("error");
@@ -112,7 +112,7 @@ const getScores = () => {
         }
     } else if (this.status == 401) {
         //Si la persona no está autorizada, la expulsamos
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     } else if (this.status == 400) {
         //Si hay un error, devolvemos un error
         subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -133,7 +133,7 @@ const checkIsLoggedIn = () => {
         getScores();
     } else if (this.status == 401) {
         //Si no ha iniciado sesión, le expulsamos al login
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     }  
     };
     xmlhttp.send();

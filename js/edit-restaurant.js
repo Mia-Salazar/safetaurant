@@ -61,7 +61,7 @@ function editRestaurant(event){
         loader.style.display = 'none';
     } else if (this.status == 401) {
         //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     }
     buttonText.innerHTML = "Editar restaurante";
     };
@@ -111,9 +111,9 @@ const checkIsLoggedIn = () => {
         fillSelects();
         getRestaurant();
     } else if (this.status == 401) {
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     } else if (this.status == 400) {
-        window.location.href = "https://foodiesaurus.miasalazar.com/view/login.html";
+        window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
     } 
     };
     xmlhttp.send();

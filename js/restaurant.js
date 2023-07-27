@@ -245,7 +245,7 @@ const checkIsLoggedIn = () => {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
-        addScore.href = `https://foodiesaurus.miasalazar.com/view/add-score.html?ID=${restaurantID}`;
+        addScore.href = `https://foodiesaurus.miasalazar.com/restaurant/add-score.html?ID=${restaurantID}`;
         changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {

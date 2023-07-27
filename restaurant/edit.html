@@ -10,8 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile-details.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/list-results.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/checkboxes.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
@@ -31,7 +33,7 @@
         </a>
       </div>
       <nav class="nav">
-        <button id="toggle" class="toggle" aria-label="Alternar menú">
+        <button id="toggle" class="toggle" aria-label="Abrir menú">
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
           <i class="toggle-item" aria-hidden="true"></i>
@@ -41,41 +43,75 @@
             <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
           </li>
           <li>
-            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/add-restaurant.html">Crear restaurante</a>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/restaurant/add.html">Crear restaurante</a>
           </li>
           <li class="nav-link">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile.html">Perfil</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/index.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/view/profile-scores.html">Mis opiniones</a>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/scores.html">Mis opiniones</a>
               </li>
             </ul>
           </li>
         </ul>
+
       </nav>
     </header>
-    <main class="main profile-details">
-      <h2>Mis restaurantes</h2>
-      <ul class="info-list">
-        <li class="info-list-item">Aquí están todos los restaurantes que has creado tú</li>
-        <li class="info-list-item">Podrás borrar los que no tengan opiniones que no sean la tuya</li>
-        <li class="info-list-item">Podrás editar los datos del local de restauración</li>
-      </ul>
-      <section class="list-container">
-        <div class="container">
-          <h3 id="found"></h3>
-          <ul class="list-results scores-list" id="list">
-            <span class="loader" role="alert" aria-busy="true" id="loader"></span>
-          </ul>
-        </div>
-      </section>
+    <main class="main add-restaurant container">
+      <h2>Editar restaurante</h2>
+      <div class="add-restaurant-wrapper">
+        <form class="add-restaurant-form" id="add">
+          <div class="input-group">
+            <label class="input-label" for="name">Nombre del restaurante*: </label>
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="province">Provincia*: </label>
+            <select name="province" id="province" class="select" required>
+              <option selected disabled value="">Escoge Provincia</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="address">Dirección*: </label>
+            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="address" name="address" type="text" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="ZIP">Código Postal*: </label>
+            <input class="input" id="ZIP" name="ZIP" min="10000" max="99999" type="number" required />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="phone">Teléfono: </label>
+            <input class="input" id="phone" name="phone" type="number" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="url">Sitio web: </label>
+            <input pattern="^(?!.*<[^>]+>).*" class="input" id="url" name="url" type="url" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="foodType">Tipo de comida: </label>
+            <select name="foodType" id="foodType" class="select">
+              <option selected disabled value="">Escoge el tipo</option>
+            </select>
+          </div>
+          <small id="feedback" class=""></small>
+          <button type="submit" class="primary-button" id="buttonSubmit">
+            <div class="loader-container">
+              <span id="buttonText">Editar restaurante</span>
+              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+            </div>
+          </button>
+        </form>
+        <figure class="img-container">
+          <img class="img" alt="" src="../assets/img/food.jpg" />
+        </figure>
+      </div>
     </main>
     <footer class="footer">
       <div>
@@ -100,6 +136,7 @@
       </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./js/shared.js"></script>
-  <script type="text/javascript" src="./js/profile-restaurants.js"></script>
+  <script type="text/javascript" src="../js/shared.js"></script>
+  <script type="text/javascript" src="../js/arrays.js"></script>
+  <script type="text/javascript" src="../js/edit-restaurant.js"></script>
 </html>

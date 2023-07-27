@@ -59,7 +59,7 @@ const viewList = () => {
     let score = document.createElement("p");
 
     link.innerHTML = "Ver detalle";
-    link.href = `https://foodiesaurus.miasalazar.com/view/restaurant.html?ID=${restaurant.restaurantID}`;
+    link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
     title.innerHTML = restaurant.name;
     address.innerHTML = restaurant.address;
     province.innerHTML = restaurant.province;
@@ -124,7 +124,7 @@ const getInitialValues = () => {
 //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
 function search(event) {
     event.preventDefault();
-    window.location.href = `https://foodiesaurus.miasalazar.com/view/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+    window.location.href = `https://foodiesaurus.miasalazar.com/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
 }
 
 fillSelects();
