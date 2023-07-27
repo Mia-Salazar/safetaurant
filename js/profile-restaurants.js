@@ -11,7 +11,7 @@ const viewList = () => {
         let province = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `https://foodiesaurus.miasalazar.com/index.html?ID=${restaurant.restaurantID}`;
+        link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         link.classList.add("primary-button");
         province.innerHTML = restaurant.province;

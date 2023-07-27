@@ -28,7 +28,7 @@ const putScores = () => {
     generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
     attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
     link.innerHTML = `Ver restaurante`;
-    link.href=`https://foodiesaurus.miasalazar.com/index.html?ID=${score.restaurantID}`
+    link.href=`https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${score.restaurantID}`
     button.innerHTML = "Eliminar";
 
     button.classList.add("primary-button");
