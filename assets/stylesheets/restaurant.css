@@ -29,6 +29,10 @@
 	margin-bottom: 1.25rem;
 }
 
+.fa-solid {
+	margin: 0;
+}
+
 .scores-list {
 	display: grid;
    	grid-template-columns: 1fr;
