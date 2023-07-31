@@ -34,8 +34,6 @@ const getRestaurants = () => {
         if (this.readyState == 4 && this.status == 200) {
             //Si ha habido éxito, guardamos los datos del usuario en la variable user
             restaurants = JSON.parse(this.responseText);
-            console.log(restaurants, 'rdsada')
-            
             if (restaurants.length !== 0) {
                 found.innerHTML = `Has registrado ${restaurants.length} locales de restauración`;
                 viewList();
