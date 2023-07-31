@@ -22,7 +22,7 @@ h3 {
 
 .list-container {
     margin-top: 2rem;
-    padding: 1rem 1rem 2rem 1rem;
+    padding: 1rem 1rem 8rem 1rem;
     background: var(--bg);
     width: 100%;
     box-sizing: border-box;

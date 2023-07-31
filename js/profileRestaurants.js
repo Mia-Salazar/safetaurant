@@ -30,6 +30,7 @@ const getRestaurants = () => {
     xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/profileRestaurants.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
+        
         if (this.readyState == 4 && this.status == 200) {
             //Si ha habido éxito, guardamos los datos del usuario en la variable user
             restaurants = JSON.parse(this.responseText);
@@ -40,6 +41,10 @@ const getRestaurants = () => {
                 found.innerHTML = "No has registrado ningún local de restauración";
                 loader.style.display = 'none';
             }
+        } else if (this.readyState == 4 && this.status == 204) {
+            restaurants = [];
+            found.innerHTML = "No has registrado ningún local de restauración";
+            loader.style.display = 'none';
         } else if (this.status == 401) {
             //Si la persona no está autorizada, la expulsamos
             window.location.href = "https://foodiesaurus.miasalazar.com/login.html";

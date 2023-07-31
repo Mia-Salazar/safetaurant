@@ -38,7 +38,7 @@
 		$query->bindParam(":userID", $userID, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
-
+		
 		if (!empty($rows)) {
 			return $rows;
 		} else {

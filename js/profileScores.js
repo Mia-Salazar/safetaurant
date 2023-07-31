@@ -104,12 +104,16 @@ const getScores = () => {
         //Si ha habido éxito, guardamos los datos del usuario en la variable user
         scores = JSON.parse(this.responseText);
         if (scores.length !== 0) {
-        found.innerHTML = `Has realizado ${scores.length} evaluaciones`;
-        putScores();
+            found.innerHTML = `Has realizado ${scores.length} evaluaciones`;
+            putScores();
         } else {
+            found.innerHTML = "No has hecho ninguna evaluación";
+            loader.style.display = 'none';
+        }
+    }  else if (this.readyState == 4 && this.status == 204) {
+        scores = [];
         found.innerHTML = "No has hecho ninguna evaluación";
         loader.style.display = 'none';
-        }
     } else if (this.status == 401) {
         //Si la persona no está autorizada, la expulsamos
         window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
