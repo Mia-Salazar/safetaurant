@@ -23,7 +23,7 @@ window.onload = function () {
   });
   google.accounts.id.renderButton(
     document.getElementById("buttonDiv"),
-    { theme: "outline", size: "large", width: "200" }  // customization attributes
+    { theme: "outline", size: "large", width: 200 }  // customization attributes
   );
   google.accounts.id.prompt(); // also display the One Tap dialog
 }
