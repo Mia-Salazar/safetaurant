@@ -97,7 +97,7 @@
 	//Funcionalidad para obtener todas las puntuaciones de un restaurante
 	function getScores($restaurantID) {
 		$connection = new Connection();
-		$query = $connection->prepare("SELECT * FROM scores WHERE restaurantID = :restaurantID");
+		$query = $connection->prepare("SELECT * FROM scores WHERE restaurantID = :restaurantID AND comment <> '' ");
 		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
