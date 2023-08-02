@@ -14,9 +14,11 @@ const list = document.getElementById("list");
 const order = document.getElementById("order");
 const loader = document.getElementById("loader");
 const nextButton = document.getElementById("next");
+const loadMoreSpinner = document.getElementById("loaderLoadMore");
 document.getElementById("search").addEventListener("submit", search, false);
 document.getElementById("order").addEventListener("change", search, false);
 nextButton.addEventListener("click", getNextPage, false);
+loadMoreSpinner.style.display = 'none';
 
 //Creamos una variable para guardar el resultado de la búsqueda
 let restaurants;
@@ -85,6 +87,7 @@ const viewList = () => {
 
 function getNextPage(){
     if(name && name != "") {
+        loadMoreSpinner.style.display = 'flex';
         from = from + LIMIT_PAGINATION;
         page++;
         getRestaurantAPI();
@@ -106,16 +109,19 @@ const getRestaurantAPI = () => {
                     nextButton.style.display = 'none';
                 }
                 viewList();
+                loadMoreSpinner.style.display = 'none';
                 loader.style.display = 'none';
             } else {
                 found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
                 loader.style.display = 'none';
+                loadMoreSpinner.style.display = 'none';
             }
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             orderContainer.classList.add("hidden");
             loader.style.display = 'none';
+            loadMoreSpinner.style.display = 'none';
         }
     };
     xmlhttp.send();
