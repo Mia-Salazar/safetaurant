@@ -1,3 +1,7 @@
+const LIMIT_PAGINATION = 10;
+let from = 0;
+let page = 0;
+
 const nav = document.getElementById("nav");
 const found = document.getElementById("found");
 const toggleButton = document.getElementById("toggle");
@@ -50,64 +54,104 @@ const fillSelects = () => {
 
 //Para cada restaurante encontrado, creamos un <li> con todos los datos
 const viewList = () => {
+    getRestaurantTotal()
     restaurants.forEach((restaurant) => {
-    let li = document.createElement("li");
-    let link = document.createElement("a");
-    let title = document.createElement("h4");
-    let address = document.createElement("p");
-    let province = document.createElement("p");
-    let score = document.createElement("p");
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+        let title = document.createElement("h4");
+        let address = document.createElement("p");
+        let province = document.createElement("p");
+        let score = document.createElement("p");
 
-    link.innerHTML = "Ver detalle";
-    link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
-    title.innerHTML = restaurant.name;
-    address.innerHTML = restaurant.address;
-    province.innerHTML = restaurant.province;
-    score.innerHTML = `${Math.floor(restaurant.generalScore)}<span>/10</span>`;
-    score.classList.add("list-score");
-    link.classList.add("primary-button");
+        link.innerHTML = "Ver detalle";
+        link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        title.innerHTML = restaurant.name;
+        address.innerHTML = restaurant.address;
+        province.innerHTML = restaurant.province;
+        score.innerHTML = `${Math.floor(restaurant.generalScore)}<span>/10</span>`;
+        score.classList.add("list-score");
+        link.classList.add("primary-button");
 
-    li.appendChild(title);
-    li.appendChild(address);
-    li.appendChild(province);
-    li.appendChild(score);
-    li.appendChild(link);
+        li.appendChild(title);
+        li.appendChild(address);
+        li.appendChild(province);
+        li.appendChild(score);
+        li.appendChild(link);
 
-    list.appendChild(li);
+        list.appendChild(li);
     });
+}
+
+const getNextPage = () => {
+    if(name && name != "") {
+        getRestaurantAPI();
+        from = from + LIMIT_PAGINATION;
+        page++;
+    } else {
+        found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+        loader.style.display = 'none';
+    }
+}
+
+const getRestaurantAPI = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            restaurants = JSON.parse(this.responseText);
+            if (restaurants[0].restaurantID !== null) {
+                viewList();
+                found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
+                loader.style.display = 'none';
+            } else {
+                found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+                loader.style.display = 'none';
+            }
+        } else if (this.status === 404 || this.status === 204) {
+            //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
+            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            orderContainer.classList.add("hidden");
+            loader.style.display = 'none';
+        }
+    };
+    xmlhttp.send();
 }
 
 //Función para buscar restaurantes con los datos recabados en el buscador
 const getRestaurants = () => {
     if(name && name != "") {
+        getRestaurantAPI();
+    } else {
+        found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+        loader.style.display = 'none';
+    }
+}
+
+const getRestaurantTotal = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}`, true);
+    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/searchTotal.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-        //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
-        //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-        restaurants = JSON.parse(this.responseText);
-        if (restaurants[0].restaurantID !== null) {
-            viewList();
-            found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
-            loader.style.display = 'none';
-        } else {
-            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-            loader.style.display = 'none';
-        }
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            restaurants = JSON.parse(this.responseText);
+            if (restaurants[0].restaurantID !== null) {
+            } else {
+                found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+                loader.style.display = 'none';
+            }
         } else if (this.status === 404 || this.status === 204) {
-        //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
-        found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-        orderContainer.classList.add("hidden");
-        loader.style.display = 'none';
+            //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
+            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            orderContainer.classList.add("hidden");
+            loader.style.display = 'none';
         }
     };
     xmlhttp.send();
-    } else {
-    found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-    loader.style.display = 'none';
-    }
 }
 
 //Obtenemos los valores iniciales de la ruta y llamamos a la función de obtener resultados para la búsqueda

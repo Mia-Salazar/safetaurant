@@ -5,10 +5,10 @@
   //Comprobamos si hemos recibido un nombre de restaurante
   if(isset($_GET['name'])){
     //Pedimos la búsqueda de restaurante enviando todos los filtros
-    $restaurants = getRestaurants($_GET['name'], $_GET['province'], $_GET['foodType'], $_GET['order'], $_GET['offset'] );
+    $restaurants = getRestaurantsTotal($_GET['name'], $_GET['province'], $_GET['foodType']);
     if($restaurants) {
       //Enviamos los resultados
-      echo json_encode($restaurants);
+      echo json_encode($restaurants[0]);
     } else {
       //Si no se ha encontrado ningún restaurante que coincida con los criterios, devolvemos un 204, ya que no hay contenido
       http_response_code(204);
