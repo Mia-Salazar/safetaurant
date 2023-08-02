@@ -13,8 +13,10 @@ const orderContainer = document.getElementById("orderContainer");
 const list = document.getElementById("list");
 const order = document.getElementById("order");
 const loader = document.getElementById("loader");
+const nextButton = document.getElementById("next");
 document.getElementById("search").addEventListener("submit", search, false);
 document.getElementById("order").addEventListener("change", search, false);
+nextButton.addEventListener("click", getNextPage, false);
 
 //Creamos una variable para guardar el resultado de la búsqueda
 let restaurants;
@@ -38,23 +40,22 @@ const checkIsLoggedIn = () => {
 //Rellenamos los select con los array que encontramos arriba
 const fillSelects = () => {
     provinces.forEach((province) => {
-    let option = document.createElement("option");
-    option.value = province;
-    option.innerHTML = province;
-    provinceSelect.appendChild(option);
+        let option = document.createElement("option");
+        option.value = province;
+        option.innerHTML = province;
+        provinceSelect.appendChild(option);
     });
     const foodTypeOrderes = foodType.sort();
     foodTypeOrderes.forEach((food) => {
-    let option = document.createElement("option");
-    option.value = food;
-    option.innerHTML = food;
-    foodSelect.appendChild(option);
+        let option = document.createElement("option");
+        option.value = food;
+        option.innerHTML = food;
+        foodSelect.appendChild(option);
     });
 }
 
 //Para cada restaurante encontrado, creamos un <li> con todos los datos
 const viewList = () => {
-    getRestaurantTotal()
     restaurants.forEach((restaurant) => {
         let li = document.createElement("li");
         let link = document.createElement("a");
@@ -82,14 +83,11 @@ const viewList = () => {
     });
 }
 
-const getNextPage = () => {
+function getNextPage(){
     if(name && name != "") {
-        getRestaurantAPI();
         from = from + LIMIT_PAGINATION;
         page++;
-    } else {
-        found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-        loader.style.display = 'none';
+        getRestaurantAPI();
     }
 }
 
@@ -103,8 +101,11 @@ const getRestaurantAPI = () => {
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurants = JSON.parse(this.responseText);
             if (restaurants[0].restaurantID !== null) {
+                const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
+                if(!hasMoreToLoad) {
+                    nextButton.style.display = 'none';
+                }
                 viewList();
-                found.innerHTML = `Se han encontrado ${restaurants.length} resultados`;
                 loader.style.display = 'none';
             } else {
                 found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
@@ -138,12 +139,9 @@ const getRestaurantTotal = () => {
         if (this.readyState == 4 && this.status == 200) {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-            restaurants = JSON.parse(this.responseText);
-            if (restaurants[0].restaurantID !== null) {
-            } else {
-                found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-                loader.style.display = 'none';
-            }
+            restaurantsTotal = JSON.parse(this.responseText);
+            found.innerHTML = `Se han encontrado ${restaurantsTotal} resultados`;
+            getRestaurants();
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
@@ -161,7 +159,6 @@ const getInitialValues = () => {
     provinceSelect.value = new URL(document.URL).searchParams.get('province');
     foodSelect.value =  new URL(document.URL).searchParams.get('foodType');
     order.value = new URL(document.URL).searchParams.get('order');
-    getRestaurants();
 }
 
 //Con esta función redirigimos al usuario a otra ruta con todos los valores de la búsqueda
@@ -174,3 +171,4 @@ function search(event) {
 fillSelects();
 getInitialValues();
 checkIsLoggedIn();
+getRestaurantTotal();
