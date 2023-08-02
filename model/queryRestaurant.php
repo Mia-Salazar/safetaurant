@@ -47,12 +47,12 @@
 		closeConnection($connection);
 	}
 
-	function getRestaurants($name, $province, $foodType, $order) {
+	function getRestaurants($name, $province, $foodType, $order, $offset) {
 		$connection = new Connection();
 		if ($name == "") {
-			$rows = getRestaurantWithoutName($province, $foodType, strtoupper($order), $connection);
+			$rows = getRestaurantWithoutName($province, $foodType, strtoupper($order), $connection, $offset);
 		} else {
-			$rows = getRestaurantWithName($name, $province, $foodType, strtoupper($order), $connection);
+			$rows = getRestaurantWithName($name, $province, $foodType, strtoupper($order), $connection, $offset);
 		}
 
 		if (!empty($rows)) {
@@ -63,7 +63,21 @@
 		}
 	}
 
-	function getRestaurantWithName($name, $province, $foodType, $order, $connection) {
+	function getLatestRestaurant() {
+		$connection = new Connection();
+		$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+		FROM restaurant 
+		INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
+		ORDER BY AVG(scores.generalScore) ASC LIMIT 10 OFFSET :offset";
+		$query = $connection->prepare($sql);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		return $rows; 
+		closeConnection($connection);
+	}
+
+	function getRestaurantWithName($name, $province, $foodType, $order, $connection, $offset) {
 		$allowedOrders = array('ASC', 'DESC');
 		$order = strtoupper($order); // Convertir a mayúsculas para que coincida con las opciones permitidas
 		if (!in_array($order, $allowedOrders)) {
@@ -78,7 +92,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 		} else if ($province != "" && $foodType == "") {
@@ -88,7 +102,7 @@
             WHERE LOWER(name) LIKE :name AND 
 			province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
@@ -99,7 +113,7 @@
             WHERE LOWER(name) LIKE :name AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':foodType', $foodType);
@@ -111,19 +125,20 @@
 			province = :province AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
 			$query->bindParam(':foodType', $foodType);
 		}
+		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
 		return $rows;
 	}
 
-	function getRestaurantWithoutName($province, $foodType, $order, $connection) {
+	function getRestaurantWithoutName($province, $foodType, $order, $connection, $offset) {
 		$allowedOrders = array('ASC', 'DESC');
 		$order = strtoupper($order); // Convertir a mayúsculas para que coincida con las opciones permitidas
 		if (!in_array($order, $allowedOrders)) {
@@ -136,7 +151,7 @@
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 		} else if ($province != "" && $foodType == "") {
 			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
@@ -144,7 +159,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
@@ -153,7 +168,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 		} else {
@@ -163,11 +178,12 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType AND province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order";
+            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 			$query->bindParam(':province', $province);
 		}
+		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
@@ -189,5 +205,92 @@
 			return false;
 		} 
 		closeConnection($connection);
+	}
+
+
+	// Total
+	function getRestaurantsTotal($name, $province, $foodType) {
+		$connection = new Connection();
+		if ($name == "") {
+			$rows = getRestaurantWithoutNameTotal($province, $foodType, $connection);
+		} else {
+			$rows = getRestaurantWithNameTotal($name, $province, $foodType, $connection);
+		}
+		return $rows;
+	}
+
+	function getRestaurantWithNameTotal($name, $province, $foodType, $connection) {
+		$rows;
+		$name = '%' . strtolower($name) . '%'; 
+		if ($province == "" && $foodType == "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE LOWER(name) LIKE :name";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':name', $name);
+		} else if ($province != "" && $foodType == "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE LOWER(name) LIKE :name AND 
+			province = :province";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':name', $name);
+			$query->bindParam(':province', $province);
+		} else if ($province == "" && $foodType != "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE LOWER(name) LIKE :name AND 
+			foodType = :foodType";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':name', $name);
+			$query->bindParam(':foodType', $foodType);
+		} else {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE LOWER(name) LIKE :name AND 
+			province = :province AND 
+			foodType = :foodType";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':name', $name);
+			$query->bindParam(':province', $province);
+			$query->bindParam(':foodType', $foodType);
+		}
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		closeConnection($connection); 
+		return $rows;
+	}
+
+	function getRestaurantWithoutNameTotal($province, $foodType, $connection) {
+		$rows;
+		if ($province == "" && $foodType == "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant";
+			$query = $connection->prepare($sql);
+		} else if ($province != "" && $foodType == "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE province = :province";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':province', $province);
+		} else if ($province == "" && $foodType != "") {
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE foodType = :foodType";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':foodType', $foodType);
+		} else {
+			//$sql = "SELECT count(*) FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY AVG(scores.generalScore) ";
+			$sql = "SELECT count(*) 
+            FROM restaurant 
+            WHERE foodType = :foodType AND province = :province";
+			$query = $connection->prepare($sql);
+			$query->bindParam(':foodType', $foodType);
+			$query->bindParam(':province', $province);
+		}
+		$query->execute();
+		$rows = $query->fetch();
+		closeConnection($connection); 
+		return $rows;
 	}
 ?>
