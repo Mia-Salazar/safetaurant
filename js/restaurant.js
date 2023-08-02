@@ -181,7 +181,7 @@ const getScores = () => {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         //Se guardan las calificaciones en una variable
-        scores = JSON.parse(this.responseText);
+        scores = JSON.parse(this.responseText) || [];
         //Llamamos a la función que añade en la página todas las puntuaciones
         putScores();
     } else if (this.status == 400) {
