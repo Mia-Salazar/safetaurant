@@ -68,25 +68,25 @@
         <li class="info-list-item">Escribe el nombre del restaurante</li>
         <li class="info-list-item">Comprueba si ese restaurante existe antes de añadirlo</li>
       </ul>
-      <form class="add-restaurant-form" id="add">
+        <form class="add-restaurant-form" id="add">
             <div class="input-group">
                 <label class="input-label" for="province">Provincia*: </label>
                 <select name="province" id="province" class="select" required>
-                <option selected disabled value="">Escoge Provincia</option>
+                    <option selected disabled value="">Escoge Provincia</option>
                 </select>
             </div>
             <div class="input-group" id="nameContainer">
                 <label class="input-label" for="name">Nombre del restaurante*: </label>
                 <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
             </div>
-        <small id="feedback" class=""></small>
-        <button type="submit" class="primary-button" id="buttonSubmit">
-          <div class="loader-container">
-            <span id="buttonText">Crear restaurante</span>
-            <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
-          </div>
-        </button>
-      </form>
+            <small id="feedback" class=""></small>
+            <button type="submit" class="primary-button" id="buttonSubmit" disabled>
+                <div class="loader-container">
+                    <span id="buttonText">Crear restaurante</span>
+                    <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+                </div>
+            </button>
+        </form>
     </main>
     <footer class="footer">
       <div>
@@ -113,4 +113,5 @@
   </body>
   <script type="text/javascript" src="../js/shared.js"></script>
   <script type="text/javascript" src="../js/arrays.js"></script>
+  <script type="text/javascript" src="../js/searchRestaurant.js"></script>
 </html>
