@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#319DA0" />
+    <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
+    <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/img/logo.png" />
+    <title>Foodiesaurus, restaurantes sin alergias</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="title-container">
+        <a href="https://foodiesaurus.miasalazar.com/index.html" class="home-link" aria-label="Ir a la home">
+          <h1 class="title">
+            <span>Foodie</span>
+            <figure class="logo-container">
+              <img class="logo" width="42px" height="42px" src="../assets/img/foodiesaurus.png" alt="" />
+            </figure>
+            <span>saurus</span>
+          </h1>
+        </a>
+      </div>
+      <nav class="nav">
+        <button id="toggle" class="toggle" aria-label="Abrir menú">
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+        </button>
+        <ul class="nav-list" id="nav">
+          <li>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/index.html">Buscar</a>
+          </li>
+          <li>
+            <a class="nav-link" href="https://foodiesaurus.miasalazar.com/restaurant/search.html">Crear restaurante</a>
+          </li>
+          <li class="nav-link">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/index.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/restaurants.html">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.miasalazar.com/profile/scores.html">Mis opiniones</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </header>
+    <main class="main add-restaurant container">
+      <h2>Añadir restaurante</h2>
+      <ul class="info-list">
+        <li class="info-list-item">Escoge una provincia</li>
+        <li class="info-list-item">Escribe el nombre del restaurante</li>
+        <li class="info-list-item">Comprueba si ese restaurante existe antes de añadirlo</li>
+      </ul>
+      <form class="add-restaurant-form" id="add">
+            <div class="input-group">
+                <label class="input-label" for="province">Provincia*: </label>
+                <select name="province" id="province" class="select" required>
+                <option selected disabled value="">Escoge Provincia</option>
+                </select>
+            </div>
+            <div class="input-group" id="nameContainer">
+                <label class="input-label" for="name">Nombre del restaurante*: </label>
+                <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
+            </div>
+        <small id="feedback" class=""></small>
+        <button type="submit" class="primary-button" id="buttonSubmit">
+          <div class="loader-container">
+            <span id="buttonText">Crear restaurante</span>
+            <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+          </div>
+        </button>
+      </form>
+    </main>
+    <footer class="footer">
+      <div>
+        <div class="footer__logo">
+          <p>Foodie</p>
+          <figure class="footer-img">
+            <img class="img" alt="logo"  width="42px" height="42px" src="../assets/img/foodiesaurus-transparent.png"  />
+           </figure>
+          <p>saurus</p>
+        </div>
+        <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+      </div>
+      <div class="footer__container">
+        <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
+        <ul class="footer__list">
+          <li><a href="https://twitter.com/miadeveloper" aria-label="Ir a mi Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/miasalazar/" aria-label="Ir a mi Linked"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+          <li><a href="https://dev.to/miasalazar" aria-label="Ir a mi Dev.to"><i class="fa-brands fa-dev" aria-hidden="true"></i></a></li>
+          <li><a href="https://marasalazar.medium.com/" aria-label="Ir a mi Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/Mia-Salazar" aria-label="Ir a mi GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript" src="../js/shared.js"></script>
+  <script type="text/javascript" src="../js/arrays.js"></script>
+</html>
