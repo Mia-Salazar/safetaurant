@@ -5,7 +5,6 @@ function handleCredentialResponse(response) {
   loader.style.display = 'flex';
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    loader.style.display = 'none';
     if (this.readyState == 4 && this.status == 200) {
       // redirect to profile page
       location.href = 'https://foodiesaurus.miasalazar.com/index.html';
