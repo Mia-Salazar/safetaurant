@@ -11,13 +11,15 @@ let typingTimer;
 const doneTypingInterval = 2000; 
 let restaurants;
 
+restaurantsList.style.display = 'none';
 loader.style.display = 'none';
 nameContainer.style.display = 'none';
-list.style.display = 'none';
+sectionList.style.display = 'none';
 
 submit.addEventListener("submit", redirect, false);
 document.getElementById("province").addEventListener("change", toggleProvince, false);
 nameInput.addEventListener("keyup",function () {
+    buttonSubmit.disabled = true;
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
     loader.style.display = 'flex';
@@ -36,6 +38,11 @@ function doneTyping () {
 
 function toggleProvince() {
     nameContainer.style.display = 'flex';
+    if (nameInput.value !== "") {
+        loader.style.display = 'flex';
+        buttonSubmit.disabled = true;
+        getRestaurantAPI();
+    }  
 }
 
 function redirect(event){
@@ -76,26 +83,25 @@ const getRestaurantAPI = () => {
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurants = JSON.parse(this.responseText);
             if (restaurants.length > 0) {
+                restaurantsList.innerHTML = "";
                 loader.style.display = 'none';
                 buttonSubmit.disabled = false;
-                list.style.display = 'flex';
+                restaurantsList.style.display = 'flex';
+                sectionList.style.display = 'flex';
                 createRestauranList();
             } else {
-                feedback.classList.add("error");
-                feedback.innerHTML = "No hay restaurantes con este nombre";
+                feedback.innerHTML = "No ningún restaurantes con este nombre ¡Añádelo!";
                 loader.style.display = 'none';
                 buttonSubmit.disabled = false;
-                list.style.display = 'flex';
                 restaurantsList.style.display = 'none';
+                sectionList.style.display = 'flex';
             }
         } else if (this.status === 404 || this.status === 204) {
-
-            feedback.classList.add("error");
-            feedback.innerHTML = "No hay restaurantes con este nombre";
+            feedback.innerHTML = "No ningún restaurantes con este nombre ¡Añádelo!";
             loader.style.display = 'none';
             buttonSubmit.disabled = false;
-            list.style.display = 'flex';
             restaurantsList.style.display = 'none';
+            sectionList.style.display = 'flex';
         }
     };
     xmlhttp.send();
