@@ -1,0 +1,18 @@
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list ul {
+    margin-top: 0;
+    padding-left: 1rem;
+    list-style-type: none;
+}
+
+.list li a {
+    color: var(--grayDark);
+}
+
+.search {
+    max-width: 23.125rem;
+}

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/search-name.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="../assets/img/logo.png" />
@@ -61,12 +62,13 @@
 
       </nav>
     </header>
-    <main class="main add-restaurant container">
+    <main class="main search container">
       <h2>Añadir restaurante</h2>
       <ul class="info-list">
         <li class="info-list-item">Escoge una provincia</li>
         <li class="info-list-item">Escribe el nombre del restaurante</li>
         <li class="info-list-item">Comprueba si ese restaurante existe antes de añadirlo</li>
+        <li class="info-list-item">Si ya existe pulsa en él para verlo</li>
       </ul>
         <form class="add-restaurant-form" id="add">
             <div class="input-group">
@@ -80,6 +82,12 @@
                 <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
             </div>
             <small id="feedback" class=""></small>
+            <section class="list" id="list">
+                <h3>Restaurantes con nombres parecidos</h3>
+                <ul id="restaurantsList">
+                </ul>
+                <p id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
+            </section>
             <button type="submit" class="primary-button" id="buttonSubmit" disabled>
                 <div class="loader-container">
                     <span id="buttonText">Crear restaurante</span>
@@ -87,6 +95,7 @@
                 </div>
             </button>
         </form>
+
     </main>
     <footer class="footer">
       <div>
@@ -113,5 +122,5 @@
   </body>
   <script type="text/javascript" src="../js/shared.js"></script>
   <script type="text/javascript" src="../js/arrays.js"></script>
-  <script type="text/javascript" src="../js/searchRestaurant.js"></script>
+  <script type="text/javascript" src="../js/searchName.js"></script>
 </html>
