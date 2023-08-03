@@ -171,7 +171,7 @@ const getInitialValues = () => {
 //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
 function search(event) {
     event.preventDefault();
-    window.location.href = `https://foodiesaurus.miasalazar.com/restaurants.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+    window.location.href = `https://foodiesaurus.miasalazar.com/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
 }
 
 fillSelects();

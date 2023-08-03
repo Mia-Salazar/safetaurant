@@ -293,4 +293,24 @@
 		closeConnection($connection); 
 		return $rows;
 	}
+
+	// Search names before adding
+	function getRestaurantsNames($name, $province) {
+		$connection = new Connection();
+		$name = '%' . strtolower($name) . '%'; 
+		$sql = "SELECT name, restaurantID  
+		FROM restaurant 
+		WHERE LOWER(name) LIKE :name AND 
+		province = :province 
+		ORDER BY name DESC";
+
+		$query = $connection->prepare($sql);
+		$query->bindParam(':name', $name);
+		$query->bindParam(':province', $province);
+		$query->execute();
+
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		closeConnection($connection); 
+		return $rows;
+	}
 ?>
