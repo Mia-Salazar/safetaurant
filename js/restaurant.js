@@ -26,11 +26,15 @@ const putData = () => {
     document.getElementById("zip").innerHTML = restaurant.ZIP;
     //Si se ha guardado el teléfono, lo mostramos
     if (restaurant.phone && restaurant.phone !== "0") {
-    document.getElementById("phone").innerHTML = restaurant.phone;
+        document.getElementById("phone").innerHTML = restaurant.phone;
     }
     //Si se ha guardado el tipo de comida, lo mostramos
     if (restaurant.foodType && restaurant.foodType !== "") {
-    document.getElementById("foodType").innerHTML = restaurant.foodType;
+        document.getElementById("foodType").innerHTML = restaurant.foodType;
+    }
+    if (restaurant.url && restaurant.url !== "") {
+        document.getElementById("url").innerHTML = restaurant.url;
+        document.getElementById("url").href = restaurant.url;
     }
     getScores();
 }
