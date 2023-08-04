@@ -193,9 +193,16 @@ const getScores = () => {
     xmlhttp.send(JSON.stringify(data));
 }
 
-const getAriaLabel = (hasOption) => {
-    if (hasOption) return "Sí hay esta opción";
+const getAriaLabel = (yes, no) => {
+    if (yes === no) return "No se sabe si hay esta opción"
+    if (yes > no) return "Sí hay esta opción";
     return "No hay esta opción";
+}
+
+const getIcon = (yes, no) => {
+    if (yes === no) return "fa-question"
+    if (yes > no) return "fa-check";
+    return "fa-xmark";
 }
 
 const getOptions = () => {
@@ -207,24 +214,24 @@ const getOptions = () => {
         //Se guardan las calificaciones en una variable
         options = JSON.parse(this.responseText);
 
-        const celiac = options.celiacDiseaseYes > options.celiacDiseaseNo ? "fa-check" : "fa-xmark";
+        const celiac = getIcon(options.celiacDiseaseYes, options.celiacDiseaseNo);
         document.getElementById("celiacDiseaseOption").classList.add(celiac);
-        document.getElementById("celiacDiseaseOption").setAttribute('aria-label', getAriaLabel(celiac))
-        const diabetes = options.diabetesYes > options.diabetesNo ? "fa-check" : "fa-xmark";
+        document.getElementById("celiacDiseaseOption").setAttribute('aria-label', getAriaLabel(options.celiacDiseaseYes, options.celiacDiseaseNo))
+        const diabetes = getIcon(options.diabetesYes, options.diabetesNo);
         document.getElementById("diabetesOption").classList.add(diabetes);
-        document.getElementById("diabetesOption").setAttribute('aria-label', getAriaLabel(diabetes))
-        const fructose = options.fructoseIntolerantYes > options.fructoseIntolerantNo ? "fa-check" : "fa-xmark";
+        document.getElementById("diabetesOption").setAttribute('aria-label', getAriaLabel(options.diabetesYes, options.diabetesNo))
+        const fructose = getIcon(options.fructoseIntolerantYes, options.fructoseIntolerantNo);
         document.getElementById("fructoseIntolerantOption").classList.add(fructose);
-        document.getElementById("fructoseIntolerantOption").setAttribute('aria-label', getAriaLabel(fructose))
-        const lactose = options.lactoseIntolerantYes > options.lactoseIntolerantNo ? "fa-check" : "fa-xmark";
+        document.getElementById("fructoseIntolerantOption").setAttribute('aria-label', getAriaLabel(options.fructoseIntolerantYes, options.fructoseIntolerantNo))
+        const lactose = getIcon(options.lactoseIntolerantYes, options.lactoseIntolerantNo);
         document.getElementById("lactoseIntolerantOption").classList.add(lactose);
-        document.getElementById("lactoseIntolerantOption").setAttribute('aria-label', getAriaLabel(lactose))
-        const vegetarian = options.vegetarianYes > options.vegetarianNo ? "fa-check" : "fa-xmark";
+        document.getElementById("lactoseIntolerantOption").setAttribute('aria-label', getAriaLabel(options.lactoseIntolerantYes, options.lactoseIntolerantNo))
+        const vegetarian = getIcon(options.vegetarianYes, options.vegetarianNo);
         document.getElementById("vegetarianOption").classList.add(vegetarian);
-        document.getElementById("vegetarianOption").setAttribute('aria-label', getAriaLabel(vegetarian))
-        const vegan = options.veganYes > options.veganNo ? "fa-check" : "fa-xmark";
+        document.getElementById("vegetarianOption").setAttribute('aria-label', getAriaLabel(options.vegetarianYes, options.vegetarianNo))
+        const vegan = getIcon(options.veganYes, options.veganNo);
         document.getElementById("veganOption").classList.add(vegan);
-        document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(vegan))
+        document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
 
         loader.style.display = 'none';
         restaurantContainer.style.display = 'block';
