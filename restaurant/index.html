@@ -65,7 +65,11 @@
       </nav>
     </header>
     <main class="main add-restaurant">
-      <h2 id="name">Restaurante</h2>
+      <div class="header-container">
+        <h2 id="name">Restaurante</h2>
+        <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
+      </div>
+      
       <div class="data-container">
         <div>
           <p class="data-text">Dirección: <span class="data-info" id="address">-</span></p>
@@ -157,12 +161,7 @@
               </li>
             </ul>
           </div>
-        </div>
-        <h3 class="actions" id="scoreText">Acciones</h3>
-        <div class="container">
-          <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
-        </div>
-        
+        </div>        
         <h3 class="reviews">Comentarios (<span id="totalComments"></span>)</h3>
         <div class="container" id="scores">
           <ul id="scoresList" class="scores-list">
