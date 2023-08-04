@@ -124,17 +124,17 @@
 
 	function getOptionsNumber($restaurantID) {
 		$connection = new Connection();
-		$query = $connection->prepare("SELECT COUNT(CASE WHEN menuOptions.celiacDisease = 2 THEN 1 END) as celiacDiseaseYes, 
+		$query = $connection->prepare("SELECT COUNT(CASE WHEN menuOptions.celiacDisease = 0 THEN 1 END) as celiacDiseaseYes, 
 		COUNT(CASE WHEN menuOptions.celiacDisease = 1 THEN 1 END) as celiacDiseaseNo, 
-		COUNT(CASE WHEN menuOptions.diabetes = 2 THEN 1 END) as diabetesYes, 
+		COUNT(CASE WHEN menuOptions.diabetes = 0 THEN 1 END) as diabetesYes, 
 		COUNT(CASE WHEN menuOptions.diabetes = 1 THEN 1 END) as diabetesNo, 
-		COUNT(CASE WHEN menuOptions.lactoseIntolerant = 2 THEN 1 END) as lactoseIntolerantYes, 
+		COUNT(CASE WHEN menuOptions.lactoseIntolerant = 0 THEN 1 END) as lactoseIntolerantYes, 
 		COUNT(CASE WHEN menuOptions.lactoseIntolerant = 1 THEN 1 END) as lactoseIntolerantNo, 
-		COUNT(CASE WHEN menuOptions.fructoseIntolerant = 2 THEN 1 END) as fructoseIntolerantYes, 
+		COUNT(CASE WHEN menuOptions.fructoseIntolerant = 0 THEN 1 END) as fructoseIntolerantYes, 
 		COUNT(CASE WHEN menuOptions.fructoseIntolerant = 1 THEN 1 END) as fructoseIntolerantNo, 
-		COUNT(CASE WHEN menuOptions.vegan = 2 THEN 1 END) as veganYes, 
+		COUNT(CASE WHEN menuOptions.vegan = 0 THEN 1 END) as veganYes, 
 		COUNT(CASE WHEN menuOptions.vegan = 1 THEN 1 END) as veganNo, 
-		COUNT(CASE WHEN menuOptions.vegetarian = 2 THEN 1 END) as vegetarianYes, 
+		COUNT(CASE WHEN menuOptions.vegetarian = 0 THEN 1 END) as vegetarianYes, 
 		COUNT(CASE WHEN menuOptions.vegetarian = 1 THEN 1 END) as vegetarianNo FROM menuOptions WHERE restaurantID = :restaurantID");
 		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
 		$query->execute();
