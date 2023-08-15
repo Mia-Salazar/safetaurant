@@ -223,13 +223,13 @@
 		$rows;
 		$name = '%' . strtolower($name) . '%'; 
 		if ($province == "" && $foodType == "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE LOWER(name) LIKE :name";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 		} else if ($province != "" && $foodType == "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE LOWER(name) LIKE :name AND 
 			province = :province";
@@ -237,7 +237,7 @@
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE LOWER(name) LIKE :name AND 
 			foodType = :foodType";
@@ -245,7 +245,7 @@
 			$query->bindParam(':name', $name);
 			$query->bindParam(':foodType', $foodType);
 		} else {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE LOWER(name) LIKE :name AND 
 			province = :province AND 
@@ -264,24 +264,24 @@
 	function getRestaurantWithoutNameTotal($province, $foodType, $connection) {
 		$rows;
 		if ($province == "" && $foodType == "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant";
 			$query = $connection->prepare($sql);
 		} else if ($province != "" && $foodType == "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE province = :province";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
-			$sql = "SELECT count(*) 
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE foodType = :foodType";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 		} else {
-			//$sql = "SELECT count(*) FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY AVG(scores.generalScore) ";
-			$sql = "SELECT count(*) 
+			//$sql = "SELECT count(*) as total FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY AVG(scores.generalScore) ";
+			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE foodType = :foodType AND province = :province";
 			$query = $connection->prepare($sql);
