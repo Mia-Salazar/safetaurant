@@ -4,6 +4,7 @@
 }
 
 .list ul {
+    flex-direction: column;
     margin-top: 0;
     padding-left: 1rem;
     list-style-type: none;
