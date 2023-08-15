@@ -146,7 +146,7 @@ const getRestaurantTotal = () => {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurantsTotal = JSON.parse(this.responseText);
-            found.innerHTML = `Se han encontrado ${restaurantsTotal} resultados`;
+            found.innerHTML = `Se han encontrado ${restaurantsTotal.total} resultados`;
             getRestaurants();
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
