@@ -19,10 +19,8 @@ sectionList.style.display = 'none';
 submit.addEventListener("submit", redirect, false);
 document.getElementById("province").addEventListener("change", toggleProvince, false);
 nameInput.addEventListener("keyup",function () {
-    buttonSubmit.disabled = true;
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    loader.style.display = 'flex';
 });
 nameInput.addEventListener("keydown",function () {
     clearTimeout(typingTimer);
@@ -32,6 +30,7 @@ nameInput.addEventListener("keydown",function () {
 function doneTyping () {
     if (nameInput.value !== "") {
         loader.style.display = 'flex';
+        buttonSubmit.disabled = true;
         getRestaurantAPI();
     }
 }
