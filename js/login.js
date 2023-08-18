@@ -7,10 +7,10 @@ function handleCredentialResponse(response) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       // redirect to profile page
-      location.href = 'https://foodiesaurus.miasalazar.com/index.html';
+      location.href = 'https://foodiesaurus.com/';
     }
   };
-  xhttp.open("POST", "https://foodiesaurus.miasalazar.com/controllers/save-user.php", true);
+  xhttp.open("POST", "https://foodiesaurus.com/controllers/save-user.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("response="+response.credential);
 }

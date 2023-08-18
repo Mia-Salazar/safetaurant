@@ -30,12 +30,12 @@ function search(event) {
   event.preventDefault();
   const province = provinceSelect.value;
   const foodType = foodSelect.value;
-  window.location.href = `https://foodiesaurus.miasalazar.com/search.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
+  window.location.href = `https://foodiesaurus.com/search.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
 }
 
 const checkIsLoggedIn = () => {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
+  xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

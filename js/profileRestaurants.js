@@ -11,7 +11,7 @@ const viewList = () => {
         let province = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         link.classList.add("primary-button");
         province.innerHTML = restaurant.province;
@@ -27,7 +27,7 @@ const viewList = () => {
 //Obtenemos los datos del usuario
 const getRestaurants = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/profileRestaurants.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/profileRestaurants.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         
@@ -47,7 +47,7 @@ const getRestaurants = () => {
             loader.style.display = 'none';
         } else if (this.status == 401) {
             //Si la persona no está autorizada, la expulsamos
-            window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
+            window.location.href = "https://foodiesaurus.com/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -60,7 +60,7 @@ const getRestaurants = () => {
 //Comprobamos si el usuario está activo
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -68,7 +68,7 @@ const checkIsLoggedIn = () => {
             getRestaurants();
         } else if (this.status == 401) {
             //Si no ha iniciado sesión, le expulsamos al login
-            window.location.href = "https://foodiesaurus.miasalazar.com/login.html";
+            window.location.href = "https://foodiesaurus.com/login.html";
         }  
     };
     xmlhttp.send();

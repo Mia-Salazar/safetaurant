@@ -46,7 +46,7 @@ function toggleProvince() {
 
 function redirect(event){
     event.preventDefault();
-    window.location.href = `https://foodiesaurus.miasalazar.com/restaurant/add.html?name=${nameInput.value}&province=${provinceSelect.value}`;
+    window.location.href = `https://foodiesaurus.com/restaurant/add.html?name=${nameInput.value}&province=${provinceSelect.value}`;
 }
 
 const fillSelects = () => {
@@ -65,7 +65,7 @@ const createRestauranList = () => {
 
         li.classList.add("info-list-item");
         link.innerHTML = restaurant.name;
-        link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
 
         li.appendChild(link);
         restaurantsList.appendChild(li);
@@ -74,7 +74,7 @@ const createRestauranList = () => {
 
 const getRestaurantAPI = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/searchName.php?name=${nameInput.value}&province=${provinceSelect.value}`, true);
+    xmlhttp.open("GET", `https://foodiesaurus.com/controllers/searchName.php?name=${nameInput.value}&province=${provinceSelect.value}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
