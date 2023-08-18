@@ -26,7 +26,7 @@ let restaurants;
 //Comprobamos si el usuario ha iniciado sesión
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.miasalazar.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -67,7 +67,7 @@ const viewList = () => {
         let score = document.createElement("p");
 
         link.innerHTML = "Ver detalle";
-        link.href = `https://foodiesaurus.miasalazar.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
@@ -96,7 +96,7 @@ function getNextPage(){
 
 const getRestaurantAPI = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
+    xmlhttp.open("GET", `https://foodiesaurus.com/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -139,7 +139,7 @@ const getRestaurants = () => {
 
 const getRestaurantTotal = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.miasalazar.com/controllers/searchTotal.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
+    xmlhttp.open("GET", `https://foodiesaurus.com/controllers/searchTotal.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -171,7 +171,7 @@ const getInitialValues = () => {
 //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
 function search(event) {
     event.preventDefault();
-    window.location.href = `https://foodiesaurus.miasalazar.com/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+    window.location.href = `https://foodiesaurus.com/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
 }
 
 fillSelects();
