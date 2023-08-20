@@ -18,3 +18,29 @@
 	width: fit-content;
 }
 
+.list-principal-score {
+    height: 3rem;
+    width: 3rem;
+    color: var(--white);
+    background-color: var(--primaryColor);
+    font-size: 1rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1rem;
+    font-weight: 600;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin: 0;
+    font-size: 2rem;
+	margin-bottom: 0;
+}
+
+.button-container {
+	display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}

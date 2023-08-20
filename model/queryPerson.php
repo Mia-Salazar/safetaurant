@@ -34,7 +34,7 @@
 
 	function getPersonRestaurants($userID) {
 		$connection = new Connection();
-		$query = $connection->prepare("SELECT restaurantID, name, province FROM restaurant WHERE userID = :userID  ORDER BY name");
+		$query = $connection->prepare("SELECT restaurantID, name, address, province FROM restaurant WHERE userID = :userID  ORDER BY name");
 		$query->bindParam(":userID", $userID, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);

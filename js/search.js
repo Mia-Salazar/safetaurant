@@ -66,21 +66,21 @@ const viewList = () => {
         let province = document.createElement("p");
         let score = document.createElement("p");
 
-        link.innerHTML = "Ver detalle";
         link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.setAttribute('aria-label', `Visitar restaurante: ${restaurant.name}`);
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
-        score.innerHTML = `${Math.floor(restaurant.generalScore)}<span>/10</span>`;
-        score.classList.add("list-score");
-        link.classList.add("primary-button");
+        province.classList.add("list-province");
+        score.innerHTML = Math.floor(restaurant.generalScore);
+        score.classList.add("list-principal-score");
 
-        li.appendChild(title);
-        li.appendChild(address);
-        li.appendChild(province);
-        li.appendChild(score);
+        link.appendChild(title);
+        link.appendChild(address);
+        link.appendChild(province);
+        link.appendChild(score);
+
         li.appendChild(link);
-
         list.appendChild(li);
     });
 }
@@ -90,6 +90,7 @@ function getNextPage(){
         loadMoreSpinner.style.display = 'flex';
         from = from + LIMIT_PAGINATION;
         page++;
+        nextButton.style.display = 'none';
         getRestaurantAPI();
     }
 }
@@ -107,6 +108,8 @@ const getRestaurantAPI = () => {
                 const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
                 if(!hasMoreToLoad) {
                     nextButton.style.display = 'none';
+                } else {
+                    nextButton.style.display = 'block';
                 }
                 viewList();
                 loadMoreSpinner.style.display = 'none';
@@ -146,7 +149,7 @@ const getRestaurantTotal = () => {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurantsTotal = JSON.parse(this.responseText);
-            found.innerHTML = `Se han encontrado ${restaurantsTotal.total} resultados`;
+            found.innerHTML = `Se han encontrado ${restaurantsTotal} resultados`;
             getRestaurants();
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo

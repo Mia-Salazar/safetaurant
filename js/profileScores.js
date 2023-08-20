@@ -6,53 +6,56 @@ let scores;
 const putScores = () => {
     const scoresList = document.getElementById("list");
     scores.forEach((score) => {
-    let li = document.createElement("li");
-    let date = document.createElement("small");
-    let userName = document.createElement("h4");
-    let allergenChart = document.createElement("p");
-    let comment = document.createElement("p");
-    let fidelityScore = document.createElement("p");
-    let generalScore = document.createElement("p");
-    let attentionScore = document.createElement("p");
-    let allergicReaction = document.createElement("p");
-    let feedback = document.createElement("p");
-    let link = document.createElement("a");
-    let button = document.createElement("button");
+        let li = document.createElement("li");
+        let date = document.createElement("small");
+        let userName = document.createElement("h4");
+        let allergenChart = document.createElement("p");
+        let comment = document.createElement("p");
+        let fidelityScore = document.createElement("p");
+        let generalScore = document.createElement("p");
+        let attentionScore = document.createElement("p");
+        let allergicReaction = document.createElement("p");
+        let feedback = document.createElement("p");
+        let link = document.createElement("a");
+        let button = document.createElement("button");
 
-    date.innerHTML = score.created;
-    userName.innerHTML = score.userName;
-    allergicReaction.innerHTML= `<span class='highlight'>¿Reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
-    allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
-    comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
-    fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
-    generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
-    attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
-    link.innerHTML = `Ver restaurante`;
-    link.href=`https://foodiesaurus.com/restaurant/index.html?ID=${score.restaurantID}`
-    button.innerHTML = "Eliminar";
+        date.innerHTML = score.created;
+        userName.innerHTML = score.userName;
+        allergicReaction.innerHTML= `<span class='highlight'>¿Reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
+        comment.innerHTML = score.comment;
+        fidelityScore.innerHTML = `<span class='highlight'>Calidad de la carta de alérgenos: </span>${score.fidelityScore}/10`;
+        generalScore.innerHTML = score.generalScore;
+        generalScore.classList.add("principal-score-comment");
+        attentionScore.innerHTML = `<span class='highlight'>Atención recibida: </span>${score.attentionScore}/10`;
+        link.innerHTML = `Ver restaurante`;
+        link.href=`https://foodiesaurus.com/restaurant/index.html?ID=${score.restaurantID}`
+        button.innerHTML = "Eliminar";
 
-    button.classList.add("primary-button");
-    button.classList.add("primary-button--ghost");
-    link.classList.add("primary-button");
-    button.setAttribute("id", `score-${score.scoreID}`);
-    button.addEventListener("click", () => {
-        deleteComment(score.scoreID, score.restaurantID)
-    });
-    feedback.setAttribute("id", `feedback-${score.scoreID}`);
+        button.classList.add("primary-button");
+        button.classList.add("primary-button--ghost");
+        link.classList.add("primary-button");
+        button.setAttribute("id", `score-${score.scoreID}`);
+        button.addEventListener("click", () => {
+            deleteComment(score.scoreID, score.restaurantID)
+        });
+        feedback.setAttribute("id", `feedback-${score.scoreID}`);
 
-    li.appendChild(userName);
-    li.appendChild(date);
-    li.appendChild(generalScore);
-    li.appendChild(allergenChart);
-    li.appendChild(allergicReaction);
-    li.appendChild(fidelityScore);
-    li.appendChild(attentionScore);
-    li.appendChild(comment);
-    li.appendChild(feedback);
-    li.appendChild(button);
-    li.appendChild(link);
+        li.appendChild(userName);
+        li.appendChild(date);
+        li.appendChild(generalScore);
+        if (score.allergenChart === "1") {
+            li.appendChild(allergenChart);
+        }
+        li.appendChild(allergicReaction);
+        li.appendChild(fidelityScore);
+        li.appendChild(attentionScore);
+        li.appendChild(comment);
+        li.appendChild(feedback);
+        li.appendChild(button);
+        li.appendChild(link);
 
-    scoresList.appendChild(li);
+        scoresList.appendChild(li);
     })
     loader.style.display = 'none';
 };

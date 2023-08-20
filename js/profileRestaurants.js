@@ -8,16 +8,20 @@ const viewList = () => {
         let li = document.createElement("li");
         let link = document.createElement("a");
         let title = document.createElement("h4");
+        let address = document.createElement("p");
         let province = document.createElement("p");
 
-        link.innerHTML = "Ver detalle";
         link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.setAttribute('aria-label', `Visitar restaurante: ${restaurant.name}`);
         title.innerHTML = restaurant.name;
-        link.classList.add("primary-button");
+        address.innerHTML = restaurant.address;
         province.innerHTML = restaurant.province;
+        province.classList.add("list-province");
 
-        li.appendChild(title);
-        li.appendChild(province);
+        link.appendChild(title);
+        link.appendChild(address);
+        link.appendChild(province);
+
         li.appendChild(link);
         list.appendChild(li);
     });
