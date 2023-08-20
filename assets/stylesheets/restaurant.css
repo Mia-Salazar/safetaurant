@@ -43,11 +43,18 @@ ul.allergen-list {
 }
 
 .principal-score {
-	height: 3rem;
-	width: 3rem;;
-	color: var(--white);
-	background-color:  var(--primaryColor);
-	font-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+    color: var(--white);
+    background-color: var(--primaryColor);
+    font-size: 2rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1rem;
+    font-weight: 600;
 }
 
 .header-container, .data-container, .button-container {
