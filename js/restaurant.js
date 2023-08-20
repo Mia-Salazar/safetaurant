@@ -86,6 +86,7 @@ const putAverage = () => {
     const averageGeneralId = document.getElementById("numberGeneral");
     const averageFidelityId = document.getElementById("numberFidelity");
     const averageAttentionId = document.getElementById("attentionScore");
+    document.getElementById("score").innerHTML = averageGeneral
 
     //General
     document.getElementById("totalOpinions").innerHTML = average.totalReviews;
