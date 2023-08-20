@@ -51,7 +51,7 @@
     font-size: 0.875rem;
 }
 
-.list-results .list-province {
+.list-container .list-results .list-province, .list-results .list-province {
     margin-bottom: 0;
 }
 
@@ -63,10 +63,10 @@
     }
 
     .list-results h4 {
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
     }
 
     .list-results li p:last-of-type {
         margin-bottom: 1rem;
-    }       
+    }  
 }
