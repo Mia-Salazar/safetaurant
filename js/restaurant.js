@@ -45,35 +45,38 @@ const putScores = () => {
     const scoresWithComments = scores.filter(score => score.comment !== '')
     document.getElementById("totalComments").innerHTML = scoresWithComments.length;
     scoresWithComments.forEach((score) => {
-    let li = document.createElement("li");
-    let date = document.createElement("small");
-    let userName = document.createElement("h4");
-    let allergicReaction = document.createElement("p");
-    let allergenChart = document.createElement("p");
-    let comment = document.createElement("p");
-    let fidelityScore = document.createElement("p");
-    let generalScore = document.createElement("p");
-    let attentionScore = document.createElement("p");
+        let li = document.createElement("li");
+        let date = document.createElement("small");
+        let userName = document.createElement("h4");
+        let allergicReaction = document.createElement("p");
+        let allergenChart = document.createElement("p");
+        let comment = document.createElement("p");
+        let fidelityScore = document.createElement("p");
+        let generalScore = document.createElement("p");
+        let attentionScore = document.createElement("p");
 
-    date.innerHTML = score.created;
-    userName.innerHTML = score.userName;
-    allergicReaction.innerHTML= `<span class='highlight'>¿Reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
-    allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
-    comment.innerHTML = `<span class='highlight'>Comentario: </span>${score.comment || "-"}`;
-    fidelityScore.innerHTML = `<span class='highlight'>Puntuación de fidelidad: </span>${score.fidelityScore}`;
-    generalScore.innerHTML = `<span class='highlight'>Puntuación general: </span>${score.generalScore}`;
-    attentionScore.innerHTML = `<span class='highlight'>Puntuación de atención recibida: </span>${score.attentionScore}`;
+        date.innerHTML = score.created;
+        userName.innerHTML = score.userName;
+        allergicReaction.innerHTML= `<span class='highlight'>¿Reacción alérgica?: </span>${score.allergicReaction === "1" ? "Sí" : "No"}`;
+        allergenChart.innerHTML= `<span class='highlight'>¿Carta de alérgenos?: </span>${score.allergenChart === "1" ? "Sí" : "No"}`;
+        comment.innerHTML = score.comment;
+        generalScore.innerHTML = score.generalScore;
+        generalScore.classList.add("principal-score-comment");
+        fidelityScore.innerHTML = `<span class='highlight'>Calidad de la carta de alérgenos: </span>${score.fidelityScore}/10`;
+        attentionScore.innerHTML = `<span class='highlight'>Atención recibida: </span>${score.attentionScore}/10`;
 
-    li.appendChild(userName);
-    li.appendChild(date);
-    li.appendChild(generalScore);
-    li.appendChild(allergicReaction);
-    li.appendChild(allergenChart);
-    li.appendChild(fidelityScore);
-    li.appendChild(attentionScore);
-    li.appendChild(comment);
+        li.appendChild(userName);
+        li.appendChild(date);
+        li.appendChild(generalScore);
+        li.appendChild(allergicReaction);
+        if (score.allergenChart === "1") {
+            li.appendChild(allergenChart);
+        }
+        li.appendChild(fidelityScore);
+        li.appendChild(attentionScore);
+        li.appendChild(comment);
 
-    scoresList.appendChild(li);
+        scoresList.appendChild(li);
     });
     getAverage();
 }

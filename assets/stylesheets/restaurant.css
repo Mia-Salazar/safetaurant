@@ -57,6 +57,25 @@ ul.allergen-list {
     font-weight: 600;
 }
 
+.principal-score-comment {
+    height: 2rem;
+    width: 2rem;
+    color: var(--white);
+    background-color: var(--secondaryColor);
+    font-size: 1rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1rem;
+    font-weight: 600;
+	position: absolute;
+    top: 1.375rem;
+    right: 1.313rem;
+    margin: 0;
+}
+
 .header-container, .data-container, .button-container {
 	max-width: 56.25rem;
 	margin-left: auto;
@@ -147,18 +166,14 @@ h5 {
 
 .scores-list p {
 	font-size:  0.875rem;
+	margin-bottom: 0;
+    margin-top: 0.625rem;
 }
 
 .scores-list h4 {
-	margin: 0 0 1.75rem 0;
+	margin: 0;
 	color:  var(--primaryColor);
 	font-size: 1.125rem;
-}
-
-.scores-list small {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.25rem;
 }
 
 h2 {
@@ -216,10 +231,6 @@ h2 {
 
 /*Adaptando el diseño a pantallas mayores*/
 @media (min-width: 768px) {
-    .scores-list {
-    	grid-template-columns: 1fr 1fr;
-    }
-
 	.averages-container {
 		grid-template-columns: 1fr 1fr;
 		width: 100%;
