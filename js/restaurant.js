@@ -238,6 +238,7 @@ const getOptions = () => {
         document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
 
         loader.style.display = 'none';
+        addScore.classList.remove("hidden");
         restaurantContainer.style.display = 'block';
     } else if (this.status == 400) {
         //Si no encontramos las puntuaciones, mostramos un mensaje
@@ -260,8 +261,6 @@ const checkIsLoggedIn = () => {
         changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
-        addScore.classList.add("hidden");
-        scoreText.classList.add("hidden");
         changeMenuAccordingToUser("no-registered");
     }
     };

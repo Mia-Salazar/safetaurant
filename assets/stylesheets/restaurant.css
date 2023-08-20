@@ -19,13 +19,30 @@
 	display: flex;
     align-items: center;
     margin: 0;
+	padding: 0 1rem;
 }
 
 .restaurant-title {
 	padding-left: 0;
+	margin-bottom: 1rem;
+    margin-top: 1.5rem;
 }
 
-.header-container, .data-container {
+.data-container {
+	margin-bottom: 2rem;
+	padding: 0 1rem;
+}
+
+.button-container {
+	padding: 0 1rem;
+	margin-bottom: 3.5rem;
+}
+
+.allergen-list {
+	margin-bottom: 0;
+}
+
+.header-container, .data-container, .button-container {
 	max-width: 56.25rem;
 	margin-left: auto;
 	margin-right: auto;
@@ -125,7 +142,7 @@ h5 {
 
 .scores-list small {
     position: absolute;
-    top: 1.25rem;
+    top: 1.5rem;
     right: 1.25rem;
 }
 
@@ -136,6 +153,10 @@ h2 {
 
 .highlight {
 	font-weight: 700;
+}
+
+.add-button {
+	margin-bottom: 2rem;
 }
 
 .restaurant-container {

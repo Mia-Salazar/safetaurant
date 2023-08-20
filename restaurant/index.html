@@ -65,12 +65,10 @@
       </nav>
     </header>
     <main class="main add-restaurant">
-      <div class="header-container">
+      <section class="header-container">
         <h2 class="restaurant-title" id="name">Restaurante</h2>
-        <a href="" class="primary-button" id="addScore">Añadir nueva opinión</a>
-      </div>
-      
-      <div class="data-container">
+      </section>
+      <section class="data-container">
         <div>
           <p class="data-text">Dirección: <span class="data-info" id="address">-</span></p>
           <p class="data-text">Provincia: <span class="data-info" id="province">-</span></p>
@@ -78,13 +76,14 @@
         </div>
         <div class="extra-info">
           <p class="data-text">Teléfono: <span class="data-info" id="phone">-</span></p>
-          <div class="data-wrapper">
-            <p class="data-text">Sitio web: </p><a class="data-info" id="url">-</a>
-          </div>
+          <p class="data-text">Sitio web: <a class="data-info" id="url">-</a></p>
           <p class="data-text">Tipo de comida: <span class="data-info" id="foodType">-</span></p>
         </div>
-      </div>
-      <span class="loader" role="alert" aria-busy="true" id="loader"></span>
+      </section>
+      <section class="button-container">
+        <a href="" class="primary-button add-button hidden" id="addScore">Añadir nueva opinión</a>
+        <span class="loader" role="alert" aria-busy="true" id="loader"></span>
+      </section>
       <section class="restaurant-container" id="restaurantContainer" style="display: none">
         <h3 id="averages" class="averages">Puntuaciones (<span id="totalOpinions"></span>)</h3>
         <div class="averages-container">
@@ -151,13 +150,13 @@
           </div>
           <div class="box">
             <h4 class="allergen-chart">Opciones alimentarias</h4>
-            <ul class="info-list">
-              <li class="info-list-item">Comida para celíacos: <p class="fa-solid" id="celiacDiseaseOption"></p></li>
-              <li class="info-list-item">Comida para diabéticos: <p class="fa-solid" id="diabetesOption"></p></li>
-              <li class="info-list-item">Comida para intolerantes a la lactosa: <p class="fa-solid" id="lactoseIntolerantOption"></p></li>
-              <li class="info-list-item">Comida para intolerantes a la fructosa: <p class="fa-solid" id="fructoseIntolerantOption"></p></li>
-              <li class="info-list-item">Comida para vegetarianos: <p class="fa-solid" id="vegetarianOption"></p></li>
-              <li class="info-list-item">Comida para veganos: <p class="fa-solid" id="veganOption"></p></li>
+            <ul class="info-list allergen-list">
+              <li class="info-list-item">Platos para celíacos: <p class="fa-solid" id="celiacDiseaseOption"></p></li>
+              <li class="info-list-item">Platos para diabéticos: <p class="fa-solid" id="diabetesOption"></p></li>
+              <li class="info-list-item">Platos para intolerantes a la lactosa: <p class="fa-solid" id="lactoseIntolerantOption"></p></li>
+              <li class="info-list-item">Platos para intolerantes a la fructosa: <p class="fa-solid" id="fructoseIntolerantOption"></p></li>
+              <li class="info-list-item">Platos para vegetarianos: <p class="fa-solid" id="vegetarianOption"></p></li>
+              <li class="info-list-item">Platos para veganos: <p class="fa-solid" id="veganOption"></p></li>
               </li>
             </ul>
           </div>
