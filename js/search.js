@@ -90,6 +90,7 @@ function getNextPage(){
         loadMoreSpinner.style.display = 'flex';
         from = from + LIMIT_PAGINATION;
         page++;
+        nextButton.style.display = 'none';
         getRestaurantAPI();
     }
 }
@@ -107,6 +108,8 @@ const getRestaurantAPI = () => {
                 const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
                 if(!hasMoreToLoad) {
                     nextButton.style.display = 'none';
+                } else {
+                    nextButton.style.display = 'block';
                 }
                 viewList();
                 loadMoreSpinner.style.display = 'none';
