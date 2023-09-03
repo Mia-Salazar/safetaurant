@@ -23,6 +23,12 @@
 	padding: 0 1rem;
 }
 
+.scores-list li small {
+	margin-bottom: 1.75rem;
+    display: block;
+    margin-top: 0.25rem;
+}
+
 .restaurant-title {
 	padding-left: 0;
 	margin-bottom: 1.25rem;
