@@ -181,3 +181,5 @@ fillSelects();
 getInitialValues();
 checkIsLoggedIn();
 getRestaurantTotal();
+
+
