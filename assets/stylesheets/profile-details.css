@@ -27,3 +27,7 @@ h3 {
     width: 100%;
     box-sizing: border-box;
 }
+
+.primary-button.white-text {
+    color: var(--white);
+}

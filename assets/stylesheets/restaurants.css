@@ -44,3 +44,10 @@
     justify-content: center;
     margin-bottom: 3rem;
 }
+
+@media (max-width: 767px) {
+    
+    .list-results h4, .list-results p {
+        max-width: 11.563rem;
+    }
+}

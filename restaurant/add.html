@@ -242,12 +242,22 @@
               <div class="input-radio">
                 <input type="radio" id="veganIDK" name="vegan" value="2" checked>
                 <label for="veganIDK">No sé</label>
+              </div>              
+            </div>
+            <div class="radio-container">
+              <div class="input-radio captcha">
+                <input class="captcha" type="checkbox" id="captcha" name="captcha" value="captcha" required />
+                <label for="captcha">No soy un robot</label>
               </div>
             </div>
           </div>
         </div>
+        <h-captcha id="signupCaptcha" aria-hidden="true"
+          site-key="781559eb-513a-4bae-8d29-d4af340e3624"
+          size="normal"
+          tabindex="0"></h-captcha>
         <small id="feedback" class=""></small>
-        <button type="submit" class="primary-button" id="buttonSubmit">
+        <button type="submit" class="primary-button" id="buttonSubmit" disabled>
           <div class="loader-container">
             <span id="buttonText">Crear restaurante</span>
             <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
@@ -278,6 +288,7 @@
       </div>
     </footer>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-hcaptcha"></script>
   <script type="text/javascript" src="../js/shared.js"></script>
   <script type="text/javascript" src="../js/inputRange.js"></script>
   <script type="text/javascript" src="../js/arrays.js"></script>

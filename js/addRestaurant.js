@@ -14,10 +14,23 @@ loader.style.display = 'none';
 //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
 let allergenChartToggle = false;
 let user;
+let buttonDisabled = true;
 
 document.getElementById("name").value = namePrevious;
 document.getElementById("add").addEventListener("submit", registerRestaurant, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
+document.getElementById("captcha").addEventListener("change", captchaToggle, false);
+
+// Captcha
+const signupCaptcha = document.getElementById('signupCaptcha');
+
+signupCaptcha.addEventListener('verified', (e) => {
+    document.getElementById("captcha").checked = true;
+    buttonSubmit.disabled = false;
+});
+signupCaptcha.addEventListener('error', (e) => {
+    feedback.innerHTML = e.error;
+});
 
 //Rellenamos los select con los array que encontramos arriba
 const fillSelects = () => {
@@ -37,6 +50,11 @@ const fillSelects = () => {
         option.innerHTML = food;
         foodSelect.appendChild(option);
     });
+}
+
+function captchaToggle() {
+    buttonSubmit.disabled = !buttonDisabled;
+    buttonDisabled = !buttonDisabled;
 }
 
 //Mostramos u ocultamos el range input de la puntuación de fidelidad

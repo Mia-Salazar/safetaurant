@@ -35,6 +35,7 @@ const putScores = () => {
         button.classList.add("primary-button");
         button.classList.add("primary-button--ghost");
         link.classList.add("primary-button");
+        link.classList.add("white-text");
         button.setAttribute("id", `score-${score.scoreID}`);
         button.addEventListener("click", () => {
             deleteComment(score.scoreID, score.restaurantID)
