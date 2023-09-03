@@ -8,7 +8,7 @@ const list = document.getElementById("list");
 const buttonSubmit = document.getElementById("buttonSubmit");
 const restaurantsList =  document.getElementById("restaurantsList");
 let typingTimer;
-const doneTypingInterval = 2000; 
+const doneTypingInterval = 1000; 
 let restaurants;
 
 restaurantsList.style.display = 'none';
