@@ -45,6 +45,10 @@
     margin-bottom: 3rem;
 }
 
+h3  {
+    margin-bottom: 2rem;
+}
+
 @media (max-width: 767px) {
     
     .list-results h4, .list-results p {

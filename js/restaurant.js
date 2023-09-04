@@ -4,19 +4,19 @@ const nav = document.getElementById("nav");
 const toggleButton = document.getElementById("toggle");
 const restaurantID = new URL(document.URL).searchParams.get('ID');
 const add = document.getElementById("add");
-const addScore = document.getElementById("addScore");
 const scoreText = document.getElementById("scoreText");
 const data = {ID: restaurantID};
 const numberGeneralBar = document.getElementById("numberGeneralBar");
 const attentionScoreBar = document.getElementById("attentionScoreBar");
 const numberFidelityBar = document.getElementById("numberFidelityBar");
 const loader = document.getElementById("loader");
+const buttonContainer = document.getElementById("buttonContainer")
 
 //Creamos las variables necesarias que usaremos para guardar los datos
 let restaurant;
 let scores;
 let average;
-let user;
+let isLoggedIn;
 
 //Mostramos los datos del restaurante en los inputs
 const putData = () => {
@@ -240,9 +240,7 @@ const getOptions = () => {
         const vegan = getIcon(options.veganYes, options.veganNo);
         document.getElementById("veganOption").classList.add(vegan);
         document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
-
         loader.style.display = 'none';
-        addScore.classList.remove("hidden");
         restaurantContainer.style.display = 'block';
     } else if (this.status == 400) {
         //Si no encontramos las puntuaciones, mostramos un mensaje
@@ -261,14 +259,31 @@ const checkIsLoggedIn = () => {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         //Si se ha iniciado sesión, añadimos un link para añadir una puntuación
-        addScore.href = `https://foodiesaurus.com/restaurant/addScore.html?ID=${restaurantID}`;
+        isLoggedIn = true;
+        showAddButtonWhenNoResults()
         changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
+        isLoggedIn = false;
         changeMenuAccordingToUser("no-registered");
     }
     };
     xmlhttp.send();
+}
+
+
+
+//Función cuando no hay resultados
+const showAddButtonWhenNoResults = () => {
+    if (isLoggedIn && !document.getElementById("addReview")) {
+        let link = document.createElement("a");
+        link.setAttribute("id","addReview");
+        link.href = `https://foodiesaurus.com/restaurant/addScore.html?ID=${restaurantID}`;;
+        link.classList.add("primary-button");
+        link.classList.add("add-button");
+        link.innerHTML = "Añadir nueva opinión"
+        buttonContainer.appendChild(link);
+    }
 }
 
 getRestaurant();
