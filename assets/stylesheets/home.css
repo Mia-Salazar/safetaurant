@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.secondary-link {
+	color: var(--secondaryColor);
+}
+
 .home {
 	color: #0a0a0a;
 }
