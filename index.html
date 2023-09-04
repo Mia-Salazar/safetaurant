@@ -1,65 +1,148 @@
-<?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#319DA0" />
-        <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
-        <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
-        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/404.css">
-        <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
-        <link rel="icon" href="./assets/img/favicon.ico" />
-        <link rel="apple-touch-icon" href="./assets/img/logo.png" />
-        <title>Error 404</title>
-    </head>
-    <body>
-        <header class="header">
-            <div class="title-container">
-              <a href="https://foodiesaurus.com/" class="home-link" aria-label="Ir a la home">
-                <h1 class="title">
-                  <span>Foodie</span>
-                  <figure class="logo-container">
-                    <img class="logo" width="42px" height="42px" src="../assets/img/foodiesaurus.png" alt="" />
-                  </figure>
-                  <span>saurus</span>
-                </h1>
-              </a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#319DA0" />
+    <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
+    <meta name="keywords" content="alergenos, carta alérgenos, restaurantes, puntuación"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/home.css">
+    <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="./assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="./assets/img/logo.png" />
+    <title>Foodiesaurus, restaurantes sin alergias</title>
+  </head>
+  <body>
+    <a class="skip-to-content-link" href="#main">
+      Saltar al contenido
+    </a>
+    <header class="header">
+      <div class="title-container">
+        <a href="https://foodiesaurus.com/" class="home-link" aria-label="Ir a la home">
+          <h1 class="title">
+            <span>Foodie</span>
+            <figure class="logo-container">
+              <img class="logo" width="42px" height="42px" src="./assets/img/foodiesaurus.png" alt="" />
+            </figure>
+            <span>saurus</span>
+          </h1>
+        </a>
+      </div>
+      <nav class="nav">
+        <button id="toggle" class="toggle" aria-label="Abrir menú">
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+          <i class="toggle-item" aria-hidden="true"></i>
+        </button>
+        <ul class="nav-list" id="nav">
+          <li>
+            <a class="nav-link" href="https://foodiesaurus.com/">Buscar</a>
+          </li>
+          <li class="registered hidden">
+            <a class="nav-link" href="https://foodiesaurus.com/restaurant/search.html">Crear restaurante</a>
+          </li>
+          <li class="no-registered">
+            <a class="nav-link" href="https://foodiesaurus.com/login.html">Iniciar sesión</a>
+          </li>
+          <li class="nav-link registered hidden">
+            <button id="account-dropdown-button" class="account-dropdown-button nav-link"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
+            <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/index.html">Perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/restaurants.html">Mis restaurantes</a>
+              </li>
+              <li>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/scores.html">Mis opiniones</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="home" id="main">
+      <div class="hero">
+        <div class="wrapper">
+          <div class="hero__title-container">
+            <h2 class="hero__title">Encuentra restaurantes seguros para alergias alimentarias</h2>
+            <p class="hero__subtitle">La única plataforma donde puedes valorar establecimientos de comida según cómo tratan las alergias y las intolencias</p>
+          </div>
+          <figure class="img-container hero__img">
+            <img class="img" alt="logo" src="./assets/img/poke.png" />
+          </figure>
+        </div>
+      </div>
+      <section class="search-container">
+        <h3 class="second-title">Empieza a buscar restaurantes</h3>
+        <form id="search">
+          <div class="input-group">
+            <label class="input-label" for="name">Nombre</label>
+            <input pattern="^(?!.*<[^>]+>).*" class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
+          </div>
+          <div class="form-selects">
+            <div class="input-group">
+              <label class="input-label" for="province">Provincia</label>
+              <select name="province" id="province" class="select">
+                <option selected value="">Escoge Provincia</option>
+              </select>
             </div>
-        </header>
-        <main class="main">
-            <figure class="">
-                <img width="300px" height="300px" src="../assets/img/foodiesaurus.png" alt="" />
-              </figure>
-            <h2>En construcción
-            </h2>
-        </main>
-        <footer class="footer">
-            <div>
-              <div class="footer__logo">
-                <p>Foodie</p>
-                <figure class="footer-img">
-                  <img class="img" alt="logo"  width="42px" height="42px" src="../assets/img/foodiesaurus-transparent.png"  />
-                 </figure>
-                <p>saurus</p>
-              </div>
-              <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+            <div class="input-group">
+              <label class="input-label" for="foodType">Tipo de comida</label>
+              <select name="foodType" id="foodType" class="select">
+                <option selected value="">Escoge el tipo</option>
+              </select>
             </div>
-            <div class="footer__container">
-              <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
-              <ul class="footer__list">
-                <li><a href="https://twitter.com/miadeveloper" aria-label="Ir a mi Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/miasalazar/" aria-label="Ir a mi Linked"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-                <li><a href="https://dev.to/miasalazar" aria-label="Ir a mi Dev.to"><i class="fa-brands fa-dev" aria-hidden="true"></i></a></li>
-                <li><a href="https://marasalazar.medium.com/" aria-label="Ir a mi Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
-                <li><a href="https://github.com/Mia-Salazar" aria-label="Ir a mi GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
-              </ul>
-            </div>
-        </footer>
-    </body>
-    <script type="text/javascript" src="./js/shared.js"></script>
+            <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
+          </div>
+        </form>
+      </section>
+      <section class="question">
+        <h4 class="second-title second-title--light">¿Quieres saber si un restaurante es seguro para ti?</h4>
+      </section>
+      <section class="instructions">
+        <figure class="img-container instruction__img-container">
+          <img class="img instruction__img" alt="" src="./assets/img/middle.jpg" />
+        </figure>
+        <ol class="instructions-list">
+          <li>Buscar por nombre, ciudad o tipo de comida</li>
+          <li>Consulta opiniones de otros <span class="bold">foodies</span></li>
+          <li>Comprueba si la <span class="bold">carta de alérgenos</span> es de fiar</li>
+          <li>O si alguien ha reportado una <span class="bold">reacción alérgica</span></li>
+          <li>Ve al restaurante y disfruta la comida</li>
+          <li><span class="bold">Puntúa la experiencia</span> y ayuda a otros</li>
+        </ol>
+      </section>
+    </main>
+    <footer class="footer">
+      <div>
+        <div class="footer__logo">
+          <p>Foodie</p>
+          <figure class="footer-img">
+            <img class="img" alt="logo"  width="42px" height="42px" src="./assets/img/foodiesaurus-transparent.png"  />
+           </figure>
+          <p>saurus</p>
+        </div>
+        <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+      </div>
+      <div class="footer__container">
+        <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
+        <ul class="footer__list">
+          <li><a href="https://twitter.com/miadeveloper" aria-label="Ir a mi Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/miasalazar/" aria-label="Ir a mi Linked"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+          <li><a href="https://dev.to/miasalazar" aria-label="Ir a mi Dev.to"><i class="fa-brands fa-dev" aria-hidden="true"></i></a></li>
+          <li><a href="https://marasalazar.medium.com/" aria-label="Ir a mi Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/Mia-Salazar" aria-label="Ir a mi GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./js/shared.js"></script>
+  <script type="text/javascript" src="./js/arrays.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
 </html>
