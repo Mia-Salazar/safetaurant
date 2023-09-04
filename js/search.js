@@ -15,6 +15,7 @@ const order = document.getElementById("order");
 const loader = document.getElementById("loader");
 const nextButton = document.getElementById("next");
 const loadMoreSpinner = document.getElementById("loaderLoadMore");
+const searchSection = document.getElementById("searchSection");
 document.getElementById("search").addEventListener("submit", search, false);
 document.getElementById("order").addEventListener("change", search, false);
 nextButton.addEventListener("click", getNextPage, false);
@@ -22,6 +23,7 @@ loadMoreSpinner.style.display = 'none';
 
 //Creamos una variable para guardar el resultado de la búsqueda
 let restaurants;
+let isLoggedIn;
 
 //Comprobamos si el usuario ha iniciado sesión
 const checkIsLoggedIn = () => {
@@ -30,9 +32,11 @@ const checkIsLoggedIn = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+        isLoggedIn = true;
         changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
+        isLoggedIn = false
         changeMenuAccordingToUser("no-registered");
     }
     };
@@ -116,18 +120,35 @@ const getRestaurantAPI = () => {
                 loader.style.display = 'none';
             } else {
                 found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+                showAddButtonWhenNoResults();
                 loader.style.display = 'none';
                 loadMoreSpinner.style.display = 'none';
+                nextButton.style.display = 'none';
             }
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            showAddButtonWhenNoResults();
             orderContainer.classList.add("hidden");
             loader.style.display = 'none';
             loadMoreSpinner.style.display = 'none';
+            nextButton.style.display = 'none';
         }
     };
     xmlhttp.send();
+}
+
+//Función cuando no hay resultados
+const showAddButtonWhenNoResults = () => {
+    if (isLoggedIn && !document.getElementById("addRestaurant")) {
+        let link = document.createElement("a");
+        link.setAttribute("id","addRestaurant");
+        link.href = "https://foodiesaurus.com/restaurant/search.html";
+        link.classList.add("primary-button");
+        link.classList.add("link");
+        link.innerHTML = "Crear restaurante"
+        searchSection.appendChild(link);
+    }
 }
 
 //Función para buscar restaurantes con los datos recabados en el buscador
