@@ -5,7 +5,10 @@ const link = document.getElementById("link");
 const provinceSelect = document.getElementById("province");
 const foodSelect = document.getElementById("foodType");
 const name = document.getElementById("name");
+const lastLi = document.getElementById("last");
 document.getElementById("search").addEventListener("submit", search, false);
+
+let isLoggedIn;
 
 //Rellenamos los select con los array que encontramos arriba
 const fillSelects = () => {
@@ -39,13 +42,32 @@ const checkIsLoggedIn = () => {
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+      isLoggedIn = true;
+      changeLanding();
       changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
+      isLoggedIn = false;
+      changeLanding();
       changeMenuAccordingToUser("no-registered");
     }
   };
   xmlhttp.send();
 }
+
+const changeLanding = () => {
+  let link = document.createElement("a");
+  link.classList.add("secondary-link");
+  if (isLoggedIn) {
+    link.href = `https://foodiesaurus.com/restaurant/search.html`;
+    link.innerHTML = "¡Creálo!";
+  } else {
+    lastLi.innerHTML = "Inicia sesión y "
+    link.href = `https://foodiesaurus.com/login.html`;
+    link.innerHTML = "¡Creálo!";
+  }
+  lastLi.appendChild(link);
+}
+
 fillSelects()
 checkIsLoggedIn();
