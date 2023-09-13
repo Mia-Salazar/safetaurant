@@ -256,7 +256,7 @@
 			$query->bindParam(':foodType', $foodType);
 		}
 		$query->execute();
-		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		$rows = $query->fetch();
 		closeConnection($connection); 
 		return $rows;
 	}
