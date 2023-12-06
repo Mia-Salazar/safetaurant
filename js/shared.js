@@ -13,6 +13,11 @@ if (dropdownButton) {
   dropdownButton.addEventListener("click", dropdownToggle, false);
 }
 
+
+if (purchase.length > 1) {
+  
+}
+
 //Con esta función mostramos las opciones que puede usar el usuario del menú
 function changeMenuAccordingToUser(userType) {
   navList.forEach((li)=> {

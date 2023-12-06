@@ -23,11 +23,6 @@ const putData = () => {
     document.getElementById("name").innerHTML = restaurant.name;
     document.getElementById("address").innerHTML = restaurant.address;
     document.getElementById("province").innerHTML = restaurant.province;
-    document.getElementById("zip").innerHTML = restaurant.ZIP;
-    //Si se ha guardado el teléfono, lo mostramos
-    if (restaurant.phone && restaurant.phone !== "0") {
-        document.getElementById("phone").innerHTML = restaurant.phone;
-    }
     //Si se ha guardado el tipo de comida, lo mostramos
     if (restaurant.foodType && restaurant.foodType !== "") {
         document.getElementById("foodType").innerHTML = restaurant.foodType;

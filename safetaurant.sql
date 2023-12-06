@@ -32,7 +32,7 @@ CREATE TABLE `restaurant` (
   `name` varchar(40) NOT NULL,
   `province` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `ZIP` int(6) NOT NULL,
+  `ZIP` int(6) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   `phone` int(12) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
