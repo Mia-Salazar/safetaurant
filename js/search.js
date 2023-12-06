@@ -119,15 +119,13 @@ const getRestaurantAPI = () => {
                 loadMoreSpinner.style.display = 'none';
                 loader.style.display = 'none';
             } else {
-                found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+
                 showAddButtonWhenNoResults();
                 loader.style.display = 'none';
                 loadMoreSpinner.style.display = 'none';
                 nextButton.style.display = 'none';
             }
         } else if (this.status === 404 || this.status === 204) {
-            //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo
-            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             showAddButtonWhenNoResults();
             orderContainer.classList.add("hidden");
             loader.style.display = 'none';
@@ -140,15 +138,24 @@ const getRestaurantAPI = () => {
 
 //Función cuando no hay resultados
 const showAddButtonWhenNoResults = () => {
-    if (isLoggedIn && !document.getElementById("addRestaurant")) {
-        let link = document.createElement("a");
-        link.setAttribute("id","addRestaurant");
-        link.href = "https://foodiesaurus.com/restaurant/search.html";
-        link.classList.add("primary-button");
-        link.classList.add("link");
-        link.innerHTML = "Crear restaurante"
+    let link = document.createElement("a");
+    link.setAttribute("id","addRestaurant");
+    link.classList.add("primary-button");
+    if (!document.getElementById("addRestaurant")) {
+        if (isLoggedIn) {
+            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
+            link.href = "https://foodiesaurus.com/restaurant/search.html";
+            link.innerHTML = "Crear restaurante" 
+        } else {
+            found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados. <br> Inicia sesión y crea el restaurante";
+            link.href = "https://foodiesaurus.com/login.html";
+            link.innerHTML = "Iniciar sesión"
+        }
         searchSection.appendChild(link);
     }
+
+    
+
 }
 
 //Función para buscar restaurantes con los datos recabados en el buscador
