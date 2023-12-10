@@ -44,7 +44,7 @@ function editRestaurant(event){
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/editRestaurant.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/editRestaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -61,7 +61,7 @@ function editRestaurant(event){
         loader.style.display = 'none';
     } else if (this.status == 401) {
         //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     }
     buttonText.innerHTML = "Editar restaurante";
     };
@@ -85,7 +85,7 @@ const putData = () => {
 
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/restaurant.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/restaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -104,16 +104,16 @@ const getRestaurant = () => {
 
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         fillSelects();
         getRestaurant();
     } else if (this.status == 401) {
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     } else if (this.status == 400) {
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     } 
     };
     xmlhttp.send();

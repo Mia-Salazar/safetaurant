@@ -28,7 +28,7 @@ let isLoggedIn;
 //Comprobamos si el usuario ha iniciado sesión
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -70,7 +70,7 @@ const viewList = () => {
         let province = document.createElement("p");
         let score = document.createElement("p");
 
-        link.href = `https://foodiesaurus.com/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        link.href = `http://localhost/SafeTaurant/restaurant/index.html?ID=${restaurant.restaurantID}`;
         link.setAttribute('aria-label', `Visitar restaurante: ${restaurant.name}`);
         title.innerHTML = restaurant.name;
         address.innerHTML = restaurant.address;
@@ -101,7 +101,7 @@ function getNextPage(){
 
 const getRestaurantAPI = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.com/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -144,11 +144,11 @@ const showAddButtonWhenNoResults = () => {
     if (!document.getElementById("addRestaurant")) {
         if (isLoggedIn) {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
-            link.href = "https://foodiesaurus.com/restaurant/search.html";
+            link.href = "http://localhost/SafeTaurant/restaurant/search.html";
             link.innerHTML = "Crear restaurante" 
         } else {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados. <br> Inicia sesión y crea el restaurante";
-            link.href = "https://foodiesaurus.com/login.html";
+            link.href = "http://localhost/SafeTaurant/login.html";
             link.innerHTML = "Iniciar sesión"
         }
         searchSection.appendChild(link);
@@ -170,7 +170,7 @@ const getRestaurants = () => {
 
 const getRestaurantTotal = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `https://foodiesaurus.com/controllers/searchTotal.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchTotal.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -202,7 +202,7 @@ const getInitialValues = () => {
 //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
 function search(event) {
     event.preventDefault();
-    window.location.href = `https://foodiesaurus.com/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
+    window.location.href = `http://localhost/SafeTaurant/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
 }
 
 fillSelects();
