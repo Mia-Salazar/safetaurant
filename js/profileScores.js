@@ -29,7 +29,7 @@ const putScores = () => {
         generalScore.classList.add("principal-score-comment");
         attentionScore.innerHTML = `<span class='highlight'>Atención recibida: </span>${score.attentionScore}/10`;
         link.innerHTML = `Ver restaurante`;
-        link.href=`https://foodiesaurus.com/restaurant/index.html?ID=${score.restaurantID}`
+        link.href=`http://localhost/SafeTaurant/restaurant/index.html?ID=${score.restaurantID}`
         button.innerHTML = "Eliminar";
 
         button.classList.add("primary-button");
@@ -73,7 +73,7 @@ const deleteComment = (scoreID, restaurantID) => {
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/deleteComment.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/deleteComment.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -86,7 +86,7 @@ const deleteComment = (scoreID, restaurantID) => {
         loader.style.display = 'none';
     } else if (this.status == 401) {
         //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     } else if (this.status == 409) {
         feedback.innerHTML = "No puedes eliminar todas las puntuaciones de un restaurante";
         feedback.classList.add("error");
@@ -101,7 +101,7 @@ const deleteComment = (scoreID, restaurantID) => {
 //Obtenemos los datos del usuario
 const getScores = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/profileScores.php", true);
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/profileScores.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -120,7 +120,7 @@ const getScores = () => {
         loader.style.display = 'none';
     } else if (this.status == 401) {
         //Si la persona no está autorizada, la expulsamos
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     } else if (this.status == 400) {
         //Si hay un error, devolvemos un error
         subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -133,7 +133,7 @@ const getScores = () => {
 //Comprobamos si el usuario está activo
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -141,7 +141,7 @@ const checkIsLoggedIn = () => {
         getScores();
     } else if (this.status == 401) {
         //Si no ha iniciado sesión, le expulsamos al login
-        window.location.href = "https://foodiesaurus.com/login.html";
+        window.location.href = "http://localhost/SafeTaurant/login.html";
     }  
     };
     xmlhttp.send();

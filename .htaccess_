@@ -2,4 +2,4 @@ ErrorDocument 404 /error_404.html
 
 RewriteEngine On
 RewriteCond %{SERVER_PORT} !=443
-RewriteRule ^(.*)$ https://foodiesaurus.com/$1 [R=301,L]
+RewriteRule ^(.*)$ http://localhost/SafeTaurant/$1 [R=301,L]

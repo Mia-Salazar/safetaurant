@@ -1,17 +1,17 @@
 <?php 
 	//Creamos una conexión con la BBDD
 	class Connection extends PDO {
-        // private $type = 'mysql';
-        // private $host = 'localhost';
-        // private $database =  'safetaurant';
-        // private $user = 'root';
-        // private $pass = '';
+        private $type = 'mysql';
+        private $host = 'localhost';
+        private $database =  'safetaurant';
+        private $user = 'root';
+        private $pass = '';
 
-		private $type = 'mysql';
-        private $host = 'db5012427505.hosting-data.io';
-        private $database =  'dbs10448932';
-        private $user = 'dbu631847';
-        private $pass = '*jHJ$6nA60hU';
+		// private $type = 'mysql';
+        // private $host = 'db5012427505.hosting-data.io';
+        // private $database =  'dbs10448932';
+        // private $user = 'dbu631847';
+        // private $pass = '*jHJ$6nA60hU';
  
         public function __construct() {
             try {

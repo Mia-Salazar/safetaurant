@@ -33,12 +33,12 @@ function search(event) {
   event.preventDefault();
   const province = provinceSelect.value;
   const foodType = foodSelect.value;
-  window.location.href = `https://foodiesaurus.com/search.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
+  window.location.href = `http://localhost/SafeTaurant/search.html?name=${name.value}&province=${province}&foodType=${foodType}&order=desc`;
 }
 
 const checkIsLoggedIn = () => {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
+  xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -59,11 +59,11 @@ const changeLanding = () => {
   let link = document.createElement("a");
   link.classList.add("secondary-link");
   if (isLoggedIn) {
-    link.href = `https://foodiesaurus.com/restaurant/search.html`;
+    link.href = `http://localhost/SafeTaurant/restaurant/search.html`;
     link.innerHTML = "¡Creálo!";
   } else {
     lastLi.innerHTML = "Inicia sesión y "
-    link.href = `https://foodiesaurus.com/login.html`;
+    link.href = `http://localhost/SafeTaurant/login.html`;
     link.innerHTML = "¡Creálo!";
   }
   lastLi.appendChild(link);

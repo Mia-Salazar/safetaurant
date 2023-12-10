@@ -103,7 +103,7 @@ const putAverage = () => {
 //Obtenemos los datos del restaurante
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/restaurant.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/restaurant.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -123,7 +123,7 @@ const getRestaurant = () => {
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getChartsFound = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/chartsFound.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/chartsFound.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -138,7 +138,7 @@ const getChartsFound = () => {
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getAllergicReactions = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/allergicReaction.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/allergicReaction.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -157,7 +157,7 @@ const getAllergicReactions = () => {
 //Obtenemos la información de todas las puntuaciones medias
 const getAverage = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/average.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/average.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -179,7 +179,7 @@ const getAverage = () => {
 //Obtenemos las puntuaciones
 const getScores = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/scores.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/scores.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -210,7 +210,7 @@ const getIcon = (yes, no) => {
 
 const getOptions = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "https://foodiesaurus.com/controllers/options.php", true);
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/options.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -249,7 +249,7 @@ const getOptions = () => {
 //Comprobamos si se ha iniciado sesión
 const checkIsLoggedIn = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://foodiesaurus.com/controllers/isLoggued.php", true);
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -273,7 +273,7 @@ const showAddButtonWhenNoResults = () => {
     if (isLoggedIn && !document.getElementById("addReview")) {
         let link = document.createElement("a");
         link.setAttribute("id","addReview");
-        link.href = `https://foodiesaurus.com/restaurant/addScore.html?ID=${restaurantID}`;;
+        link.href = `http://localhost/SafeTaurant/restaurant/addScore.html?ID=${restaurantID}`;;
         link.classList.add("primary-button");
         link.classList.add("add-button");
         link.innerHTML = "Añadir nueva opinión"
