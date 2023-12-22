@@ -1,0 +1,59 @@
+.hero {
+    position: relative;
+    display: flex;
+    height: 12.5rem;
+    background-image: url("../img/happy.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.hero:after {
+    content: '';
+    position: absolute;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--black);
+    opacity: 0.7;
+}
+
+figure {
+    margin: 0;
+}
+
+.img-self {
+    max-width: 12.5rem;
+    width: 100%;
+}
+
+.title {
+    margin: auto;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 1.75rem;
+    text-align: center;
+    z-index: 1;
+}
+
+.info {
+    max-width: 56.25rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.info a:link {
+    color: var(--primaryColor)
+}
+
+@media (min-width: 768px) {
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        gap: 1rem;
+    }
+
+    .img-self {
+        width: 12.5rem;
+    }
+}

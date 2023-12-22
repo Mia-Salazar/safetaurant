@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/home.css">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/prehistory.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="./assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="./assets/img/logo.png" />
@@ -89,58 +89,44 @@
         </ul>
       </nav>
     </header>
-    <main class="home" id="main">
-      <div class="hero">
-        <div class="wrapper">
-          <div class="hero__title-container">
-            <h2 class="hero__title">Encuentra restaurantes seguros para alergias alimentarias</h2>
-            <p class="hero__subtitle">La única plataforma donde puedes valorar establecimientos de comida según cómo tratan las alergias y las intolencias</p>
-          </div>
-          <figure class="img-container hero__img">
-            <img class="img" alt="logo" src="./assets/img/poke.png" />
+    <main>
+      <section class="hero">
+        <h2 class="title" id="name">Prehistoria</h2>
+      </section>
+      <section class="info">
+        <h3>El contexto</h3>
+        <p>En diciembre de 2014 entró en vigor en la Unión Europea la <a target="_blank" href="https://www.boe.es/doue/2011/304/L00018-00063.pdf">normativa 1169/2011</a> que había sido aprobada en 2011.</p>
+        <p>Esta normativa respondía a la diversidad de las personas que existen en el planeta, y a sus diferentes tipos de dietas. Asimismo, en él se centraban en las diversas intolerancias y alergias alimenticias, y en otras posibles condiciones relacionadas con la alimentación.</p>
+        <p>En este texto se regulaba como obligatorio que todos los locales de restauración tuviesen una carta de alérgenos. En dicha carta se debería indicar la presencia de cada uno de los 14 alérgenos que se recogen en esta normativa.</p>
+        <p>Para entender mejor la necesidad de mostrar la presencia de ciertos alimentos, es pertinente conocer algunos datos:</p>
+        <ul>
+          <li>Entre un <a target="_blank" href="https://www.quironsalud.com/es/comunicacion/actualidad-quironsalud/20-25-poblacion-mundial-sufre-alguna-enfermedad-alerg-57adf#:~:text=la%20poblaci%C3%B3n%20infantil-,Entre%20el%2020%25%20y%2025%25%20de%20la%20poblaci%C3%B3n%20mundial%20sufre,frecuentemente%20en%20la%20poblaci%C3%B3n%20infantil">20 y un 25% de la población posee algún tipo de alergia alimentaria</a>.</li>
+          <li>Se estima que un <a target="_blank" href="https://www.medicalnewstoday.com/articles/180120#:~:text=Worldwide%2C%20an%20estimated%2068%25%20of,and%20alternatives%20to%20dairy%20products.">68% de la población mundial tiene problemas para digerir la lactosa</a>.</li>
+          <li><a target="_blank" href="https://www.beyondceliac.org/celiac-disease/facts-and-figures/">Un 1% de las personas son celíacas</a>.</li>
+        </ul>
+        <p>Teniendo en cuenta todas estas cifras, la importancia de poder conocer los ingredientes de los platos se hace acuciante. Con tantas personas con tantas condiciones, es necesario un buen conocimiento de los platos para evitar reacciones alérgicas, incomodidades estomacales y el empeoramiento de otras patologías.</p>
+        <h3>La autora</h3>
+        <div class="container">
+          <figure>
+            <img class="img-self" alt="Mia Salazar" src="https://pbs.twimg.com/profile_images/1434553805606166529/QHYMK3ns_400x400.jpg" />
           </figure>
+          <div>
+            <p>Soy Mia Salazar, la creadora de la plataforma, y la persona que tuvo la idea. Actualmente soy Front-end developer desde 2018 y me estoy especializando en Accesibilidad. En mi tiempo libre voy ampliando Foodiesaurus, escribo artículos y soy mentora.</p>
+            <p>La idea de Foodiesaurus nació por mi propia necesidad. Soy una persona con diversas intolerancias y alergias alimentarias y, tras múltiples reacciones alérticas en varios restaurantes, se me ocurrió la idea: crear una plataforma donde se pudiese valorar restaurantes en función de cómo se tratasen a los alérgenos.</p>
+            <p>Sin embargo, a medida que fui modelando la idea, me di cuenta de la cantidad de personas a mi alrededor que tenían sus propias condiciones y decisiones: personas con diabetes, veganas, vegetarianas, o con discapacidades. Por ello, acabé ampliando la idea a otros segmentos de población.</p>
+          </div>
         </div>
-      </div>
-      <section class="search-container">
-        <h3 class="second-title">Empieza a buscar restaurantes</h3>
-        <form id="search">
-          <div class="input-group">
-            <label class="input-label" for="name">Nombre</label>
-            <input pattern="^(?!.*<[^>]+>).*" class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
-          </div>
-          <div class="form-selects">
-            <div class="input-group">
-              <label class="input-label" for="province">Provincia</label>
-              <select name="province" id="province" class="select">
-                <option selected value="">Escoge Provincia</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="foodType">Tipo de comida</label>
-              <select name="foodType" id="foodType" class="select">
-                <option selected value="">Escoge el tipo</option>
-              </select>
-            </div>
-            <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
-          </div>
-        </form>
-      </section>
-      <section class="question">
-        <h4 class="second-title second-title--light">¿Quieres saber si un restaurante es seguro para ti?</h4>
-      </section>
-      <section class="instructions">
-        <figure class="img-container instruction__img-container">
-          <img class="img instruction__img" alt="" src="./assets/img/middle.jpg" />
-        </figure>
-        <ol class="instructions-list">
-          <li>Buscar por nombre, ciudad o tipo de comida</li>
-          <li>Consulta opiniones de otros <span class="bold">foodies</span></li>
-          <li>Comprueba si la <span class="bold">carta de alérgenos</span> es de fiar</li>
-          <li>O si alguien ha reportado una <span class="bold">reacción alérgica</span></li>
-          <li>Ve al restaurante y disfruta la comida</li>
-          <li><span class="bold">Puntúa la experiencia</span> y ayuda a otros</li>
-          <li >Si no has conseguido encontrar el restaurante... <span id="last"></span></li>
-        </ol>
+        <p>Al final decidí que la plataforma giraría en torno a 5 ejes:</p>
+        <ul>
+          <li>Si un restaurante tenía carta de alérgenos y cómo de fiable era esa carta de alérgenos.</li>
+          <li>La atención que el personal de cocina y sala dieran a las necesidades de las dietas de cada persona.</li>
+          <li>Cuáles fuesen las opciones alimentarias que se ofrecían en el establecimiento.</li>
+          <li>Si se había tenido una reacción alérgica o alguna reacción adversa relacionada con la ingesta de platos en el restaurante.</li>
+          <li>Si se tenían en cuenta en los locales las necesidades de las personas con discapacidad.</li>
+        </ul>
+        <p>Si deseas conocer la historia entera de Foodiesaurus, puedes <a target="_blank" href="https://www.youtube.com/watch?v=CpuxfoV71E0&feature=youtu.be&ab_channel=CommitConf">ver en este vídeo la historia de cómo evolucionó la idea</a>.</p>
+        <p>Actualmente Foodiesaurus está en plena expansión y estoy intentando, poco a poco, ir añadiendo funcionalidades. Si tienes alguna idea para ayudar en este pequeño proyecto, en el footer están todas las formas para poder contactar conmigo.</p>
+        <p>Gracias por leer y contribuir en Foodiesaurus.</p>
       </section>
     </main>
     <footer class="footer">
@@ -152,7 +138,7 @@
            </figure>
           <p>saurus</p>
         </div>
-        <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+        <p class="copyright">Foodiesaurus©, restaurantes sin alergias.</p>
       </div>
       <div class="footer__container">
         <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
