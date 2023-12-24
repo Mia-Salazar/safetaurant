@@ -60,19 +60,22 @@ const createAddressesList = () => {
     addresses.forEach((address) => {
         let label = document.createElement("label");
         let input = document.createElement("input");
+        let div = document.createElement("div");
+
+        div.classList.add("radio-container");
 
         input.setAttribute("name", "addressComplete");
         input.setAttribute("id", address.place_id);
         input.value = address.place_id
         input.type = "radio";
-        input.addEventListener("click", addressClick, false);
-        input.classList.add("info-list-item");
         
-        label.innerHTML = address.display_name;
+        const cityOrTown = address.address.city ? address.address.city : address.address.town
+        label.innerHTML = `${address.address.road}, ${cityOrTown}, ${address.address.state}`;
         label.htmlFor = address.place_id
 
-        addressList.appendChild(label);
-        addressList.appendChild(input);
+        div.appendChild(input);
+        div.appendChild(label);
+        addressList.appendChild(div);
     });
 }
 
@@ -82,16 +85,16 @@ const getAddressAPI = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            const addressAPI = JSON.parse(this.responseText) || [];
-            addresses = addressAPI.filter((el) => {
-                return el.display_name.includes("Spain")
-            })
+            addresses = JSON.parse(this.responseText) || [];
             if (addresses.length > 0) {
                 addressList.innerHTML = "";
                 loader.style.display = 'none';
                 addressList.style.display = 'flex';
                 addressSection.style.display = 'flex';
                 addressTitle.style.display = 'flex';
+                feedback.style.display = 'flex';
+                feedback.innerHTML = "¿Ninguna de estas direcciones es correcta? ¡Añade el restaurante a mano!";
+                buttonSubmit.style.display = 'block';
                 createAddressesList();
             } else {
                 feedback.style.display = 'flex';

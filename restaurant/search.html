@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-radio.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/search-name.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../assets/img/favicon.ico" />
@@ -107,11 +107,11 @@
         <span class="loader" role="alert" aria-busy="true" id="loader"></span>
         <fieldset class="list" id="addressSection">
           <legend class="step-title" id="addressTitle">2. Escoge la dirección completa</legend>
-          <div id="addressList">
+          <div class="address-list" id="addressList">
           </div>
-          <p id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
+          <p class="feedback" id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
         </fieldset>
-        <button type="submit" class="primary-button" id="buttonSubmit" disabled>
+        <button type="submit" class="primary-button" id="buttonSubmit">
           <div class="loader-container">
             <span id="buttonText">Añadir restaurante</span>
           </div>

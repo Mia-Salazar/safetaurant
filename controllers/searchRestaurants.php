@@ -6,7 +6,7 @@
         $address = $_GET['address'];
 
         // La URL de la API con los parámetros
-        $url = "https://us1.locationiq.com/v1/search?key={$api_key}&q={$address}&format=json";
+        $url = "https://eu1.locationiq.com/v1/search?key={$api_key}&q={$address}&format=json&countrycodes=es&addressdetails=1";
 
         // Realizar la solicitud a la API y obtener la respuesta
         $response = file_get_contents($url);

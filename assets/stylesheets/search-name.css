@@ -1,6 +1,7 @@
 .list {
     display: flex;
     flex-direction: column;
+    margin-top: 2.5rem;
 }
 
 .list ul {
@@ -47,11 +48,20 @@ fieldset {
 .radio-container {
     display: grid;
     grid-template-columns: 1.5rem 1fr;
-    align-items: flex-start;
+    align-items: baseline;
+    margin-bottom: 1rem;
 }
 
 label {
     max-width: unset;
+}
+
+.address-list {
+    flex-direction: column;
+}
+
+.feedback {
+    margin-top: 3.375rem;;
 }
 
 @media (min-width: 992px) {
