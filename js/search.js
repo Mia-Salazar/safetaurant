@@ -145,7 +145,7 @@ const showAddButtonWhenNoResults = () => {
         if (isLoggedIn) {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados";
             link.href = "http://localhost/SafeTaurant/restaurant/search.html";
-            link.innerHTML = "Crear restaurante" 
+            link.innerHTML = "Añadir restaurante" 
         } else {
             found.innerHTML = "No hay restaurantes con los filtros de búsqueda seleccionados. <br> Inicia sesión y crea el restaurante";
             link.href = "http://localhost/SafeTaurant/login.html";

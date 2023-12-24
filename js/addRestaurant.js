@@ -141,7 +141,7 @@ const addScore = (data) =>{
             window.location.href = "http://localhost/SafeTaurant/login.html";
         }
         //Mostramos al usuario que ya no está cargando
-        buttonText.innerHTML = "Crear restaurante";
+        buttonText.innerHTML = "Añadir restaurante";
     };
     xmlhttp.send(JSON.stringify(data));
 }
@@ -168,7 +168,7 @@ const addOptions = (data) => {
             window.location.href = "http://localhost/SafeTaurant/login.html";
         }
         //Mostramos al usuario que ya no está cargando
-    buttonText.innerHTML = "Crear restaurante";
+    buttonText.innerHTML = "Añadir restaurante";
     };
     xmlhttp.send(JSON.stringify(data));
 }
