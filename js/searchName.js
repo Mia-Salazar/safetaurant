@@ -43,16 +43,36 @@ function redirect(event){
     window.location.href = `http://localhost/SafeTaurant/restaurant/add.html`;
 }
 
+//
+function addressClick(event) {
+    const addresClicked = event.target.id
+    event.preventDefault();
+    console.log(event.target.id, 'event')
+    // addresses.forEach((address) => {
+    //     if(address.place_id === addresClicked) {
+    //         document.getElementById(address.place_id).style.
+    //     }
+    //     document.getElementById("addressList")
+    // })
+}
+
 const createAddressesList = () => {
     addresses.forEach((address) => {
-        let li = document.createElement("li");
-        let element = document.createElement("button");
+        let label = document.createElement("label");
+        let input = document.createElement("input");
 
-        li.classList.add("info-list-item");
-        element.innerHTML = address.display_name;
+        input.setAttribute("name", "addressComplete");
+        input.setAttribute("id", address.place_id);
+        input.value = address.place_id
+        input.type = "radio";
+        input.addEventListener("click", addressClick, false);
+        input.classList.add("info-list-item");
+        
+        label.innerHTML = address.display_name;
+        label.htmlFor = address.place_id
 
-        li.appendChild(element);
-        addressList.appendChild(li);
+        addressList.appendChild(label);
+        addressList.appendChild(input);
     });
 }
 

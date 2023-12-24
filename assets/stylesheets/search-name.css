@@ -37,3 +37,14 @@
 .primary-button {
     width: fit-content;
 }
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+@media (min-width: 992px) {
+    .search {
+        width: 42.125rem;
+    }
+}
