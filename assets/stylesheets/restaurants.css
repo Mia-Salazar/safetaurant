@@ -7,6 +7,10 @@
 	align-items: center;
 }
 
+.order-container.hidden {
+    display: none;
+}
+
 .order-label {
 	margin-bottom: 0;
 	margin-right: 5px;
