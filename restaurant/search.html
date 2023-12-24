@@ -94,20 +94,19 @@
     <main class="main search container" id="main">
       <h2>Añadir restaurante</h2>
       <ul class="info-list">
-        <li class="info-list-item">Escribe una dirección</li>
-        <li class="info-list-item">Escoge la dirección completa</li>
-        <li class="info-list-item">Comprueba si aparece el restaurante en la lista</li>
-        <li class="info-list-item">Si es uno de ellos, pulsa en él</li>
-        <li class="info-list-item">Si no es uno de ellos añade el restaurante desde 0</li>
+        <li class="info-list-item">En esta página puedes dar de alta restaurantes que todavía no existan en Foodiesaurus</li>
+        <li class="info-list-item">Indica la dirección donde se encuentra el local</li>
+        <li class="info-list-item">Si encontramos el restaurante por dirección, añádele su primera puntuación</li>
+        <li class="info-list-item">Si no lo ubicamos, agrega el restaurante desde 0 y escoge su primera evaluación</li>
       </ul>
         <form class="add-restaurant-form" id="add">
           <div class="input-group" id="addressContainer">
-            <label class="input-label" for="address">Dirección del restaurante</label>
+            <label class="step-title" for="address">1. Escribe la dirección del restaurante</label>
             <input pattern="^(?!.*<[^>]+>).*" class="input" id="address" name="address" type="text" required />
           </div>
-          <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+          <span class="loader" role="alert" aria-busy="true" id="loader"></span>
           <section class="list" id="addressSection">
-              <h3 id="addressTitle">Direcciones relacionadas</h3>
+              <h3 class="step-title" id="addressTitle">2. Escoge la dirección completa</h3>
               <ul id="addressList">
               </ul>
               <!-- <p id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p> -->

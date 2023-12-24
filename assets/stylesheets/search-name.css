@@ -23,3 +23,12 @@
     border: none;
     background: transparent;
 }
+
+.step-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.info-list {
+    margin-bottom: 3.375rem;
+}

@@ -92,6 +92,7 @@ body {
 	content: '-';
 	color: var(--gray);
 	left: 0;
+	top: 0;
 }
 
 .info-list-item:last-of-type {
