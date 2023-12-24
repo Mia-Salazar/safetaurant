@@ -17,6 +17,7 @@ loader.style.display = 'none';
 addressSection.style.display = 'none';
 buttonSubmit.style.display = 'none';
 addressTitle.style.display = 'none';
+feedback.style.display = 'none';
 
 submit.addEventListener("submit", redirect, false);
 addressInput.addEventListener("keyup",function () {
@@ -31,19 +32,11 @@ addressInput.addEventListener("keydown",function () {
 function doneTyping () {
     if (addressInput.value !== "") {
         loader.style.display = 'flex';
-        buttonSubmit.disabled = true;
+        addressList.innerHTML = "";
+        addressSection.style.display = 'none';
         getAddressAPI();
     }
 }
-
-// function toggleProvince() {
-//     nameContainer.style.display = 'flex';
-//     if (addressInput.value !== "") {
-//         loader.style.display = 'flex';
-//         buttonSubmit.disabled = true;
-//         getAddressAPI();
-//     }  
-// }
 
 function redirect(event){
     event.preventDefault();
@@ -81,6 +74,7 @@ const getAddressAPI = () => {
                 addressTitle.style.display = 'flex';
                 createAddressesList();
             } else {
+                feedback.style.display = 'flex';
                 feedback.innerHTML = "No hay ninguna dirección con este nombre ¡Añade el restaurante!";
                 loader.style.display = 'none';
                 addressList.style.display = 'none';
@@ -90,6 +84,7 @@ const getAddressAPI = () => {
             }
         } else if (this.status === 404 || this.status === 204) {
             feedback.innerHTML = "No hay ninguna dirección con este nombre ¡Añade el restaurante!";
+            feedback.style.display = 'flex';
             loader.style.display = 'none';
             addressList.style.display = 'none';
             addressSection.style.display = 'flex';
