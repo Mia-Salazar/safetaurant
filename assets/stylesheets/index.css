@@ -235,7 +235,7 @@ body {
 }
 
 .nav-link {
-	padding: 0 0.625rem;
+	padding: 0;
 	color: var(--white);
 	font-size: 1.125rem;
 	text-decoration: none;
@@ -401,6 +401,10 @@ body {
 @media (min-width: 768px) {
 	.nav-list a {
 		font-size: 1.25rem;
+	}
+
+	.nav-list li {
+		padding: 0 0 0 1rem;
 	}
 
 	.footer {

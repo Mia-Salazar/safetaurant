@@ -43,6 +43,17 @@ fieldset {
     padding: 0;
 }
 
+
+.radio-container {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    align-items: flex-start;
+}
+
+label {
+    max-width: unset;
+}
+
 @media (min-width: 992px) {
     .search {
         width: 42.125rem;
