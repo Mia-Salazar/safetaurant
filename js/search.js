@@ -118,8 +118,9 @@ const getRestaurantAPI = () => {
                 viewList();
                 loadMoreSpinner.style.display = 'none';
                 loader.style.display = 'none';
+                orderContainer.classList.remove("hidden");
             } else {
-
+                orderContainer.classList.add("hidden");
                 showAddButtonWhenNoResults();
                 loader.style.display = 'none';
                 loadMoreSpinner.style.display = 'none';
