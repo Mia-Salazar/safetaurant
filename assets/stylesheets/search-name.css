@@ -15,7 +15,7 @@
 }
 
 .search {
-    max-width: 23.125rem;
+    max-width: 42.125rem;
 }
 
 .info-list-item button {
@@ -25,10 +25,15 @@
 }
 
 .step-title {
+    margin-bottom: 1rem;
     font-weight: bold;
     font-size: 1.1rem;
 }
 
 .info-list {
     margin-bottom: 3.375rem;
+}
+
+.primary-button {
+    width: fit-content;
 }
