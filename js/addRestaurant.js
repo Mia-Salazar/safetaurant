@@ -6,8 +6,6 @@ const buttonSubmit = document.getElementById("buttonSubmit");
 const error = document.getElementById("error");
 const loader = document.getElementById("loader");
 const buttonText = document.getElementById("buttonText");
-const namePrevious = new URL(document.URL).searchParams.get('name');
-const provincePrevious = new URL(document.URL).searchParams.get('province');
 loader.style.display = 'none';
 
 //Variable para comprobar si hay carta de alérgenos
@@ -16,7 +14,6 @@ let allergenChartToggle = false;
 let user;
 let buttonDisabled = true;
 
-document.getElementById("name").value = namePrevious;
 document.getElementById("add").addEventListener("submit", registerRestaurant, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
@@ -38,9 +35,6 @@ const fillSelects = () => {
         let option = document.createElement("option");
         option.value = province;
         option.innerHTML = province;
-        if (provincePrevious === province) {
-            option.setAttribute('selected', true);
-        }
         provinceSelect.appendChild(option);
     });
     const foodTypeOrderes = foodType.sort();

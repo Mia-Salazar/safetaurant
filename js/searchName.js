@@ -1,109 +1,101 @@
 const loader = document.getElementById("loader");
-const nameContainer = document.getElementById("nameContainer");
-const provinceSelect = document.getElementById("province");
-const nameInput = document.getElementById("name");
+const nameContainer = document.getElementById("addressContainer");
+const addressInput = document.getElementById("address");
 const feedback = document.getElementById("feedback");
 const submit = document.getElementById("add");
 const list = document.getElementById("list");
 const buttonSubmit = document.getElementById("buttonSubmit");
-const restaurantsList =  document.getElementById("restaurantsList");
+const addressSection = document.getElementById("addressSection");
+const addressList =  document.getElementById("addressList");
+const addressTitle = document.getElementById("addressTitle");
 let typingTimer;
 const doneTypingInterval = 1000; 
-let restaurants;
+let addresses;
 
-restaurantsList.style.display = 'none';
+addressList.style.display = 'none';
 loader.style.display = 'none';
-nameContainer.style.display = 'none';
-sectionList.style.display = 'none';
+addressSection.style.display = 'none';
+buttonSubmit.style.display = 'none';
+addressTitle.style.display = 'none';
 
 submit.addEventListener("submit", redirect, false);
-document.getElementById("province").addEventListener("change", toggleProvince, false);
-nameInput.addEventListener("keyup",function () {
+addressInput.addEventListener("keyup",function () {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
 });
-nameInput.addEventListener("keydown",function () {
+addressInput.addEventListener("keydown",function () {
     clearTimeout(typingTimer);
 })
 
 //user is "finished typing," do something
 function doneTyping () {
-    if (nameInput.value !== "") {
+    if (addressInput.value !== "") {
         loader.style.display = 'flex';
         buttonSubmit.disabled = true;
-        getRestaurantAPI();
+        getAddressAPI();
     }
 }
 
-function toggleProvince() {
-    nameContainer.style.display = 'flex';
-    if (nameInput.value !== "") {
-        loader.style.display = 'flex';
-        buttonSubmit.disabled = true;
-        getRestaurantAPI();
-    }  
-}
+// function toggleProvince() {
+//     nameContainer.style.display = 'flex';
+//     if (addressInput.value !== "") {
+//         loader.style.display = 'flex';
+//         buttonSubmit.disabled = true;
+//         getAddressAPI();
+//     }  
+// }
 
 function redirect(event){
     event.preventDefault();
-    window.location.href = `http://localhost/SafeTaurant/restaurant/add.html?name=${nameInput.value}&province=${provinceSelect.value}`;
+    window.location.href = `http://localhost/SafeTaurant/restaurant/add.html`;
 }
 
-const fillSelects = () => {
-    provinces.forEach((province) => {
-        let option = document.createElement("option");
-        option.value = province;
-        option.innerHTML = province;
-        provinceSelect.appendChild(option);
-    });
-}
-
-const createRestauranList = () => {
-    restaurants.forEach((restaurant) => {
+const createAddressesList = () => {
+    addresses.forEach((address) => {
         let li = document.createElement("li");
-        let link = document.createElement("a");
+        let element = document.createElement("button");
 
         li.classList.add("info-list-item");
-        link.innerHTML = restaurant.name;
-        link.href = `http://localhost/SafeTaurant/restaurant/index.html?ID=${restaurant.restaurantID}`;
+        element.innerHTML = address.display_name;
 
-        li.appendChild(link);
-        restaurantsList.appendChild(li);
+        li.appendChild(element);
+        addressList.appendChild(li);
     });
 }
 
-const getRestaurantAPI = () => {
+const getAddressAPI = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchName.php?name=${nameInput.value}&province=${provinceSelect.value}`, true);
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchRestaurants.php?address=${addressInput.value}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
-            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-            restaurants = JSON.parse(this.responseText);
-            if (restaurants.length > 0) {
-                restaurantsList.innerHTML = "";
+            const addressAPI = JSON.parse(this.responseText) || [];
+            addresses = addressAPI.filter((el) => {
+                return el.display_name.includes("Spain")
+            })
+            if (addresses.length > 0) {
+                addressList.innerHTML = "";
                 loader.style.display = 'none';
-                buttonSubmit.disabled = false;
-                restaurantsList.style.display = 'flex';
-                sectionList.style.display = 'flex';
-                createRestauranList();
+                addressList.style.display = 'flex';
+                addressSection.style.display = 'flex';
+                addressTitle.style.display = 'flex';
+                createAddressesList();
             } else {
-                feedback.innerHTML = "No ningún restaurantes con este nombre ¡Añádelo!";
+                feedback.innerHTML = "No hay ninguna dirección con este nombre ¡Añade el restaurante!";
                 loader.style.display = 'none';
-                buttonSubmit.disabled = false;
-                restaurantsList.style.display = 'none';
-                sectionList.style.display = 'flex';
+                addressList.style.display = 'none';
+                addressSection.style.display = 'flex';
+                buttonSubmit.style.display = 'block';
+                addressTitle.style.display = 'none';
             }
         } else if (this.status === 404 || this.status === 204) {
-            feedback.innerHTML = "No ningún restaurantes con este nombre ¡Añádelo!";
+            feedback.innerHTML = "No hay ninguna dirección con este nombre ¡Añade el restaurante!";
             loader.style.display = 'none';
-            buttonSubmit.disabled = false;
-            restaurantsList.style.display = 'none';
-            sectionList.style.display = 'flex';
+            addressList.style.display = 'none';
+            addressSection.style.display = 'flex';
+            buttonSubmit.style.display = 'block';
+            addressTitle.style.display = 'none';
         }
     };
     xmlhttp.send();
 }
-
-fillSelects();

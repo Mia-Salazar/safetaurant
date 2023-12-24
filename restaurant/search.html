@@ -94,34 +94,29 @@
     <main class="main search container" id="main">
       <h2>Añadir restaurante</h2>
       <ul class="info-list">
-        <li class="info-list-item">Escoge una provincia</li>
-        <li class="info-list-item">Escribe el nombre del restaurante</li>
-        <li class="info-list-item">Comprueba si ese restaurante existe antes de añadirlo</li>
-        <li class="info-list-item">Si ya existe pulsa en él para verlo</li>
+        <li class="info-list-item">Escribe una dirección</li>
+        <li class="info-list-item">Escoge la dirección completa</li>
+        <li class="info-list-item">Comprueba si aparece el restaurante en la lista</li>
+        <li class="info-list-item">Si es uno de ellos, pulsa en él</li>
+        <li class="info-list-item">Si no es uno de ellos añade el restaurante desde 0</li>
       </ul>
         <form class="add-restaurant-form" id="add">
-            <div class="input-group">
-                <label class="input-label" for="province">Provincia*: </label>
-                <select name="province" id="province" class="select" required>
-                    <option selected disabled value="">Escoge Provincia</option>
-                </select>
-            </div>
-            <div class="input-group" id="nameContainer">
-                <label class="input-label" for="name">Nombre del restaurante*: </label>
-                <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" name="name" type="text" required />
-            </div>
-            <section class="list" id="sectionList">
-                <h3>Restaurantes con nombres parecidos</h3>
-                <ul id="restaurantsList">
-                </ul>
-                <p id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
-            </section>
-            <button type="submit" class="primary-button" id="buttonSubmit" disabled>
-                <div class="loader-container">
-                    <span id="buttonText">Añadir restaurante</span>
-                    <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
-                </div>
-            </button>
+          <div class="input-group" id="addressContainer">
+            <label class="input-label" for="address">Dirección del restaurante</label>
+            <input pattern="^(?!.*<[^>]+>).*" class="input" id="address" name="address" type="text" required />
+          </div>
+          <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+          <section class="list" id="addressSection">
+              <h3 id="addressTitle">Direcciones relacionadas</h3>
+              <ul id="addressList">
+              </ul>
+              <!-- <p id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p> -->
+          </section>
+          <button type="submit" class="primary-button" id="buttonSubmit" disabled>
+              <div class="loader-container">
+                  <span id="buttonText">Añadir restaurante</span>
+              </div>
+          </button>
         </form>
 
     </main>

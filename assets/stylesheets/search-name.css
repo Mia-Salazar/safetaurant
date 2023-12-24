@@ -17,3 +17,9 @@
 .search {
     max-width: 23.125rem;
 }
+
+.info-list-item button {
+    text-align: left;
+    border: none;
+    background: transparent;
+}
