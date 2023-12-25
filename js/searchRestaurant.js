@@ -73,15 +73,19 @@ const createAddressesList = () => {
         label.innerHTML = `${address.address.road}, ${cityOrTown}, ${address.address.state}`;
         label.htmlFor = address.place_id
 
+        input.addEventListener('change', addressClick, false);
+
         div.appendChild(input);
         div.appendChild(label);
         addressList.appendChild(div);
     });
+
+
 }
 
 const getAddressAPI = () => {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchRestaurants.php?address=${addressInput.value}`, true);
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchAddress.php?address=${addressInput.value}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
