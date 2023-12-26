@@ -1,6 +1,7 @@
 .list {
     display: flex;
     flex-direction: column;
+    margin-top: 2.5rem;
 }
 
 .list ul {
@@ -15,5 +16,60 @@
 }
 
 .search {
-    max-width: 23.125rem;
+    max-width: 42.125rem;
+}
+
+.info-list-item button {
+    text-align: left;
+    border: none;
+    background: transparent;
+}
+
+.step-title {
+    margin-bottom: 1.25rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.info-list {
+    margin-bottom: 3.375rem;
+}
+
+.primary-button {
+    width: fit-content;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+
+.radio-container {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    grid-gap: 5px;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+label {
+    max-width: unset;
+}
+
+.address-list, .restaurants-list {
+    flex-direction: column;
+    max-height: 16.875rem;
+    overflow-y: auto;
+    padding: 0 0 0 1.25rem;
+}
+
+.feedback {
+    margin-top: 3.375rem;;
+}
+
+@media (min-width: 992px) {
+    .search {
+        width: 42.125rem;
+    }
 }
