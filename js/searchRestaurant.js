@@ -82,8 +82,8 @@ const createAddressesList = () => {
         input.value = address.place_id
         input.type = "radio";
         
-        const cityOrTown = address.address.city ? address.address.city : address.address.town
-        label.innerHTML = `${address.address.road}, ${cityOrTown}, ${address.address.state}`;
+        const cityOrTown = address.address.city ? address.address.city : address.address.town ? address.address.town : address.address.village;
+        label.innerHTML = `<strong>${address.address.road}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
         label.htmlFor = address.place_id
 
         input.addEventListener('change', addressClick, false);
@@ -136,27 +136,27 @@ const getAddressAPI = () => {
 }
 
 const createRestaurantsList = () => {
-    addresses.forEach((address) => {
+   restaurants.features.forEach((restaurant) => {
         let label = document.createElement("label");
         let input = document.createElement("input");
         let div = document.createElement("div");
 
         div.classList.add("radio-container");
 
-        input.setAttribute("name", "addressComplete");
-        input.setAttribute("id", address.place_id);
-        input.value = address.place_id
+        input.setAttribute("name", "restaurantComplete");
+        input.setAttribute("id", restaurant.properties.place_id);
+        input.value = restaurant.properties.place_id
         input.type = "radio";
         
-        const cityOrTown = address.address.city ? address.address.city : address.address.town
-        label.innerHTML = `${address.address.road}, ${cityOrTown}, ${address.address.state}`;
-        label.htmlFor = address.place_id
+        label.innerHTML = `<strong>${restaurant.properties.name}</strong>, ${restaurant.properties.street}, ${restaurant.properties.postcode},
+        ${restaurant.properties.city}`;
+        label.htmlFor = restaurant.properties.place_id;
 
-        input.addEventListener('change', addressClick, false);
+        //input.addEventListener('change', addressClick, false);
 
         div.appendChild(input);
         div.appendChild(label);
-        addressList.appendChild(div);
+        restaurantsList.appendChild(div);
     });
 }
 

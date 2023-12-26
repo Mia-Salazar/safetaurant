@@ -26,7 +26,7 @@
 }
 
 .step-title {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     font-weight: bold;
     font-size: 1.1rem;
 }
@@ -48,6 +48,7 @@ fieldset {
 .radio-container {
     display: grid;
     grid-template-columns: 1.5rem 1fr;
+    grid-gap: 5px;
     align-items: baseline;
     margin-bottom: 1rem;
 }
@@ -56,8 +57,11 @@ label {
     max-width: unset;
 }
 
-.address-list {
+.address-list, .restaurants-list {
     flex-direction: column;
+    max-height: 16.875rem;
+    overflow-y: auto;
+    padding: 0 0 0 1.25rem;
 }
 
 .feedback {
