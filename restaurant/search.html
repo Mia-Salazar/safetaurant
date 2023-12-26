@@ -102,20 +102,20 @@
       <form class="add-restaurant-form" id="add">
         <div class="input-group" id="addressContainer">
           <label class="step-title" for="address">1. Escribe la dirección del restaurante</label>
-          <input pattern="^(?!.*<[^>]+>).*" class="input" id="address" name="address" type="text" required />
+          <input pattern="^(?!.*<[^>]+>).*" class="input" id="address" name="address" type="text" required aria-controls="addressSection" />
         </div>
-        <fieldset class="list" id="addressSection">
+        <fieldset class="list" id="addressSection" aria-live="polite" role="region">
           <legend class="step-title" id="addressTitle">2. Escoge la dirección completa</legend>
-          <div class="address-list" id="addressList">
+          <div class="address-list" id="addressList" aria-controls="restaurantsSection" >
           </div>
         </fieldset>
-        <fieldset class="list" id="restaurantsSection">
+        <fieldset class="list" id="restaurantsSection" aria-live="polite" role="region">
           <legend class="step-title" id="restaurantTitle">3. Escoge el restaurante</legend>
           <div class="restaurants-list" id="restaurantsList">
           </div>
         </fieldset>
         <span class="loader" role="alert" aria-busy="true" id="loader"></span>
-        <p class="feedback" id="feedback">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
+        <p class="feedback" id="feedback" aria-live="polite">¿No encuentras el restaurante que quieres crear? ¡Añádelo!</p>
         <button type="submit" class="primary-button" id="buttonSubmit">
           Añadir restaurante desde 0
         </button>
