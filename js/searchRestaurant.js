@@ -47,9 +47,12 @@ addressInput.addEventListener("keydown",function () {
 function doneTyping () {
     if (addressInput.value !== "") {
         loader.style.display = 'flex';
+
+        addresses = [];
         addressList.innerHTML = "";
         addressSection.style.display = 'none';
 
+        restaurants = [];
         restaurantsList.innerHTML = "";
         restaurantsSection.style.display = 'none';
         getAddressAPI();
@@ -63,6 +66,11 @@ function redirect(event){
 
 function addressClick(event) {
     event.preventDefault();
+
+    restaurantsList.innerHTML = "";
+    restaurantsSection.style.display = 'none';
+    restaurants = [];
+
     const addresClicked = event.target.id
     const addressData = addresses.find(address => address.place_id === addresClicked);
     loader.style.display = 'flex';
