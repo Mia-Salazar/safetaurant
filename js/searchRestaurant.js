@@ -68,8 +68,8 @@ function restaurantClick(event) {
     event.preventDefault();
     const restaurantClicked = event.target.id
     const restaurantsData = restaurants.features.find(restaurant => restaurant.properties.place_id === restaurantClicked);
-    window.location.href = `http://localhost/SafeTaurant/restaurant/add.html?name=${restaurantsData.properties.address_line1}
-    &address=&{restaurantsData.properties.address_line2}&city=${restaurantsData.properties.city}
+    window.location.href = `http://localhost/SafeTaurant/restaurant/add-score.html?name=${restaurantsData.properties.address_line1}
+    &address=&${restaurantsData.properties.address_line2}&city=${restaurantsData.properties.city}
     &lat=${restaurantsData.properties.lat}&long=${restaurantsData.properties.lon}
     &zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}`;
 }
