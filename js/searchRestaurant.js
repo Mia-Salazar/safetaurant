@@ -68,12 +68,10 @@ function restaurantClick(event) {
     event.preventDefault();
     const restaurantClicked = event.target.id
     const restaurantsData = restaurants.features.find(restaurant => restaurant.properties.place_id === restaurantClicked);
-    window.location.href = `http://localhost/SafeTaurant/restaurant/add-score.html?name=${restaurantsData.properties.address_line1}
-    &address=${restaurantsData.properties.address_line2}&province=${restaurantsData.properties.state}
-    &lat=${restaurantsData.properties.lat}&long=${restaurantsData.properties.lon}
-    &zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}
-    &phone=${restaurantsData.properties.datasource.raw.phone || 0}&url=${restaurantsData.properties.datasource.raw.website || 0}
-    &foodType=${convertCuisine(restaurantsData.properties.datasource.raw.cuisine) || 0}`;
+    const phoneData = restaurantsData.properties.datasource.raw.phone ? restaurantsData.properties.datasource.raw.phone : 0;
+    const urlData = restaurantsData.properties.datasource.raw.website  ? restaurantsData.properties.datasource.raw.website  : 0;
+    window.location.href = `http://localhost/SafeTaurant/restaurant/add-score.html?name=${restaurantsData.properties.address_line1}&address=${restaurantsData.properties.address_line2}&province=${restaurantsData.properties.state}&lat=${restaurantsData.properties.lat}&long=${restaurantsData.properties.lon}&zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}&phone=${phoneData}&url=${urlData}&foodType=${convertCuisine(restaurantsData.properties.datasource.raw.cuisine)}`;
+
 }
 
 const convertCuisine = (cuisine) => {
