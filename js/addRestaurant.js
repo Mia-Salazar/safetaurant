@@ -91,6 +91,9 @@ function registerRestaurant(event){
         fructoseIntolerant: document.querySelector('input[name="fructose"]:checked').value,
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
+        latitude: 0,
+        longitude: 0,
+        apiID: "",
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
