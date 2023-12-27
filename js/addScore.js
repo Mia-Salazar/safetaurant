@@ -15,6 +15,8 @@ document.getElementById("add").addEventListener("submit", addNewScore, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
 
+console.log(ID, 'ID')
+
 // Captcha
 const signupCaptcha = document.getElementById('signupCaptcha');
 
@@ -67,6 +69,7 @@ function addNewScore(event){
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
     };
+    if(!ID)
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addScore.php", true);
@@ -89,6 +92,12 @@ function addNewScore(event){
         buttonText.innerHTML = "Añadir opinión";
     };
     xmlhttp.send(JSON.stringify(data));
+}
+
+const changeTitle = () => {
+    if (!ID) {
+        document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
+    }
 }
 
 const addOptions = (data) => {
@@ -155,3 +164,4 @@ const checkIsLoggedIn = () => {
     xmlhttp.send();
 }
 checkIsLoggedIn();
+changeTitle()
