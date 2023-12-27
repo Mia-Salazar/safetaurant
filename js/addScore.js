@@ -1,9 +1,9 @@
 const feedback = document.getElementById("feedback");
 const fidelity = document.getElementById("fidelityScoreContainer");
-const ID = new URL(document.URL).searchParams.get('ID');
+const ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
 const buttonText = document.getElementById("buttonText");
-loader.style.display = 'none';
+loader.style.display = "none";
 
 //Variable para comprobar si hay carta de alérgenos
 //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
@@ -11,20 +11,18 @@ let allergenChartToggle = false;
 let user;
 let buttonDisabled = true;
 
-document.getElementById("add").addEventListener("submit", addNewScore, false);
+document.getElementById("add").addEventListener("submit", submitScore, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
 
-console.log(ID, 'ID')
-
 // Captcha
-const signupCaptcha = document.getElementById('signupCaptcha');
+const signupCaptcha = document.getElementById("signupCaptcha");
 
-signupCaptcha.addEventListener('verified', (e) => {
+signupCaptcha.addEventListener("verified", (e) => {
     document.getElementById("captcha").checked = true;
     buttonSubmit.disabled = false;
 });
-signupCaptcha.addEventListener('error', (e) => {
+signupCaptcha.addEventListener("error", (e) => {
     feedback.innerHTML = e.error;
 });
 
@@ -43,9 +41,9 @@ function allergenToggle() {
     allergenChartToggle = !allergenChartToggle;
 }
 
-function addNewScore(event){
-    loader.style.display = 'flex';
+function submitScore(event){
     event.preventDefault();
+    loader.style.display = "flex";
     const feedback = document.getElementById("feedback");
     //Mostramos al usuario que la aplicación está en proceso
     buttonText.innerHTML = "Cargando...";
@@ -69,29 +67,12 @@ function addNewScore(event){
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
     };
-    if(!ID)
-    //Hacemos la petición al back-end
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addScore.php", true);
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-            addOptions(data)
-        } else if (this.status == 424) {
-            //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-            feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
-            loader.style.display = 'none';
-        } else if (this.status == 401) {
-            //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-            window.location.href = "http://localhost/SafeTaurant/login.html";
-        }
-        //Mostramos al usuario que ya no está cargando
-        buttonText.innerHTML = "Añadir opinión";
-    };
-    xmlhttp.send(JSON.stringify(data));
+    if(!ID) {
+        registerRestaurant(data)
+    } else {
+        addScore(data);
+    }
+
 }
 
 const changeTitle = () => {
@@ -110,16 +91,16 @@ const addOptions = (data) => {
             feedback.innerHTML = "Creado correctamente";
             feedback.classList.add("success");
             feedback.classList.remove("error");
-            window.location.href = "http://localhost/SafeTaurant/";
+            //window.location.href = "http://localhost/SafeTaurant/";
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
             feedback.innerHTML = "Hubo un error en la creación de la puntuación";
             feedback.classList.add("error");
             feedback.classList.remove("success");
-            loader.style.display = 'none';
+            loader.style.display = "none";
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-            window.location.href = "http://localhost/SafeTaurant/login.html";
+            //window.location.href = "http://localhost/SafeTaurant/login.html";
         }
         //Mostramos al usuario que ya no está cargando
         buttonText.innerHTML = "Añadir restaurante";
@@ -138,7 +119,7 @@ const getProfile = () => {
             user = JSON.parse(this.responseText);
         } else if (this.status == 401) {
             //Si la persona no está autorizada, la expulsamos
-            window.location.href = "http://localhost/SafeTaurant/login.html";
+            //window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -156,12 +137,79 @@ const checkIsLoggedIn = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 &&  this.status == 401) {
-            window.location.href = "http://localhost/SafeTaurant/login.html";
+            //window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.readyState == 4 && this.status == 200) {
             getProfile();
         }
     };
     xmlhttp.send();
+}
+
+const addScore = (data) => {
+    //Hacemos la petición al back-end
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addScore.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+            addOptions(data)
+        } else if (this.status == 424) {
+            //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+            feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
+            feedback.classList.add("error");
+            feedback.classList.remove("success");
+            loader.style.display = "none";
+        } else if (this.status == 401) {
+            //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+            //window.location.href = "http://localhost/SafeTaurant/login.html";
+        }
+        //Mostramos al usuario que ya no está cargando
+        buttonText.innerHTML = "Añadir opinión";
+    };
+    xmlhttp.send(JSON.stringify(data));
+}
+
+const registerRestaurant = (data) => {
+    const url = new URL(document.URL);
+    const dataRestaurant = {
+        name: url.searchParams.get("name"),
+        province: url.searchParams.get("province"),
+        address: url.searchParams.get("address"),
+        ZIP: url.searchParams.get("zip"),
+        phone: url.searchParams.get("phone") || "",
+        url: url.searchParams.get("url")|| "",
+        foodType: url.searchParams.get("foodType"),
+        latitude: url.searchParams.get("lat"),
+        longitude:url.searchParams.get("long"),
+        apiID: url.searchParams.get("apiID"),
+        created: new Date(),
+        id: user.id,
+    };
+
+    console.log(dataRestaurant)
+    const newData = data;
+    //Hacemos la petición al back-end
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addRestaurant.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
+            newData.restaurantID = this.responseText;
+            addScore(newData);
+        } else if (this.status == 424) {
+            //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
+            feedback.innerHTML = "Hubo un error en la creación del restaurante";
+            feedback.classList.add("error");
+            feedback.classList.remove("success");
+            loader.style.display = "none";
+        } else if (this.status == 401) {
+            //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
+            //window.location.href = "http://localhost/SafeTaurant/login.html";
+        }
+    };
+    xmlhttp.send(JSON.stringify(dataRestaurant));
 }
 checkIsLoggedIn();
 changeTitle()
