@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2022 a las 19:58:48
+-- Tiempo de generación: 27-12-2023 a las 11:54:55
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `Foodiesaurus`
+-- Base de datos: `safetaurant`
 --
 
 -- --------------------------------------------------------
@@ -36,7 +36,10 @@ CREATE TABLE `restaurant` (
   `url` varchar(100) DEFAULT NULL,
   `phone` int(12) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
-  `userID` int(11) NOT NULL
+  `userID` int(11) NOT NULL,
+  `latitude` int(12) DEFAULT NULL,
+  `longitude` int(12) DEFAULT NULL,
+  `apiID` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -59,67 +62,16 @@ CREATE TABLE `scores` (
   `allergicReaction` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user`
---
-
-CREATE TABLE `users` (
- `id` int(11) NOT NULL AUTO_INCREMENT,
- `google_uid` varchar(255) NOT NULL,
- `name` varchar(255) NOT NULL,
- `email` varchar(255) NOT NULL,
- `picture` text NOT NULL,
- PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `menuOptions` (
-  `optionID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `celiacDisease` int(1) NOT NULL,
-  `diabetes` int(1) NOT NULL,
-  `lactoseIntolerant` int(1) NOT NULL,
-  `fructoseIntolerant` int(1) NOT NULL,
-  `vegan` int(1) NOT NULL,
-  `vegetarian` int(1) NOT NULL,
-  `restaurantID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- CREATE TABLE `user` (
---   `userID` int(10) NOT NULL,
---   `name` varchar(50) NOT NULL,
---   `email` varchar(100) NOT NULL,
---   `birthDate` date NOT NULL,
---   `password` varchar(12) NOT NULL,
---   `surname` varchar(50) DEFAULT NULL,
---   `lactoseIntolerance` int(1) DEFAULT NULL,
---   `celiacDisease` int(1) DEFAULT NULL,
---   `allergies` varchar(200) DEFAULT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Índices para tablas volcadas
 --
-
--- Indices de la tabla `menuOptions`
--- ALTER TABLE `menuOptions`
---   ADD PRIMARY KEY (`optionID`),
---   ADD KEY `restaurantID` (`restaurantID`),
---   ADD KEY `userID` (`userID`);
-
-ALTER TABLE `menuOptions`
-  ADD CONSTRAINT `restaurant_ibfk_4` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`);
-ALTER TABLE `menuOptions`
-  ADD CONSTRAINT `restaurant_ibfk_5` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 
 --
 -- Indices de la tabla `restaurant`
 --
 ALTER TABLE `restaurant`
   ADD PRIMARY KEY (`restaurantID`),
-  ADD KEY `userID` (`userID`);
+  ADD KEY `restaurant_ibfk_1` (`userID`);
 
 --
 -- Indices de la tabla `scores`
@@ -127,29 +79,7 @@ ALTER TABLE `restaurant`
 ALTER TABLE `scores`
   ADD PRIMARY KEY (`scoreID`),
   ADD KEY `scores_ibfk_2` (`restaurantID`),
-  ADD KEY `userID` (`userID`);
-
---
--- Indices de la tabla `user`
---
--- ALTER TABLE `user`
---   ADD PRIMARY KEY (`userID`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `restaurant`
---
-ALTER TABLE `restaurant`
-  MODIFY `restaurantID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `scores`
---
-ALTER TABLE `scores`
-  MODIFY `scoreID` int(10) NOT NULL AUTO_INCREMENT;
+  ADD KEY `scores_ibfk_3` (`userID`);
 
 --
 -- Restricciones para tablas volcadas
