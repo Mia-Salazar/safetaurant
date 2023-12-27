@@ -6,8 +6,8 @@
 	//Para tener el ID del restaurante recién creado y poder crear su puntuación, devolvemos ese ID si hay éxito, sino false
 	function registerRestaurant($name, $province, $address, $ZIP, $phone, $foodType, $userID, $url, $latitude, $longitude, $apiID) {
 		$connection = new Connection();
-		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID, url) 
-				VALUES (:name, :province, :address, :ZIP, :phone, :foodType, :userID,  :url)";
+		$sql = "INSERT INTO restaurant (name, province, address, ZIP, phone, foodType, userID, url, latitude, longitude, apiID) 
+				VALUES (:name, :province, :address, :ZIP, :phone, :foodType, :userID,  :url, :latitude, :longitude, :apiID)";
 		$query = $connection->prepare($sql);
 		$query->bindParam(':name',$name);
 		$query->bindParam(':province', $province);
