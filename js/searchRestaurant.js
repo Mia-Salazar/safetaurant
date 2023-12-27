@@ -47,9 +47,12 @@ addressInput.addEventListener("keydown",function () {
 function doneTyping () {
     if (addressInput.value !== "") {
         loader.style.display = 'flex';
+
+        addresses = [];
         addressList.innerHTML = "";
         addressSection.style.display = 'none';
 
+        restaurants = [];
         restaurantsList.innerHTML = "";
         restaurantsSection.style.display = 'none';
         getAddressAPI();
@@ -61,8 +64,63 @@ function redirect(event){
     window.location.href = `http://localhost/SafeTaurant/restaurant/add.html`;
 }
 
+function restaurantClick(event) {
+    event.preventDefault();
+    const restaurantClicked = event.target.id
+    const restaurantsData = restaurants.features.find(restaurant => restaurant.properties.place_id === restaurantClicked);
+    const phoneData = restaurantsData.properties.datasource.raw.phone ? restaurantsData.properties.datasource.raw.phone : 0;
+    const urlData = restaurantsData.properties.datasource.raw.website  ? restaurantsData.properties.datasource.raw.website  : 0;
+    window.location.href = `http://localhost/SafeTaurant/restaurant/add-score.html?name=${restaurantsData.properties.address_line1}&address=${restaurantsData.properties.address_line2}&province=${restaurantsData.properties.state}&lat=${restaurantsData.properties.lat}&long=${restaurantsData.properties.lon}&zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}&phone=${phoneData}&url=${urlData}&foodType=${convertCuisine(restaurantsData.properties.datasource.raw.cuisine)}`;
+
+}
+
+const convertCuisine = (cuisine) => {
+    if (cuisine.includes("catering.cafe")) return "Cafetería";
+
+    if (cuisine.includes("pizza")) return "Pizza";
+
+    if (cuisine.includes("burger")) return "Hamburguesa";
+
+    if (cuisine.includes("italian")) return "Italiana";
+
+    if (cuisine.includes("chinese")) return "China";
+
+    if (cuisine.includes("korean")) return "Coreana";
+
+    if (cuisine.includes("mexican") || cuisine.includes("tacos") 
+    || cuisine.includes("tex-mex") || cuisine.includes("chili")) return "Mexicana";
+
+    if (cuisine.includes("japanese") || cuisine.includes("sushi")
+    || cuisine.includes("ramen") || cuisine.includes("dumpling")) return "Japonesa";
+
+    if (cuisine.includes("american") || cuisine.includes("wings")) return "Americana";
+
+    if (cuisine.includes("greek") || cuisine.includes("pita")) return "Griega";
+
+    if (cuisine.includes("indian")) return "India";
+
+    if (cuisine.includes("thai")) return "Tailandesa";
+
+    if (cuisine.includes("spanish")) return "Española";
+
+    if (cuisine.includes("tapas")) return "Tapas";
+
+    if (cuisine.includes("latin_american")) return "Latinoamericana";
+
+    if (cuisine.includes("vietnamese")) return "Vietnamita";
+
+    if (cuisine.includes("portuguese")) return "Portuguesa";
+
+    return "Otro";
+}
+
 function addressClick(event) {
     event.preventDefault();
+
+    restaurantsList.innerHTML = "";
+    restaurantsSection.style.display = 'none';
+    restaurants = [];
+
     const addresClicked = event.target.id
     const addressData = addresses.find(address => address.place_id === addresClicked);
     loader.style.display = 'flex';
@@ -152,7 +210,7 @@ const createRestaurantsList = () => {
         ${restaurant.properties.city}`;
         label.htmlFor = restaurant.properties.place_id;
 
-        //input.addEventListener('change', addressClick, false);
+        input.addEventListener('change', restaurantClick, false);
 
         div.appendChild(input);
         div.appendChild(label);
@@ -191,3 +249,23 @@ const getRestaurantsAPI = (latitude, longitude) => {
     };
     xmlhttp.send();
 }
+
+//Comprobamos si el usuario ha iniciado sesión
+//Si la respuesta es afirmativa, continuamos con la carga de la página
+//En caso contrario le expulsamos al login
+const checkIsLoggedIn = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        } else if (this.status == 401) {
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } else if (this.status == 400) {
+            //Si hay un error, devolvemos un error
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } 
+    };
+    xmlhttp.send();
+}
+checkIsLoggedIn();
