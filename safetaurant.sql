@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2023 a las 16:54:17
+-- Tiempo de generación: 27-12-2023 a las 17:00:18
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -37,8 +37,8 @@ CREATE TABLE `restaurant` (
   `phone` varchar(15) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
   `userID` int(11) NOT NULL,
-  `latitude` int(12) DEFAULT NULL,
-  `longitude` int(12) DEFAULT NULL,
+  `latitude` varchar(12) DEFAULT NULL,
+  `longitude` varchar(12) DEFAULT NULL,
   `apiID` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -47,7 +47,7 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`restaurantID`, `name`, `province`, `address`, `ZIP`, `url`, `phone`, `foodType`, `userID`, `latitude`, `longitude`, `apiID`) VALUES
-(0, 'Sushirakki    ', 'Comunidad de Madrid    ', 'Calle de Antonio López Aguado, 28029 Madrid, España', 28029, '0    ', '34', 'Japonesa', 1, 40, -4, '5133ba72ac419e0dc059db19e290b23d4440f00103f901189251210100000092030a537573686972616b6b69    ');
+(0, 'Sushirakki    ', 'Comunidad de Madrid    ', 'Calle de Antonio López Aguado, 28029 Madrid, España', 28029, '0    ', '34', 'Japonesa', 1, '40', '-4', '5133ba72ac419e0dc059db19e290b23d4440f00103f901189251210100000092030a537573686972616b6b69    ');
 
 -- --------------------------------------------------------
 
@@ -116,3 +116,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
