@@ -209,3 +209,23 @@ const getRestaurantsAPI = (latitude, longitude) => {
     };
     xmlhttp.send();
 }
+
+//Comprobamos si el usuario ha iniciado sesión
+//Si la respuesta es afirmativa, continuamos con la carga de la página
+//En caso contrario le expulsamos al login
+const checkIsLoggedIn = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "http://localhost/SafeTaurant/controllers/isLoggued.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        } else if (this.status == 401) {
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } else if (this.status == 400) {
+            //Si hay un error, devolvemos un error
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } 
+    };
+    xmlhttp.send();
+}
+checkIsLoggedIn();
