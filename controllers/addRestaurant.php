@@ -9,7 +9,7 @@
   //Comprobamos si el usuario está autentificado mirando las cookies
   if(isset($_COOKIE['userID'])) {
     //Enviamos los datos para crear un restaurante
-    $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $formInfo['id'], $formInfo['url']);
+    $data = registerRestaurant($formInfo['name'], $formInfo['province'], $formInfo['address'],  $formInfo['ZIP'], $formInfo['phone'], $formInfo['foodType'], $formInfo['id'], $formInfo['url'], $formInfo['latitude'], $formInfo['longitude'], $formInfo['apiID']);
     if($data) {
       //Si el restaurante ha sido creado correctanente, lanzamos la funcionalidad de crear la puntuación con sus datos
       echo $data;
