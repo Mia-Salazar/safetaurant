@@ -69,9 +69,51 @@ function restaurantClick(event) {
     const restaurantClicked = event.target.id
     const restaurantsData = restaurants.features.find(restaurant => restaurant.properties.place_id === restaurantClicked);
     window.location.href = `http://localhost/SafeTaurant/restaurant/add-score.html?name=${restaurantsData.properties.address_line1}
-    &address=&${restaurantsData.properties.address_line2}&city=${restaurantsData.properties.city}
+    &address=${restaurantsData.properties.address_line2}&province=${restaurantsData.properties.county}
     &lat=${restaurantsData.properties.lat}&long=${restaurantsData.properties.lon}
-    &zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}`;
+    &zip=${restaurantsData.properties.postcode}&apiID=${restaurantsData.properties.place_id}
+    &phone=${restaurantsData.properties.datasource.raw.phone || 0}&url=${restaurantsData.properties.datasource.raw.website || 0}
+    &foodType`;
+}
+
+const convertCuisine = (cuisine) => {
+    if (cuisine.includes("catering.cafe")) return "Cafetería";
+
+    if (cuisine.includes("pizza")) return "Pizza";
+
+    if (cuisine.includes("burger")) return "Hamburguesa";
+
+    if (cuisine.includes("italian")) return "Italiana";
+
+    if (cuisine.includes("chinese")) return "China";
+
+    if (cuisine.includes("korean")) return "Coreana";
+
+    if (cuisine.includes("mexican") || cuisine.includes("tacos") 
+    || cuisine.includes("tex-mex") || cuisine.includes("chili")) return "Mexicana";
+
+    if (cuisine.includes("japanese") || cuisine.includes("sushi")
+    || cuisine.includes("ramen") || cuisine.includes("dumpling")) return "Japonesa";
+
+    if (cuisine.includes("american") || cuisine.includes("wings")) return "Americana";
+
+    if (cuisine.includes("greek") || cuisine.includes("pita")) return "Griega";
+
+    if (cuisine.includes("indian")) return "India";
+
+    if (cuisine.includes("thai")) return "Tailandesa";
+
+    if (cuisine.includes("spanish")) return "Española";
+
+    if (cuisine.includes("tapas")) return "Tapas";
+
+    if (cuisine.includes("latin_american")) return "Latinoamericana";
+
+    if (cuisine.includes("vietnamese")) return "Vietnamita";
+
+    if (cuisine.includes("portuguese")) return "Portuguesa";
+
+    return "Otro";
 }
 
 function addressClick(event) {
