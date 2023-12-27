@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2023 a las 11:54:55
+-- Tiempo de generación: 27-12-2023 a las 16:54:17
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -34,13 +34,20 @@ CREATE TABLE `restaurant` (
   `address` varchar(100) NOT NULL,
   `ZIP` int(6) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
-  `phone` int(12) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
   `foodType` varchar(40) DEFAULT NULL,
   `userID` int(11) NOT NULL,
   `latitude` int(12) DEFAULT NULL,
   `longitude` int(12) DEFAULT NULL,
   `apiID` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `restaurant`
+--
+
+INSERT INTO `restaurant` (`restaurantID`, `name`, `province`, `address`, `ZIP`, `url`, `phone`, `foodType`, `userID`, `latitude`, `longitude`, `apiID`) VALUES
+(0, 'Sushirakki    ', 'Comunidad de Madrid    ', 'Calle de Antonio López Aguado, 28029 Madrid, España', 28029, '0    ', '34', 'Japonesa', 1, 40, -4, '5133ba72ac419e0dc059db19e290b23d4440f00103f901189251210100000092030a537573686972616b6b69    ');
 
 -- --------------------------------------------------------
 
@@ -61,6 +68,13 @@ CREATE TABLE `scores` (
   `userName` varchar(50) NOT NULL,
   `allergicReaction` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `scores`
+--
+
+INSERT INTO `scores` (`scoreID`, `comment`, `created`, `generalScore`, `allergenChart`, `fidelityScore`, `attentionScore`, `userID`, `restaurantID`, `userName`, `allergicReaction`) VALUES
+(0, '', '2023-12-27', 5, 0, 0, 5, 1, 0, 'María Salazar', 0);
 
 --
 -- Índices para tablas volcadas
