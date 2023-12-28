@@ -70,7 +70,6 @@ const getAddressAPI = () => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             addresses = JSON.parse(this.responseText) || [];
-            console.log(addresses)
             if (addresses.length > 0) {
                 registerRestaurant(addresses[0].lat, addresses[0].lon)
             } else {

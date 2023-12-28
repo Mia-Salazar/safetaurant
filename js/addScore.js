@@ -1,6 +1,6 @@
 const feedback = document.getElementById("feedback");
 const fidelity = document.getElementById("fidelityScoreContainer");
-const ID = new URL(document.URL).searchParams.get("ID");
+let ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
 const buttonText = document.getElementById("buttonText");
 loader.style.display = "none";
@@ -75,9 +75,31 @@ function submitScore(event){
 
 }
 
-const changeTitle = () => {
+const checkDuplicatedRestaurant = () => {
+    const url = new URL(document.URL);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchDuplicates.php?name=${url.searchParams.get("name")}&lat=${url.searchParams.get("lat")}&long=${url.searchParams.get("long")}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.length === 1) {
+                ID = response[0].restaurantID;
+            }           
+        } else if (this.status == 401) {
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } else if (this.status == 400) {
+            //Si hay un error, devolvemos un error
+            subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+        } 
+    };
+    xmlhttp.send();
+}
+
+const checkAddScoreOrAddRestaurantPage = () => {
     if (!ID) {
         document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
+        checkDuplicatedRestaurant();
     }
 }
 
@@ -213,4 +235,4 @@ const registerRestaurant = (data) => {
     xmlhttp.send(JSON.stringify(dataRestaurant));
 }
 checkIsLoggedIn();
-changeTitle()
+checkAddScoreOrAddRestaurantPage()
