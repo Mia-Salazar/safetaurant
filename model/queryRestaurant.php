@@ -316,4 +316,23 @@
 		closeConnection($connection); 
 		return $rows;
 	}
+
+	//Search restaurant by latitude and longitude to check duplicates
+	function getRestaurantsByAddress($latitude, $longitude) {
+		$connection = new Connection();
+		$sql = "SELECT name, restaurantID  
+		FROM restaurant 
+		WHERE latitude = :latitude AND 
+		longitude = :longitude 
+		ORDER BY name DESC";
+
+		$query = $connection->prepare($sql);
+		$query->bindParam(':latitude', $latitude);
+		$query->bindParam(':longitude', $longitude);
+		$query->execute();
+
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+		closeConnection($connection); 
+		return $rows;
+	}
 ?>
