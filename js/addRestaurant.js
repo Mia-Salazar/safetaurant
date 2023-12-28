@@ -14,6 +14,7 @@ let allergenChartToggle = false;
 let user;
 let buttonDisabled = true;
 let addresses;
+let formData;
 
 document.getElementById("add").addEventListener("submit", submitRestaurant, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
@@ -62,6 +63,37 @@ function allergenToggle() {
     allergenChartToggle = !allergenChartToggle;
 }
 
+const checkDuplicatedRestaurant = (latitude, longitude) => {
+    const url = new URL(document.URL);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchDuplicates.php?lat=${latitude}&long=${longitude}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const response = JSON.parse(this.responseText);
+            const hasSimilarName = response[0].name.toLowerCase().includes(document.getElementById("name").value.toLowerCase());
+            if (response.length === 1 && hasSimilarName) {
+                formData.latitude = latitude;
+                formData.longitude = longitude;
+                formData.restaurantID = response[0].restaurantID;
+                console.log('yep')
+                addScore(formData)
+            } else {
+                formData.latitude = latitude;
+                formData.longitude = longitude;
+                registerRestaurant();
+            }       
+        } else if (this.status == 401) {
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        } else if (this.status == 400) {
+            formData.latitude = latitude;
+            formData.longitude = longitude;
+            registerRestaurant(0, 0)
+        } 
+    };
+    xmlhttp.send();
+}
+
 const getAddressAPI = () => {
     const addressComplete = `${document.getElementById("address").value}, ${document.getElementById("province").value}`;
     var xmlhttp = new XMLHttpRequest();
@@ -71,12 +103,18 @@ const getAddressAPI = () => {
         if (this.readyState == 4 && this.status == 200) {
             addresses = JSON.parse(this.responseText) || [];
             if (addresses.length > 0) {
-                registerRestaurant(addresses[0].lat, addresses[0].lon)
+                formData.latitude = addresses[0].lat;
+                formData.longitude = addresses[0].lon;
+                checkDuplicatedRestaurant(addresses[0].lat, addresses[0].lon)
             } else {
-                registerRestaurant(0, 0)
+                formData.latitude = 0;
+                formData.longitude = 0;
+                registerRestaurant();
             }
         } else if (this.status === 404 || this.status === 204) {
-            registerRestaurant(0, 0)
+            formData.latitude = 0;
+            formData.longitude = 0;
+            registerRestaurant()
         }
     };
     xmlhttp.send();
@@ -89,11 +127,7 @@ function submitRestaurant(event){
     buttonText.innerHTML = "Cargando...";
     feedback.innerHTML = "";
     //Creamos el objeto con todos los datos del nuevo restaurante
-    getAddressAPI();
-}
-
-const registerRestaurant = (latitude, longitude) => {
-    const data = {
+    formData = {
         name: document.getElementById("name").value,
         province: document.getElementById("province").value,
         address: document.getElementById("address").value,
@@ -116,10 +150,12 @@ const registerRestaurant = (latitude, longitude) => {
         fructoseIntolerant: document.querySelector('input[name="fructose"]:checked').value,
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
-        latitude: latitude,
-        longitude: longitude,
         apiID: "",
     };
+    getAddressAPI();
+}
+
+const registerRestaurant = () => {
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addRestaurant.php", true);
@@ -127,8 +163,8 @@ const registerRestaurant = (latitude, longitude) => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-            data.restaurantID = this.responseText;
-            addScore(data);
+            formData.restaurantID = this.responseText;
+            addScore(formData)
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
             feedback.innerHTML = "Hubo un error en la creación del restaurante";
@@ -140,8 +176,9 @@ const registerRestaurant = (latitude, longitude) => {
             window.location.href = "http://localhost/SafeTaurant/login.html";
         }
     };
-    xmlhttp.send(JSON.stringify(data));
+    xmlhttp.send(JSON.stringify(formData));
 }
+
 const addScore = (data) =>{
     //Hacemos la petición al back-end      
     var xmlhttp = new XMLHttpRequest();

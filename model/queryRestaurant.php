@@ -318,18 +318,15 @@
 	}
 
 	//Search restaurant by latitude and longitude to check duplicates
-	function getRestaurantsByAddress($name, $latitude, $longitude) {
+	function getRestaurantsByAddress($latitude, $longitude) {
 		$connection = new Connection();
-		$name = '%' . strtolower($name) . '%'; 
 		$sql = "SELECT name, restaurantID  
 		FROM restaurant 
-		WHERE LOWER(name) LIKE :name AND 
-		latitude = :latitude AND
-		longitude = :longitude
+		WHERE latitude = :latitude AND 
+		longitude = :longitude 
 		ORDER BY name DESC";
 
 		$query = $connection->prepare($sql);
-		$query->bindParam(':name', $name);
 		$query->bindParam(':latitude', $latitude);
 		$query->bindParam(':longitude', $longitude);
 		$query->execute();

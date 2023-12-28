@@ -4,9 +4,9 @@
   include "../model/queryRestaurant.php";
 
   //Comprobamos si hemos recibido un ID
-  if(isset($_GET['name'])) {
+  if(isset($_GET['lat'])) {
     //Buscamos las puntuaciones de un restaurante por su ID
-    $restaurant = getRestaurantsByAddress($_GET['name'], $_GET['lat'], $_GET['long']);
+    $restaurant = getRestaurantsByAddress($_GET['lat'], $_GET['long']);
     echo json_encode($restaurant);
   } else {
     //Si no hemos recibido un ID, devolvemos un error

@@ -78,12 +78,13 @@ function submitScore(event){
 const checkDuplicatedRestaurant = () => {
     const url = new URL(document.URL);
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchDuplicates.php?name=${url.searchParams.get("name")}&lat=${url.searchParams.get("lat")}&long=${url.searchParams.get("long")}`, true);
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchDuplicates.php?lat=${url.searchParams.get("lat")}&long=${url.searchParams.get("long")}`, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const response = JSON.parse(this.responseText);
-            if (response.length === 1) {
+            const hasSimilarName = response[0].name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
+            if (response.length === 1 && hasSimilarName) {
                 ID = response[0].restaurantID;
             }           
         } else if (this.status == 401) {
