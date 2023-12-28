@@ -13,8 +13,9 @@ loader.style.display = 'none';
 let allergenChartToggle = false;
 let user;
 let buttonDisabled = true;
+let addresses;
 
-document.getElementById("add").addEventListener("submit", registerRestaurant, false);
+document.getElementById("add").addEventListener("submit", submitRestaurant, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
 
@@ -61,13 +62,38 @@ function allergenToggle() {
     allergenChartToggle = !allergenChartToggle;
 }
 
-function registerRestaurant(event){
+const getAddressAPI = () => {
+    const addressComplete = `${document.getElementById("address").value}, ${document.getElementById("province").value}`;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchAddress.php?address=${addressComplete}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            addresses = JSON.parse(this.responseText) || [];
+            console.log(addresses)
+            if (addresses.length > 0) {
+                registerRestaurant(addresses[0].lat, addresses[0].lon)
+            } else {
+                registerRestaurant(0, 0)
+            }
+        } else if (this.status === 404 || this.status === 204) {
+            registerRestaurant(0, 0)
+        }
+    };
+    xmlhttp.send();
+}
+
+function submitRestaurant(event){
     loader.style.display = 'flex';
     event.preventDefault();
     //Mostramos al usuario que la aplicación está en proceso
     buttonText.innerHTML = "Cargando...";
     feedback.innerHTML = "";
     //Creamos el objeto con todos los datos del nuevo restaurante
+    getAddressAPI();
+}
+
+const registerRestaurant = (latitude, longitude) => {
     const data = {
         name: document.getElementById("name").value,
         province: document.getElementById("province").value,
@@ -91,8 +117,8 @@ function registerRestaurant(event){
         fructoseIntolerant: document.querySelector('input[name="fructose"]:checked').value,
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
-        latitude: 0,
-        longitude: 0,
+        latitude: latitude,
+        longitude: longitude,
         apiID: "",
     };
     //Hacemos la petición al back-end
@@ -117,7 +143,6 @@ function registerRestaurant(event){
     };
     xmlhttp.send(JSON.stringify(data));
 }
-
 const addScore = (data) =>{
     //Hacemos la petición al back-end      
     var xmlhttp = new XMLHttpRequest();
