@@ -49,6 +49,7 @@
 
 ul.allergen-list {
 	margin-bottom: 0;
+	box-shadow: none;
 }
 
 .principal-score {

@@ -66,6 +66,10 @@ function submitScore(event){
         fructoseIntolerant: document.querySelector('input[name="fructose"]:checked').value,
         vegan: document.querySelector('input[name="vegan"]:checked').value,
         vegetarian: document.querySelector('input[name="vegetarian"]:checked').value,
+        accesibleMenu: document.querySelector('input[name="accesibleMenu"]:checked').value,
+        accesibleTable: document.querySelector('input[name="accesibleTable"]:checked').value,
+        accesibleParking: document.querySelector('input[name="accesibleParking"]:checked').value,
+        accesibleBathroom: document.querySelector('input[name="accesibleBathroom"]:checked').value,
     };
     if(!ID) {
         registerRestaurant(data)

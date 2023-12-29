@@ -11,12 +11,15 @@ const attentionScoreBar = document.getElementById("attentionScoreBar");
 const numberFidelityBar = document.getElementById("numberFidelityBar");
 const loader = document.getElementById("loader");
 const buttonContainer = document.getElementById("buttonContainer")
+const accesibilityOptions = document.getElementById("accesibilityOptions");
 
 //Creamos las variables necesarias que usaremos para guardar los datos
 let restaurant;
 let scores;
 let average;
 let isLoggedIn;
+
+accesibilityOptions.style.display = "none";
 
 //Mostramos los datos del restaurante en los inputs
 const putData = () => {
@@ -116,10 +119,7 @@ const getMap = (latitude, longitude) => {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             const imageUrl = URL.createObjectURL(xmlhttp.response);
-            console.log(imageUrl);
             document.getElementById("map").src = imageUrl;
-            // const map = JSON.parse(this.responseText);
-            // console.log(map, 'map')
         } else if (this.status === 400) {
 
         }
@@ -263,6 +263,8 @@ const getOptions = () => {
         const vegan = getIcon(options.veganYes, options.veganNo);
         document.getElementById("veganOption").classList.add(vegan);
         document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
+
+        getAccesibility(options);
         loader.style.display = 'none';
         restaurantContainer.style.display = 'block';
     } else if (this.status == 400) {
@@ -272,6 +274,31 @@ const getOptions = () => {
     }   
     };
     xmlhttp.send(JSON.stringify(data));
+}
+
+const addAccesibilityOption = (option, text) => {
+    if(option) {
+        let li = document.createElement("li");
+        li.classList.add("info-list-item");
+        li.innerHTML = text;
+        accesibilityOptions.appendChild(li);
+    }
+}
+
+const getAccesibility = (options) => {
+    const hasAccesibleMenu = options.accesibleMenuYes > options.accesibleMenuNo;
+    const hasAccesibleTable = options.accesibleTableYes > options.accesibleTableNo;
+    const hasAccesibleParking = options.accesibleParkingYes > options.accesibleParkingNo;
+    const hasAccesibleBathroom = options.accesibleBathroomYes > options.accesibleBathroomNo;
+    if (hasAccesibleMenu || hasAccesibleTable || hasAccesibleParking || hasAccesibleBathroom) {
+        accesibilityOptions.style.display = "block";
+        document.getElementById("restaurantTitle").style.display="none";
+
+        addAccesibilityOption(hasAccesibleMenu, "Menú accesible");
+        addAccesibilityOption(hasAccesibleTable, "Mesa accesible");
+        addAccesibilityOption(hasAccesibleParking, "Parking accesible");
+        addAccesibilityOption(hasAccesibleBathroom, "Baño accesible");
+    }
 }
 
 //Comprobamos si se ha iniciado sesión
@@ -301,7 +328,7 @@ const showAddButtonWhenNoResults = () => {
     if (isLoggedIn && !document.getElementById("addReview")) {
         let link = document.createElement("a");
         link.setAttribute("id","addReview");
-        link.href = `http://localhost/SafeTaurant/restaurant/addScore.html?ID=${restaurantID}`;;
+        link.href = `http://localhost/SafeTaurant/restaurant/add-score.html?ID=${restaurantID}`;;
         link.classList.add("primary-button");
         link.classList.add("add-button");
         link.innerHTML = "Añadir nueva opinión"
