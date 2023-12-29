@@ -34,3 +34,8 @@ input[type="radio"]:checked::before {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
+fieldset {
+	border: none;
+    padding: 0;
+}
