@@ -71,7 +71,7 @@ const checkDuplicatedRestaurant = (latitude, longitude) => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const response = JSON.parse(this.responseText);
-            const hasSimilarName = response[0].name.toLowerCase().includes(document.getElementById("name").value.toLowerCase());
+            const hasSimilarName = response[0]?.name.toLowerCase().includes(document.getElementById("name").value.toLowerCase());
             if (response.length === 1 && hasSimilarName) {
                 formData.latitude = latitude;
                 formData.longitude = longitude;
