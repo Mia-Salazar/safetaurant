@@ -27,7 +27,13 @@ const putData = () => {
     if (restaurant.foodType && restaurant.foodType !== "") {
         document.getElementById("foodType").innerHTML = restaurant.foodType;
     }
-    if (restaurant.url && restaurant.url !== "") {
+    if (restaurant.phone && restaurant.phone !== "" && restaurant.phone != 0) {
+        document.getElementById("phone").innerHTML = restaurant.phone;
+    }
+    if (restaurant.ZIP && restaurant.ZIP !== "" && restaurant.ZIP != 0) {
+        document.getElementById("zip").innerHTML = restaurant.ZIP;
+    }
+    if (restaurant.url && restaurant.url !== "" && restaurant.url != 0) {
         document.getElementById("url").innerHTML = restaurant.url;
         document.getElementById("url").href = restaurant.url;
     }
