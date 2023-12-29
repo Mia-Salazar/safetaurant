@@ -76,7 +76,6 @@ const checkDuplicatedRestaurant = (latitude, longitude) => {
                 formData.latitude = latitude;
                 formData.longitude = longitude;
                 formData.restaurantID = response[0].restaurantID;
-                console.log('yep')
                 addScore(formData)
             } else {
                 formData.latitude = latitude;
@@ -209,7 +208,6 @@ const addScore = (data) =>{
 }
 
 const addOptions = (data) => {
-    console.log(data, 'formData add Options')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/addOptions.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
