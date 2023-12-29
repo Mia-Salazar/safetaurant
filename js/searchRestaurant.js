@@ -142,7 +142,12 @@ const createAddressesList = () => {
         input.type = "radio";
         
         const cityOrTown = address.address.city ? address.address.city : address.address.town ? address.address.town : address.address.village;
-        label.innerHTML = `<strong>${address.address.road}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
+        if (address.address.postcode) {
+            label.innerHTML = `<strong>${address.address.road}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
+        } else {
+            label.innerHTML = `<strong>${address.address.road}</strong>, ${cityOrTown}, ${address.address.state}`;
+        }
+
         label.htmlFor = address.place_id
 
         input.addEventListener('change', addressClick, false);
