@@ -84,7 +84,7 @@ const checkDuplicatedRestaurant = (latitude, longitude) => {
                 registerRestaurant();
             }       
         } else if (this.status == 401) {
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             formData.latitude = latitude;
             formData.longitude = longitude;
@@ -177,7 +177,7 @@ const registerRestaurant = () => {
             loader.style.display = 'none';
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         }
     };
     xmlhttp.send(JSON.stringify(formData));
@@ -200,7 +200,7 @@ const addScore = (data) =>{
             loader.style.display = 'none';
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         }
         //Mostramos al usuario que ya no está cargando
         buttonText.innerHTML = "Añadir restaurante";
@@ -219,7 +219,7 @@ const addOptions = (data) => {
             feedback.innerHTML = "Creado correctamente";
             feedback.classList.add("success");
             feedback.classList.remove("error");
-            //window.location.href = "http://localhost/SafeTaurant/";
+            window.location.href = "http://localhost/SafeTaurant/";
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
             feedback.innerHTML = "Hubo un error en la creación de la puntuación";
@@ -228,7 +228,7 @@ const addOptions = (data) => {
             loader.style.display = 'none';
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         }
         //Mostramos al usuario que ya no está cargando
     buttonText.innerHTML = "Añadir restaurante";
@@ -247,7 +247,7 @@ const getProfile = () => {
             user = JSON.parse(this.responseText);
         } else if (this.status == 401) {
             //Si la persona no está autorizada, la expulsamos
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
@@ -268,7 +268,7 @@ const checkIsLoggedIn = () => {
             fillSelects();
             getProfile()
         } else if (this.status == 401) {
-            //window.location.href = "http://localhost/SafeTaurant/login.html";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
             subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";

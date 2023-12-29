@@ -301,7 +301,7 @@ const showAddButtonWhenNoResults = () => {
     if (isLoggedIn && !document.getElementById("addReview")) {
         let link = document.createElement("a");
         link.setAttribute("id","addReview");
-        link.href = `http://localhost/SafeTaurant/restaurant/addScore.html?ID=${restaurantID}`;;
+        link.href = `http://localhost/SafeTaurant/restaurant/add-score.html?ID=${restaurantID}`;;
         link.classList.add("primary-button");
         link.classList.add("add-button");
         link.innerHTML = "Añadir nueva opinión"
