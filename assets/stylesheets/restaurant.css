@@ -36,7 +36,7 @@
 }
 
 .data-container {
-	margin-bottom: 2rem;
+	margin-bottom: 0;
 	padding: 0 1rem;
 }
 
@@ -98,6 +98,7 @@ ul.allergen-list {
 
 .data-wrapper .data-text{
 	margin: 0 0.25rem 0 0;
+	line-height: 1.375rem;
 }
 
 .data-info {
@@ -280,6 +281,6 @@ h2 {
 /*Adaptando el diseño a pantallas grandes*/
 @media (min-width: 992px) {
 	.map-container {
-		max-width: 31.25rem;
+		max-width: 28.125rem;
 	}
 }

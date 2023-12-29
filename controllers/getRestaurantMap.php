@@ -7,7 +7,7 @@
         $long = $_GET['long'];
 
         // La URL de la API con los parámetros
-        $apiUrl = "https://maps.locationiq.com/v3/staticmap?key={$api_key}&center={$lat},{$long}&zoom=16&size=600x600&format=jpg&markers=icon:large-red-cutout%7C{$lat},{$long}";
+        $apiUrl = "https://maps.locationiq.com/v3/staticmap?key={$api_key}&center={$lat},{$long}&zoom=16&size=450x450&format=jpg&markers=icon:large-red-cutout%7C{$lat},{$long}";
 
         // Realiza la solicitud a la API
         $imageData = @file_get_contents($apiUrl);
