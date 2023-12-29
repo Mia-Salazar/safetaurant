@@ -265,7 +265,12 @@ h2 {
 	.data-container {
 		display: flex;
 		gap: 2rem;
+		margin-top: 1rem;
     }
+
+	.data-text:first-of-type {
+		margin-top: 0;
+	}
 
 	.map-container {
 		margin: 0;

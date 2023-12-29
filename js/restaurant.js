@@ -137,9 +137,7 @@ const getRestaurant = () => {
         //Si se ha encontrado el restaurante, llamamos a las funciones que muestran la información en la página y a la que  busca las calificaciones
         //Se guarda la información del restaurante
         restaurant = JSON.parse(this.responseText);
-        if (restaurant.latitude != 0 && restaurant.longitude != 0) {
-            getMap(restaurant.latitude, restaurant.longitude);
-        }
+        getMap(restaurant.latitude, restaurant.longitude);
         putData();
     } else if (this.status == 404) {
         //Si no se encuentra el ID del restaurante, le dejamos este mensaje
