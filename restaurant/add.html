@@ -171,96 +171,108 @@
           <textarea id="comment" name="comment" rows="4" cols="10"></textarea>
         </div>
         <h3>Las opciones alimentarias que ofrece el restaurante</h3>
-        <p class="radio-title">Opciones celíacas</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="celiacYes" name="celiac" value="0">
-            <label for="celiacYes">Sí</label>
+        <fieldset>
+          <legend class="radio-title">Opciones celíacas</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="celiacYes" name="celiac" value="0">
+              <label for="celiacYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="celiacNo" name="celiac" value="1">
+              <label for="celiacNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
+              <label for="celiacIDK">No sé</label>
+            </div>
           </div>
-          <div class="input-radio">
-            <input type="radio" id="celiacNo" name="celiac" value="1">
-            <label for="celiacNo">No</label>
+        </fieldset>
+        <fieldset>
+          <legend class="radio-title">Opciones diabéticas</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="diabetesYes" name="diabetes" value="0">
+              <label for="diabetesYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="diabetesNo" name="diabetes" value="1">
+              <label for="diabetesNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
+              <label for="diabetesIDK">No sé</label>
+            </div>
           </div>
-          <div class="input-radio">
-            <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
-            <label for="celiacIDK">No sé</label>
+        </fieldset>
+        <fieldset>
+          <legend class="radio-title">Opciones para intolerantes a la lactosa</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="lactoseYes" name="lactose" value="0">
+              <label for="lactoseYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="lactoseNo" name="lactose" value="1">
+              <label for="lactoseNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
+              <label for="lactoseIDK">No sé</label>
+            </div>
           </div>
-        </div>
-        <p class="radio-title">Opciones diabéticas</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="diabetesYes" name="diabetes" value="0">
-            <label for="diabetesYes">Sí</label>
+        </fieldset>
+        <fieldset>
+          <legend class="radio-title">Opciones para intolerantes a la fructosa</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="fructoseYes" name="fructose" value="0">
+              <label for="fructoseYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="fructoseNo" name="fructose" value="1">
+              <label for="fructoseNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
+              <label for="fructoseIDK">No sé</label>
+            </div>
           </div>
-          <div class="input-radio">
-            <input type="radio" id="diabetesNo" name="diabetes" value="1">
-            <label for="diabetesNo">No</label>
+        </fieldset>
+        <fieldset>
+          <legend class="radio-title">Opciones vegetarianas</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
+              <label for="vegetarianYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
+              <label for="vegetarianNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
+              <label for="vegetarianIDK">No sé</label>
+            </div>
           </div>
-          <div class="input-radio">
-            <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
-            <label for="diabetesIDK">No sé</label>
+        </fieldset>
+        <fieldset>
+          <legend class="radio-title">Opciones veganas</legend>
+          <div class="radio-container">
+            <div class="input-radio">
+              <input type="radio" id="veganYes" name="vegan" value="0">
+              <label for="veganYes">Sí</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="veganNo" name="vegan" value="1">
+              <label for="veganNo">No</label>
+            </div>
+            <div class="input-radio">
+              <input type="radio" id="veganIDK" name="vegan" value="2" checked>
+              <label for="veganIDK">No sé</label>
+            </div>              
           </div>
-        </div>
-        <p class="radio-title">Opciones para intolerantes a la lactosa</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="lactoseYes" name="lactose" value="0">
-            <label for="lactoseYes">Sí</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="lactoseNo" name="lactose" value="1">
-            <label for="lactoseNo">No</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
-            <label for="lactoseIDK">No sé</label>
-          </div>
-        </div>
-        <p class="radio-title">Opciones para intolerantes a la fructosa</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="fructoseYes" name="fructose" value="0">
-            <label for="fructoseYes">Sí</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="fructoseNo" name="fructose" value="1">
-            <label for="fructoseNo">No</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
-            <label for="fructoseIDK">No sé</label>
-          </div>
-        </div>
-        <p class="radio-title">Opciones vegetarianas</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
-            <label for="vegetarianYes">Sí</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
-            <label for="vegetarianNo">No</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
-            <label for="vegetarianIDK">No sé</label>
-          </div>
-        </div>
-        <p class="radio-title">Opciones veganas</p>
-        <div class="radio-container">
-          <div class="input-radio">
-            <input type="radio" id="veganYes" name="vegan" value="0">
-            <label for="veganYes">Sí</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="veganNo" name="vegan" value="1">
-            <label for="veganNo">No</label>
-          </div>
-          <div class="input-radio">
-            <input type="radio" id="veganIDK" name="vegan" value="2" checked>
-            <label for="veganIDK">No sé</label>
-          </div>              
-        </div>
+        </fieldset>
         <div class="radio-container">
           <div class="input-radio captcha">
             <input class="captcha" type="checkbox" id="captcha" name="captcha" value="captcha" required />
