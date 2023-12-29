@@ -27,7 +27,13 @@ const putData = () => {
     if (restaurant.foodType && restaurant.foodType !== "") {
         document.getElementById("foodType").innerHTML = restaurant.foodType;
     }
-    if (restaurant.url && restaurant.url !== "") {
+    if (restaurant.phone && restaurant.phone !== "" && restaurant.phone != 0) {
+        document.getElementById("phone").innerHTML = restaurant.phone;
+    }
+    if (restaurant.ZIP && restaurant.ZIP !== "" && restaurant.ZIP != 0) {
+        document.getElementById("zip").innerHTML = restaurant.ZIP;
+    }
+    if (restaurant.url && restaurant.url !== "" && restaurant.url != 0) {
         document.getElementById("url").innerHTML = restaurant.url;
         document.getElementById("url").href = restaurant.url;
     }
@@ -100,6 +106,27 @@ const putAverage = () => {
     getChartsFound();
 }
 
+const getMap = (latitude, longitude) => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/getRestaurantMap.php?lat=${latitude}&long=${longitude}`, true);
+    xmlhttp.responseType = 'blob';
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            const imageUrl = URL.createObjectURL(xmlhttp.response);
+            console.log(imageUrl);
+            document.getElementById("map").src = imageUrl;
+            // const map = JSON.parse(this.responseText);
+            // console.log(map, 'map')
+        } else if (this.status === 400) {
+
+        }
+    };
+    xmlhttp.send();
+}
+
 //Obtenemos los datos del restaurante
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -110,6 +137,7 @@ const getRestaurant = () => {
         //Si se ha encontrado el restaurante, llamamos a las funciones que muestran la información en la página y a la que  busca las calificaciones
         //Se guarda la información del restaurante
         restaurant = JSON.parse(this.responseText);
+        getMap(restaurant.latitude, restaurant.longitude);
         putData();
     } else if (this.status == 404) {
         //Si no se encuentra el ID del restaurante, le dejamos este mensaje

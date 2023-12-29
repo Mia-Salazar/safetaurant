@@ -16,8 +16,7 @@
 }
 
 .header-container {
-	display: grid;
-    grid-template-columns: 1fr 3rem;
+	display: flex;
 	align-items: center;
     margin: 0;
 	padding: 0 1rem;
@@ -41,10 +40,10 @@
 	padding: 0 1rem;
 }
 
-.button-container {
+.wrapper {
 	display: flex;
 	flex-direction: column;
-	padding: 0 1rem;
+	padding: 0;
 	margin-bottom: 3.5rem;
 }
 
@@ -85,7 +84,7 @@ ul.allergen-list {
     margin: 0;
 }
 
-.header-container, .data-container, .button-container {
+.header-container, .data-container, .wrapper {
 	max-width: 56.25rem;
 	margin-left: auto;
 	margin-right: auto;
@@ -239,6 +238,15 @@ h2 {
 	margin-bottom: 0;
 }
 
+.map-container {
+	max-width: 25rem;
+	margin: 1rem 0 2rem 0;
+}
+
+.map-img {
+	width: 100%;
+}
+
 
 /*Adaptando el diseño a pantallas mayores*/
 @media (min-width: 768px) {
@@ -253,12 +261,25 @@ h2 {
 		display: flex;
 		align-items: center;
 	}
+
+	.data-container {
+		display: flex;
+		gap: 2rem;
+		margin-top: 1rem;
+    }
+
+	.data-text:first-of-type {
+		margin-top: 0;
+	}
+
+	.map-container {
+		margin: 0;
+	}
 }
 
 /*Adaptando el diseño a pantallas grandes*/
 @media (min-width: 992px) {
-	.data-container {
-		display: grid;
-    	grid-template-columns: 1fr 1fr;
-    }
+	.map-container {
+		max-width: 31.25rem;
+	}
 }
