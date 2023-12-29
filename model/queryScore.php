@@ -29,10 +29,10 @@
 		closeConnection($connection);
 	}
 
-	function addOptions($celiacDisease, $diabetes, $lactoseIntolerant, $fructoseIntolerant, $vegan, $vegetarian, $restaurantID, $userID) {
+	function addOptions($celiacDisease, $diabetes, $lactoseIntolerant, $fructoseIntolerant, $vegan, $vegetarian, $restaurantID, $userID, $accesibleMenu, $accesibleTable, $accesibleParking, $accesibleBathroom) {
 		$connection = new Connection();
-		$sql = "INSERT INTO menuOptions (celiacDisease, diabetes, lactoseIntolerant, fructoseIntolerant, vegan, vegetarian, restaurantID, userID) 
-				VALUES (:celiacDisease, :diabetes, :lactoseIntolerant, :fructoseIntolerant, :vegan, :vegetarian, :restaurantID, :userID)";
+		$sql = "INSERT INTO menuOptions (celiacDisease, diabetes, lactoseIntolerant, fructoseIntolerant, vegan, vegetarian, restaurantID, userID, accesibleMenu, accesibleTable, accesibleParking, accesibleBathroom) 
+				VALUES (:celiacDisease, :diabetes, :lactoseIntolerant, :fructoseIntolerant, :vegan, :vegetarian, :restaurantID, :userID, :accesibleMenu, :accesibleTable, :accesibleParking, :accesibleBathroom)";
 		$query = $connection->prepare($sql);
 		$query->bindParam(':celiacDisease',$celiacDisease);
 		$query->bindParam(':diabetes', $diabetes);
@@ -42,6 +42,10 @@
 		$query->bindParam(':vegetarian', $vegetarian);
 		$query->bindParam(':restaurantID', $restaurantID);
 		$query->bindParam(':userID', $userID);
+		$query->bindParam(':accesibleMenu', $accesibleMenu);
+		$query->bindParam(':accesibleTable', $accesibleTable);
+		$query->bindParam(':accesibleParking', $accesibleParking);
+		$query->bindParam(':accesibleBathroom', $accesibleBathroom);
 		$query->execute();
 		$lastInsertId = $connection->lastInsertId();
 		if ($lastInsertId>0) {

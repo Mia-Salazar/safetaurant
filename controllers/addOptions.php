@@ -8,7 +8,10 @@
   //Comprobamos si el usuario está autentificado mirando las cookies
   if(isset($_COOKIE['userID'])) {
     //Añadimos la nueva calificación
-    $option = addOptions($formInfo['celiacDisease'], $formInfo['diabetes'], $formInfo['lactoseIntolerant'],  $formInfo['fructoseIntolerant'], $formInfo['vegan'], $formInfo['vegetarian'], $formInfo['restaurantID'], $formInfo['id']);
+    $option = addOptions($formInfo['celiacDisease'], $formInfo['diabetes'], $formInfo['lactoseIntolerant'],  
+    $formInfo['fructoseIntolerant'], $formInfo['vegan'], $formInfo['vegetarian'], $formInfo['restaurantID'], 
+    $formInfo['id'], $formInfo['accesibleMenu'], $formInfo['accesibleTable'], $formInfo['accesibleParking'],
+    $formInfo['accesibleBathroom']);
     if($option) {
       //Si tenemos éxito devolvemos un mensaje mostrando que todo ha ido bien
       echo "OK";
