@@ -76,6 +76,8 @@ function restaurantClick(event) {
 }
 
 const convertCuisine = (cuisine) => {
+    if (!cuisine) return "Otro";
+
     if (cuisine.includes("catering.cafe")) return "Cafetería";
 
     if (cuisine.includes("pizza")) return "Pizza";
@@ -141,11 +143,12 @@ const createAddressesList = () => {
         input.value = address.place_id
         input.type = "radio";
         
+        const street = address.address.road ? address.address.road : address.address.square;
         const cityOrTown = address.address.city ? address.address.city : address.address.town ? address.address.town : address.address.village;
         if (address.address.postcode) {
-            label.innerHTML = `<strong>${address.address.road}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
+            label.innerHTML = `<strong>${street}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
         } else {
-            label.innerHTML = `<strong>${address.address.road}</strong>, ${cityOrTown}, ${address.address.state}`;
+            label.innerHTML = `<strong>${street}</strong>, ${cityOrTown}, ${address.address.state}`;
         }
 
         label.htmlFor = address.place_id
