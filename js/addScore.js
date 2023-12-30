@@ -79,6 +79,27 @@ function submitScore(event){
 
 }
 
+const getStaticData = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchRestaurantConfig.php?restaurantID=${ID}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            if (this.status == 200) {
+                const config = JSON.parse(xmlhttp.response)
+                document.getElementById("optionsContainer").style.display = "none";
+                document.getElementById("allergenChartContainer").style.display = "none";
+                if (config.allergenChart === 1) {
+                    document.getElementById("fidelityScoreContainer").classList.remove("hidden");
+                }
+            }
+        }
+    };
+    xmlhttp.send();
+}
+
 const checkDuplicatedRestaurant = () => {
     const url = new URL(document.URL);
     var xmlhttp = new XMLHttpRequest();
@@ -87,24 +108,29 @@ const checkDuplicatedRestaurant = () => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const response = JSON.parse(this.responseText);
-            const hasSimilarName = response[0].name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
+            const hasSimilarName = response[0]?.name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
+            console.log()
             if (response.length === 1 && hasSimilarName) {
                 ID = response[0].restaurantID;
-            }           
+                //document.getElementById("optionsContainer").style.display = "none";
+            }        
         } else if (this.status == 401) {
             window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
-            subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         } 
     };
     xmlhttp.send();
 }
 
 const checkAddScoreOrAddRestaurantPage = () => {
+    console.log(ID, 'Calle de Antonio López Aguado')
     if (!ID) {
         document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
         checkDuplicatedRestaurant();
+    } else {
+        getStaticData()
     }
 }
 
@@ -240,4 +266,4 @@ const registerRestaurant = (data) => {
     xmlhttp.send(JSON.stringify(dataRestaurant));
 }
 checkIsLoggedIn();
-checkAddScoreOrAddRestaurantPage()
+checkAddScoreOrAddRestaurantPage();
