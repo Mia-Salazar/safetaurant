@@ -67,13 +67,16 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/prehistory.html">Prehistoria</a>
-          </li>
-          <li>
             <a class="nav-link" href="http://localhost/SafeTaurant/">Buscar</a>
           </li>
           <li>
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">Añadir restaurante</a>
+          </li>
+          <li>
+            <a class="nav-link" href="http://localhost/SafeTaurant/prehistory.html">Prehistoria</a>
+          </li>
+          <li>
+            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant-owner.html">Soy un restaurante</a>
           </li>
           <li class="nav-link">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
@@ -97,6 +100,7 @@
     <main class="main add-restaurant container" id="main">
       <h2 id="title">Añade una nueva opinión</h2>
       <p class="subtitle">Añade una opinión nueva a un restaurante. Los campos con un asterisco (*) son obligatorios.</p>
+      <div class="loader" role="alert" aria-busy="true" id="loaderGeneral"></div>
 
       <form class="add-restaurant-form" id="add">
         <div class="add-restaurant-wrapper">
@@ -126,7 +130,7 @@
               <input class="input checkbox" id="allergicReaction" name="allergicReaction" type="checkbox" />
               <label class="" for="allergicReaction">¿Tuviste una reacción alérgica?</label>
             </div>
-            <div class="checkbox-group">
+            <div class="checkbox-group" id="allergenChartContainer">
               <input class="input checkbox" id="allergenChart" name="allergenChart" type="checkbox" />
               <label class="" for="allergenChart">¿Carta de alérgenos?</label>
             </div>
@@ -145,7 +149,10 @@
               <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
             </div>
           </div>
-          <div>
+          <div  id="someOptions">
+            <p><strong>Algunas opciones de este restaurante ya han sido comprobadas y no necesitan evalación</strong></p>
+          </div>
+          <div id="optionsContainer">
             <h3>Opciones alimentarias que ofrecen</h3>
             <fieldset>
               <legend class="radio-title">Opciones celíacas</legend>

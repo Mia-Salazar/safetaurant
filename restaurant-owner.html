@@ -13,20 +13,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/home.css">
-    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/restaurants.css">
-    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/list-results.css">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/static-pages.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
     <link rel="icon" href="./assets/img/favicon.ico" />
     <link rel="apple-touch-icon" href="./assets/img/logo.png" />
     <title>Foodiesaurus, restaurantes sin alergias</title>
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PBDNLPD5');</script>
-  <!-- End Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBDNLPD5');</script>
+<!-- End Google Tag Manager -->
   </head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-66LGQYSR60"></script>
@@ -51,7 +49,7 @@
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
-              <img class="logo" width="42px" height="42px" src="../assets/img/foodiesaurus.png" alt="logo" />
+              <img class="logo" width="42px" height="42px" src="./assets/img/foodiesaurus.png" alt="logo" />
             </figure>
             <span>saurus</span>
           </h1>
@@ -97,60 +95,78 @@
         </ul>
       </nav>
     </header>
-    <main class="" id="main">
-      <section class="search-container">
-        <h2>Resultados de la búsqueda</h2>
-        <form id="search">
-          <div class="input-group">
-            <label class="input-label" for="name">Busca un restaurante</label>
-            <input pattern="^(?!.*<[^>]+>).*"  class="input" id="name" placeholder="Nombre restaurante" name="name" type="text" />
-          </div>
-          <div class="form-selects">
-            <div class="input-group">
-              <label class="input-label" for="province">Provincia: </label>
-              <select name="province" id="province" class="select">
-                <option selected value="">Escoge Provincia</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="foodType">Tipo de comida: </label>
-              <select name="foodType" id="foodType" class="select">
-                <option selected value="">Escoge el tipo</option>
-              </select>
-            </div>
-            <button type="submit" class="primary-button" id="buttonSubmit">Buscar</button>
-          </div>
-        </form>
+    <main>
+      <section class="hero restaurant">
+        <h2 class="title" id="name">Soy un restaurante</h2>
       </section>
-      <section class="list-results-container container" id="searchSection">
-        <div class="order-container" id="orderContainer">
-          <label class="input-label order-label" for="order">Ordernar de forma: </label>
-          <select name="order" id="order" class="select">
-            <option value="asc">Ascendente</option>
-            <option selected value="desc">Descendente</option>
-          </select>
-        </div>
-        <h3 id="found"></h3>
-        <span class="loader" role="alert" aria-busy="true" id="loader"></span>
-        <ul class="list-results" id="list">
+      <section class="info">
+        <h3>Creación de restaurante</h3>
+        <p>Si eres un restaurante y deseas que introduzcamos tu restaurante, escribe un email a <a href="mailto:hello@miasalazar.com">hello@miasalazar.com</a>. </p>
+        <p>En el asunto del email deberás indicar: Foodiesaurus, Alta restaurante. Para poder dar de alta su local de restauración necesitaremos varios datos.</p>
+        <ul>
+          <li>Nombre completo del restaurante.</li>
+          <li>Dirección completa, incluído código postal y provincia.</li>
+          <li>Teléfono.</li>
+          <li>Url de la página web si la hubiera.</li>
+          <li>Tipo de comida. Por ejemplo: Tapas, pizza, italiana...</li>
+          <li>Si el restaurante tiene carta de alérgenos, el pdf o link para consultar la carta de alérgenos.</li>
+          <li>Si el restaurante tiene carta accesible, el pdf o link para consultarla.</li>
+          <li>Si el restaurante tiene mesas accesibles, alguna prueba de la existencia de dicha mesa, como fotografías o vídeos tanto de la mesa como de su emplazamiento.</li>
+          <li>Si el restaurante tiene parking accesible, alguna prueba de la localización del parking accesible.</li>
+          <li>Si el restaurante tiene baño accesible, alguna prueba de la existencia de dicho baño, como fotografías o vídeos tanto de la habitación como del recorrido necesario desde la entrada del restaurante hasta dicho baño.</li>
         </ul>
-      </section>
-      <section class="button-container container">
-        <button class="primary-button--ghost primary-button load" id="next">Cargar más
-          <span class="loader" role="alert" aria-busy="true" id="loaderLoadMore"></span>
-        </button>
-      </section>
+        <p>Por otro lado, si se desea apuntar las opciones alimentarias que se ofrecen en el local, se debera indicar cuáles opciones alimentarias se ofrecen, y cuáles son los platos que corresponden a cada una.</p>
+        <p>Las opciones alimentarias que se tienen en cuenta en Foodiesaurus son:</p>
+        <ul>
+          <li>Para personas veganas.</li>
+          <li>Para personas vegetarianas.</li>
+          <li>Para personas diabéticas.</li>
+          <li>Para personas celíacas.</li>
+          <li>Para personas con intolerancia a la lactosa.</li>
+          <li>Para personas con intolerancia a la fructosa.</li>
+        </ul>
+        <p>Una vez tengamos todos estos datos, y hayamos comprobado que son correctos, añadiremos el restaurante. Si se han aportado pruebas de la carta de alérgenos, de la carta accesible, o de algún otro elemento, completaremos el restaurante indicando su existencia o no.</p>
+        <h3>Ventajas</h3>
+        <p>Las ventajas de que introduzcamos nosotros el restaurante, en lugar de un usuario, es que nos puedes enviar las pruebas de tu carta de alérgenos, carta accesible, etc. De esta forma, los usuarios ya sabrán de forma fehaciente qué hay en el restaurante y qué no, y no les hará falta al añadir sus comentarios indicar la existencia o no de ciertos elementos.</p>
+        <p>Asimismo, te asegurarás de que el local de restauración ha sido creado con los datos correctos.</p>
+        <h3>Ejemplo de email</h3>
+        <div class="mail">
+          <p>Buenos días,</p>
+          <p>Soy ___ del restaurante ___ y me gustaría que se le diera el alta a mi restaurante.</p>
+          <p>El restaurante está en la dirección ____, provincia ___, y con código postal ___.</p>
+          <p>El teléfono es ___, la url es ____, y el tipo de comida del restaurante es ____ .</p>
+          <p>El restaurante tiene:</p>
+          <ul>
+            <li>Carta de alérgenos. Adjunto ___foto, vídeo, explicación ___.</li>
+            <li>Menú accesible. Adjunto ___foto, vídeo, explicación ___.</li>
+            <li>Parking accesible. Adjunto ___foto, vídeo, explicación ___.</li>
+            <li>Mesa accesible. Adjunto ___foto, vídeo, explicación ___.</li>
+            <li>Baño accesible. Adjunto ___foto, vídeo, explicación ___.</li>
+          </ul>
+          <p>En cuanto a las opciones alimentarias, ofrecemos:</p> 
+          <ul>
+            <li>Comida para personas veganas. Los platos son: ____</li>
+            <li>Comida para personas vegetarianas. Los platos son: ____</li>
+            <li>Comida para personas diabéticas. Los platos son: ____</li>
+            <li>Comida para personas celíacas. Los platos son: ____</li>
+            <li>Comida para personas con intolerancia a la lactosa. Los platos son: ____</li>
+            <li>Comida para personas con intolerancia a la fructosa. Los platos son: ____</li>
+          </ul>
+          <p>Muchas gracias</p>
+        </div>
+
+    </section>
     </main>
     <footer class="footer">
       <div>
         <div class="footer__logo">
           <p>Foodie</p>
           <figure class="footer-img">
-            <img class="img" alt="logo"  width="42px" height="42px" src="../assets/img/foodiesaurus-transparent.png"  />
+            <img class="img" alt="logo"  width="42px" height="42px" src="./assets/img/foodiesaurus-transparent.png"  />
            </figure>
           <p>saurus</p>
         </div>
-        <p class="copyright">Foodiesaurus©, restaurantes sin alergias</p>
+        <p class="copyright">Foodiesaurus©, restaurantes sin alergias.</p>
       </div>
       <div class="footer__container">
         <p class="footer__by">Por <a href="https://miasalazar.netlify.app/" class="footer__name" target="_blank">Mia Salazar</a></p>
@@ -165,6 +181,5 @@
     </footer>
   </body>
   <script type="text/javascript" src="./js/shared.js"></script>
-  <script type="text/javascript" src="./js/arrays.js"></script>
-  <script type="text/javascript" src="./js/search.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
 </html>

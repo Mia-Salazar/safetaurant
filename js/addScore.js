@@ -2,8 +2,10 @@ const feedback = document.getElementById("feedback");
 const fidelity = document.getElementById("fidelityScoreContainer");
 let ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
+const loaderGeneral = document.getElementById("loaderGeneral");
 const buttonText = document.getElementById("buttonText");
 loader.style.display = "none";
+document.getElementById("someOptions").style.display = "none";
 
 //Variable para comprobar si hay carta de alérgenos
 //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
@@ -14,6 +16,8 @@ let buttonDisabled = true;
 document.getElementById("add").addEventListener("submit", submitScore, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
+
+add.style.display = "none";
 
 // Captcha
 const signupCaptcha = document.getElementById("signupCaptcha");
@@ -79,6 +83,30 @@ function submitScore(event){
 
 }
 
+const getStaticData = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchRestaurantConfig.php?restaurantID=${ID}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            if (this.status == 200) {
+                const config = JSON.parse(xmlhttp.response)
+                document.getElementById("optionsContainer").style.display = "none";
+                document.getElementById("allergenChartContainer").style.display = "none";
+                document.getElementById("someOptions").style.display = "block";
+                if (config.allergenChart === 1) {
+                    document.getElementById("fidelityScoreContainer").classList.remove("hidden");
+                }
+            }
+            loaderGeneral.style.display = "none";
+            add.style.display = "flex";
+        }
+    };
+    xmlhttp.send();
+}
+
 const checkDuplicatedRestaurant = () => {
     const url = new URL(document.URL);
     var xmlhttp = new XMLHttpRequest();
@@ -87,15 +115,20 @@ const checkDuplicatedRestaurant = () => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const response = JSON.parse(this.responseText);
-            const hasSimilarName = response[0].name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
+            const hasSimilarName = response[0]?.name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
             if (response.length === 1 && hasSimilarName) {
                 ID = response[0].restaurantID;
-            }           
+                getStaticData();
+            } else {
+                loaderGeneral.style.display = "none";
+                add.style.display = "flex"; 
+            }
+    
         } else if (this.status == 401) {
             window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
             //Si hay un error, devolvemos un error
-            subtitle.innerHTML = "Hubo un error al encontrar los datos del usuario";
+            window.location.href = "http://localhost/SafeTaurant/login.html";
         } 
     };
     xmlhttp.send();
@@ -105,6 +138,8 @@ const checkAddScoreOrAddRestaurantPage = () => {
     if (!ID) {
         document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
         checkDuplicatedRestaurant();
+    } else {
+        getStaticData();
     }
 }
 
@@ -240,4 +275,4 @@ const registerRestaurant = (data) => {
     xmlhttp.send(JSON.stringify(dataRestaurant));
 }
 checkIsLoggedIn();
-checkAddScoreOrAddRestaurantPage()
+checkAddScoreOrAddRestaurantPage();
