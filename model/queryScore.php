@@ -126,6 +126,22 @@
 		closeConnection($connection);
 	}
 
+	function getRestaurantConfig($restaurantID) {
+		$connection = new Connection();
+		$query = $connection->prepare("SELECT * FROM restaurantconfig WHERE restaurantID = :restaurantID");
+		$query->bindParam(":restaurantID", $restaurantID, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		if (!empty($rows)) {
+			return $rows[0];
+		} else {
+			//Si no lo encontramso devolvemos false
+			return false;
+		} 
+		closeConnection($connection);
+	}
+
 	function getOptionsNumber($restaurantID) {
 		$connection = new Connection();
 		$query = $connection->prepare("SELECT COUNT(CASE WHEN menuOptions.celiacDisease = 0 THEN 1 END) as celiacDiseaseYes, 

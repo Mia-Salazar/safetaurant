@@ -18,6 +18,7 @@ let restaurant;
 let scores;
 let average;
 let isLoggedIn;
+let config;
 
 accesibilityOptions.style.display = "none";
 
@@ -87,6 +88,7 @@ const putScores = () => {
 
 //Mostramos la puntuación media del restaurante en los inputs
 const putAverage = () => {
+    console.log('putaverage')
     const averageGeneral = Math.floor(average.generalScore);
     const averageFidelity = Math.floor(average.fidelityScore);
     const averageAttention = Math.floor(average.attentionScore);
@@ -127,6 +129,24 @@ const getMap = (latitude, longitude) => {
     xmlhttp.send();
 }
 
+const getStaticData = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/searchRestaurantConfig.php?restaurantID=${restaurant.restaurantID}`, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
+            //Si no hay ninguno, mostramos un mensaje indicando lo contrario
+            if (this.status == 200) {
+                config = JSON.parse(xmlhttp.response)
+            }
+            putData();
+        }
+
+    };
+    xmlhttp.send();
+}
+
 //Obtenemos los datos del restaurante
 const getRestaurant = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -138,7 +158,7 @@ const getRestaurant = () => {
         //Se guarda la información del restaurante
         restaurant = JSON.parse(this.responseText);
         getMap(restaurant.latitude, restaurant.longitude);
-        putData();
+        getStaticData();
     } else if (this.status == 404) {
         //Si no se encuentra el ID del restaurante, le dejamos este mensaje
         restaurantContainer.innerHTML = "No hay un restaurante con este ID";
@@ -150,6 +170,7 @@ const getRestaurant = () => {
 
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getChartsFound = () => {
+    console.log('getChartsFound')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/chartsFound.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -163,8 +184,38 @@ const getChartsFound = () => {
     xmlhttp.send(JSON.stringify(data));
 }
 
+const elementConfig = (config, id) => {
+    const hasOption = config === 1;
+    const iconOption = hasOption ? "fa-check" : "fa-xmark";
+    const ariaOpcion = hasOption ? "Sí hay esta opción"  : "No hay esta opción";
+    document.getElementById(id).classList.add(iconOption);
+    document.getElementById(id).setAttribute('aria-label', ariaOpcion)
+}
+
+const putConfig  = () => {
+    elementConfig (config.celiacDisease, "celiacDiseaseOption");
+    elementConfig (config.diabetes, "diabetesOption");
+    elementConfig (config.fructoseIntolerant, "fructoseIntolerantOption");
+    elementConfig (config.lactoseIntolerant, "lactoseIntolerantOption");
+    elementConfig (config.vegetarian, "vegetarianOption");
+    elementConfig (config.vegan, "veganOption");
+
+    if (config.accesibleMenu || config.accesibleTable || config.accesibleParking || config.accesibleBathroom) {
+        accesibilityOptions.style.display = "block";
+        document.getElementById("restaurantTitle").style.display="none";
+        addAccesibilityOption(config.accesibleMenu, "Menú accesible");
+        addAccesibilityOption(config.accesibleTable, "Mesa accesible");
+        addAccesibilityOption(config.accesibleParking, "Parking accesible");
+        addAccesibilityOption(config.accesibleBathroom, "Baño accesible");
+    }
+
+    loader.style.display = 'none';
+    restaurantContainer.style.display = 'block';
+}
+
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getAllergicReactions = () => {
+    console.log('getAllergicReactions')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/allergicReaction.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -176,7 +227,13 @@ const getAllergicReactions = () => {
         document.getElementById("numberBarAllergen").innerHTML = this.responseText;
         document.getElementById("chartAllergenPercent").innerHTML = percent;
         document.getElementById("allergenScoreBar").style.width = `${percent}%`;
-        getOptions();
+
+        if (config) {
+            console.log(1)
+            putConfig();
+        } else {
+            getOptions();
+        }
     }   
     };
     xmlhttp.send(JSON.stringify(data));
@@ -237,6 +294,7 @@ const getIcon = (yes, no) => {
 }
 
 const getOptions = () => {
+    console.log('getOptions')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/options.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -321,8 +379,6 @@ const checkIsLoggedIn = () => {
     xmlhttp.send();
 }
 
-
-
 //Función cuando no hay resultados
 const showAddButtonWhenNoResults = () => {
     if (isLoggedIn && !document.getElementById("addReview")) {
@@ -335,6 +391,8 @@ const showAddButtonWhenNoResults = () => {
         buttonContainer.appendChild(link);
     }
 }
+
+
 
 getRestaurant();
 checkIsLoggedIn();
