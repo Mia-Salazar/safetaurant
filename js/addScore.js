@@ -12,6 +12,7 @@ document.getElementById("someOptions").style.display = "none";
 let allergenChartToggle = false;
 let user;
 let buttonDisabled = true;
+let config;
 
 document.getElementById("add").addEventListener("submit", submitScore, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
@@ -92,7 +93,7 @@ const getStaticData = () => {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             if (this.status == 200) {
-                const config = JSON.parse(xmlhttp.response)
+                config = JSON.parse(xmlhttp.response)
                 document.getElementById("optionsContainer").style.display = "none";
                 document.getElementById("allergenChartContainer").style.display = "none";
                 document.getElementById("someOptions").style.display = "block";
@@ -215,7 +216,16 @@ const addScore = (data) => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-            addOptions(data)
+            if (!config) {
+                addOptions(data)
+            } else {
+                loader.style.display = "none";
+                feedback.innerHTML = "Creado correctamente";
+                feedback.classList.add("success");
+                feedback.classList.remove("error");
+                window.location.href = "http://localhost/SafeTaurant/";
+            }
+            
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
             feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
