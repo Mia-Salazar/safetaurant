@@ -135,7 +135,6 @@ const checkDuplicatedRestaurant = () => {
 }
 
 const checkAddScoreOrAddRestaurantPage = () => {
-    console.log(ID, 'Calle de Antonio López Aguado')
     if (!ID) {
         document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
         checkDuplicatedRestaurant();

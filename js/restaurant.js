@@ -88,7 +88,6 @@ const putScores = () => {
 
 //Mostramos la puntuación media del restaurante en los inputs
 const putAverage = () => {
-    console.log('putaverage')
     const averageGeneral = Math.floor(average.generalScore);
     const averageFidelity = Math.floor(average.fidelityScore);
     const averageAttention = Math.floor(average.attentionScore);
@@ -170,7 +169,6 @@ const getRestaurant = () => {
 
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getChartsFound = () => {
-    console.log('getChartsFound')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/chartsFound.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -215,7 +213,6 @@ const putConfig  = () => {
 
 //Obtenemos la información sobre cuántas veces se encontró carta de alérgenos
 const getAllergicReactions = () => {
-    console.log('getAllergicReactions')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/allergicReaction.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
@@ -229,7 +226,6 @@ const getAllergicReactions = () => {
         document.getElementById("allergenScoreBar").style.width = `${percent}%`;
 
         if (config) {
-            console.log(1)
             putConfig();
         } else {
             getOptions();
@@ -294,7 +290,6 @@ const getIcon = (yes, no) => {
 }
 
 const getOptions = () => {
-    console.log('getOptions')
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://localhost/SafeTaurant/controllers/options.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
