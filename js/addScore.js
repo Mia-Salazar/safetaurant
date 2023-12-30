@@ -4,6 +4,7 @@ let ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
 const buttonText = document.getElementById("buttonText");
 loader.style.display = "none";
+document.getElementById("someOptions").style.display = "none";
 
 //Variable para comprobar si hay carta de alérgenos
 //Si no la hay, la puntuación de fidelidad será 1 directamente y no se mostrará el range input
@@ -91,6 +92,7 @@ const getStaticData = () => {
                 const config = JSON.parse(xmlhttp.response)
                 document.getElementById("optionsContainer").style.display = "none";
                 document.getElementById("allergenChartContainer").style.display = "none";
+                document.getElementById("someOptions").style.display = "block";
                 if (config.allergenChart === 1) {
                     document.getElementById("fidelityScoreContainer").classList.remove("hidden");
                 }
