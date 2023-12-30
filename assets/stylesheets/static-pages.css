@@ -7,6 +7,11 @@
     background-size: cover;
 }
 
+.hero.restaurant {
+    background-image: url("../img/restaurant.jpg");
+    background-position: right;
+}
+
 .hero:after {
     content: '';
     position: absolute;
