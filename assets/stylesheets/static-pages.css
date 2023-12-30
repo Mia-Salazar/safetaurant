@@ -50,6 +50,10 @@ figure {
     color: var(--primaryColor)
 }
 
+.mail {
+    padding-left: 1rem;
+}
+
 @media (min-width: 768px) {
     .container {
         display: flex;
