@@ -2,6 +2,7 @@ const feedback = document.getElementById("feedback");
 const fidelity = document.getElementById("fidelityScoreContainer");
 let ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
+const loaderGeneral = document.getElementById("loaderGeneral");
 const buttonText = document.getElementById("buttonText");
 loader.style.display = "none";
 document.getElementById("someOptions").style.display = "none";
@@ -15,6 +16,8 @@ let buttonDisabled = true;
 document.getElementById("add").addEventListener("submit", submitScore, false);
 document.getElementById("allergenChart").addEventListener("change", allergenToggle, false);
 document.getElementById("captcha").addEventListener("change", captchaToggle, false);
+
+add.style.display = "none";
 
 // Captcha
 const signupCaptcha = document.getElementById("signupCaptcha");
@@ -97,6 +100,8 @@ const getStaticData = () => {
                     document.getElementById("fidelityScoreContainer").classList.remove("hidden");
                 }
             }
+            loaderGeneral.style.display = "none";
+            add.style.display = "flex";
         }
     };
     xmlhttp.send();
@@ -111,11 +116,14 @@ const checkDuplicatedRestaurant = () => {
         if (this.readyState == 4 && this.status == 200) {
             const response = JSON.parse(this.responseText);
             const hasSimilarName = response[0]?.name.toLowerCase().includes(url.searchParams.get("name").toLowerCase());
-            console.log()
             if (response.length === 1 && hasSimilarName) {
                 ID = response[0].restaurantID;
-                //document.getElementById("optionsContainer").style.display = "none";
-            }        
+                getStaticData();
+            } else {
+                loaderGeneral.style.display = "none";
+                add.style.display = "flex"; 
+            }
+    
         } else if (this.status == 401) {
             window.location.href = "http://localhost/SafeTaurant/login.html";
         } else if (this.status == 400) {
@@ -132,7 +140,7 @@ const checkAddScoreOrAddRestaurantPage = () => {
         document.getElementById("title").innerHTML = "Añadir primera opinión al restaurante";
         checkDuplicatedRestaurant();
     } else {
-        getStaticData()
+        getStaticData();
     }
 }
 
