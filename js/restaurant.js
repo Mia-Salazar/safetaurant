@@ -14,6 +14,11 @@ const loader = document.getElementById("loader");
 const buttonContainer = document.getElementById("buttonContainer")
 const accesibilityOptions = document.getElementById("accesibilityOptions");
 
+let averageAttentionPercent
+let averageChart
+let averageFidelityPercent
+let allergenReactionPercent
+
 //Creamos las variables necesarias que usaremos para guardar los datos
 let restaurant;
 let scores;
@@ -89,18 +94,13 @@ const putScores = () => {
 
 //Mostramos la puntuación media del restaurante en los inputs
 const putAverage = () => {
-    const averageGeneral = Math.floor(average.generalScore);
     const averageFidelity = Math.floor(average.fidelityScore);
     const averageAttention = Math.floor(average.attentionScore);
-    const averageGeneralId = document.getElementById("numberGeneral");
+    averageAttentionPercent =  averageAttention * 10
+    averageFidelityPercent = averageFidelity * 10
     const averageFidelityId = document.getElementById("numberFidelity");
     const averageAttentionId = document.getElementById("attentionScore");
-    document.getElementById("score").innerHTML = averageGeneral
 
-    //General
-    document.getElementById("totalOpinions").innerHTML = average.totalReviews;
-    numberGeneralBar.style.width = `${averageGeneral}0%`;
-    averageGeneralId.innerHTML = averageGeneral;
     //Fidelity
     averageFidelityId.innerHTML = averageFidelity;
     numberFidelityBar.style.width = `${averageFidelity}0%`;
@@ -175,7 +175,8 @@ const getChartsFound = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        const averageChart = this.responseText * 100 / average.totalReviews;
+        document.getElementById("totalOpinions").innerHTML = average.totalReviews;
+        averageChart = this.responseText * 100 / average.totalReviews;
         numberChartBar.style.width = `${averageChart}%`;
         document.getElementById("chartPercent").innerHTML = averageChart;
         getAllergicReactions();
@@ -220,9 +221,9 @@ const getAllergicReactions = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        const percent = Math.floor(this.responseText * 100 / average.totalReviews);
-        document.getElementById("numberBarAllergen").innerHTML = `${percent}%`;
-        document.getElementById("allergenScoreBar").style.width = `${percent}%`;
+        allergenReactionPercent = Math.floor(this.responseText * 100 / average.totalReviews);
+        document.getElementById("numberBarAllergen").innerHTML = `${allergenReactionPercent}%`;
+        document.getElementById("allergenScoreBar").style.width = `${allergenReactionPercent}%`;
 
         if (config) {
             putConfig();
@@ -315,6 +316,7 @@ const getOptions = () => {
         document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
 
         getAccesibility(options);
+        getGeneralScore(averageAttentionPercent, averageChart, averageFidelityPercent, allergenReactionPercent)
         loader.style.display = 'none';
         restaurantContainer.style.display = 'block';
     } else if (this.status == 400) {
@@ -384,6 +386,15 @@ const showAddButtonWhenNoResults = () => {
     }
 }
 
+
+const getGeneralScore = (attention, chart, fidelity, reaction) => {
+    const averageGeneralId = document.getElementById("numberGeneral");
+    const reactionPositive = - (reaction - 10) * 5
+    const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
+    numberGeneralBar.style.width = `${generalScore}0%`;
+    averageGeneralId.innerHTML = generalScore;
+    document.getElementById("score").innerHTML = generalScore
+}
 
 
 getRestaurant();
