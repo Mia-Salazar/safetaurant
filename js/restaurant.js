@@ -9,6 +9,7 @@ const data = {ID: restaurantID};
 const numberGeneralBar = document.getElementById("numberGeneralBar");
 const attentionScoreBar = document.getElementById("attentionScoreBar");
 const numberFidelityBar = document.getElementById("numberFidelityBar");
+const numberChartBar = document.getElementById("numberChartBar");
 const loader = document.getElementById("loader");
 const buttonContainer = document.getElementById("buttonContainer")
 const accesibilityOptions = document.getElementById("accesibilityOptions");
@@ -174,8 +175,9 @@ const getChartsFound = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chartNumber").innerHTML = this.responseText;
-        document.getElementById("chartPercent").innerHTML = this.responseText * 100 / average.totalReviews;
+        const averageChart = this.responseText * 100 / average.totalReviews;
+        numberChartBar.style.width = `${averageChart}%`;
+        document.getElementById("chartPercent").innerHTML = averageChart;
         getAllergicReactions();
     }   
     };
@@ -219,10 +221,7 @@ const getAllergicReactions = () => {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         const percent = Math.floor(this.responseText * 100 / average.totalReviews);
-        document.getElementById("chartAllergenNumber").innerHTML = this.responseText;
-        document.getElementById("totalBarAllergen").innerHTML = average.totalReviews;
-        document.getElementById("numberBarAllergen").innerHTML = this.responseText;
-        document.getElementById("chartAllergenPercent").innerHTML = percent;
+        document.getElementById("numberBarAllergen").innerHTML = `${percent}%`;
         document.getElementById("allergenScoreBar").style.width = `${percent}%`;
 
         if (config) {
@@ -245,8 +244,6 @@ const getAverage = () => {
         //Guardamos los datos en una variable
         //Colocamos los datos de las calificaciones medias en la página
         average = JSON.parse(this.responseText);
-        document.getElementById("totalScores").innerHTML = average.totalReviews
-        document.getElementById("totalScoresAllergen").innerHTML = average.totalReviews
         putAverage();
     } else if (this.status == 404) {
         //Si no se encuentra el ID del restaurante, le dejamos este mensaje
