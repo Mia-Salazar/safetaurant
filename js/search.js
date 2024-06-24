@@ -138,7 +138,8 @@ const getRestaurantAPI = () => {
         if (this.readyState == 4 && this.status == 200) {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-            restaurants = orderRestaurants(JSON.parse(this.responseText))
+            const response = JSON.parse(this.responseText)
+            restaurants = orderRestaurants(response)
             if (restaurants[0].restaurantID !== null) {
                 const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
                 if(!hasMoreToLoad) {

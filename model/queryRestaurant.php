@@ -97,7 +97,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 		} else if ($province != "" && $foodType == "") {
@@ -109,7 +109,7 @@
             WHERE LOWER(name) LIKE :name AND 
 			province = :province 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
@@ -122,7 +122,7 @@
             WHERE LOWER(name) LIKE :name AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':foodType', $foodType);
@@ -136,13 +136,13 @@
 			province = :province AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
 			$query->bindParam(':foodType', $foodType);
 		}
-		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
+		
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
@@ -164,7 +164,7 @@
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 		} else if ($province != "" && $foodType == "") {
 			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, 
@@ -174,7 +174,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE province = :province 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
@@ -185,7 +185,7 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 		} else {
@@ -199,12 +199,12 @@
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType AND province = :province 
             GROUP BY restaurantID 
-            ORDER BY restaurant.name $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 			$query->bindParam(':province', $province);
 		}
-		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
+		
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
