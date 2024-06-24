@@ -102,6 +102,34 @@ function getNextPage(){
     }
 }
 
+const getGeneralScore = (attention, chart, fidelity, reaction) => {
+    const reactionPositive = - (reaction - 10) * 5
+    const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
+    return generalScore;
+}
+
+const compareScores = ( a, b ) => {
+    if ( a.generalScore > b.generalScore ){
+      return -1;
+    }
+    if ( a.generalScore < b.generalScore ){
+      return 1;
+    }
+    return 0;
+  }
+
+const orderRestaurants = ( restaurants) => {
+    const newRestaurants = restaurants.map((restaurant) => {
+        const averageAttentionPercent =  Math.floor(restaurant.attentionScore) * 10
+        const chart = restaurant.allergenChartCount * 100 / restaurant.totalScores;
+        const averageFidelityPercent = Math.floor(restaurant.fidelityScore) * 10
+        const newRestaurant = {...restaurant, generalScore: getGeneralScore(averageAttentionPercent, chart, averageFidelityPercent, Number(restaurant.allergicReactionCount))}
+        return newRestaurant 
+    })
+    const restaurantsOrdered = newRestaurants.sort(compareScores)
+    return restaurantsOrdered;
+}
+
 const getRestaurantAPI = () => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", `http://localhost/SafeTaurant/controllers/search.php?name=${name.value}&province=${provinceSelect.value || ""}&foodType=${foodSelect.value || ""}&order=${order.value || "desc"}&offset=${from}`, true);
@@ -110,7 +138,7 @@ const getRestaurantAPI = () => {
         if (this.readyState == 4 && this.status == 200) {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-            restaurants = JSON.parse(this.responseText);
+            restaurants = orderRestaurants(JSON.parse(this.responseText))
             if (restaurants[0].restaurantID !== null) {
                 const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
                 if(!hasMoreToLoad) {
