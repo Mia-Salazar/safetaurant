@@ -389,7 +389,7 @@ const showAddButtonWhenNoResults = () => {
 
 const getGeneralScore = (attention, chart, fidelity, reaction) => {
     const averageGeneralId = document.getElementById("numberGeneral");
-    const reactionPositive = - (reaction - 10) * 5
+    const reactionPositive = reaction === 0 ? 50 : - (reaction - 100) * 5
     const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
     numberGeneralBar.style.width = `${generalScore}0%`;
     averageGeneralId.innerHTML = generalScore;
