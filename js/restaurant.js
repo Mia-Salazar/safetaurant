@@ -178,7 +178,7 @@ const getChartsFound = () => {
         document.getElementById("totalOpinions").innerHTML = average.totalReviews;
         averageChart = this.responseText * 100 / average.totalReviews;
         numberChartBar.style.width = `${averageChart}%`;
-        document.getElementById("chartPercent").innerHTML = averageChart;
+        document.getElementById("chartPercent").innerHTML = `${averageChart}%`;
         getAllergicReactions();
     }   
     };
