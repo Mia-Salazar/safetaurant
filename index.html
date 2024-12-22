@@ -5,6 +5,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta charset="utf-8" />
+    <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#319DA0" />
     <meta name="description" content="Una aplicación web donde puedes ver y puntuar restaurante según los alérgenos">
@@ -45,7 +46,7 @@
     </a>
     <header class="header">
       <div class="title-container">
-        <a href="http://localhost/SafeTaurant/" class="home-link" aria-label="Ir a la home">
+        <a href="https://foodiesaurus.com/" class="home-link" aria-label="Ir a la home">
           <h1 class="title">
             <span>Foodie</span>
             <figure class="logo-container">
@@ -63,32 +64,32 @@
         </button>
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/">Buscar</a>
+            <a class="nav-link" href="https://foodiesaurus.com/">Buscar</a>
           </li>
           <li class="registered hidden">
-            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">Añadir restaurante</a>
+            <a class="nav-link" href="https://foodiesaurus.com/restaurant/search.html">Añadir restaurante</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/prehistory.html">Prehistoria</a>
+            <a class="nav-link" href="https://foodiesaurus.com/prehistory.html">Prehistoria</a>
           </li>
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant-owner.html">Soy un restaurante</a>
+            <a class="nav-link" href="https://foodiesaurus.com/restaurant-owner.html">Soy un restaurante</a>
           </li>
           <li class="no-registered">
-            <a class="nav-link" href="http://localhost/SafeTaurant/login.html">Iniciar sesión</a>
+            <a class="nav-link" href="https://foodiesaurus.com/login.html">Iniciar sesión</a>
           </li>
           <li class="nav-link registered hidden">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
               <li>
-                <a class="nav-link" href="http://localhost/SafeTaurant/profile/index.html">Perfil</a>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/index.html">Perfil</a>
               </li>
               <li>
-                <a class="nav-link" href="http://localhost/SafeTaurant/profile/restaurants.html">Mis restaurantes</a>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/restaurants.html">Mis restaurantes</a>
               </li>
               <li>
-                <a class="nav-link" href="http://localhost/SafeTaurant/profile/scores.html">Mis opiniones</a>
+                <a class="nav-link" href="https://foodiesaurus.com/profile/scores.html">Mis opiniones</a>
               </li>
             </ul>
           </li>
@@ -172,8 +173,16 @@
         </ul>
       </div>
     </footer>
+    <section class="pwa" id="pwaModal" role="alert">
+      <p class="pwa__title">Navega más rápido con nuestra App</p>
+      <div class="pwa__container">
+        <button id="installBtn" class="primary-button pwa__accept">Instalar</button>
+        <button id="pwaNotNow" class="primary-button pwa__reject">Ahora no</button>
+      </div>
+    </section> 
   </body>
   <script type="text/javascript" src="./js/shared.js"></script>
   <script type="text/javascript" src="./js/arrays.js"></script>
   <script type="text/javascript" src="./js/index.js"></script>
+  <script type="text/javascript" src="./js/pwa.js"></script>
 </html>
