@@ -65,6 +65,50 @@ body {
 	transform: translateY(0%);
 }
 
+/*PWA launcher*/
+
+.pwa {
+	display: none;
+	background-color: var(--secondaryColor);
+	color: var(--white);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border: none;
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+	padding: 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.pwa__container {
+	display: grid;
+	grid-template-columns: 100px 100px;
+	grid-gap: 16px;
+}
+
+.pwa__title {
+    margin: 0;
+    max-width: 200px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 22px;
+    font-weight: 600;
+}
+
+button.pwa__reject {
+	color: var(--white);
+	border: 1px solid var(--white);;
+}
+
+button.pwa__accept {
+	color: var(--secondaryColor);
+	background-color: var(--white);
+}
+
 /*Utility clases*/
 .bold {
 	font-weight: bold;
