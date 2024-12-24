@@ -452,6 +452,29 @@ button.pwa__accept {
 /*Medias queries*/
 @media (max-width: 767px) {
 	.nav {
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		background-color: var(--white);
+		border-top: 1px solid var(--grayDark)
+	}
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		color: var(--grayDark)
+	}
+
+	.nav-list {
+		justify-content: space-between;
+		padding: 0 2rem;
+	}
+
+	
+
+	.just-desktop {
 		display: none;
 	}
 
@@ -459,12 +482,27 @@ button.pwa__accept {
 		justify-content: center;
 	}
 
-	.logo-container
+	.logo-container {
+		width: 1.875rem;
+		height: 1.875rem;
+	}
+
+	.header .title {
+		font-size: 1.75rem;
+	}
 }
 
 @media (min-width: 768px) {
 	.nav-list a {
 		font-size: 1.25rem;
+	}
+
+	i.menu-icon {
+		display: none;
+	}
+
+	.just-mobile {
+		display: flexbox;
 	}
 
 	.nav-list li {

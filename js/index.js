@@ -1,5 +1,4 @@
 const nav = document.getElementById("nav");
-const toggleButton = document.getElementById("toggle");
 const register = document.getElementById("register");
 const link = document.getElementById("link");
 const provinceSelect = document.getElementById("province");

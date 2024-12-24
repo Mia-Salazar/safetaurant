@@ -4,7 +4,6 @@ let page = 0;
 
 const nav = document.getElementById("nav");
 const found = document.getElementById("found");
-const toggleButton = document.getElementById("toggle");
 const register = document.getElementById("register");
 const name = document.getElementById("name");
 const provinceSelect = document.getElementById("province");

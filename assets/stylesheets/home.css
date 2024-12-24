@@ -83,10 +83,6 @@
 	height: 25rem;
 }
 
-.toggle.hidden, .nav-list.hidden {
-	display:  none;
-}
-
 .primary-button {
 	text-decoration: none;
 }

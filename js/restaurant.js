@@ -1,7 +1,6 @@
 const restaurantContainer = document.getElementById("restaurantContainer");
 const feedback = document.getElementById("feedback");
 const nav = document.getElementById("nav");
-const toggleButton = document.getElementById("toggle");
 const restaurantID = new URL(document.URL).searchParams.get('ID');
 const add = document.getElementById("add");
 const scoreText = document.getElementById("scoreText");
