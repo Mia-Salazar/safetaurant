@@ -61,10 +61,22 @@
       <nav class="nav">
         <ul class="nav-list" id="nav">
           <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/">Buscar</a>
+            <a class="nav-link" href="http://localhost/SafeTaurant/">
+              <i class="menu-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <span class="nav-text">Buscar</span>
+            </a>
           </li>
-          <li>
-            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">Añadir restaurante</a>
+          <li class="registered hidden">
+            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">
+              <i class="menu-icon fa-solid fa-plus" aria-hidden="true"></i>
+              <span class="nav-text">Añadir restaurante</span>
+            </a>
+          </li>
+          <li class="registered hidden just-mobile">
+            <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">
+              <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
+              <span class="nav-text">Mi cuenta</span>
+            </a>
           </li>
           <li class="just-desktop">
             <a class="nav-link" href="http://localhost/SafeTaurant/prehistory.html">Prehistoria</a>
@@ -72,7 +84,13 @@
           <li class="just-desktop">
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant-owner.html">Soy un restaurante</a>
           </li>
-          <li class="nav-link">
+          <li class="no-registered">
+            <a class="nav-link" href="http://localhost/SafeTaurant/login.html">
+              <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
+              <span class="nav-text">Iniciar sesión</span>
+            </a>
+          </li>
+          <li class="nav-link registered hidden just-desktop">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
@@ -88,7 +106,6 @@
             </ul>
           </li>
         </ul>
-
       </nav>
     </header>
     <main class="main add-restaurant container" id="main">

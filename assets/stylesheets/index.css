@@ -502,7 +502,7 @@ button.pwa__accept {
 	}
 
 	.just-mobile {
-		display: flexbox;
+		display: none;
 	}
 
 	.nav-list li {

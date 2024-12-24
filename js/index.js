@@ -5,9 +5,7 @@ const provinceSelect = document.getElementById("province");
 const foodSelect = document.getElementById("foodType");
 const name = document.getElementById("name");
 const lastLi = document.getElementById("last");
-document.getElementById("search").addEventListener("submit", search, false);
-
-let isLoggedIn;
+const searchId = document.getElementById("search")
 
 //Rellenamos los select con los array que encontramos arriba
 const fillSelects = () => {
@@ -26,6 +24,14 @@ const fillSelects = () => {
   });
 }
 
+if (searchId) {
+  fillSelects()
+  searchId.addEventListener("submit", search, false);
+}
+
+let isLoggedIn;
+
+
 //Con esta función redirigimos al usuario a otra ruta con todos los valores de la búsqueda
 //Si se ha pulsado el botón de búsqueda sin introducir ningún valor en el campo de nombre, lanzamos una alerta
 function search(event) {
@@ -42,12 +48,16 @@ const checkIsLoggedIn = () => {
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       isLoggedIn = true;
-      changeLanding();
+      if (searchId) {
+        changeLanding();
+      }
       changeMenuAccordingToUser("registered");
     }
     if(this.readyState == 4 && this.status == 401) {
       isLoggedIn = false;
-      changeLanding();
+      if (searchId) {
+        changeLanding();
+      }
       changeMenuAccordingToUser("no-registered");
     }
   };
@@ -68,5 +78,4 @@ const changeLanding = () => {
   lastLi.appendChild(link);
 }
 
-fillSelects()
 checkIsLoggedIn();
