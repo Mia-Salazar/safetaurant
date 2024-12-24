@@ -275,7 +275,7 @@ button.pwa__accept {
 	display: flex;
     flex-direction: column;
     align-items: center;
-	padding: 0.938rem 0.938rem 3.438rem 0.938rem;
+	padding: 0.938rem 0.938rem 5rem 0.938rem;
 	background-color: var(--secondaryColor);
 }
 
