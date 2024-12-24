@@ -57,3 +57,25 @@ const zipcodes = {
 }
 const foodType = ["Italiana", "India","Americana", "Mexicana", "Japonesa", "Coreana", "Pastelería", "Cafetería", "Tapas", "China", "Pizza", "Hamburguesa", "Vietnamita", "Portuguesa",
 "Vegana", "Vegetariana", "Vietnamita", "Peruana", "India", "Tailandesa", "Gourmet", "Fusión", "Catering", "Otro", "Heladería", "Latinoamericana", "Española", "Griega"];
+
+const provinceSelect = document.getElementById("province");
+const foodSelect = document.getElementById("foodType");
+
+//Rellenamos los select con los array que encontramos arriba
+const fillSelects = () => {
+    provinces.forEach((province) => {
+      let option = document.createElement("option");
+      option.value = province;
+      option.innerHTML = province;
+      provinceSelect.appendChild(option);
+    });
+    const foodTypeOrderes = foodType.sort();
+    foodTypeOrderes.forEach((food) => {
+      let option = document.createElement("option");
+      option.value = food;
+      option.innerHTML = food;
+      foodSelect.appendChild(option);
+    });
+}
+
+fillSelects()

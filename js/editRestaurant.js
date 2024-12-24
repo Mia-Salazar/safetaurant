@@ -1,29 +1,10 @@
 const restaurantID = new URL(document.URL).searchParams.get('ID');
 const data = {ID: restaurantID};
-const provinceSelect = document.getElementById("province");
-const foodSelect = document.getElementById("foodType");
 const feedback = document.getElementById("feedback");
 const buttonSubmit = document.getElementById("buttonSubmit");
 const buttonText = document.getElementById("buttonText");
 const loader = document.getElementById("loader");
 loader.style.display = 'none';
-
-//Rellenamos los select con los array que encontramos arriba
-const fillSelects = () => {
-    provinces.forEach((province) => {
-    let option = document.createElement("option");
-    option.value = province;
-    option.innerHTML = province;
-    provinceSelect.appendChild(option);
-    });
-    const foodTypeOrderes = foodType.sort();
-    foodTypeOrderes.forEach((food) => {
-    let option = document.createElement("option");
-    option.value = food;
-    option.innerHTML = food;
-    foodSelect.appendChild(option);
-    });
-}
 
 function editRestaurant(event){
     loader.style.display = 'flex';
@@ -33,14 +14,14 @@ function editRestaurant(event){
     feedback.innerHTML = "";
     //Creamos el objeto con todos los datos del nuevo restaurante
     const data = {
-    restaurantID: restaurantID,
-    name: document.getElementById("name").value,
-    province: document.getElementById("province").value,
-    address: document.getElementById("address").value,
-    ZIP: Number(document.getElementById("ZIP").value),
-    phone: Number(document.getElementById("phone").value),
-    url: document.getElementById("url").value,
-    foodType: document.getElementById("foodType").value,
+        restaurantID: restaurantID,
+        name: document.getElementById("name").value,
+        province: document.getElementById("province").value,
+        address: document.getElementById("address").value,
+        ZIP: Number(document.getElementById("ZIP").value),
+        phone: Number(document.getElementById("phone").value),
+        url: document.getElementById("url").value,
+        foodType: document.getElementById("foodType").value,
     };
     //Hacemos la petición al back-end
     var xmlhttp = new XMLHttpRequest();
@@ -108,7 +89,6 @@ const checkIsLoggedIn = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        fillSelects();
         getRestaurant();
     } else if (this.status == 401) {
         window.location.href = "http://localhost/SafeTaurant/login.html";
