@@ -351,10 +351,11 @@ button.pwa__accept {
 	margin-bottom: 5px;
 }
 
-.input, .select {
-	padding: 5px;
+.input, .select, textarea {
+	padding: 0.75rem;
 	border: none;
-    border-bottom: 1px solid var(--gray);
+    border: 1px solid var(--gray);
+	border-radius: 5px;
 }
 
 .input, .input-label {
