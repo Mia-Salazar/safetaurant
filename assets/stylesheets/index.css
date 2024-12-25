@@ -82,11 +82,12 @@ body {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+	z-index: 2;
 }
 
 .pwa__container {
 	display: grid;
-	grid-template-columns: 6.25rem 6.25rem;
+	grid-template-columns: 6.5rem 6.5rem;
 	grid-gap: 1rem;
 }
 
