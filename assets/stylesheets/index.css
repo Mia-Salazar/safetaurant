@@ -354,7 +354,7 @@ button.pwa__accept {
 .input, .select, textarea {
 	padding: 0.75rem;
 	border: none;
-    border: 1px solid var(--gray);
+    border: 1px solid var(--grayDark);
 	border-radius: 5px;
 }
 
