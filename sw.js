@@ -1,7 +1,5 @@
 const CACHE_NAME = 'foodiesaurus-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
   '/assets/img/192.png',
   '/assets/img/512.png'
 ];

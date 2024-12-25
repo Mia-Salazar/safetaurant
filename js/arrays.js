@@ -67,6 +67,9 @@ const fillSelects = () => {
       let option = document.createElement("option");
       option.value = province;
       option.innerHTML = province;
+      if (province === "Madrid") {
+        option.setAttribute("selected", "selected"); 
+      }
       provinceSelect.appendChild(option);
     });
     const foodTypeOrderes = foodType.sort();
