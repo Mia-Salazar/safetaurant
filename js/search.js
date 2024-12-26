@@ -4,11 +4,8 @@ let page = 0;
 
 const nav = document.getElementById("nav");
 const found = document.getElementById("found");
-const toggleButton = document.getElementById("toggle");
 const register = document.getElementById("register");
 const name = document.getElementById("name");
-const provinceSelect = document.getElementById("province");
-const foodSelect = document.getElementById("foodType");
 const orderContainer = document.getElementById("orderContainer");
 const list = document.getElementById("list");
 const order = document.getElementById("order");
@@ -39,26 +36,6 @@ const checkIsLoggedIn = () => {
     }
     };
     xmlhttp.send();
-}
-
-//Rellenamos los select con los array que encontramos arriba
-const fillSelects = () => {
-    provinces.forEach((province) => {
-        let option = document.createElement("option");
-        option.value = province;
-        option.innerHTML = province;
-        if (province === "Madrid") {
-            option.selected = true;
-        }
-        provinceSelect.appendChild(option);
-    });
-    const foodTypeOrderes = foodType.sort();
-    foodTypeOrderes.forEach((food) => {
-        let option = document.createElement("option");
-        option.value = food;
-        option.innerHTML = food;
-        foodSelect.appendChild(option);
-    });
 }
 
 //Para cada restaurante encontrado, creamos un <li> con todos los datos
@@ -219,7 +196,6 @@ function search(event) {
     window.location.href = `http://localhost/SafeTaurant/search.html?name=${name.value}&province=${provinceSelect.value}&foodType=${foodSelect.value}&order=${order.value}`;
 }
 
-fillSelects();
 getInitialValues();
 checkIsLoggedIn();
 getRestaurantTotal();

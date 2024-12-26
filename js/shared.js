@@ -1,13 +1,8 @@
 const menu = document.getElementById("nav");
-const toggle = document.getElementById("toggle");
 const navList = document.querySelectorAll("#nav li");
 
 const dropdown = document.getElementById("account-dropdown-list");
 const dropdownButton = document.getElementById("account-dropdown-button");
-
-if (toggle) {
-  toggle.addEventListener("click", toggleMenu, false);
-}
 
 if (dropdownButton) {
   dropdownButton.addEventListener("click", dropdownToggle, false);
@@ -29,19 +24,6 @@ function changeMenuAccordingToUser(userType) {
       }
     }
   });
-}
-
-//Funcionalidad para abrir y cerrar el hamburguer menú
-let isMenuOpen = false;
-function toggleMenu() {
-  if (!isMenuOpen) {
-    menu.classList.add("open");
-    toggle.classList.add("open");
-  } else {
-    menu.classList.remove("open");
-    toggle.classList.remove("open");
-  }
-  isMenuOpen = !isMenuOpen;
 }
 
 //Funcionalidad para abrir y cerrar el dropdown

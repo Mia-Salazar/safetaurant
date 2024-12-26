@@ -51,7 +51,7 @@ body {
 .skip-to-content-link {
 	background: var(--secondaryColor);
 	color: var(--white);
-	height: 30px;
+	height: 1.875rem;
 	top: -50%;
 	left: 50%;
 	padding: 0.5rem;
@@ -71,31 +71,32 @@ body {
 	display: none;
 	background-color: var(--secondaryColor);
 	color: var(--white);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 0.625rem;
+	border-top-right-radius: 0.625rem;
 	border: none;
     position: sticky;
     width: 100%;
     bottom: 0;
-	padding: 32px;
+	padding: 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+	z-index: 2;
 }
 
 .pwa__container {
 	display: grid;
-	grid-template-columns: 100px 100px;
-	grid-gap: 16px;
+	grid-template-columns: 6.5rem 6.5rem;
+	grid-gap: 1rem;
 }
 
 .pwa__title {
     margin: 0;
-    max-width: 200px;
-    font-size: 16px;
+    max-width: 12.5rem;
+    font-size: 1rem;
     text-align: center;
-    line-height: 22px;
+    line-height: 1.375rem;
     font-weight: 600;
 }
 
@@ -153,14 +154,14 @@ button.pwa__accept {
 	font-weight: 700;
 	cursor:  pointer;
 	text-decoration: none;
-	height: 40px;
+	height: 2.5rem;
 }
 
 .secondary-button {
 	color:  var(--secondaryColor);
 	border:  1px solid var(--secondaryColor);
 	background-color: transparent;
-	height: 40px;
+	height: 2.5rem;
 }
 
 .primary-button:hover, .secondary-button:hover, .primary-button:disabled, .secondary-button:disabled {
@@ -257,23 +258,6 @@ button.pwa__accept {
 	z-index:1;
 }
 
-.toggle {
-	display: none;
-}
-
-.toggle-item {
-	width: 100%;
-	height: 6px;
-	background-color: var(--white);
-	margin-bottom: 4px;
-	transform-origin: top left;
-	transition: 0.5s;
-}
-
-.toggle-item:last-of-type {
-	margin-bottom: 0;
-}
-
 .open {
 	display: flex;
 }
@@ -292,7 +276,7 @@ button.pwa__accept {
 	display: flex;
     flex-direction: column;
     align-items: center;
-	padding: 0.938rem 0.938rem 3.438rem 0.938rem;
+	padding: 0.938rem 0.938rem 5rem 0.938rem;
 	background-color: var(--secondaryColor);
 }
 
@@ -368,10 +352,11 @@ button.pwa__accept {
 	margin-bottom: 5px;
 }
 
-.input, .select {
-	padding: 5px;
+.input, .select, textarea {
+	padding: 0.75rem;
 	border: none;
-    border-bottom: 1px solid var(--gray);
+    border: 1px solid var(--grayDark);
+	border-radius: 5px;
 }
 
 .input, .input-label {
@@ -467,10 +452,59 @@ button.pwa__accept {
 }
 
 /*Medias queries*/
+@media (max-width: 767px) {
+	.nav {
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		background-color: var(--white);
+		border-top: 1px solid var(--grayDark)
+	}
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		color: var(--grayDark)
+	}
+
+	.nav-list {
+		justify-content: space-between;
+		padding: 0 2rem;
+	}
+
+	
+
+	.just-desktop {
+		display: none;
+	}
+
+	.header {
+		justify-content: center;
+	}
+
+	.logo-container {
+		width: 1.875rem;
+		height: 1.875rem;
+	}
+
+	.header .title {
+		font-size: 1.75rem;
+	}
+}
 
 @media (min-width: 768px) {
 	.nav-list a {
 		font-size: 1.25rem;
+	}
+
+	i.menu-icon {
+		display: none;
+	}
+
+	.just-mobile {
+		display: none;
 	}
 
 	.nav-list li {
@@ -524,63 +558,5 @@ button.pwa__accept {
 		max-width: 56.25rem;
 		margin-right: auto;
 		margin-left: auto;
-	}
-}
-
-/*Hamburguer menu*/
-@media (max-width: 767px) {
-
-	.copyright  {
-		position: absolute;
-		bottom: 1rem;
-	}
-
-	.toggle {
-		width: 2.25rem;
-		height: 2rem;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		padding: 0;
-		appearance: none;
-		background-color: transparent;
-		border: none;
-		z-index: 2;
-	}
-
-	.toggle.open .toggle-item {
-		margin-left: 4px;
-	}
-
-	.toggle.open .toggle-item:first-of-type {
-		transform: rotate(46deg);
-	}
-	.toggle.open .toggle-item:last-of-type {
-		transform: rotate(-46deg);
-		transform-origin: bottom left;
-	}
-	.toggle.open .toggle-item:nth-of-type(2) {
-		display:  none;
-	}
-
-	.nav-list {
-		position: absolute;
-		width: 100%;
-		left: 0;
-		bottom: 0;
-		background: var(--primaryColor);
-		height: calc(100vh - 3.438rem);
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		margin: 0;
-		transform: translate(0%, -125%);
-		transition: transform 0.5s;
-	}
-
-	.nav-list.open {
-		transform: translate(0%);
 	}
 }

@@ -1,10 +1,10 @@
 const subtitle = document.getElementById("subtitle");
 const name = document.getElementById("name")
 const email = document.getElementById("email")
-const img = document.getElementById("img")
 const logout = document.getElementById("logout");
 const loader = document.getElementById("loader");
 const buttonText = document.getElementById("button-text");
+const logoutIcon = document.getElementById("logoutIcon");
 let user;
 
 logout.addEventListener("click", logoutFunction, false);
@@ -17,10 +17,11 @@ function logoutFunction() {
     xmlhttp.onreadystatechange = function() {
     loader.style.display = 'flex';
     buttonText.innerHTML = 'Cargando...'
-    if (this.readyState == 4 && this.status == 401) {
-        //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
-        window.location.href = "http://localhost/SafeTaurant/login.html";
-    }
+    logoutIcon.style.display = 'none';
+        if (this.readyState == 4 && this.status == 401) {
+            //Si tiene éxito y nos devuelve un 401, significa que el usuario ha salido de la aplicación y le expulsamos al login
+            window.location.href = "http://localhost/SafeTaurant/login.html";
+        }
     };
     xmlhttp.send();
 }
@@ -53,7 +54,6 @@ const getProfile = () => {
 const putData = () => {
     name.innerHTML = user.name;
     email.innerHTML = user.email;
-    img.src = user.picture;
     loader.style.display = 'none';
     buttonText.innerHTML = 'Salir';
 }
