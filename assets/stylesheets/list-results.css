@@ -9,6 +9,7 @@
     margin-bottom: 1rem;
     font-size: 1.25rem;
     color: var(--black);
+    width: calc(100% - 56px);
 }
 
 .list-results li {
