@@ -1,4 +1,4 @@
-const CACHE_NAME = 'foodiesaurus-cache-v1';
+const CACHE_NAME = 'foodiesaurus-cache-v3';
 const urlsToCache = [
   '/assets/img/192.png',
   '/assets/img/512.png'
@@ -29,3 +29,19 @@ self.addEventListener('fetch', event => {
   );
 });
 
+self.addEventListener('activate', event => {
+  // Remove old caches
+    event.waitUntil(
+      (async () => {
+        const keys = await caches.keys();
+        return keys.map(async (cache) => {
+          if(cache !== CACHE_NAME) {
+            console.log('Service Worker: Removing old cache: '+cache);
+            return await caches.delete(cache);
+          }
+        })
+      })()
+    )
+  })
+
+self.caches.delete('foodiesaurus-cache-v3')
