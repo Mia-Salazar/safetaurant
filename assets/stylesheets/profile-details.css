@@ -31,3 +31,8 @@ h3 {
 .primary-button.white-text {
     color: var(--white);
 }
+
+.scores-list li div {
+    display: flex;
+    justify-content: space-between;
+}

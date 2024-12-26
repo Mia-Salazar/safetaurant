@@ -18,6 +18,7 @@ const putScores = () => {
         let feedback = document.createElement("p");
         let link = document.createElement("a");
         let button = document.createElement("button");
+        let buttonContainer = document.createElement("div");
 
         date.innerHTML = score.created;
         userName.innerHTML = score.userName;
@@ -42,6 +43,8 @@ const putScores = () => {
         });
         feedback.setAttribute("id", `feedback-${score.scoreID}`);
 
+        buttonContainer.appendChild(link);
+        buttonContainer.appendChild(button);
         li.appendChild(userName);
         li.appendChild(date);
         li.appendChild(generalScore);
@@ -53,8 +56,7 @@ const putScores = () => {
         li.appendChild(attentionScore);
         li.appendChild(comment);
         li.appendChild(feedback);
-        li.appendChild(button);
-        li.appendChild(link);
+        li.appendChild(buttonContainer);
 
         scoresList.appendChild(li);
     })
