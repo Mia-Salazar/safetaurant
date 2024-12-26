@@ -9,6 +9,7 @@
 
 .data-text {
 	font-weight: 700;
+	margin-right: 0.5rem;
 }
 
 .data-wrapper {
@@ -16,7 +17,9 @@
 }
 
 .header-container {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 3.5rem;
+	gap: 0.5rem;
 	align-items: center;
     margin: 0;
 	padding: 0 1rem;
@@ -53,36 +56,17 @@ ul.allergen-list {
 }
 
 .principal-score {
-    height: 3rem;
-    width: 3rem;
+    height: 3.5rem;
+    width: 3.5rem;
     color: var(--white);
     background-color: var(--primaryColor);
-    font-size: 2rem;
+    font-size: 2.25rem;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1rem;
     font-weight: 600;
-}
-
-.principal-score-comment {
-    height: 2rem;
-    width: 2rem;
-    color: var(--white);
-    background-color: var(--secondaryColor);
-    font-size: 1rem;
-    margin-left: 1rem;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1rem;
-    font-weight: 600;
-	position: absolute;
-    top: 1.375rem;
-    right: 1.313rem;
-    margin: 0;
 }
 
 .header-container, .data-container, .wrapper {
@@ -103,7 +87,19 @@ ul.allergen-list {
 }
 
 .data-info {
+	color: var(--grayDark);
 	font-weight: normal;
+}
+
+.restaurant__container {
+	display: grid;
+    grid-template-columns: 1.5rem 8.25rem 1fr;
+	align-items: baseline;
+}
+
+.restaurant__addres-text {
+	display: flex;
+	flex-direction: column;
 }
 
 .averages-container {
@@ -130,6 +126,7 @@ ul.allergen-list {
     gap:  1.25rem;
     padding: 0;
 	list-style-type: none;
+	color: var(--grayDark);
 }
 
 .info-list {
@@ -182,7 +179,7 @@ h5 {
 
 .scores-list h4 {
 	margin: 0;
-	color:  var(--primaryColor);
+	color:  var(--secondaryColor);
 	font-size: 1.125rem;
 }
 
@@ -193,6 +190,7 @@ h2 {
 
 .highlight {
 	font-weight: 700;
+	color: var(--black);
 }
 
 .add-button {
@@ -242,11 +240,31 @@ h2 {
 
 .map-container {
 	max-width: 25rem;
-	margin: 1rem 0 2rem 0;
+	margin: 0rem 0 2rem 0;
 }
 
 .map-img {
 	width: 100%;
+}
+
+p.principal-score-comment {
+    height: 2.5rem;
+    width: 2.5rem;
+    color: var(--white);
+    background-color: var(--primaryColor);
+    font-size: 1.5rem;
+	margin-top: 0;
+    margin-left: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1rem;
+    font-weight: 600;
+	position: absolute;
+    top: 1.375rem;
+    right: 1.313rem;
+    margin: 0;
 }
 
 

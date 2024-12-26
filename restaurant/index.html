@@ -111,23 +111,36 @@
         <h2 class="restaurant-title" id="name">Restaurante</h2>
         <span class="principal-score" id="score"></span>
       </section>
-      
       <section class="data-container">
+        <div class="restaurant__container">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <p class="data-text">Dirección:</p>
+          <div class="restaurant__addres-text">
+            <span class="data-info" id="address">-</span>
+            <span class="data-info" id="province">-</span>
+            <span class="data-info" id="zip">-</span>
+          </div>
+        </div>
+        <div class="restaurant__container">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <p class="data-text">Teléfono:</p>
+          <span class="data-info" id="phone">-</span>
+        </div>
+        <div class="restaurant__container">
+          <i class="fa-solid fa-globe" aria-hidden="true"></i>
+          <p class="data-text">Sitio web: </p>
+          <a class="data-info" id="url">-</a>
+        </div>
+        <div class="restaurant__container">
+          <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+          <p class="data-text">Tipo de comida: </p>
+          <a class="data-info"  id="foodType">-</a>
+        </div>
+        <section class="wrapper" id="buttonContainer">
+        </section>
         <figure class="map-container">
           <img class="map-img" alt="mapa" id="map" src />
         </figure>
-        <div>
-          <p class="data-text">Dirección: <span class="data-info" id="address">-</span></p>
-          <p class="data-text">Provincia: <span class="data-info" id="province">-</span></p>
-          <p class="data-text">Código postal: <span class="data-info" id="zip">-</span></p>
-          <p class="data-text">Teléfono: <a class="data-info" id="phone">-</a></p>
-          <p class="data-text">Sitio web: <a class="data-info" id="url">-</a></p>
-          <p class="data-text">Tipo de comida: <span class="data-info" id="foodType">-</span></p>
-          <section class="wrapper" id="buttonContainer">
-          </section>
-        </div>
-
-
       </section>
       <section class="wrapper">
         <span class="loader" role="alert" aria-busy="true" id="loader"></span>

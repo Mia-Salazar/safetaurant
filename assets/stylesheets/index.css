@@ -130,6 +130,7 @@ button.pwa__accept {
 	margin-bottom: 5px;
 	font-size: 0.875rem;
 	padding-left: 0.75rem;
+	color: var(--grayDark);
 }
 
 .info-list-item:after {
@@ -473,8 +474,6 @@ button.pwa__accept {
 		justify-content: space-between;
 		padding: 0 2rem;
 	}
-
-	
 
 	.just-desktop {
 		display: none;
