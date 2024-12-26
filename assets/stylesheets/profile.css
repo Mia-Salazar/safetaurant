@@ -24,20 +24,6 @@
 	margin: 0;
 }
 
-.profile__link {
-	width: 100%;
-	display: flex;
-	padding: 1rem 0;
-	margin-bottom: 1rem;
-	justify-content: space-between;
-	text-decoration: none;
-	color: var(--grayDark);
-	border: none;
-	background-color: transparent;
-	border-bottom: 1px solid var(--grayDark);
-	font-size: 1rem;
-}
-
 .loader-container {
 	width: 100%;
 	justify-content: space-between;

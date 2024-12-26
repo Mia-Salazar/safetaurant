@@ -370,6 +370,20 @@ button.pwa__accept {
 	color: var(--gray);
 }
 
+.link-arrow {
+	width: 100%;
+	display: flex;
+	padding: 1rem 0;
+	margin-bottom: 1rem;
+	justify-content: space-between;
+	text-decoration: none;
+	color: var(--grayDark);
+	border: none;
+	background-color: transparent;
+	border-bottom: 1px solid var(--grayDark);
+	font-size: 1rem;
+}
+
 .primary-button, .secondary-button {
 	width: 100%;
 	margin-top: 0.625rem;
