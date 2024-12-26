@@ -137,6 +137,11 @@
         <div class="averages-container">
           <div class="box">
             <h4 class="allergen-chart">Puntuaciones generales</h4>
+            <ul class="info-list">
+              <li class="info-list-item">La puntuación general se calcula teniendo en cuenta todos los puntos
+              </li>
+              <li class="info-list-item">La atención recibida hace referencia a cómo nos ha tratado el personal una vez conoció nuestras alergias o intolerancias</li>
+            </ul>
             <div class="input-group">
               <h5>General</h5>
               <div class="range-container">
@@ -159,13 +164,22 @@
             </div>
           </div>
           <div class="box">
-            <h4 class="allergen-chart">Alérgenos</h4>
+            <h4 class="allergen-chart">Carta de alérgenos</h4>
             <ul class="info-list">
-              <li class="info-list-item">Había carta de alérgenos en <span id="chartNumber">-</span> de las <span id="totalScores">-</span> visitas
+              <li class="info-list-item">En este punto comprobamos si el restaurante tiene carta de alérgenos
               </li>
-              <li class="info-list-item">Esto supone el <span id="chartPercent">-</span>%
+              <li class="info-list-item">Si el local lo tiene, observamos si ésta se corresponde con la comida que se recibe
               </li>
             </ul>
+            <div class="input-group">
+              <h5>Visitas en las que hubo carta de alérgenos</h5>
+              <div class="range-container">
+                <div class="bar">
+                  <span id="numberChartBar"></span>
+                </div>
+                <span class="range-number" id="chartPercent">5%</span>
+              </div>
+            </div>
             <div class="input-group input-group--last">
               <h5>Calidad de la carta</h5>
               <div class="range-container">
@@ -180,10 +194,9 @@
           <div class="box">
             <h4 class="allergen-chart">Reacciones alérgicas</h4>
             <ul class="info-list">
-              <li class="info-list-item">Han tenido una reacción alérgica en <span id="chartAllergenNumber">-</span> de las <span id="totalScoresAllergen">-</span> visitas
+              <li class="info-list-item">Aquí medimos si alguna persona ha tenido una reacción alérgica o reacción adversa tras comer en el local
               </li>
-              <li class="info-list-item">Esto supone el <span id="chartAllergenPercent">-</span>%
-              </li>
+              <li class="info-list-item">Las reacciones alérgicas son el valor con mayor peso en el cálculo general</li>
             </ul>
             <div class="input-group input-group--last">
               <h5>Porcentaje de reacciones</h5>
@@ -192,7 +205,6 @@
                   <span id="allergenScoreBar"></span>
                 </div>
                 <span class="range-number" id="numberBarAllergen">5</span>
-                <span class="total-range">/<span id="totalBarAllergen">10</span></span>
               </div>
             </div>
           </div>

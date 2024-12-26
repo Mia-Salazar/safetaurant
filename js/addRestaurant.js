@@ -117,7 +117,7 @@ function submitRestaurant(event){
         foodType: document.getElementById("foodType").value,
         created: new Date(),
         comment: document.getElementById("comment").value,
-        generalScore: document.getElementById("generalScore").value,
+        generalScore: 5,
         allergenChart: document.getElementById("allergenChart").checked ? 1 : 0,
         fidelityScore: document.getElementById("allergenChart").checked ? document.getElementById("fidelityScore").value : 0,
         allergicReaction: document.getElementById("allergicReaction").checked ? 1 : 0,

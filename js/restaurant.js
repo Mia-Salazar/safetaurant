@@ -8,9 +8,15 @@ const data = {ID: restaurantID};
 const numberGeneralBar = document.getElementById("numberGeneralBar");
 const attentionScoreBar = document.getElementById("attentionScoreBar");
 const numberFidelityBar = document.getElementById("numberFidelityBar");
+const numberChartBar = document.getElementById("numberChartBar");
 const loader = document.getElementById("loader");
 const buttonContainer = document.getElementById("buttonContainer")
 const accesibilityOptions = document.getElementById("accesibilityOptions");
+
+let averageAttentionPercent
+let averageChart
+let averageFidelityPercent
+let allergenReactionPercent
 
 //Creamos las variables necesarias que usaremos para guardar los datos
 let restaurant;
@@ -87,18 +93,13 @@ const putScores = () => {
 
 //Mostramos la puntuación media del restaurante en los inputs
 const putAverage = () => {
-    const averageGeneral = Math.floor(average.generalScore);
     const averageFidelity = Math.floor(average.fidelityScore);
     const averageAttention = Math.floor(average.attentionScore);
-    const averageGeneralId = document.getElementById("numberGeneral");
+    averageAttentionPercent =  averageAttention * 10
+    averageFidelityPercent = averageFidelity * 10
     const averageFidelityId = document.getElementById("numberFidelity");
     const averageAttentionId = document.getElementById("attentionScore");
-    document.getElementById("score").innerHTML = averageGeneral
 
-    //General
-    document.getElementById("totalOpinions").innerHTML = average.totalReviews;
-    numberGeneralBar.style.width = `${averageGeneral}0%`;
-    averageGeneralId.innerHTML = averageGeneral;
     //Fidelity
     averageFidelityId.innerHTML = averageFidelity;
     numberFidelityBar.style.width = `${averageFidelity}0%`;
@@ -173,8 +174,10 @@ const getChartsFound = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chartNumber").innerHTML = this.responseText;
-        document.getElementById("chartPercent").innerHTML = this.responseText * 100 / average.totalReviews;
+        document.getElementById("totalOpinions").innerHTML = average.totalReviews;
+        averageChart = this.responseText * 100 / average.totalReviews;
+        numberChartBar.style.width = `${averageChart}%`;
+        document.getElementById("chartPercent").innerHTML = `${averageChart}%`;
         getAllergicReactions();
     }   
     };
@@ -217,12 +220,9 @@ const getAllergicReactions = () => {
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        const percent = Math.floor(this.responseText * 100 / average.totalReviews);
-        document.getElementById("chartAllergenNumber").innerHTML = this.responseText;
-        document.getElementById("totalBarAllergen").innerHTML = average.totalReviews;
-        document.getElementById("numberBarAllergen").innerHTML = this.responseText;
-        document.getElementById("chartAllergenPercent").innerHTML = percent;
-        document.getElementById("allergenScoreBar").style.width = `${percent}%`;
+        allergenReactionPercent = Math.floor(this.responseText * 100 / average.totalReviews);
+        document.getElementById("numberBarAllergen").innerHTML = `${allergenReactionPercent}%`;
+        document.getElementById("allergenScoreBar").style.width = `${allergenReactionPercent}%`;
 
         if (config) {
             putConfig();
@@ -244,8 +244,6 @@ const getAverage = () => {
         //Guardamos los datos en una variable
         //Colocamos los datos de las calificaciones medias en la página
         average = JSON.parse(this.responseText);
-        document.getElementById("totalScores").innerHTML = average.totalReviews
-        document.getElementById("totalScoresAllergen").innerHTML = average.totalReviews
         putAverage();
     } else if (this.status == 404) {
         //Si no se encuentra el ID del restaurante, le dejamos este mensaje
@@ -317,6 +315,7 @@ const getOptions = () => {
         document.getElementById("veganOption").setAttribute('aria-label', getAriaLabel(options.veganYes, options.veganNo))
 
         getAccesibility(options);
+        getGeneralScore(averageAttentionPercent, averageChart, averageFidelityPercent, allergenReactionPercent)
         loader.style.display = 'none';
         restaurantContainer.style.display = 'block';
     } else if (this.status == 400) {
@@ -386,6 +385,15 @@ const showAddButtonWhenNoResults = () => {
     }
 }
 
+
+const getGeneralScore = (attention, chart, fidelity, reaction) => {
+    const averageGeneralId = document.getElementById("numberGeneral");
+    const reactionPositive = reaction === 0 ? 50 : - (reaction - 100) * 5
+    const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
+    numberGeneralBar.style.width = `${generalScore}0%`;
+    averageGeneralId.innerHTML = generalScore;
+    document.getElementById("score").innerHTML = generalScore
+}
 
 
 getRestaurant();

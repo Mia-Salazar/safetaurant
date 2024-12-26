@@ -71,7 +71,7 @@
 		$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
 		FROM restaurant 
 		INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
-		ORDER BY AVG(scores.generalScore) ASC LIMIT 10 OFFSET :offset";
+		ORDER BY restaurant.name ASC LIMIT 10 OFFSET :offset";
 		$query = $connection->prepare($sql);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -90,51 +90,59 @@
 		$rows;
 		$name = '%' . strtolower($name) . '%'; 
 		if ($province == "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province,
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 		} else if ($province != "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province,
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name AND 
 			province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province,
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':foodType', $foodType);
 		} else {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province,
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE LOWER(name) LIKE :name AND 
 			province = :province AND 
 			foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':name', $name);
 			$query->bindParam(':province', $province);
 			$query->bindParam(':foodType', $foodType);
 		}
-		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
+		
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
@@ -150,43 +158,53 @@
 		$order = strtoupper($order);
 		$rows;
 		if ($province == "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province,
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 		} else if ($province != "" && $foodType == "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, 
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount 
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':province', $province);
 		} else if ($province == "" && $foodType != "") {
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, 
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount 
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 		} else {
-			//$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY AVG(scores.generalScore) ";
-			$sql = "SELECT restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, AVG(scores.generalScore) as generalScore 
+			//$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, 
+			//AVG(fidelityScore) as fidelityScore, 
+			//AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY restaurant.name ";
+			$sql = "SELECT COUNT(scores.restaurantID) as totalScores, restaurant.restaurantID, restaurant.name, restaurant.address, restaurant.province, 
+			AVG(fidelityScore) as fidelityScore, 
+			AVG(attentionScore) as attentionScore, SUM(CASE WHEN scores.allergenChart > 0 THEN 1 ELSE 0 END) AS allergenChartCount, SUM(CASE WHEN scores.allergicReaction > 0 THEN 1 ELSE 0 END) AS allergicReactionCount 
             FROM restaurant 
             INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID 
             WHERE foodType = :foodType AND province = :province 
             GROUP BY restaurantID 
-            ORDER BY AVG(scores.generalScore) $order LIMIT 10 OFFSET :offset";
+            ORDER BY restaurant.name $order";
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 			$query->bindParam(':province', $province);
 		}
-		$query->bindParam(':offset', $offset, PDO::PARAM_INT);
+		
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_ASSOC);
 		closeConnection($connection); 
@@ -283,7 +301,7 @@
 			$query = $connection->prepare($sql);
 			$query->bindParam(':foodType', $foodType);
 		} else {
-			//$sql = "SELECT count(*) as total FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY AVG(scores.generalScore) ";
+			//$sql = "SELECT count(*) as total FROM restaurant INNER JOIN scores ON restaurant.restaurantID = scores.restaurantID WHERE foodType = :foodType AND province = :province GROUP BY restaurantID ORDER BY restaurant.name ";
 			$sql = "SELECT count(*) as total 
             FROM restaurant 
             WHERE foodType = :foodType AND province = :province";
