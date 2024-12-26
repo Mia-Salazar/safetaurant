@@ -6,6 +6,8 @@
 
 .list-results h4  {
     margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
 }
 
 .list-results li {
@@ -23,7 +25,7 @@
 }
 
 .list-results li p {
-	margin: 5px 0 0.75rem 0;
+	margin: 5px 0 0.5rem 0;
 }
 
 .list-results li p:last-of-type {
@@ -53,6 +55,7 @@
 
 .list-container .list-results .list-province, .list-results .list-province {
     margin-bottom: 0;
+    margin-top: 0;
 }
 
 @media (min-width: 768px) {
