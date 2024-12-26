@@ -194,6 +194,7 @@ h2 {
 }
 
 .add-button {
+	margin-top: 1rem;
 	width: fit-content;
     height: fit-content;
 	margin-bottom: 0;
@@ -283,8 +284,6 @@ p.principal-score-comment {
 	}
 
 	.data-container {
-		display: flex;
-		gap: 2rem;
 		margin-top: 1rem;
     }
 

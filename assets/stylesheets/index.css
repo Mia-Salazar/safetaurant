@@ -377,10 +377,10 @@ button.pwa__accept {
 	margin-bottom: 1rem;
 	justify-content: space-between;
 	text-decoration: none;
-	color: var(--grayDark);
+	color: var(--black);
 	border: none;
 	background-color: transparent;
-	border-bottom: 1px solid var(--grayDark);
+	border-bottom: 1px solid var(--black);
 	font-size: 1rem;
 }
 
