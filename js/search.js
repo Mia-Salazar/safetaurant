@@ -13,12 +13,10 @@ const orderContainer = document.getElementById("orderContainer");
 const list = document.getElementById("list");
 const order = document.getElementById("order");
 const loader = document.getElementById("loader");
-const nextButton = document.getElementById("next");
 const loadMoreSpinner = document.getElementById("loaderLoadMore");
 const searchSection = document.getElementById("searchSection");
 document.getElementById("search").addEventListener("submit", search, false);
 document.getElementById("order").addEventListener("change", search, false);
-nextButton.addEventListener("click", getNextPage, false);
 loadMoreSpinner.style.display = 'none';
 
 //Creamos una variable para guardar el resultado de la búsqueda
@@ -49,6 +47,9 @@ const fillSelects = () => {
         let option = document.createElement("option");
         option.value = province;
         option.innerHTML = province;
+        if (province === "Madrid") {
+            option.selected = true;
+        }
         provinceSelect.appendChild(option);
     });
     const foodTypeOrderes = foodType.sort();
@@ -89,14 +90,33 @@ const viewList = () => {
     });
 }
 
-function getNextPage(){
-    if(name && name != "") {
-        loadMoreSpinner.style.display = 'flex';
-        from = from + LIMIT_PAGINATION;
-        page++;
-        nextButton.style.display = 'none';
-        getRestaurantAPI();
+const getGeneralScore = (attention, chart, fidelity, reaction) => {
+    const reactionPositive = reaction === 0 ? 50 : - (reaction - 100) * 5
+    const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
+    return generalScore;
+}
+
+const compareScores = ( a, b ) => {
+    if ( a.generalScore > b.generalScore ){
+      return -1;
     }
+    if ( a.generalScore < b.generalScore ){
+      return 1;
+    }
+    return 0;
+  }
+
+const orderRestaurants = ( restaurants) => {
+    const newRestaurants = restaurants.map((restaurant) => {
+        const averageAttentionPercent =  Math.floor(restaurant.attentionScore) * 10
+        const chart = Number(restaurant.allergenChartCount) * 100 / restaurant.totalScores;
+        const averageFidelityPercent = Math.floor(restaurant.fidelityScore) * 10
+        const allergenPercent = Number(restaurant.allergicReactionCount) * 100 / restaurant.totalScores;
+        const newRestaurant = {...restaurant, generalScore: getGeneralScore(averageAttentionPercent, chart, averageFidelityPercent, allergenPercent)}
+        return newRestaurant 
+    })
+    const restaurantsOrdered = newRestaurants.sort(compareScores)
+    return restaurantsOrdered;
 }
 
 const getRestaurantAPI = () => {
@@ -107,14 +127,9 @@ const getRestaurantAPI = () => {
         if (this.readyState == 4 && this.status == 200) {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
-            restaurants = JSON.parse(this.responseText);
+            const response = JSON.parse(this.responseText)
+            restaurants = orderRestaurants(response)
             if (restaurants[0].restaurantID !== null) {
-                const hasMoreToLoad = restaurantsTotal > (from + LIMIT_PAGINATION);
-                if(!hasMoreToLoad) {
-                    nextButton.style.display = 'none';
-                } else {
-                    nextButton.style.display = 'block';
-                }
                 viewList();
                 loadMoreSpinner.style.display = 'none';
                 loader.style.display = 'none';
@@ -124,14 +139,12 @@ const getRestaurantAPI = () => {
                 showAddButtonWhenNoResults();
                 loader.style.display = 'none';
                 loadMoreSpinner.style.display = 'none';
-                nextButton.style.display = 'none';
             }
         } else if (this.status === 404 || this.status === 204) {
             showAddButtonWhenNoResults();
             orderContainer.classList.add("hidden");
             loader.style.display = 'none';
             loadMoreSpinner.style.display = 'none';
-            nextButton.style.display = 'none';
         }
     };
     xmlhttp.send();
