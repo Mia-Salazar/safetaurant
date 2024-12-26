@@ -156,6 +156,7 @@ button.pwa__accept {
 	cursor:  pointer;
 	text-decoration: none;
 	height: 2.5rem;
+	font-size: 0.875rem;
 }
 
 .secondary-button {
