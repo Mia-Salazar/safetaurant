@@ -1,4 +1,3 @@
-const feedback = document.getElementById("feedback");
 const fidelity = document.getElementById("fidelityScoreContainer");
 let ID = new URL(document.URL).searchParams.get("ID");
 const loader = document.getElementById("loader");
@@ -28,7 +27,7 @@ signupCaptcha.addEventListener("verified", (e) => {
     buttonSubmit.disabled = false;
 });
 signupCaptcha.addEventListener("error", (e) => {
-    feedback.innerHTML = e.error;
+    document.getElementById("feedback").innerHTML = e.error;
 });
 
 function captchaToggle() {
@@ -151,15 +150,15 @@ const addOptions = (data) => {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             //Si ha habido éxito, se lo mostramos con un texto y el color verde en él
-            feedback.innerHTML = "Creado correctamente";
-            feedback.classList.add("success");
-            feedback.classList.remove("error");
+            document.getElementById("feedback").innerHTML = "Creado correctamente";
+            document.getElementById("feedback").classList.add("success");
+            document.getElementById("feedback").classList.remove("error");
             window.location.href = "http://localhost/SafeTaurant/";
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-            feedback.innerHTML = "Hubo un error en la creación de la puntuación";
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
+            document.getElementById("feedback").innerHTML = "Hubo un error en la creación de la puntuación";
+            document.getElementById("feedback").classList.add("error");
+            document.getElementById("feedback").classList.remove("success");
             loader.style.display = "none";
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
@@ -220,17 +219,17 @@ const addScore = (data) => {
                 addOptions(data)
             } else {
                 loader.style.display = "none";
-                feedback.innerHTML = "Creado correctamente";
-                feedback.classList.add("success");
-                feedback.classList.remove("error");
+                document.getElementById("feedback").innerHTML = "Creado correctamente";
+                document.getElementById("feedback").classList.add("success");
+                document.getElementById("feedback").classList.remove("error");
                 window.location.href = "http://localhost/SafeTaurant/";
             }
             
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-            feedback.innerHTML = "Hubo un error en la creación de la nueva puntuación";
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
+            document.getElementById("feedback").innerHTML = "Hubo un error en la creación de la nueva puntuación";
+            document.getElementById("feedback").classList.add("error");
+            document.getElementById("feedback").classList.remove("success");
             loader.style.display = "none";
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
@@ -273,9 +272,9 @@ const registerRestaurant = (data) => {
             addScore(newData);
         } else if (this.status == 424) {
             //Si ha ocurrido algún error, le mostramos un texto de error y se lo ponemos de color rojo
-            feedback.innerHTML = "Hubo un error en la creación del restaurante";
-            feedback.classList.add("error");
-            feedback.classList.remove("success");
+            document.getElementById("feedback").innerHTML = "Hubo un error en la creación del restaurante";
+            document.getElementById("feedback").classList.add("error");
+            document.getElementById("feedback").classList.remove("success");
             loader.style.display = "none";
         } else if (this.status == 401) {
             //Si el usuario no ha iniciado sesión lo expulsamos a la página de inicio de sesión
@@ -284,5 +283,14 @@ const registerRestaurant = (data) => {
     };
     xmlhttp.send(JSON.stringify(dataRestaurant));
 }
+
+function nextStep(event){
+    event.preventDefault();
+}
+
+function previousStep(event){
+    event.preventDefault();
+}
+
 checkIsLoggedIn();
 checkAddScoreOrAddRestaurantPage();
