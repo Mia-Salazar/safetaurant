@@ -170,8 +170,6 @@ const createAddressesList = () => {
         div.appendChild(label);
         addressList.appendChild(div);
     });
-
-
 }
 
 const getAddressAPI = () => {
