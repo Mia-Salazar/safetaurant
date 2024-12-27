@@ -24,7 +24,7 @@
 	margin: 0;
 }
 
-.loader-container {
+.profile .loader-container {
 	width: 100%;
 	justify-content: space-between;
 }
