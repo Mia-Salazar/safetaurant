@@ -284,13 +284,5 @@ const registerRestaurant = (data) => {
     xmlhttp.send(JSON.stringify(dataRestaurant));
 }
 
-function nextStep(event){
-    event.preventDefault();
-}
-
-function previousStep(event){
-    event.preventDefault();
-}
-
 checkIsLoggedIn();
 checkAddScoreOrAddRestaurantPage();
