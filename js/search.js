@@ -67,8 +67,20 @@ const viewList = () => {
     });
 }
 
+const calcularPuntuacion = (porcentaje) => {
+    if (porcentaje === 0) {
+        return 50;
+    } else if (porcentaje === 100) {
+        return 0;
+    }
+
+    // Fórmula para calcular la puntuación
+    let puntuacion = 50 - (porcentaje / 2);
+    return puntuacion;
+}
+
 const getGeneralScore = (attention, chart, fidelity, reaction) => {
-    const reactionPositive = reaction === 0 ? 50 : - (reaction - 100) * 5
+    const reactionPositive = calcularPuntuacion(reaction)
     const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
     return generalScore;
 }
