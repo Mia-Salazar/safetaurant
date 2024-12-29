@@ -7,6 +7,10 @@
 	margin-bottom: 3rem;
 }
 
+.add-restaurant-form {
+	flex-direction: column;
+}
+
 .checkbox-group {
 	margin-bottom: 1.25rem;
 }
@@ -15,6 +19,12 @@
 	width: 100%;
 	margin: 0;
 	max-width: unset;
+}
+
+.button-container {
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: 1fr 1fr;
 }
 
 .add-restaurant .primary-button {
@@ -36,6 +46,76 @@ label {
 .captcha {
 	position: absolute;
 	left: -9999em;
+}
+
+.add-restaurant-wrapper {
+	margin-top: 1rem;
+	padding: 1rem;
+	border: 1px solid var(--grayDark);
+	border-radius: 0.625rem;
+}
+
+#signupCaptcha {
+	margin: 0;
+}
+
+/*Steps*/
+.step__container {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	margin: 2rem 0 0.5rem 0;
+}
+
+.step__item {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 1rem;
+	width: 4rem;
+	height: 4rem;
+	font-size: 3rem;
+	color: var(--grayDark);
+	border: 6px solid var(--grayDark);
+	border-radius: 50%;
+	font-family: var(--primaryTypo);
+}
+
+.step__item:after, .step__item:before {
+	content: '';
+	position: absolute;
+	top: 45%;
+	right: -1.5rem;
+	background-color: var(--grayDark);
+	height: 6px;
+	width: 1.25rem;
+}
+
+.step__item:after {
+	left: -1.5rem;
+	right: unset;
+}
+
+.step__item:first-of-type:after {
+	display: none;
+}
+
+.step__item:last-of-type:before {
+	display: none;
+}
+
+.step__item--done {
+	color: var(--primaryColor);
+	border: 6px solid var(--primaryColor);
+}
+
+.step__item--done-before:before {
+	background-color: var(--primaryColor);
+}
+
+.step__item--done-after:after {
+	background-color: var(--primaryColor);
 }
 
 @media (min-width: 768px) {
