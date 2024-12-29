@@ -15,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-radio.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/checkboxes.css">
     <script src="https://kit.fontawesome.com/e8797cc6b0.js" crossorigin="anonymous"></script>
@@ -67,13 +66,13 @@
               <span class="nav-text">Buscar</span>
             </a>
           </li>
-          <li class="registered hidden">
+          <li class="registered">
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">
               <i class="menu-icon fa-solid fa-plus" aria-hidden="true"></i>
               <span class="nav-text">Añadir restaurante</span>
             </a>
           </li>
-          <li class="registered hidden just-mobile">
+          <li class="registered just-mobile">
             <a class="nav-link" href="http://localhost/SafeTaurant/profile/index.html">
               <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
               <span class="nav-text">Mi cuenta</span>
@@ -85,13 +84,7 @@
           <li class="just-desktop">
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant-owner.html">Soy un restaurante</a>
           </li>
-          <li class="no-registered">
-            <a class="nav-link" href="http://localhost/SafeTaurant/login.html">
-              <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
-              <span class="nav-text">Iniciar sesión</span>
-            </a>
-          </li>
-          <li class="nav-link registered hidden just-desktop">
+          <li class="nav-link registered just-desktop">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
@@ -172,7 +165,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label class="input-label" for="comment">Comentario: </label>
+          <label class="input-label" for="comment">¿Quieres añadir algo?: </label>
           <textarea id="comment" name="comment" rows="4" cols="10"></textarea>
         </div>
         <h3>Opciones alimentarias que ofrecen</h3>

@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/index.css">
-    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/profile.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-range.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/input-radio.css">
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/add-restaurant.css">
@@ -67,13 +66,13 @@
               <span class="nav-text">Buscar</span>
             </a>
           </li>
-          <li class="registered hidden">
+          <li class="registered">
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant/search.html">
               <i class="menu-icon fa-solid fa-plus" aria-hidden="true"></i>
               <span class="nav-text">Añadir restaurante</span>
             </a>
           </li>
-          <li class="registered hidden just-mobile">
+          <li class="registered just-mobile">
             <a class="nav-link" href="http://localhost/SafeTaurant/profile/index.html">
               <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
               <span class="nav-text">Mi cuenta</span>
@@ -85,13 +84,7 @@
           <li class="just-desktop">
             <a class="nav-link" href="http://localhost/SafeTaurant/restaurant-owner.html">Soy un restaurante</a>
           </li>
-          <li class="no-registered">
-            <a class="nav-link" href="http://localhost/SafeTaurant/login.html">
-              <i class="menu-icon fa-solid fa-user" aria-hidden="true"></i>
-              <span class="nav-text">Iniciar sesión</span>
-            </a>
-          </li>
-          <li class="nav-link registered hidden just-desktop">
+          <li class="nav-link registered just-desktop">
             <button id="account-dropdown-button" class="account-dropdown-button nav-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta <i class="arrow down" aria-hidden="true"></i></button>
             <ul id="account-dropdown-list" aria-labelledby="account-dropdown-button" class="dropdown" aria-label="Alternar menú de cuenta">
@@ -113,10 +106,14 @@
       <h2 id="title">Añade una nueva opinión</h2>
       <p class="subtitle">Añade una opinión nueva a un restaurante. Los campos con un asterisco (*) son obligatorios.</p>
       <div class="loader" role="alert" aria-busy="true" id="loaderGeneral"></div>
-
+      <div class="step__container">
+        <p id="step1" class="step__item step__item--1 step__item--done">1</p>
+        <p id="step2" class="step__item step__item--2">2</p>
+        <p id="step3" class="step__item step__item--3">3</p>
+      </div>
       <form class="add-restaurant-form" id="add">
         <div class="add-restaurant-wrapper">
-          <div class="top-wrapper">
+          <section class="top-wrapper" id="content1">
             <h3 >Tu opinión sobre alérgenos</h3>
             <div class="input-group">
               <label class="input-label" for="attentionScore">Atención recibida por el personal*: </label>
@@ -147,206 +144,216 @@
               </div>
             </div>
             <div class="input-group">
-              <label class="input-label" for="comment">Comentario: </label>
+              <label class="input-label" for="comment">¿Quieres añadir algo?: </label>
               <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
             </div>
-          </div>
+          </section>
           <div  id="someOptions">
-            <p><strong>Algunas opciones de este restaurante ya han sido comprobadas y no necesitan evalación</strong></p>
+            <p><strong>Algunas opciones de este restaurante ya han sido comprobadas y no necesitan evaluación</strong></p>
           </div>
           <div id="optionsContainer">
-            <h3>Opciones alimentarias que ofrecen</h3>
-            <fieldset>
-              <legend class="radio-title">Opciones celíacas</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="celiacYes" name="celiac" value="0">
-                  <label for="celiacYes">Sí</label>
+            <section class="hidden" id="content2">
+              <h3>Opciones alimentarias que ofrecen</h3>
+              <fieldset>
+                <legend class="radio-title">Opciones celíacas</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="celiacYes" name="celiac" value="0">
+                    <label for="celiacYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="celiacNo" name="celiac" value="1">
+                    <label for="celiacNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
+                    <label for="celiacIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="celiacNo" name="celiac" value="1">
-                  <label for="celiacNo">No</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Opciones diabéticas</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="diabetesYes" name="diabetes" value="0">
+                    <label for="diabetesYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="diabetesNo" name="diabetes" value="1">
+                    <label for="diabetesNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
+                    <label for="diabetesIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="celiacIDK" name="celiac" value="2" checked>
-                  <label for="celiacIDK">No sé</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Opciones para intolerantes a la lactosa</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="lactoseYes" name="lactose" value="0">
+                    <label for="lactoseYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="lactoseNo" name="lactose" value="1">
+                    <label for="lactoseNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
+                    <label for="lactoseIDK">No sé</label>
+                  </div>
                 </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Opciones diabéticas</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="diabetesYes" name="diabetes" value="0">
-                  <label for="diabetesYes">Sí</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Opciones para intolerantes a la fructosa</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="fructoseYes" name="fructose" value="0">
+                    <label for="fructoseYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="fructoseNo" name="fructose" value="1">
+                    <label for="fructoseNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
+                    <label for="fructoseIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="diabetesNo" name="diabetes" value="1">
-                  <label for="diabetesNo">No</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Opciones vegetarianas</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
+                    <label for="vegetarianYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
+                    <label for="vegetarianNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
+                    <label for="vegetarianIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="diabetesIDK" name="diabetes" value="2" checked>
-                  <label for="diabetesIDK">No sé</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Opciones veganas</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="veganYes" name="vegan" value="0">
+                    <label for="veganYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="veganNo" name="vegan" value="1">
+                    <label for="veganNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="veganIDK" name="vegan" value="2" checked>
+                    <label for="veganIDK">No sé</label>
+                  </div>              
                 </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Opciones para intolerantes a la lactosa</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="lactoseYes" name="lactose" value="0">
-                  <label for="lactoseYes">Sí</label>
+              </fieldset>
+            </section>
+            <section class="hidden" id="content3">
+              <h3>Opciones de accesibilidad que ofrecen</h3>
+              <fieldset>
+                <legend class="radio-title">Menú accesible</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleMenuYes" name="accesibleMenu" value="0">
+                    <label for="accesibleMenuYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleMenuNo" name="accesibleMenu" value="1">
+                    <label for="accesibleMenuNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleMenuIDK" name="accesibleMenu" value="2" checked>
+                    <label for="accesibleMenuIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="lactoseNo" name="lactose" value="1">
-                  <label for="lactoseNo">No</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Mesa accesible</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleTableYes" name="accesibleTable" value="0">
+                    <label for="accesibleTableYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleTableNo" name="accesibleTable" value="1">
+                    <label for="accesibleTableNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleTableIDK" name="accesibleTable" value="2" checked>
+                    <label for="accesibleTableIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="lactoseIDK" name="lactose" value="2" checked>
-                  <label for="lactoseIDK">No sé</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Parking accesible accesible</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleParkingYes" name="accesibleParking" value="0">
+                    <label for="accesibleParkingYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleParkingNo" name="accesibleParking" value="1">
+                    <label for="accesibleParkingNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleParkingIDK" name="accesibleParking" value="2" checked>
+                    <label for="accesibleParkingIDK">No sé</label>
+                  </div>
                 </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Opciones para intolerantes a la fructosa</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="fructoseYes" name="fructose" value="0">
-                  <label for="fructoseYes">Sí</label>
+              </fieldset>
+              <fieldset>
+                <legend class="radio-title">Baño accesible</legend>
+                <div class="radio-container">
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleBathroomYes" name="accesibleBathroom" value="0">
+                    <label for="accesibleBathroomYes">Sí</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleBathroomNo" name="accesibleBathroom" value="1">
+                    <label for="accesibleBathroomNo">No</label>
+                  </div>
+                  <div class="input-radio">
+                    <input type="radio" id="accesibleBathroomIDK" name="accesibleBathroom" value="2" checked>
+                    <label for="accesibleBathroomIDK">No sé</label>
+                  </div>
                 </div>
-                <div class="input-radio">
-                  <input type="radio" id="fructoseNo" name="fructose" value="1">
-                  <label for="fructoseNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="fructoseIDK" name="fructose" value="2" checked>
-                  <label for="fructoseIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Opciones vegetarianas</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="vegetarianYes" name="vegetarian" value="0">
-                  <label for="vegetarianYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="vegetarianNo" name="vegetarian" value="1">
-                  <label for="vegetarianNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="vegetarianIDK" name="vegetarian" value="2" checked>
-                  <label for="vegetarianIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Opciones veganas</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="veganYes" name="vegan" value="0">
-                  <label for="veganYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="veganNo" name="vegan" value="1">
-                  <label for="veganNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="veganIDK" name="vegan" value="2" checked>
-                  <label for="veganIDK">No sé</label>
-                </div>              
-              </div>
-            </fieldset>
-            <h3>Opciones de accesibilidad que ofrecen</h3>
-            <fieldset>
-              <legend class="radio-title">Menú accesible</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="accesibleMenuYes" name="accesibleMenu" value="0">
-                  <label for="accesibleMenuYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleMenuNo" name="accesibleMenu" value="1">
-                  <label for="accesibleMenuNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleMenuIDK" name="accesibleMenu" value="2" checked>
-                  <label for="accesibleMenuIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Mesa accesible</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="accesibleTableYes" name="accesibleTable" value="0">
-                  <label for="accesibleTableYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleTableNo" name="accesibleTable" value="1">
-                  <label for="accesibleTableNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleTableIDK" name="accesibleTable" value="2" checked>
-                  <label for="accesibleTableIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Parking accesible accesible</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="accesibleParkingYes" name="accesibleParking" value="0">
-                  <label for="accesibleParkingYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleParkingNo" name="accesibleParking" value="1">
-                  <label for="accesibleParkingNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleParkingIDK" name="accesibleParking" value="2" checked>
-                  <label for="accesibleParkingIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend class="radio-title">Baño accesible</legend>
-              <div class="radio-container">
-                <div class="input-radio">
-                  <input type="radio" id="accesibleBathroomYes" name="accesibleBathroom" value="0">
-                  <label for="accesibleBathroomYes">Sí</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleBathroomNo" name="accesibleBathroom" value="1">
-                  <label for="accesibleBathroomNo">No</label>
-                </div>
-                <div class="input-radio">
-                  <input type="radio" id="accesibleBathroomIDK" name="accesibleBathroom" value="2" checked>
-                  <label for="accesibleBathroomIDK">No sé</label>
-                </div>
-              </div>
-            </fieldset>
-            <div class="radio-container">
-              <div class="input-radio captcha">
-                <input class="captcha" type="checkbox" id="captcha" name="captcha" value="captcha" required />
-                <label for="captcha">No soy un robot</label>
-              </div>
+              </fieldset>
+            </section>
+            <div class="button-container">
+              <button id="previousButton" type="button" class="primary-button primary-button--ghost hidden">Anterior</button>
+              <button id="nextButton" type="button" class="primary-button">Siguiente</button>
             </div>
+
           </div>
         </div>
-        <h-captcha id="signupCaptcha" aria-hidden="true"
+        <section class="hidden" id="content4">
+          <div class="radio-container">
+            <div class="input-radio captcha">
+              <input class="captcha" type="checkbox" id="captcha" name="captcha" value="captcha" required />
+              <label for="captcha">No soy un robot</label>
+            </div>
+          </div>
+          <h-captcha id="signupCaptcha" aria-hidden="true"
           site-key="781559eb-513a-4bae-8d29-d4af340e3624"
           size="normal"
           tabindex="0"></h-captcha>
-
-        <small id="feedback" class=""></small>
-        <button type="submit" class="primary-button" id="buttonSubmit" disabled>
-          <div class="loader-container">
-            <span id="buttonText">Añadir opinión</span>
-            <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
-          </div>
-        </button>
+          <small id="feedback" class=""></small>
+          <button type="submit" class="primary-button" id="buttonSubmit" disabled>
+            <div class="loader-container">
+              <span id="buttonText">Añadir opinión</span>
+              <span class="loader loader--light" role="alert" aria-busy="true" id="loader"></span>
+            </div>
+          </button>
+        </section>
       </form>
     </main>
     <footer class="footer">
@@ -374,6 +381,7 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vanilla-hcaptcha"></script>
   <script type="text/javascript" src="../js/shared.js"></script>
+  <script type="text/javascript" src="../js/steps.js"></script>
   <script type="text/javascript" src="../js/inputRange.js"></script>
   <script type="text/javascript" src="../js/addScore.js"></script>
 </html>

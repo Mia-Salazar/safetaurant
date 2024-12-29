@@ -8,6 +8,8 @@
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.25rem;
+    color: var(--black);
+    width: calc(100% - 56px);
 }
 
 .list-results li {
@@ -21,7 +23,7 @@
 
 .list-results a {
     text-decoration: none;
-    color: var(--black)
+    color: var(--grayDark);
 }
 
 .list-results li p {

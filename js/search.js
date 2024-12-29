@@ -67,8 +67,20 @@ const viewList = () => {
     });
 }
 
+const calcularPuntuacion = (porcentaje) => {
+    if (porcentaje === 0) {
+        return 50;
+    } else if (porcentaje === 100) {
+        return 0;
+    }
+
+    // Fórmula para calcular la puntuación
+    let puntuacion = 50 - (porcentaje / 2);
+    return puntuacion;
+}
+
 const getGeneralScore = (attention, chart, fidelity, reaction) => {
-    const reactionPositive = reaction === 0 ? 50 : - (reaction - 100) * 5
+    const reactionPositive = calcularPuntuacion(reaction)
     const generalScore = Math.floor(((attention * 0.2) + (chart * 0.15) + (fidelity * 0.15) + (reactionPositive)) / 10)
     return generalScore;
 }
@@ -168,7 +180,7 @@ const getRestaurantTotal = () => {
             //Si se encuentran restaurantes que coincidan con los filtros de búsqueda, llamamos a la función para pintar todos los restaurantes y mostramos un mensaje
             //Si no hay ninguno, mostramos un mensaje indicando lo contrario
             restaurantsTotal = JSON.parse(this.responseText);
-            found.innerHTML = `Se han encontrado ${restaurantsTotal} resultados`;
+            found.innerHTML = `Hay <span class="restauranta__total-number">${restaurantsTotal}</span> resultados`;
             getRestaurants();
         } else if (this.status === 404 || this.status === 204) {
             //Si no encontramos ningún restaurante, mostramos un mensaje indicándolo

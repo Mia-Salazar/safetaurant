@@ -143,7 +143,18 @@ const createAddressesList = () => {
         input.value = address.place_id
         input.type = "radio";
         
-        const street = address.address.road ? address.address.road : address.address.square;
+        const street = address.address.road ? address.address.road 
+                       : address.address.square ? address.address.square 
+                       : address.address.allotments ? address.address.allotments
+                       : address.address.residential ? address.address.residential
+                       : address.address.greenfield ?  address.address.greenfield
+                       : address.address.stream ? address.address.stream
+                       : address.address.farm ? address.address.farm
+                       : address.address.isolated_dwelling ? address.address.isolated_dwelling
+                       : address.address.neighbourhood ? address.address.neighbourhood
+                       : address.address.scrub ? address.address.scrub
+                       : address.address.vineyard ?  address.address.vineyard
+                       : address.address.hamlet;
         const cityOrTown = address.address.city ? address.address.city : address.address.town ? address.address.town : address.address.village;
         if (address.address.postcode) {
             label.innerHTML = `<strong>${street}</strong>, ${address.address.postcode}, ${cityOrTown}, ${address.address.state}`;
@@ -159,8 +170,6 @@ const createAddressesList = () => {
         div.appendChild(label);
         addressList.appendChild(div);
     });
-
-
 }
 
 const getAddressAPI = () => {

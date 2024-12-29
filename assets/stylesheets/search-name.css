@@ -44,12 +44,7 @@ fieldset {
     padding: 0;
 }
 
-
 .radio-container {
-    display: grid;
-    grid-template-columns: 1.5rem 1fr;
-    grid-gap: 5px;
-    align-items: baseline;
     margin-bottom: 1rem;
 }
 
@@ -61,11 +56,29 @@ label {
     flex-direction: column;
     max-height: 16.875rem;
     overflow-y: auto;
-    padding: 0 0 0 1.25rem;
 }
 
 .feedback {
     margin-top: 3.375rem;;
+}
+
+.search .radio-container input {
+    position: absolute;
+    left: -9999em;
+}
+
+.search .radio-container label {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--grayDark);
+    border-radius: 0.625rem;
+    margin-right: 0.5rem;
+}
+
+.search .radio-container input:checked + label {
+    background-color: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    color: var(--white);
 }
 
 @media (min-width: 992px) {

@@ -81,4 +81,6 @@ const fillSelects = () => {
     });
 }
 
-fillSelects()
+if (provinceSelect && foodSelect) {
+  fillSelects()
+}
