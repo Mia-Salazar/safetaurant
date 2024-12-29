@@ -316,8 +316,7 @@ const getOptions = () => {
 
         getAccesibility(options);
         getGeneralScore(averageAttentionPercent, averageChart, averageFidelityPercent, allergenReactionPercent)
-        loader.style.display = 'none';
-        restaurantContainer.style.display = 'block';
+
     } else if (this.status == 400) {
         //Si no encontramos las puntuaciones, mostramos un mensaje
         document.getElementById("scores").innerHTML = "No hay opciones disponibles para este restaurante";
@@ -393,6 +392,8 @@ const getGeneralScore = (attention, chart, fidelity, reaction) => {
     numberGeneralBar.style.width = `${generalScore}0%`;
     averageGeneralId.innerHTML = generalScore;
     document.getElementById("score").innerHTML = generalScore
+    loader.style.display = 'none';
+    restaurantContainer.style.display = 'block';
 }
 
 
