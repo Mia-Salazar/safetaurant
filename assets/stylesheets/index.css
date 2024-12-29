@@ -63,6 +63,8 @@ body {
   
 .skip-to-content-link:focus {
 	transform: translateY(0%);
+	left: 0;
+    top: 0;
 }
 
 /*PWA launcher*/
