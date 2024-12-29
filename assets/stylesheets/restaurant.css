@@ -89,6 +89,7 @@ ul.allergen-list {
 .data-info {
 	color: var(--grayDark);
 	font-weight: normal;
+	word-break: break-all;
 }
 
 .restaurant__container {
