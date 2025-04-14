@@ -76,8 +76,10 @@ function submitScore(event){
         accesibleBathroom: document.querySelector('input[name="accesibleBathroom"]:checked').value,
     };
     if(!ID) {
+        console.log('registrar')
         registerRestaurant(data)
     } else {
+        console.log('solo añadir')
         addScore(data);
     }
 
